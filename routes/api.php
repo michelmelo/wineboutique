@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::name('api.')->namespace('Api')->group(function () {
+    // Unprotected routes
+    Route::group(['middleware' => 'guest:api'], function () {
+        Route::get('/cities', 'LocationsController@cities')->name('cities');
+        Route::get('/locations/{city}', 'LocationsController@locations')->name('locations');
+
+        Route::namespace('Auth')->group(function () {
+            Route::post('register', 'RegisterController@register')->name('register');
+        });
+    });
+
+    // Protected routes
+    Route::middleware('auth:api')->group(function () {
+    });
+});

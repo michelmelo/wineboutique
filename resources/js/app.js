@@ -1,10 +1,12 @@
-
-/**
- * First, we will load all of this project's Javascript utilities and other
- * dependencies. Then, we will be ready to develop a robust and powerful
- * application frontend using useful Laravel and JavaScript libraries.
- */
-
 require('./bootstrap');
 require('./main');
-require('jquery-ui');
+window.Vue = require('vue');
+window.Vuelidate = require('vuelidate').default;
+
+Vue.use(Vuelidate);
+
+Vue.component('register-sell-form', require('./components/forms/RegisterSellForm.vue'));
+
+const app = new Vue({
+    el: '#app'
+});

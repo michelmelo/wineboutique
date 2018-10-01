@@ -9,7 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public static $types = [
+        'seller' => 'SELLER',
+        'customer' => 'CUSTOMER'
+    ];
     /**
      * The attributes that are mass assignable.
      *

@@ -24,7 +24,7 @@
 </head>
 <body>
     @include('layouts.partials._header')
-	<div class="main">
+	<div class="main" id="app">
         @yield('content')
 	</div>
     @include('layouts.partials._footer')
