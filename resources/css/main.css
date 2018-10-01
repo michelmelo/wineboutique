@@ -1,0 +1,2504 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+a {
+	text-decoration:none!important;
+}
+
+a.underline {
+	text-decoration:underline!important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+}
+
+h2.heading {
+    text-align: center;
+    text-transform: uppercase;
+    color:#282828;
+    font-size: 28px;
+    font-weight: 700;
+    width: 100%;
+}
+
+select {
+    border: thin solid darkgrey!important;
+}
+
+.center-text {
+    text-align: center;
+}
+.left-text {
+    text-align: left!important;
+}
+
+.margin-0-auto {
+    margin: 0 auto;
+}
+
+.btn-link, .btn-link:hover {
+    color: #525457;
+    text-decoration: none!important;
+}
+
+.headline-2 {
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.row {
+	margin: 0px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.padding-row {
+    padding: 30px 0!important;
+}
+
+.main {
+	padding: 0;
+}
+
+.color-r {
+	color: #9C193A;
+}
+
+.color-w {
+    color: #fff;
+}
+
+.v-align {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.button {
+    font-size: 20px;
+    padding: 10px 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.white-button {
+    background: #fff;
+    color: #9C193A;
+}
+
+.red-button {
+    background: #9C193A;
+    color: #fff;
+}
+
+.pink-button {
+    background: #D6879A;
+    color: #fff;
+}
+
+.white-button:hover {
+    color: #9C193A;
+}
+
+.red-button:hover, .pink-button:hover {
+    color: #fff;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.margin-t {
+    margin-top: 20px;
+}
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-5ths {
+    flex: 0 0 20%;
+    max-width: 20%;
+    float: left;
+}
+
+
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+    float: left;
+}
+
+
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+
+.page-header {
+    border-bottom: 4px solid #9b1f3d;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.page-header img {
+    width: 100%;
+}
+
+.page-header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 36px;
+    font-weight: 700;
+}
+
+
+.forms input {
+    width: 100%;
+    border: 1px solid #D8D8D8;
+    padding: 15px 10px;
+    margin-top: -1px;
+}
+
+.forms a {
+    color: #9C193A;
+}
+
+.forms input[type="submit"] {
+    border: 0px;
+    margin-top: 15px;
+}
+
+.forms input[type="checkbox"] {
+    width: auto;
+    top: 3px;
+    position: relative;
+}
+
+.forms .form-check {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding-top: 10px;
+}
+
+
+.forms .form-inline label {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.forms .half-select {
+    width: 50%;
+    border: 1px solid #D8D8D8;
+    padding: 15px 10px;
+    margin-top: -1px;
+}
+
+.forms span {
+    margin-top: 10px;
+}
+
+.forms span a {
+    font-size: 12px;
+    color: #da8599;
+}
+
+
+select {
+
+  /* styling */
+  background-color: white;
+  border: thin solid blue;
+  display: inline-block;
+  font: inherit;
+
+  /* reset */
+
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+/* arrows */
+
+select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 7px),
+    calc(100% - 15px) calc(1em + 7px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 6px,
+    5px 6px,
+    0px 1.5em;
+  background-repeat: no-repeat;
+}
+
+
+
+/*=========================================================================================================================================================================================
+                                                                           NAVIGATION
+==========================================================================================================================================================================================*/
+
+nav {
+    border: 1px solid #E1E1E1;
+    background-color: #FFFFFF!important;
+    box-shadow: 0px 9px 17px -8px #0000002b;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: rgb(155, 31, 61);
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+.navbar-nav li {
+    padding: 0px;
+    text-align: center;
+}
+
+.navbar-nav li a  {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.navbar .form-inline {
+    display: none;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                             HEADER
+==========================================================================================================================================================================================*/
+
+header {
+    background: #fff;
+}
+
+.top-header {
+    padding: 20px 0;
+}
+
+.form-control {
+    border-radius: 10px 0 0 10px;
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
+    margin-right: 0px!important;
+}
+
+.form-inline button.search {
+    border-radius: 0 10px 10px 0;
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
+    color:#fff;
+    background: #9C193A;
+}
+
+.user-area {
+
+}
+
+.user-area .col {
+    text-align: center;
+}
+
+.user-area img {
+    width: 30px;
+    margin: 0 auto;
+    display: block;
+    height: 30px;
+}
+
+.user-area span {
+    width: 100%;
+    text-align: center;
+    display: block;
+    color:#CAC9C9;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.item-in-cart {
+    position: absolute;
+    color: #fff;
+    font-size: 8px;
+    padding: 2px;
+    background: #9A1E3E;
+    border-radius: 20px;
+    top: -3px;
+    right: 37px;
+    min-width: 16px;
+    height: 16px;
+    text-align: center;
+}
+
+.cart-icon {
+    text-align: center;
+}
+
+.cart-icon > div {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto;
+    float: none;
+}
+
+.sticky {
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+    animation:slide-down 0.5s;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+
+@keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    } 
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    } 
+}
+
+/*=========================================================================================================================================================================================
+                                                                             FOOTER
+==========================================================================================================================================================================================*/
+
+footer .container {
+    padding: 50px 0;
+}
+
+footer h4 {
+    text-align: center;
+}
+
+.footer-banner {
+    text-align: center;
+    padding: 50px 10px;
+    background: url(../img/footer-banner-bg.jpg);
+    background-size: cover;
+}
+
+.footer-social {
+    text-align: center;
+}
+
+.footer-social a {
+    display: inline;
+    margin: 5px;
+}
+
+.footer-social i {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #9A1E3E;
+    color: #fff;;
+    font-size: 18px;
+    border-radius: 50px;
+}
+
+.footer-about {
+    padding: 0 15px;
+    background: #F0F0F0;
+}
+
+footer p {
+    color: #aaaaaa;
+}
+
+.footer-nav {
+    padding: 0px;
+    text-align: center;
+    list-style: none;
+    margin-top: 60px;
+}
+
+.footer-nav li {
+    display: inline;
+    padding: 10px 0;
+}
+
+.footer-nav li a {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #575c61!important;
+    border-right: 2px solid #575c61;
+    font-weight: 500;
+    padding: 0 10px;
+}
+
+.footer-nav li:last-child a {
+    border-right: 0;
+}
+
+.copyright {
+    padding: 30px 0;
+    color: #aaaaaa;
+}
+
+/*=========================================================================================================================================================================================
+                                                                               HOME
+==========================================================================================================================================================================================*/
+
+
+
+/*=============================================================================================
+                                     HOME SLIDER
+==============================================================================================*/
+
+.home-slider {
+    border-bottom: 4px solid #9b1f3d;
+    margin-bottom: 20px;
+}
+
+.carousel-control-prev-icon {
+    background-image: url(../img/slide-left.svg);
+}
+
+.carousel-control-next-icon {
+    background-image: url(../img/slide-right.svg);
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-indicators .active {
+    background-color: #9b1f3d!important;
+}
+
+.carousel-indicators li {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+}
+
+.slider-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+}
+
+.slider-content h1 {
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+
+
+/*=============================================================================================
+                                  HOME ACCORDION
+==============================================================================================*/
+
+.accordion {
+    width: 100%;
+}
+
+.accordion button {
+    width: 100%;
+    text-align: left;
+}
+
+.accordion-name {
+    font-size: 24px;
+    top: 6px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.card-header {
+    background-color: transparent;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+.card-body .sub-cat {
+    background: #F5F4F4;
+    width: 100%;
+    color: #646464;
+    font-size: 18px;
+    padding: 5px 5px 5px 7%;
+    margin-bottom: 3px;
+    display: block;
+}
+
+.card-body .sub-cat:last-child {
+    margin-bottom: 0px;
+}
+
+.accordion button i {
+    position: absolute;
+    right: 30px;
+    font-size: 20px;
+    top: 35px;
+}
+
+
+.accordion button .fa-chevron-up {
+    display: block;
+}
+
+.accordion button .fa-chevron-down {
+    display: none;
+}
+
+.accordion button.collapsed .fa-chevron-up {
+    display: none;
+}
+
+.accordion button.collapsed .fa-chevron-down {
+    display: block;
+}
+
+
+
+
+/*=============================================================================================
+                                        HOME SECURE
+==============================================================================================*/
+
+.secure-section .col-md-4 {
+    margin-top: 20px;
+}
+
+.secure-section img {
+    margin-bottom: 30px;
+}
+
+.secure-section h4 {
+    font-size: 24px;
+    color: #282828;
+    font-weight: 300;
+}
+
+
+.secure-section p {
+    color: #575758;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                  STAR RATING
+==========================================================================================================================================================================================*/
+
+.star-rating {
+     padding: 0 5px;
+     padding-bottom: 5px;
+     position: absolute;
+     bottom: 0px;
+}
+
+.star-rating .fa {
+    color: #D5D5D5;
+}
+
+.star-rating .checked {
+    color: #991D3F;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                  VINE BOX 1
+==========================================================================================================================================================================================*/
+
+.vine-box-style-1 {
+    margin-bottom: 20px;
+}
+
+.vine-box-style-1 a {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.vine-box-style-1 img {
+    width: 100%;
+}
+
+
+.vine-box-style-1 h5 {
+    font-size:16px;
+    color: #2b2e32;
+    text-transform: uppercase;
+    margin-top: 10px;
+    padding: 0 5px;
+    margin-bottom: 45px;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #9a1e3eb5;
+    top: 0px;
+    left: -100%;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.vine-box-style-1:hover .overlay {
+    left: 0px;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                  VINE BOX 2
+==========================================================================================================================================================================================*/
+
+.vine-box-style-2 {
+    margin-bottom: 20px;
+}
+
+.vine-box-style-2 .row {
+    height: 100%;
+}
+
+.vine-box-style-2 a {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.vine-box-style-2 img  {
+    margin: 0 auto;
+    display: block;
+}
+
+.vine-box-style-2 .col-md-6 {
+    padding: 10px;
+}
+
+.vine-box-style-2 .col-md-6:first-child {
+    background: #F5F5F5;
+}
+
+.vine-box-style-2 h5 {
+    font-size: 20px;
+}
+
+.vine-box-style-2 .name {
+    color: #646464;
+    margin-bottom: 35px;
+}
+
+.vine-box-style-2 .price {
+    color: #525457;
+    position: absolute;
+    bottom: 0px;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                  VINE BOX 3
+==========================================================================================================================================================================================*/
+
+.vine-box-style-3 {
+    margin-bottom: 20px;
+}
+
+.vine-box-style-3 a {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.vine-box-style-3 img {
+    margin: 0 auto;
+    display: block;
+}
+
+.vine-box-style-3 h5 {
+    font-size:16px;
+    color: #646464;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.vine-box-style-3 h4 {
+    font-size:20px;
+    color: #282828;
+    margin-top: 10px;
+    padding: 0 10px;
+    margin-bottom: 50px;
+    font-weight: 600;
+}
+
+.vine-box-style-3 .image-container {
+    position: relative;
+    overflow: hidden;
+    background: #F5F5F5;
+    padding: 15px 10px;
+}
+
+.vine-box-style-3 .image-container i {
+    position: absolute;
+    color: #d0d0d0;
+    font-size: 50px;
+    top: 10px;
+    right: 10px;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #9a1e3eb5;
+    top: 0px;
+    left: -100%;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.vine-box-style-3:hover .overlay {
+    left: 0px;
+}
+
+.vine-box-style-3 .star-rating {
+    padding: 0 10px;
+    padding-bottom: 5px;
+}
+
+.sale-mark {
+    color: #fff;
+    background: #CD345C;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-weight: 600;
+}
+
+.order-q {
+    color: #646464;
+    font-size: 18px;
+    position: absolute;
+    right: 22px;
+    bottom: 4px;
+}
+
+
+/*=============================================================================================
+                                        3.2
+==============================================================================================*/
+
+
+.style-3-2 img {
+    width: 30%;
+}
+
+.style-3-2 .sale-mark {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.style-3-2 .image-container i {
+    font-size: 30px;
+}
+
+.style-3-2 h4 {
+    font-size: 16px;
+}
+
+.style-3-2 .star-rating .fa {
+    font-size: 12px;
+}
+
+.style-3-2 .order-q {
+    font-size: 10px;
+    right: 20px;
+    bottom: 8px;
+}
+
+.like-heart {
+    color: #9c193ab0!important;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                  VINE BOX 4
+==========================================================================================================================================================================================*/
+
+.vine-box-style-4 .image-container {
+    position: relative;
+    overflow: hidden;
+    background: #F5F5F5;
+    padding: 10px 10px;
+}
+
+.vine-box-style-4 img {
+    margin: 0 auto;
+    display: block;
+    max-height: 200px!important;
+}
+
+.vine-box-style-4 .price {
+    font-size: 18px;
+    background: rgba(154,29,62, 0.75);
+    color: #fff;
+    font-weight: 500;
+    padding: 3px 5px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                  VINE BOX 5
+==========================================================================================================================================================================================*/
+
+.vine-box-style-5 {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.vine-box-style-5 .row {
+    height: 100%;
+}
+
+.vine-box-style-5>div {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.vine-box-style-5 img  {
+    margin: 0 auto;
+    display: block;
+}
+
+.vine-box-style-5 .col-3, .vine-box-style-5 .col-9 {
+    padding: 10px;
+}
+
+.vine-box-style-5 .col-3 {
+    background: #F5F5F5;
+}
+
+.vine-box-style-5 h5 {
+    font-size: 20px;
+}
+
+.vine-box-style-5 .name {
+    color: #646464;
+    margin-bottom: 5px;
+}
+
+.vine-box-style-5 .price {
+    color: #525457;
+    position: relative;
+}
+
+.shipping {
+    position: absolute;
+    bottom: 10px;
+    left: 10px
+}
+
+.shipping  span {
+    color: #da8599;
+    font-size: 14px;
+}
+
+
+.quantity {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+}
+
+.quantity p {
+    margin-bottom: 0;
+    color:#a7a7a7;
+    font-size: 14px;
+}
+
+
+.quantity p span:not(.amount) {
+   width: 30px;
+    height: 30px;
+    line-height: 29px;
+    text-align: center;
+    border-radius: 30px;
+    background: #F9F9F9;
+    display: inline-block;
+    font-size: 30px!important;
+    position: relative;
+    top: 3px;
+    cursor:pointer;
+}
+
+.quantity .minus {
+    
+}
+
+.quantity .amount {
+    margin: 0 10px;
+    font-size: 20px;
+    color: #9b1f3d;
+    display: inline-block;
+}
+
+.quantity .plus {
+    
+}
+
+.quantity .plus:hover, .quantity .minus:hover  {
+    background: #F1F1F1;
+}
+
+.vine-box-style-5 .close {
+   position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #a7a7a7;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                 SIDEBAR
+==========================================================================================================================================================================================*/
+
+.sidebar .card-header {
+    padding: .25rem .25rem;
+}
+
+.sidebar .accordion-name {
+    font-size: 14px;
+    top: 0;
+    margin-left: 0px;
+}
+
+.sidebar .accordion button i {
+    position: absolute;
+    right: 14px;
+    font-size: 14px;
+    top: 11px;
+}
+
+.sidebar .card-body .sub-cat {
+    background: #F5F4F4;
+    width: 100%;
+    color: #646464;
+    font-size: 14px;
+    padding: 5px 5px 5px 7%;
+    margin-bottom: 3px;
+    display: block;
+}
+
+.sidebar .card-header .btn {
+    padding: 0 5px;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                 PAGINATION
+==========================================================================================================================================================================================*/
+
+.pagination-box nav {
+    box-shadow: none;
+    border: 0px;
+    text-align: right;
+}
+
+.pagination-box .pagination {
+    float: right;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #363636;
+    background-color: #cd335c73;
+    border-color: #cd335c00;
+}
+
+.pagination-box .page-link {
+    padding: .75rem 1rem;
+    color: #363636;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                  SINGLE WINE
+==========================================================================================================================================================================================*/
+
+.preview {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; 
+}
+
+@media screen and (max-width: 996px) {
+    .preview {
+        margin-bottom: 20px; 
+    } 
+}
+
+.preview-pic {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; 
+    background: #F5F5F5;
+    padding: 20px 10px;
+    /*min-height: 540px;*/
+}
+
+.preview-pic i {
+    position: absolute;
+    color: #D6879A;
+    font-size: 50px;
+    top: 10px;
+    right: 20px;
+}
+
+.preview-thumbnail.nav-tabs {
+    border: none;
+    margin-top: 15px;
+    text-align: center;
+    display: block;
+}
+
+.preview-thumbnail.nav-tabs li {
+    width: auto;
+    margin: 2.5%;
+    float: none;
+    display: inline-block;
+}
+
+.preview-thumbnail.nav-tabs li img {
+    max-width: 100%;
+    display: block;
+    width: 50px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.preview-thumbnail.nav-tabs li a {
+    padding: 0;
+    margin: 0; 
+}
+
+.preview-thumbnail.nav-tabs li:last-of-type {
+    margin-right: 0; 
+}
+
+.tab-content {
+    overflow: hidden; 
+}
+
+.tab-content img {
+    width: auto;
+    -webkit-animation-name: opacity;
+    animation-name: opacity;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    max-height: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+/*.card {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em; 
+}*/
+
+
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+    transform: scale(3); 
+   }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } 
+    }
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } 
+}
+
+
+
+.single-wine-info h1 {
+    color: #646464;
+    font-weight: 300;
+}
+
+.single-wine-info .price {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 126px;
+}
+
+.single-wine-info .col-4 p {
+    font-weight: 300;
+    color: rgba(0,0,0,.5);
+}
+
+.single-wine-info .col-4 > span {
+    font-weight: 600;
+}
+
+.single-wine-info .col-4 .star-rating {
+    padding: 0px;
+    width: 100%;
+    position: relative;
+}
+
+.single-wine-info .col-4 {
+    border: 1px solid rgb(228, 228, 228);
+    padding: 10px 5px;
+}
+
+.single-wine-info .button {
+    margin-top: 10px;
+}
+
+.single-wine-info {
+    
+}
+
+.wine-description {
+    width: 100%;
+}
+
+.wine-description .nav-tabs {
+    border: 0px;
+}
+
+
+.wine-description ul li a {
+    font-size: 24px;
+    font-weight: 800;
+    color: #282828;
+    width: 100%;
+    position: relative;
+    float: left;
+    padding: 20px 5px;
+}
+
+.wine-description ul li a.active {
+    background: #f5f5f5;
+    border-bottom: 3px solid #D48699;
+}
+
+.wine-description .tab-content {
+    padding: 30px 10px;
+}
+
+/*=========================================================================================================================================================================================
+                                                                                 WINERIES
+==========================================================================================================================================================================================*/
+
+.wineries-box {
+    
+}
+
+.wineries-box>div {
+    margin-bottom: 30px;
+    background: #fff;
+    padding: 10px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+
+
+.wineries-brand {
+    position: relative;
+}
+
+.winery-header {
+    width: 100%;
+}
+
+.winery-logo {
+    position: absolute;
+    left: 5px;
+    bottom: -44px;
+    border-radius: 100px;
+    border: 4px solid #fff;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    width: 88px;
+    height: 88px;
+}
+
+.wineries-box p {
+    padding: 10px 0  10px 100px;
+    color: #363a44;
+    font-weight: 500;
+}
+
+.wineries-box p span {
+    color: #979797;
+}
+
+
+
+
+/*=============================================================================================
+                                        WINERY
+==============================================================================================*/
+
+.page-header .wine-badge {
+    position: absolute;
+    width: auto;
+    top: 15px;
+    left: 15px;
+}
+
+.winery-logo-big {
+    position: relative;
+    float: left;
+    border-radius: 150px;
+    border: 5px solid #fff;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    width: 130px;
+    height: 130px;
+    margin-right: 15px;
+}
+
+.winery-info>div {
+    position: relative;
+    float: left;
+}
+
+.winery-info h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.winery-info .star-rating {
+    position: relative;
+    padding: 0px;
+}
+
+.winery-info p {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.winery-categories .vine-box-style-4 {
+    margin-bottom: 30px;
+}
+
+.winery-categories h2 {
+    width: 100%;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                 WB EXPERIENCE
+==========================================================================================================================================================================================*/
+
+.wb-experience {
+
+}
+
+.wb-experience {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.wb-experience a {
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    height: 100%;
+    display: block;
+}
+
+.wb-experience img {
+    width: 100%;
+}
+
+.wb-experience h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.wb-experience:hover .overlay {
+    left: 0px;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                 MY WINE
+==========================================================================================================================================================================================*/
+
+.my-wine a {
+    color: #212529;
+}
+
+.my-wine h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.my-wine .image-holder img:first-child {
+
+}
+
+.my-wine .image-holder img:last-child {
+    display: none;
+}
+
+.my-wine a:hover .image-holder img:last-child {
+    display: inline-block;
+}
+
+.my-wine a:hover .image-holder img:first-child {
+    display: none;
+}
+
+.my-wine a:hover h2 {
+    color: #9A1D3E;
+}
+
+.wish2 {
+    display: none;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                 LOCAL PICKUP
+==========================================================================================================================================================================================*/
+
+.results, .stores {
+    border-top: 1px solid #e0e0e0;
+    padding: 50px 10px;
+}
+
+.results .main__clipper {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.results h3 {
+    font-size: 20px;
+    color: #9b1f3d;
+    font-weight: 600;
+}
+
+.results p {
+    color: #282828;
+    margin-bottom: 5px;
+}
+
+.results .red-button {
+    position: relative;
+    float: left;
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.stores img {
+    width: 100%;
+}
+
+.find-stores {
+    width: 100%;
+}
+
+.find-stores input {
+   width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.find-stores input[type="submit"] {
+   border: 0px;
+}
+
+
+
+/*=========================================================================================================================================================================================
+                                                                                 TRACKING ORDER
+==========================================================================================================================================================================================*/
+
+.tracking {
+     border-bottom: 1px solid #e0e0e0;
+}
+
+.tracking:last-child {
+     border-top: 0px;
+}
+
+.order-info p {
+    color: #282828;
+    margin-bottom: 0px;
+}
+
+.order-info p span {
+    color: #9b1f3d;
+    font-weight: 600;
+}
+
+.tracking-slider {
+    padding: 30px 0;
+}
+
+.tracking-slider img {
+    width: 100%;
+}
+
+.tracking-slider span {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.tracking-slider span p {
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.tracking-slider span p:first-child {
+    color: #dcdcdc;
+}
+
+.tracking-slider span p:last-child {
+    color: #9c9c9c;
+}
+
+.ship-to {
+    background: #F8F8F8;
+    padding: 30px;
+}
+
+.ship-to p {
+    color: #282828;
+    margin-bottom: 0px;
+}
+
+.ship-to p span {
+    color: #9b1f3d;
+    font-weight: 600;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                 CART
+==========================================================================================================================================================================================*/
+
+.cart-table, .cart-table-total {
+    width: 100%;
+    color: #979797;
+    font-size: 21px;
+}
+
+.cart-table th {
+    padding: 0 5px;
+}
+
+.cart-table tr td:last-child, .cart-table-total tr td:last-child {
+    text-align: right;
+    font-weight: 600;
+}
+
+.cart-table th {
+    color: #282828;
+    font-weight: 400;
+    padding: 15px 0px;
+}
+
+.cart-table th b {
+    font-weight: 600;
+}
+
+.cart-table-total {
+    margin: 20px 0;
+}
+
+.cart-table-total tr td {
+    color: #646464;
+    padding-top: 10px;
+    border-top: 1px solid #d0d0d0;
+    font-weight: 500;
+}
+
+.cart-buttons .button {
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                  PROFILE
+==========================================================================================================================================================================================*/
+
+.profile-menu {
+    list-style: none;
+    padding: 0px;
+}
+
+.profile-menu li {
+    margin-top: -1px;
+}
+
+.profile-menu li a {
+    color: #525457;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    border: 1px solid #f6f6f6;
+}
+
+.profile-menu li a i {
+    color:#9b1f3d;
+    font-size: 16px;
+    margin-left: 5px;
+    width: 25px;
+    text-align: center;
+}
+
+.profile-menu li.active a {
+    background: #9b1f3d;
+    color: #fff;
+}
+
+.profile-menu li.active a i {
+    color: #fff;
+}
+
+.profile-menu li a i {
+    color:#9b1f3d;
+    font-size: 16px;
+    margin-left: 5px;
+    width: 25px;
+    text-align: center;
+}
+
+
+.shadow-box {
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+.shadow-box h2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    font-weight: 700;
+    font-size: 22px;
+    border-bottom: 1px solid #EBEBEB;
+    position: relative;
+}
+
+
+.info-box table {
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.info-box table tr {
+
+}
+
+.info-box table tr td {
+    padding: 10px 5px;
+    width: 50%;
+}
+
+.info-box table tr td:first-child {
+     color:#9b1f3d;
+}
+
+.edit-button {
+    position: absolute;
+    right: 5px;
+    color:#9b1f3d;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    top: 7px;
+}
+
+
+
+/*=========================================================================================================================================================================================
+                                                                                  STARTUP
+==========================================================================================================================================================================================*/
+
+.startup .shadow-box {
+    padding-bottom: 30px;
+}
+
+.startup table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.startup table td {
+    /*width: 50%;*/
+}
+
+.startup table td:first-child {
+    color: #9A1E3E;
+    font-weight: 600;
+} 
+
+.startup table td select {
+    width: 100%;
+    border: 1px solid #D8D8D8;
+    padding: 10px 10px;
+     margin: 5px 0;
+}
+
+
+.enter-name {
+    position: relative;
+}
+
+.enter-name input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+.name-check {
+    position: absolute;
+    right: 10px;
+    background: #E6F8E3;
+    color: #69B85D;
+    font-size: 22px;
+    top: 10px;
+    height: 48px;
+    width: 48px;
+    border: 1px solid #bbbaba;
+    text-align: center;
+}
+
+.name-check i {
+    line-height: 48px;
+}
+
+.winery-preferences table {
+    margin-top: 20px;
+}
+
+.inventory h4 {
+    margin-bottom: 10px;
+}
+
+.inventory .style-3-2 img {
+    width: auto;
+    height: 172px;
+}
+
+.inventory .vine-box-style-3 .inv-container {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.inventory .image-container {
+    min-height: 202px;
+}
+
+.inventory .vine-box-style-3 {
+    min-height: 276px;
+}
+
+.add-wine img {
+    width: 100%;
+}
+
+.delete-copy {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: #b5b5b5;
+}
+
+.delete-copy a {
+    width: 100%;
+    box-shadow: none;
+    display: inline-block;
+    height: auto;
+    color: #b5b5b5;
+    position: relative;
+    float: left;
+}
+
+.delete-copy i {
+    color: #991D3F!important;
+    font-size: 12px!important;
+    position: relative!important;
+    float: left;
+    right: auto!important;
+    top: 2px!important;
+    margin-right: 5px;
+}
+
+.delete-copy span {
+    position: relative;
+    float: left;
+}
+
+.delete-copy a:hover span {
+    position: relative;
+    float: left;
+    color: #363636;
+}
+
+
+/*=========================================================================================================================================================================================
+                                                                                ADD NEW WINE
+==========================================================================================================================================================================================*/
+
+.add-new-wine form {
+    width: 100%;
+}
+
+.form-inputs {
+    width: 100%;
+}
+
+.form-inputs .radio-check input {
+    width: auto;
+    float: left;
+}
+
+.form-inputs p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #9b1f3d;
+    margin-bottom: 0px;
+    line-height: 48px;
+}
+
+.form-inputs p span {
+    font-weight: 300;
+}
+
+.form-inputs input, .form-inputs select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0;
+}
+
+.new-wine-photos, .details {
+    padding: 30px 15px;
+}
+
+.new-wine-photos .col-4 {
+    margin-bottom: 10px;
+}
+
+.new-wine-photos img {
+    width: 100%;
+}
+
+.form-inputs>div {
+    margin-bottom:20px;
+}
+
+.form-inputs textarea {
+    width: 100%;
+    padding: 10px;
+    height: 200px;
+}
+
+.usd-input {
+    padding-left: 75px!important;
+}
+
+.usd {
+    position: absolute;
+    left: 10px;
+    background: #FBFBFB;
+    color: #959595;
+    font-size: 22px;
+    top: 0;
+    height: 48px;
+    width: 70px;
+    border: 1px solid #bbbaba;
+    text-align: center;
+    line-height: 48px;
+}
+
+
+
+
+
+
+/*RADIO*/
+.radio-check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee0;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.label-container {
+    position: relative;
+    float: left;
+    padding-left: 25px;
+    line-height: 42px;
+    font-weight: 600;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-check input:checked ~ .checkmark {
+    background-color: transparent;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-check input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-check .checkmark:after {
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #9a1e3e;
+}
+
+
+
+/*CHECK*/
+
+input[type=checkbox].css-checkbox {
+      position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height:1px; 
+    width:1px; 
+    margin:-1px; 
+    padding:0;
+    border:0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:30px;
+    height:22px; 
+    display:inline-block;
+    line-height:22px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:15px;
+    vertical-align:middle;
+    cursor:pointer;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -22px;
+}
+
+
+
+.lite-red-check{background-image:url(../img/check.png);}
+
+
+
+
+/*=========================================================================================================================================================================================
+                                                                                 MEDIA QUERY
+==========================================================================================================================================================================================*/
+
+@media only screen and (max-width : 1650px) {
+    
+}
+
+@media only screen and (min-width : 1200px) {
+    .container {
+        max-width: 1190px;
+    }
+}
+
+@media only screen and (max-width : 1200px) {
+    .navbar-nav li {
+        width: auto;
+        flex-basis: auto;
+    }
+
+    .item-in-cart {
+        right: 28px;
+    }
+}
+
+
+@media only screen and (max-width : 992px) {
+    .user-area .col-6 a > span, .user-area .col-6 a div span {
+        display: none;
+    }
+
+    .navbar .form-inline {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .navbar .form-inline .form-control {
+        margin-right: -5px!important;
+    }
+
+    .desktop-search {
+        display: none;
+    }
+
+    .logo img {
+        width: 150px;
+        right: -62px;
+        position: relative;
+    }
+
+    .navbar-toggler {
+        position: absolute;
+        top: -72px;
+        left: 15px;
+    }
+
+    .logo {
+        text-align: center;
+        max-width: 80%;
+        flex: 0 0 80%;
+    }
+
+    .user-area {
+        max-width: 20%;
+        flex: 0 0 20%;
+    }
+
+    .item-in-cart {
+        right: 0px;
+    }
+
+    .col-xs-5ths, .main__scroller .col-xs-6 {
+        /*flex: 0 0 50%;
+        max-width: 50%;
+        float: left;*/
+
+        flex: 0 0 250px;
+        max-width: 250px;
+        width: 250px;
+        position: relative;
+        float: left;
+    }
+
+    .col-xs-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        float: left;
+    }
+
+    .main__clipper {
+        width: 100%;
+        position: relative;
+        float: left;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main__scroller {
+        width: auto;
+        display: inline-flex;
+    }
+
+    .style-3-2 .order-q {
+        font-size: 10px;
+        right: 0;
+        bottom: 8px;
+        margin-bottom: 20px;
+        position: relative;
+        float: left;
+        padding: 0 10px;
+    }
+
+    .style-3-2 h4 {
+        margin-bottom: 15px;
+    }
+
+    .sidebar {
+        margin-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+
+@media only screen and (max-width : 768px) {
+    .mobile-display {
+        display: none;
+    }
+    .headline-2 {
+        margin-bottom: 20px;
+    }
+
+    .logo img {
+        width: 120px;
+        right: -68px;
+        position: relative;
+    }
+
+    .navbar-toggler {
+        position: absolute;
+        top: -65px;
+        left: 15px;
+    }
+
+    .logo {
+        text-align: center;
+        max-width: 70%;
+        flex: 0 0 70%;
+    }
+
+    .user-area {
+        max-width: 30%;
+        flex: 0 0 30%;
+    }
+
+    .item-in-cart {
+        right: 7px;
+    }
+
+    
+    .footer-nav {
+        margin-top: 35px;
+    }
+
+    footer .container {
+        padding: 30px 0;
+    }
+
+    .slider-content h1 {
+        display: none;
+    }
+
+    .button {
+        font-size: 16px;
+    }
+
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .order-q {
+        position: relative;
+        right: 0;
+        bottom: 0;
+        margin-bottom: 40px;
+        float: left;
+        padding: 0 10px;
+    }
+
+    .vine-box-style-3 h4 {
+        margin-bottom: 10px;
+    }
+
+    .vine-box-style-1 h5, .star-rating .fa {
+        font-size: 14px;
+    }
+
+    .single-wine-info .star-rating .fa {
+        font-size: 10px;
+    }
+
+    .col-xs-5ths, .main__scroller .col-xs-6 {
+        flex: 0 0 180px;
+        max-width: 180px;
+        width: 180px;
+        position: relative;
+        float: left;
+    }
+
+    .card-header img {
+        width: 30px;
+    }
+
+    .accordion-name {
+        font-size: 18px;
+    }
+
+    .card-body .sub-cat {
+        font-size: 16px;
+    }
+
+    .accordion button i {
+        top: 25px;
+    }
+
+    .vine-box-style-2 h5 {
+        font-size: 16px;
+    }
+
+    .vine-box-style-3 img {
+        width: 30%;
+    }
+
+    .vine-box-style-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .sale-mark {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    .single-wine-info h1 {
+        font-size: 20px;
+    }
+
+    .single-wine-info .price {
+        font-size: 22px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .wine-description ul li a {
+        font-size: 16px;
+    }
+
+    .single-wine-buttons a {
+        width: 49%;
+        font-size: 12px;
+        padding: 15px 5px;
+    }
+
+    .single-wine-buttons a:first-child {
+        margin-right: 2%;
+    }
+
+    .single-wine-img img {
+        max-height: 200px;
+    }
+
+    .preview-thumbnail.nav-tabs li img {
+        width: 25px;
+        height: 50px;
+    }
+
+    .preview-pic i {
+        font-size: 32px;
+    }
+
+    .single-wine-info .col-4 p {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .style-3-2 .sale-mark {
+        font-size: 12px;
+        padding: 5px 5px;
+    }
+
+    h2.heading {
+        font-size: 22px;
+    }
+
+    .vine-box-style-4 img {
+        max-height: 120px!important;
+    }
+
+    .vine-box-style-4 .price {
+        font-size: 14px;
+    }
+
+    .winery-logo {
+        bottom: -35px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .wineries-box p {
+        padding: 5px 0 0px 80px;
+        color: #363a44;
+        font-weight: 500;
+    }
+
+    .page-header .wine-badge {
+        width: 20px;
+    }
+
+    .winery-logo-big {
+        width: 80px;
+        height: 80px;
+    }
+
+    .winery-info h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+
+    .winery-info p {
+        font-size: 12px;
+        margin-top: 0;
+    }
+
+    .winery-categories h2 {
+        font-size: 18px;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .wb-experience h2  {
+        font-size: 20px;
+    }
+
+    .page-header h1, .headline-2  {
+        font-size: 24px;
+    }
+
+    .my-wine .image-holder img {
+        width: 100%;
+    }
+
+    .my-wine .col-4, .my-wine .col-8 {
+        position: relative;
+        float: left;
+    }
+
+    .wish1 {
+        display: none;
+    }
+
+    .wish2 {
+        display: block;
+    }
+
+    .my-wine h2, .my-wine p {
+        text-align: left;
+    }
+
+    .tracking-slider span p {
+        font-size: 10px;
+    }
+
+    .tracking {
+        font-size: 14px;
+    }
+
+    .forms .form-inline label {
+        font-size: 10px;
+    }
+
+    .info-box h2 {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .info-box table {
+       font-size: 14px;
+    }
+
+    .edit-button {
+        top: 2px;
+    }
+}
+
+
+@media only screen and (max-width : 580px) {
+    .container {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .form-inline .form-control {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
+
+    .navbar {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .item-in-cart {
+        right: 2px;
+    }
+
+    .home-slider {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .my-wine h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+
+    .my-wine p {
+        font-size: 12px;
+    }
+
+    .add-wine img {
+        width: 100%!important;
+        height: auto!important;
+    }
+
+    .winery-preferences table {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width : 450px) {
+    .item-in-cart {
+        right: -6px;
+    }
+
+    .wineries-box p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width : 400px) {
+    .logo img {
+        right: -50px;
+    }
+
+    .item-in-cart {
+        right: -3px;
+    }
+}
+
+
+@media only screen and (max-width : 370px) {
+    
+}
+
+
+
