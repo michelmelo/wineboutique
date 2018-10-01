@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-3 user-area">
                     <div class="v-align row">
-                        <div class="col-6"><a href="#"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN IN</span></a></div>
-                        <div class="col-6 cart-icon"><a href="#"><div><img src="{{asset('img/cart.svg')}}"><div class="item-in-cart">6</div><span>CART</span></div></a></div>
+                        <div class="col-6"><a href="{{route('login')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN IN</span></a></div>
+                        <div class="col-6 cart-icon"><a href="{{route('cart')}}"><div><img src="{{asset('img/cart.svg')}}"><div class="item-in-cart">6</div><span>CART</span></div></a></div>
                     </div>
                 </div>
             </div>
@@ -33,31 +33,31 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">Wines</a>
+                        <a class="nav-link" href="{{route('wines')}}">Wines</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">New Arrivals</a>
+                        <a class="nav-link" href="{{route('new-arrivals')}}">New Arrivals</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">Wineries</a>
+                        <a class="nav-link" href="{{route('wineries')}}">Wineries</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">Hot Sellers</a>
+                        <a class="nav-link" href="{{route('hot-sellers')}}">Hot Sellers</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">WB Experience</a>
+                        <a class="nav-link" href="{{route('wb-experience')}}">WB Experience</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">My Wine </a>
+                        <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">Create an account</a>
+                        <a class="nav-link" href="{{route('register')}}">Create an account</a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="#">Sell on WB</a>
+                        <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>
                     </li>
                 </ul>
             </div>

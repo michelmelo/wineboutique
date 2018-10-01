@@ -11,25 +11,37 @@
 |
 */
 
-Route::view('/', 'home');
+Route::view('/', 'home')->name('home');
 
-Auth::routes();
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::view('/add-new-wine', 'add-new-wine');
-Route::view('/cart', 'cart');
-Route::view('/customer-sign-up', 'customer-sign-up');
-Route::view('/get-paid', 'get-paid');
-Route::view('/hot-sellers', 'hot-sellers');
-Route::view('/local-pickup', 'local-pickup');
-Route::view('/my-wine', 'my-wine');
-Route::view('/new-arrivals', 'new-arrivals');
-Route::view('/order-track', 'order-track');
-Route::view('/profile', 'profile');
-Route::view('/sign-up-to-sell', 'sign-up-to-sell');
-Route::view('/startup', 'startup');
-Route::view('/wb-experience', 'wb-experience');
-Route::view('/wineries', 'wineries');
-Route::view('/winery', 'winery');
-Route::view('/wines-single', 'wines-single');
-Route::view('/wines', 'wines');
-Route::view('/wishlist', 'wishlist');
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
+Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
+Route::view('/cart', 'cart')->name('cart');
+Route::view('/get-paid', 'get-paid')->name('get-paid');
+Route::view('/hot-sellers', 'hot-sellers')->name('hot-sellers');
+Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
+Route::view('/my-wine', 'my-wine')->name('my-wine');
+Route::view('/new-arrivals', 'new-arrivals')->name('new-arrivals');
+Route::view('/order-track', 'order-track')->name('order-track');
+Route::view('/profile', 'profile')->name('profile');
+Route::view('/startup', 'startup')->name('startup');
+Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
+Route::view('/wineries', 'wineries')->name('wineries');
+Route::view('/winery', 'winery')->name('winery');
+Route::view('/wines-single', 'wines-single')->name('wines-single');
+Route::view('/wines', 'wines')->name('wines');
+Route::view('/wishlist', 'wishlist')->name('wishlist');
