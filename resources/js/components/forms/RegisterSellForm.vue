@@ -111,9 +111,9 @@
                     });
                     return;
                 }
-                axios.post('/api/auth/register', _.omit(this, formFields))
+                axios.post('/api/auth/register', _.pick(this._data, formFields))
                     .then(() => {
-                        document.location.href = '/login';
+                        document.location.href = '/startup';
                     })
                     .catch(error => {
                         console.log("error", error);

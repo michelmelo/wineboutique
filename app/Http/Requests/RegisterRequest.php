@@ -32,8 +32,8 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6',
             'phone' => 'required|string|min:6',
             'type' => 'required|string',
-            'city' => 'required_if:type,==,SELLER|exists:cities',
-            'location' => 'required_if:type,==,SELLER|exists:locations',
+            'city' => 'required_if:type,==,SELLER|exists:cities,id',
+            'location' => 'required_if:type,==,SELLER|exists:locations,id',
             'acceptTerms' => 'required|accepted',
             'acceptAge' => 'required|accepted'
         ];

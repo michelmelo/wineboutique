@@ -22,7 +22,7 @@ Route::name('api.')->namespace('Api')->group(function () {
         Route::get('/cities', 'LocationsController@cities')->name('cities');
         Route::get('/locations/{city}', 'LocationsController@locations')->name('locations');
 
-        Route::namespace('Auth')->group(function () {
+        Route::namespace('Auth')->prefix('auth')->group(function () {
             Route::post('register', 'RegisterController@register')->name('register');
         });
     });
