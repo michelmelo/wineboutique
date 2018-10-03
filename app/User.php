@@ -23,14 +23,11 @@ class User extends Authenticatable
     protected $fillable = [
         'firstName',
         'lastName',
-        'wineryName',
         'email',
         'password',
         'phone',
         'city',
         'location',
-        'acceptTerms',
-        'acceptAge',
         'type'
     ];
 
@@ -43,13 +40,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function city()
+    public function winery()
     {
-        return $this->belongsTo(City::class);
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
+        return $this->hasOne(Winery::class);
     }
 }

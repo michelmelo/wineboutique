@@ -23,7 +23,8 @@ Route::name('api.')->namespace('Api')->group(function () {
         Route::get('/locations/{city}', 'LocationsController@locations')->name('locations');
 
         Route::namespace('Auth')->prefix('auth')->group(function () {
-            Route::post('register', 'RegisterController@register')->name('register');
+            Route::post('/register', 'RegisterController@register')->name('register');
+            Route::post('/check-email', 'RegisterController@checkEmail')->name('email');
         });
     });
 

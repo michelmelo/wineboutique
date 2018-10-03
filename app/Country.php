@@ -8,7 +8,8 @@ class Country extends Model
 {
     protected $fillable = [
         "name",
-        "code"
+        "iso_code2",
+        "iso_code3"
     ];
 
     public function regions()

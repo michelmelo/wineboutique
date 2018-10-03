@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
         return [
             'firstName' => 'required|string|min:4|max:255',
             'lastName' => 'required|string|min:4|max:255',
-            'wineryName' => 'required|string|min:4|max:255',
+            'wineryName' => 'required_if:type,==,SELLER|string|min:4|max:255',
             'email' => 'email|required|unique:users,email',
             'password' => 'required|string|min:6',
             'phone' => 'required|string|min:6',

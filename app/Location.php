@@ -28,4 +28,9 @@ class Location extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function wineries()
+    {
+        return $this->hasMany(Winery::class);
+    }
 }

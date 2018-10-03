@@ -26,4 +26,9 @@ class City extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function wineries()
+    {
+        return $this->hasMany(Winery::class);
+    }
 }

@@ -3,7 +3,7 @@
         <input type="text" v-model.trim="firstName" :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name">
         <input type="text" v-model.trim="lastName" :class="{ 'invalid': isInvalid('lastName') }" name="lastName" placeholder="Last Name">
         <input type="text" v-model.trim="wineryName" :class="{ 'invalid': isInvalid('wineryName') }" name="wineryName" placeholder="Winery Name">
-        <input type="email" v-model.trim="email" :class="{ 'invalid': isInvalid('email') }" name="email" placeholder="Email">
+        <input type="email" v-model.trim="email" :class="{ 'invalid': isInvalid('email') || validEmail===false, 'valid': validEmail }" name="email" placeholder="Email">
         <input type="password" v-model="password" :class="{ 'invalid': isInvalid('password') }" name="password" placeholder="Password">
         <input type="text" v-model.trim="phone" :class="{ 'invalid': isInvalid('phone') }" name="phone" placeholder="Phone">
         <select class="half-select" :class="{ 'invalid': isInvalid('city') }" name="city" v-model="city" v-bind:disabled="cities.length===0">
@@ -67,13 +67,15 @@
             type: 'SELLER',
             cities: [],
             locations: [],
-            showErrors: false
+            showErrors: false,
+            validEmail: null
         }),
         created() {
             this.fetchCities();
         },
         watch: {
-            'city': 'fetchLocations'
+            'city': 'fetchLocations',
+            'email': 'checkEmail'
         },
         methods: {
             fetchCities() {
@@ -99,6 +101,18 @@
                         });
                 }
             },
+            checkEmail() {
+                this.validEmail = null;
+                if(this.email.length > 0 && email(this.email)) {
+                    axios.post(`/api/auth/check-email`, {email: this.email})
+                        .then(() => {
+                            this.validEmail = true;
+                        })
+                        .catch(() => {
+                            this.validEmail = false;
+                        });
+                }
+            },
             onSubmit() {
                 this.showErrors = true;
                 if(this.$v.$invalid) {
@@ -113,7 +127,7 @@
                 }
                 axios.post('/api/auth/register', _.pick(this._data, formFields))
                     .then(() => {
-                        document.location.href = '/startup';
+                        //document.location.href = '/startup';
                     })
                     .catch(error => {
                         console.log("error", error);

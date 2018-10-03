@@ -203,6 +203,10 @@ select {
     border: 1px solid darkred !important;
 }
 
+.forms .valid {
+    border: 1px solid green !important;
+}
+
 .forms a {
     color: #9C193A;
 }

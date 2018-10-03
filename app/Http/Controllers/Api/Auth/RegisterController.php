@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\User;
 use App\City;
 use App\Location;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -17,16 +19,32 @@ class RegisterController extends Controller
             'city',
             'location',
             'acceptTerms',
-            'acceptAge'
+            'acceptAge',
+            'wineryName'
         ]);
+        $userData["password"] = Hash::make($userData["password"]);
 
         $user = User::create($userData);
 
-        if($userData['type'] === User::$types['seller']) {
-            $user->city()->associate(City::find($request->get('city')));
-            $user->location()->associate(Location::find($request->get('location')));
+        if($userData['type'] === User::$types['seller'])
+        {
+            $winery = $user->winery()->create([
+                'name' => $request->get('wineryName')
+            ]);
+            City::find($request->get('city'))->wineries()->save($winery);
+            Location::find($request->get('location'))->wineries()->save($winery);
         }
 
         Auth::login($user, true);
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'email|required|unique:users,email'
+        ]);
+
+        return response('ok', 200)
+            ->header('Content-Type', 'text/plain');
     }
 }
