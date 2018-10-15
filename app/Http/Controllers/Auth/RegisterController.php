@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/profile';
 
     /**
      * Show the application registration sell form.
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'wineryName' => 'required_if:type,==,SELLER|string|min:4|max:255',
             'email' => 'email|required|unique:users,email',
             'password' => 'required|string|min:6',
-            'phone' => 'required|string|min:6',
+            'phone' => 'required_if:type,==,SELLER|string|min:6',
             'type' => 'required|string',
             'city' => 'required_if:type,==,SELLER|exists:cities,id',
             'location' => 'required_if:type,==,SELLER|exists:locations,id',

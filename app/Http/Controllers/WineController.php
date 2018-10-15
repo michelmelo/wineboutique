@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewWineRequest;
+use App\Varietal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
@@ -35,5 +36,15 @@ class WineController extends Controller
         $newWine = $wine->replicate();
         $newWine->save();
         return $newWine;
+    }
+
+    public function list(Request $request)
+    {
+        $wines = Wine::paginate(8);
+        $varietals = Varietal::all();
+        return view('wines', [
+            'wines' => $wines,
+            'varietals' => $varietals
+        ]);
     }
 }

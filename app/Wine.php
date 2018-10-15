@@ -14,4 +14,14 @@ class Wine extends Model
     {
         return $this->belongsTo(Winery::class);
     }
+
+    public function varietal()
+    {
+        return $this->belongsTo(Varietal::class);
+    }
+
+    public function getPhotoLink()
+    {
+        return str_replace('public', '/storage', $this->photo);
+    }
 }

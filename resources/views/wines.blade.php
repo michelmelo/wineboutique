@@ -23,11 +23,9 @@
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <a href="#" class="sub-cat">Wite</a>
-                            <a href="#" class="sub-cat">Red</a>
-                            <a href="#" class="sub-cat">Rosé</a>
-                            <a href="#" class="sub-cat">Sparkling</a>
-                            <a href="#" class="sub-cat">Organic/Natural</a>
+                            @foreach ($varietals as $varietal)
+                                <a href="#" class="sub-cat">{{$varietal->name}}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -75,188 +73,30 @@
         </div>
 
         <div class="col-lg-10 col-sm-12 row row-eq-height">
+            @foreach ($wines as $wine)
+                <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
+                    <a href="#">
+                        <div class="image-container">
+                            <img src="{{$wine->getPhotoLink()}}">
+                            <div class="overlay"></div>
+                            <i class="far fa-heart"></i>
+                            <span class="sale-mark">SALE</span>
+                        </div>
+                        <h5>Name Of The Store</h5>
+                        <h4>${{$wine->price}}</h4>
+                        <div class="star-rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <span class="order-q">193 Orders</span>
+                    </a>
+                </div>
+            @endforeach
 
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                <a href="#">
-                    <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <div class="overlay"></div>
-                        <i class="far fa-heart"></i>
-                        <span class="sale-mark">SALE</span>
-                    </div>
-                    <h5>Name Of The Store</h5>
-                    <h4>$49.00</h4>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <span class="order-q">193 Orders</span>
-                </a>
-            </div>
-
-            <div class="pagination-box col-md-12">
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <span class="page-link"><</span>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item">
-                            <span class="page-link">
-                                2
-                                <span class="sr-only">(current)</span>
-                            </span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            {{ $wines->links() }}
         </div>
     </div>
 </div>

@@ -41,7 +41,7 @@ Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
 Route::view('/wineries', 'wineries')->name('wineries');
 Route::view('/winery', 'winery')->name('winery');
 Route::view('/wines-single', 'wines-single')->name('wines-single');
-Route::view('/wines', 'wines')->name('wines');
+Route::get('/wines', 'WineController@list')->name('wines');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 
 Route::group(['middleware' => ['auth']], function() {
