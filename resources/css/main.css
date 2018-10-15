@@ -594,6 +594,7 @@ footer p {
     padding: 5px 5px 5px 7%;
     margin-bottom: 3px;
     display: block;
+    cursor: pointer;
 }
 
 .card-body .sub-cat:last-child {

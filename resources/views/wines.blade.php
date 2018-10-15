@@ -10,65 +10,67 @@
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
             <div id="accordion" class="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="accordion-name">VARIETAL</span>
-                                <i class="fas fa-chevron-down"></i>
-                                <i class="fas fa-chevron-up"></i>
-                            </button>
-                        </h5>
-                    </div>
+                <form>
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="accordion-name">VARIETAL</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                            </h5>
+                        </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            @foreach ($varietals as $varietal)
-                                <a href="#" class="sub-cat">{{$varietal->name}}</a>
-                            @endforeach
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                @foreach ($varietals as $varietal)
+                                    <label class="sub-cat"><input name="varietal" value="{{$varietal->id}}" type="checkbox" class="d-none"/>{{$varietal->name}}</label>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="accordion-name">REGION</span>
-                                <i class="fas fa-chevron-down"></i>
-                                <i class="fas fa-chevron-up"></i>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div class="card-body">
-                            <a href="#" class="sub-cat">Wite</a>
-                            <a href="#" class="sub-cat">Red</a>
-                            <a href="#" class="sub-cat">Rosé</a>
-                            <a href="#" class="sub-cat">Sparkling</a>
-                            <a href="#" class="sub-cat">Organic/Natural</a>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="accordion-name">REGION</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <a href="#" class="sub-cat">Wite</a>
+                                <a href="#" class="sub-cat">Red</a>
+                                <a href="#" class="sub-cat">Rosé</a>
+                                <a href="#" class="sub-cat">Sparkling</a>
+                                <a href="#" class="sub-cat">Organic/Natural</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <span class="accordion-name">PRICE</span>
-                                <i class="fas fa-chevron-down"></i>
-                                <i class="fas fa-chevron-up"></i>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="card-body">
-                            <a href="#" class="sub-cat">Wite</a>
-                            <a href="#" class="sub-cat">Red</a>
-                            <a href="#" class="sub-cat">Rosé</a>
-                            <a href="#" class="sub-cat">Sparkling</a>
-                            <a href="#" class="sub-cat">Organic/Natural</a>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="accordion-name">PRICE</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <a href="#" class="sub-cat">Wite</a>
+                                <a href="#" class="sub-cat">Red</a>
+                                <a href="#" class="sub-cat">Rosé</a>
+                                <a href="#" class="sub-cat">Sparkling</a>
+                                <a href="#" class="sub-cat">Organic/Natural</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
