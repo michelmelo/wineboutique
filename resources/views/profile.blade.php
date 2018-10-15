@@ -16,29 +16,11 @@
         </div>
 
         <div class="col-md-8 col-sm-12">
-            <div class="info-box shadow-box">
-                <h2>PERSONAL INFORMATION <div class="edit-button edit-personal"><i class="far fa-edit"></i>Edit</div></h2>
-                <table id="personal">
-                    <tr>
-                        <td>First Name:</td>
-                        <td class="edit-text">John</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td class="edit-text">Doe</td>
-                    </tr>
-                    <tr>
-                        <td>Date of birth:</td>
-                        <td class="edit-text">09/18/1990 /</td>
-                    </tr>
-                    <tr>
-                        <td>Email address:</td>
-                        <td class="edit-text">johndoe@mail.com</td>
-                    </tr>
-                </table>
+            <div>
+                <personal-information-form user="{{json_encode($user)}}" />
             </div>
 
-            <div class="info-box shadow-box">
+            <div class="info-box shadow-box password-edit">
                 <h2>PASSWORD <div class="edit-button edit-password"><i class="far fa-edit"></i>Edit</div></h2>
                 <table id="pass">
                     <tr>
@@ -48,7 +30,7 @@
                 </table>
             </div>
 
-            <div class="info-box shadow-box">
+            <div class="info-box shadow-box website-edit">
                 <h2>WEBSITE PREFERENCES <div class="edit-button edit-preferance"><i class="far fa-edit"></i>Edit</div></h2>
                 <table id="preferance">
                     <tr>

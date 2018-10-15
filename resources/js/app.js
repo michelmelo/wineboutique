@@ -24,6 +24,7 @@ Vue.directive('click-outside', {
 
 Vue.component('register-sell-form', require('./components/forms/RegisterSellForm.vue'));
 Vue.component('startup-form', require('./components/forms/StartupForm.vue'));
+Vue.component('personal-information-form', require('./components/forms/PersonalInformationForm.vue'));
 
 const app = new Vue({
     el: '#app'

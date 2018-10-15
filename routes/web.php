@@ -54,5 +54,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/wine/delete/{wine}', 'WineController@delete')->name('wine.delete');
     Route::post('/wine/clone/{wine}', 'WineController@clone')->name('wine.clone');
 
-    Route::view('/profile', 'profile')->name('profile');
+    Route::get('/profile', 'ProfileController@show')->name('profile.show');
+    Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
 });

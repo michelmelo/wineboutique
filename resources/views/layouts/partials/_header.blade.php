@@ -16,7 +16,7 @@
                         @if(Auth::guest())
                             <div class="col-6"><a href="{{route('login')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN IN</span></a></div>
                         @else
-                            <div class="col-6"><a href="{{route('profile')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>PROFILE</span></a></div>
+                            <div class="col-6"><a href="{{route('profile.show')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>PROFILE</span></a></div>
                             <div class="col-6 cart-icon"><a href="{{route('cart')}}"><div><img src="{{asset('img/cart.svg')}}"><div class="item-in-cart">6</div><span>CART</span></div></a></div>
 
                             <div class="col-6"><a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><div><img src="{{asset('img/user.svg')}}"></div><span>LOGOUT</span></a></div>

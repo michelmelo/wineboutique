@@ -30,6 +30,6 @@ class StartupController extends Controller
         $winery->currency()->associate(Currency::find($request->currency));
         $winery->save();
 
-        return redirect()->route('profile');
+        return redirect()->route('profile.show');
     }
 }
