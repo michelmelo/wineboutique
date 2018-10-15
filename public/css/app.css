@@ -13398,6 +13398,8 @@ select {
     padding: 10px 30px;
     text-align: center;
     font-weight: 600;
+    border: 0;
+    cursor: pointer;
 }
 
 .button:hover {
@@ -13512,7 +13514,7 @@ select {
     margin-top: -1px;
 }
 
-.forms .invalid {
+.invalid {
     border: 1px solid darkred !important;
 }
 
@@ -14132,6 +14134,24 @@ footer p {
     padding: 0 10px;
     margin-bottom: 50px;
     font-weight: 600;
+}
+
+.vine-box-style-3 input {
+    border: 0;
+    width: calc(100% - 20px);
+}
+
+.vine-box-style-3 input[type='text'] {
+    margin: 10px 10px 1rem;
+    font-size: 16px;
+    color: #646464;
+}
+
+.vine-box-style-3 input[type='number'] {
+    margin: 10px 10px 15px;
+    color: #282828;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .vine-box-style-3 .image-container {
@@ -15157,8 +15177,16 @@ footer p {
     min-height: 276px;
 }
 
+.add-wine {
+    cursor: pointer;
+}
+
 .add-wine img {
     width: 100%;
+}
+
+.add-wine input[type='file'] {
+    display: none;
 }
 
 .delete-copy {

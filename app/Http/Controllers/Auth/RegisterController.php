@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\City;
+use App\Location;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -69,9 +73,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'firstName' => 'required|string|min:4|max:255',
+            'lastName' => 'required|string|min:4|max:255',
+            'wineryName' => 'required_if:type,==,SELLER|string|min:4|max:255',
+            'email' => 'email|required|unique:users,email',
+            'password' => 'required|string|min:6',
+            'phone' => 'required|string|min:6',
+            'type' => 'required|string',
+            'city' => 'required_if:type,==,SELLER|exists:cities,id',
+            'location' => 'required_if:type,==,SELLER|exists:locations,id',
+            'acceptTerms' => 'required|accepted',
+            'acceptAge' => 'required|accepted'
         ]);
     }
 
@@ -83,10 +95,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'firstName' => $data['firstName'],
+            'lastName' => $data['lastName'],
+            'phone' => $data['firstName'],
+            'type' => $data['firstName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if($data['type'] === User::$types['seller'])
+        {
+            $winery = $user->winery()->create([
+                'name' => $data['wineryName']
+            ]);
+            City::find($data['city'])->wineries()->save($winery);
+            Location::find($data['location'])->wineries()->save($winery);
+            $this->redirectTo = route('startup');
+        }
+
+        return $user;
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        Auth::login($user);
+        return redirect()->intended($this->redirectTo);
     }
 }

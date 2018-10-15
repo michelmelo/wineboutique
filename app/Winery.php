@@ -39,4 +39,9 @@ class Winery extends Model
     {
         return $this->belongsTo(Currency::class);
     }
+
+    public function wines()
+    {
+        return $this->hasMany(Wine::class);
+    }
 }

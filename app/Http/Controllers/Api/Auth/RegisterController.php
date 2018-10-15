@@ -13,31 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function register(RegisterRequest $request)
-    {
-        $userData = $request->except([
-            'city',
-            'location',
-            'acceptTerms',
-            'acceptAge',
-            'wineryName'
-        ]);
-        $userData["password"] = Hash::make($userData["password"]);
-
-        $user = User::create($userData);
-
-        if($userData['type'] === User::$types['seller'])
-        {
-            $winery = $user->winery()->create([
-                'name' => $request->get('wineryName')
-            ]);
-            City::find($request->get('city'))->wineries()->save($winery);
-            Location::find($request->get('location'))->wineries()->save($winery);
-        }
-
-        Auth::login($user, true);
-    }
-
     public function checkEmail(Request $request)
     {
         $request->validate([

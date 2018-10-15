@@ -3,10 +3,27 @@ require('./main');
 require('jquery-ui');
 window.Vue = require('vue');
 window.Vuelidate = require('vuelidate').default;
+window.Vue2Filters = require('vue2-filters');
 
 Vue.use(Vuelidate);
+Vue.use(Vue2Filters);
+
+Vue.directive('click-outside', {
+    bind: function (el, binding, vnode) {
+        this.event = function (event) {
+            if (!(el == event.target || el.contains(event.target))) {
+                binding.value(event);
+            }
+        };
+        document.body.addEventListener('click', this.event)
+    },
+    unbind: function (el) {
+        document.body.removeEventListener('click', this.event)
+    },
+});
 
 Vue.component('register-sell-form', require('./components/forms/RegisterSellForm.vue'));
+Vue.component('startup-form', require('./components/forms/StartupForm.vue'));
 
 const app = new Vue({
     el: '#app'

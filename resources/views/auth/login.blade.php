@@ -10,7 +10,8 @@
         </div>
 
         <div class="col-lg-6 col-md-12 forms">
-            <form class="form-inline">
+            <form class="form-inline" method="post">
+                @csrf
                 <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
                     <span class="help-block">

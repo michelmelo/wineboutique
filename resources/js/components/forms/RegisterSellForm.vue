@@ -1,5 +1,7 @@
 <template>
-    <form class="form-inline" v-on:submit.prevent="onSubmit" ref="formElement">
+    <form class="form-inline" v-on:submit="onSubmit" method="post" action="/register">
+        <input type="hidden" name="_token" v-model="csrf">
+        <input type="hidden" name="type" value="SELLER">
         <input type="text" v-model.trim="firstName" :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name">
         <input type="text" v-model.trim="lastName" :class="{ 'invalid': isInvalid('lastName') }" name="lastName" placeholder="Last Name">
         <input type="text" v-model.trim="wineryName" :class="{ 'invalid': isInvalid('wineryName') }" name="wineryName" placeholder="Winery Name">
@@ -48,8 +50,7 @@
         'city',
         'location',
         'acceptTerms',
-        'acceptAge',
-        'type'
+        'acceptAge'
     ];
 
     export default {
@@ -64,7 +65,7 @@
             location: '',
             acceptTerms: false,
             acceptAge: false,
-            type: 'SELLER',
+            csrf: window.Laravel.csrfToken,
             cities: [],
             locations: [],
             showErrors: false,
@@ -113,9 +114,10 @@
                         });
                 }
             },
-            onSubmit() {
+            onSubmit(event) {
                 this.showErrors = true;
                 if(this.$v.$invalid) {
+                    event.preventDefault();
                     formFields.some(formField => {
                         if(this.$v[formField].$invalid) {
                             document.querySelector(`[name="${formField}"]`).focus();
@@ -123,15 +125,7 @@
                         }
                         return false;
                     });
-                    return;
                 }
-                axios.post('/api/auth/register', _.pick(this._data, formFields))
-                    .then(() => {
-                        //document.location.href = '/startup';
-                    })
-                    .catch(error => {
-                        console.log("error", error);
-                    })
             },
             isInvalid(name) {
                 return this.$v[name].$invalid && this.showErrors;

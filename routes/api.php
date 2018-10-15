@@ -13,22 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::name('api.')->namespace('Api')->group(function () {
     // Unprotected routes
-    Route::group(['middleware' => 'guest:api'], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/countries', 'LocationsController@countries')->name('countries');
         Route::get('/cities', 'LocationsController@cities')->name('cities');
         Route::get('/locations/{city}', 'LocationsController@locations')->name('locations');
 
+        Route::get('/languages', 'LanguageController@list')->name('languages');
+        Route::get('/currencies', 'CurrencyController@list')->name('currencies');
+
         Route::namespace('Auth')->prefix('auth')->group(function () {
-            Route::post('/register', 'RegisterController@register')->name('register');
             Route::post('/check-email', 'RegisterController@checkEmail')->name('email');
         });
-    });
-
-    // Protected routes
-    Route::middleware('auth:api')->group(function () {
     });
 });

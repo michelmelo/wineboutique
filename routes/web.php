@@ -37,11 +37,21 @@ Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
 Route::view('/my-wine', 'my-wine')->name('my-wine');
 Route::view('/new-arrivals', 'new-arrivals')->name('new-arrivals');
 Route::view('/order-track', 'order-track')->name('order-track');
-Route::view('/profile', 'profile')->name('profile');
-Route::view('/startup', 'startup')->name('startup');
 Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
 Route::view('/wineries', 'wineries')->name('wineries');
 Route::view('/winery', 'winery')->name('winery');
 Route::view('/wines-single', 'wines-single')->name('wines-single');
 Route::view('/wines', 'wines')->name('wines');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/startup', 'StartupController@show')->name('startup');
+    Route::post('/startup', 'StartupController@store');
+
+    Route::post('/wine/store', 'WineController@store')->name('wine.store');
+    Route::post('/wine/update/{wine}', 'WineController@update')->name('wine.update');
+    Route::delete('/wine/delete/{wine}', 'WineController@delete')->name('wine.delete');
+    Route::post('/wine/clone/{wine}', 'WineController@clone')->name('wine.clone');
+
+    Route::view('/profile', 'profile')->name('profile');
+});
