@@ -40,11 +40,28 @@ class WineController extends Controller
 
     public function list(Request $request)
     {
-        $wines = Wine::paginate(8);
+        $wines = Wine::query();
         $varietals = Varietal::all();
+
+        $filter = $request->all();
+
+        if(array_key_exists('varietal', $filter)) {
+            $wines = $wines->whereIn('varietal_id', $filter['varietal']);
+        }
+
+        $wines = $wines->paginate(8);
+
         return view('wines', [
             'wines' => $wines,
-            'varietals' => $varietals
+            'varietals' => $varietals,
+            'filter' => $filter
+        ]);
+    }
+
+    public function show(Wine $wine)
+    {
+        return view('wines-single', [
+            'wine' => $wine
         ]);
     }
 }

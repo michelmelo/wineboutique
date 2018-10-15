@@ -18,8 +18,8 @@
         </div>
 
         <div class="col-lg-6 col-sm-12 single-wine-info">
-            <h1>Place Holder of the Name of the Wine</h1>
-            <p class="price">$27.00</p>
+            <h1>{{$wine->name}}</h1>
+            <p class="price">${{$wine->price}}</p>
 
             <div class="row">
                 <div class="col-4 center-text">

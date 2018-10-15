@@ -72,5 +72,15 @@ $( document ).ready(function() {
     	$( '#preferance .edit-text' ).empty();
 	  	$( '#preferance .edit-text' ).append( "<input type='text'>" );
 	});
+
+	$(".auto-submit").change(function() {
+        const el = $(this);
+        let form;
+
+        if (el.is('form')) { form = el; }
+        else { form = el.closest('form'); }
+
+        form.submit();
+	});
 });
 

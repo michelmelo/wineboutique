@@ -45,7 +45,7 @@
                         <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item col">
-                        <a class="nav-link" href="{{route('wines')}}">Wines</a>
+                        <a class="nav-link" href="{{route('wine.list')}}">Wines</a>
                     </li>
                     <li class="nav-item col">
                         <a class="nav-link" href="{{route('new-arrivals')}}">New Arrivals</a>

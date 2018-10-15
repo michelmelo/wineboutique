@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
             <div id="accordion" class="accordion">
-                <form>
+                <form method="get" class="auto-submit">
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -25,7 +25,7 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 @foreach ($varietals as $varietal)
-                                    <label class="sub-cat"><input name="varietal" value="{{$varietal->id}}" type="checkbox" class="d-none"/>{{$varietal->name}}</label>
+                                    <label class="sub-cat"><input name="varietal[]" value="{{$varietal->id}}" type="checkbox" class="d-none" {{in_array($varietal->id, array_key_exists ('varietal', $filter)?$filter['varietal']:[])?'checked':''}}/>{{$varietal->name}}</label>
                                 @endforeach
                             </div>
                         </div>
@@ -77,7 +77,7 @@
         <div class="col-lg-10 col-sm-12 row row-eq-height">
             @foreach ($wines as $wine)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                    <a href="#">
+                    <a href="{{route('wine.show', ['wine' => $wine->id])}}">
                         <div class="image-container">
                             <img src="{{$wine->getPhotoLink()}}">
                             <div class="overlay"></div>

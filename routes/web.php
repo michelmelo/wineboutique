@@ -40,9 +40,10 @@ Route::view('/order-track', 'order-track')->name('order-track');
 Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
 Route::view('/wineries', 'wineries')->name('wineries');
 Route::view('/winery', 'winery')->name('winery');
-Route::view('/wines-single', 'wines-single')->name('wines-single');
-Route::get('/wines', 'WineController@list')->name('wines');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
+
+Route::get('/wines', 'WineController@list')->name('wine.list');
+Route::get('/wine/{wine}', 'WineController@show')->name('wine.show');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
