@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
-use App\Currency;
+use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\StartupRequest;
-use App\Language;
+use App\Winery;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,9 +24,8 @@ class StartupController extends Controller
         $winery = Auth::user()->winery;
 
         $winery->name = $request->wineryName;
-        $winery->language()->associate(Language::find($request->language));
-        $winery->country()->associate(Country::find($request->country));
-        $winery->currency()->associate(Currency::find($request->currency));
+        $winery->state = $request->state;
+        $winery->description = $request->description;
         $winery->save();
 
         return redirect()->route('profile.show');

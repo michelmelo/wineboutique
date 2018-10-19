@@ -17,19 +17,14 @@ class CreateWineriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
-            $table->integer('country_id')->unsigned()->index()->nullable();
+            $table->string('state')->nullable();
             $table->integer('city_id')->unsigned()->index()->nullable();
             $table->integer('location_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('language_id')->unsigned()->index()->nullable();
-            $table->integer('currency_id')->unsigned()->index()->nullable();
 
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
         });
     }
 

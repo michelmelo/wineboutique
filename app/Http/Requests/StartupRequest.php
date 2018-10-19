@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class StartupRequest extends FormRequest
 {
@@ -26,9 +27,8 @@ class StartupRequest extends FormRequest
     {
         return [
             'wineryName' => 'required|string|min:4|max:255',
-            'language' => 'required|exists:languages,id',
-            'country' => 'required|exists:countries,id',
-            'currency' => 'required|exists:currencies,id',
+            'state' => 'required|in:'.implode(",", array_keys(Config::get('enums.states'))),
+            'description' => 'required|string|min:10'
         ];
     }
 }

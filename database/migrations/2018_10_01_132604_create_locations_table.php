@@ -20,12 +20,9 @@ class CreateLocationsTable extends Migration
             $table->string('note')->nullable();
             $table->double('latitude', 8, 6)->nullable();
             $table->double('longitude', 8, 6)->nullable();
-            $table->integer('region_id')->unsigned()->index();
-            $table->integer('country_id')->unsigned()->index();
+            $table->string('state');
             $table->integer('city_id')->unsigned()->index();
 
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }

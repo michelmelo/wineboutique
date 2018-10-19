@@ -2,50 +2,28 @@
     <div class="col-md-12 col-sm-12">
         <form v-on:submit="onSubmit" method="post" action="/startup">
             <input type="hidden" name="_token" v-model="csrf">
-            <div class="shadow-box row">
+            <div class="shadow-box row" v-show="step===1">
                 <h2>NAME YOUR WINERY</h2>
                 <div class="col-lg-3 col-sm-12"></div>
                 <div class="col-lg-6 col-sm-12 enter-name">
-                    <input type="text" placeholder="Enter your winery name" v-model="wineryName" name="wineryName" :class="{ 'invalid': isInvalid('wineryName') }">
+                    <input type="text" placeholder="Enter your winery name" v-model.trim="wineryName" name="wineryName" :class="{ 'invalid': isInvalid('wineryName') }">
                     <div class="name-check"><i class="fas fa-check"></i></div>
                 </div>
                 <div class="col-lg-3 col-sm-12"></div>
             </div>
 
-            <div class="shadow-box row">
+            <div class="shadow-box row" v-show="step===1">
                 <h2>WINERY PREFERENCES</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 winery-preferences">
                     <table>
                         <tr>
-                            <td>Winery language *</td>
+                            <td>Winery state *</td>
                             <td>
-                                <select class="half-select" v-model="language" v-bind:disabled="languages.length===0" name="language" :class="{ 'invalid': isInvalid('language') }">
+                                <select class="half-select" v-model="state" v-bind:disabled="states.length===0" name="state" :class="{ 'invalid': isInvalid('state') }">
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="language in languages" v-bind:value="language.id">
-                                        {{ language.name }}
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Winery country *</td>
-                            <td>
-                                <select class="half-select" v-model="country" v-bind:disabled="countries.length===0" name="country" :class="{ 'invalid': isInvalid('country') }">
-                                    <option disabled hidden value="">Select</option>
-                                    <option v-for="country in countries" v-bind:value="country.id">
-                                        {{ country.name }}
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Winery currecy *</td>
-                            <td>
-                                <select class="half-select" v-model="currency" v-bind:disabled="currencies.length===0" name="currency" :class="{ 'invalid': isInvalid('currency') }">
-                                    <option disabled hidden value="">Select</option>
-                                    <option v-for="currency in currencies" v-bind:value="currency.id">
-                                        {{ currency.name }}
+                                    <option v-for="state in states" v-bind:value="state.code">
+                                        {{ state.name }}
                                     </option>
                                 </select>
                             </td>
@@ -55,7 +33,7 @@
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
 
-            <div class="shadow-box row">
+            <div class="shadow-box row" v-show="step===1">
                 <h2>INVENTORY UPLOAD</h2>
                 <div class="col-lg-12 col-sm-12 inventory">
                     <div class="row">
@@ -72,7 +50,7 @@
                         <div class="col-xs-5 vine-box-style-3 style-3-2" v-for="wine in wines" v-click-outside="disableEditing(wine.id)">
                             <div class="inv-container">
                                 <div class="image-container">
-                                    <img v-bind:src="wine.photo">
+                                    <img v-bind:src="'/storage/images/wines/'+wine.photo">
                                     <div class="delete-copy">
                                         <a href="#" v-on:click.stop.prevent="deleteWine(wine.id)"><i class="fas fa-times"></i> <span>DELETE</span></a>
                                         <a href="#" v-on:click.stop.prevent="cloneWine(wine.id)"><i class="far fa-copy"></i> <span>COPY</span></a>
@@ -81,7 +59,7 @@
                                 <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id'/>
                                 <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name.length?wine.name:'Name Of The Wine'}}</h5>
                                 <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id'/>
-                                <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency(getCurrencySymbol()) }}</h4>
+                                <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
                             </div>
                         </div>
 
@@ -89,80 +67,75 @@
                 </div>
             </div>
 
-            <button type="submit" class="red-button button float-right">NEXT STEP</button>
+            <div class="shadow-box row" v-show="step===2">
+                <h2>WINERY DESCRIPTION</h2>
+                <div class="col-lg-2 col-sm-12"></div>
+                <div class="col-lg-8 col-sm-12">
+                    <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description"></textarea>
+                </div>
+                <div class="col-lg-2 col-sm-12"></div>
+            </div>
+
+            <div class="shadow-box row" v-show="step===2">
+                <h2>WINERY APPEARANCE</h2>
+                <div class="col-lg-2 col-sm-12"></div>
+                <div class="col-lg-8 col-sm-12">
+                    <div class="col-lg-12 wineries-box">
+                        <div>
+                            <div class="wineries-brand">
+                                <label class="winery-header uploader" v-bind:style="'background-image: url('+getCoverPhoto()+')'">
+                                    <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
+                                </label>
+                                <label class="winery-logo uploader" v-bind:style="'background-image: url('+getProfilePhoto()+')'">
+                                    <input type="file" @change="handlePhotoChange" accept="image/*" data-type="profile" />
+                                </label>
+                            </div>
+                            <p>{{wineryName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-12"></div>
+            </div>
+
+            <button type="button" class="red-button button float-right" v-on:click.stop.prevent="setStep(2)" v-show="step===1">NEXT STEP</button>
+
+            <button type="button" class="red-button button float-left" v-on:click.stop.prevent="setStep(1)" v-show="step===2">PREVIOUS STEP</button>
+            <button type="submit" class="red-button button float-right" v-show="step===2">FINISH</button>
         </form>
     </div>
 </template>
 
 <script>
-    import { required, minLength, numeric } from 'vuelidate/lib/validators';
-
-    const formFields = [
-        'wineryName',
-        'language',
-        'country',
-        'currency'
-    ];
-
     export default {
         props: ['wineryName'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
-            countries: [],
-            languages: [],
-            currencies: [],
-            country: "",
-            language: "",
-            currency: "",
+            states: [],
+            state: "",
             wines: [],
             currentlyEditing: 0,
-            showErrors: false,
-            csrf: window.Laravel.csrfToken
+            step: 1,
+            profile: null,
+            defaultProfilePhoto: '/img/winery-logo-1.jpg',
+            cover: null,
+            defaultCoverPhoto: '/img/winery-1.jpg',
+            description: "",
+            errors: {}
         }),
         created() {
-            this.fetchCountries();
-            this.fetchLanguages();
-            this.fetchCurrencies();
+            this.fetchStates();
         },
         methods: {
-            fetchCountries() {
+            fetchStates() {
                 this.cities = [];
-                axios.get('/api/countries')
+                axios.get('/api/states')
                     .then(response => {
-                        this.countries = response.data;
+                        console.log(response.data);
+                        this.states = response.data;
                     })
                     .catch(error => {
                         console.log("error", error);
                     });
-            },
-            fetchLanguages() {
-                this.cities = [];
-                axios.get('/api/languages')
-                    .then(response => {
-                        this.languages = response.data;
-                    })
-                    .catch(error => {
-                        console.log("error", error);
-                    });
-            },
-            fetchCurrencies() {
-                this.cities = [];
-                axios.get('/api/currencies')
-                    .then(response => {
-                        this.currencies = response.data;
-                    })
-                    .catch(error => {
-                        console.log("error", error);
-                    });
-            },
-            getCurrencySymbol() {
-                if(this.currency.length === 0) {
-                    return '$';
-                }
-
-                const selectedCurrency = _.find(this.currencies, {id: this.currency});
-
-                return selectedCurrency.symbol || selectedCurrency.acronym;
             },
             setEditing(wineId) {
                 this.currentlyEditing = wineId;
@@ -194,7 +167,7 @@
                 axios.post(`/wine/clone/${wineId}`)
                     .then(response => {
                         this.wines = [...this.wines, {
-                            photo: '/'+response.data.photo.replace('public', 'storage'),
+                            photo: response.data.photo,
                             name: '',
                             price: 0,
                             id: response.data.id
@@ -218,7 +191,7 @@
                     axios.post('/wine/store', data)
                         .then(response => {
                             this.wines = [...this.wines, {
-                                photo: '/'+response.data.photo.replace('public', 'storage'),
+                                photo: response.data.photo,
                                 name: '',
                                 price: 0,
                                 id: response.data.id
@@ -229,39 +202,55 @@
                         });
                 }
             },
+            handlePhotoChange(e) {
+                if(e.target.files && e.target.files.length) {
+                    const file = e.target.files[0];
+
+                    if(file.type.indexOf('image/')!==0) {
+                        return console.log('Selected file must be an image!');
+                    }
+
+                    let data = new FormData();
+                    data.append('photo', file);
+
+                    const type = e.target.dataset.type;
+
+                    axios.post(`/winery/${type}`, data)
+                        .then(response => {
+                            this[type] = response.data.photo;
+                        })
+                        .catch(error => {
+                            console.log("error", error);
+                        });
+                }
+            },
+            setStep(step) {
+                this.errors = {};
+                if(this.step===1 && step===2) {
+                    if(this.wineryName.length<3) this.errors['wineryName'] = 'You must enter winery name.';
+                    if(this.state.length===0) this.errors['state'] = 'You must select state.';
+
+                    if(Object.keys(this.errors).length > 0) return;
+                }
+
+                this.step = step;
+                window.scrollTo(0,0);
+            },
             onSubmit() {
-                this.showErrors = true;
-                if(this.$v.$invalid) {
-                    event.preventDefault();
-                    formFields.some(formField => {
-                        if(this.$v[formField].$invalid) {
-                            document.querySelector(`[name="${formField}"]`).focus();
-                            return true;
-                        }
-                        return false;
-                    });
+                this.errors = {};
+                if(this.description.length < 10) {
+                    this.errors['description'] = 'You must enter at least 10 characters.';
+                    return false;
                 }
             },
             isInvalid(name) {
-                return this.$v[name].$invalid && this.showErrors;
-            }
-        },
-        validations: {
-            wineryName: {
-                required,
-                minLength: minLength(4)
+                return this.errors[name];
             },
-            language: {
-                required,
-                numeric
+            getProfilePhoto() {
+                return this.profile?`/storage/images/wineries/profile/${this.profile}`:this.defaultProfilePhoto;
             },
-            country: {
-                required,
-                numeric
-            },
-            currency: {
-                required,
-                numeric
+            getCoverPhoto() {
+                return this.cover?`/storage/images/wineries/cover/${this.cover}`:this.defaultCoverPhoto;
             }
         }
     }

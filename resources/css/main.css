@@ -2064,8 +2064,37 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 .lite-red-check{background-image:url(../img/check.png);}
 
+/*=========================================================================================================================================================================================
+                                                                                 NIKOLA CUSTOM
+==========================================================================================================================================================================================*/
 
+.uploader {
+    background-position: center;
+    background-size: cover;
+}
 
+.uploader:hover {
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.winery-header.uploader {
+    padding-bottom: 22.52%;
+}
+
+.winery-logo.uploader {
+    bottom: -54px;
+}
+
+.uploader input {
+    display: none;
+}
+
+.card-body .sub-cat.checked {
+    background: #848383;
+    color: #F5F4F4;
+}
 
 /*=========================================================================================================================================================================================
                                                                                  MEDIA QUERY

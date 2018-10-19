@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Winery::class);
     }
+
+    public function isSeller()
+    {
+        return $this->type===self::$types['seller'];
+    }
 }

@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\City;
 use App\Country;
+use Illuminate\Support\Facades\Config;
 
 class LocationsController extends Controller
 {
-    public function countries()
+    public function states()
     {
-        return Country::all();
+        $rawStates = Config::get('enums.states');
+        $statesCodes = array_keys($rawStates);
+        return array_map(function($name, $code) {
+            return [
+                'name' => $name,
+                'code' => $code
+            ];
+        }, $rawStates, $statesCodes);
     }
 
     public function cities()

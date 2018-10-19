@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="accordion-name">VARIETAL</span>
                                     <i class="fas fa-chevron-down"></i>
                                     <i class="fas fa-chevron-up"></i>
@@ -25,7 +25,10 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 @foreach ($varietals as $varietal)
-                                    <label class="sub-cat"><input name="varietal[]" value="{{$varietal->id}}" type="checkbox" class="d-none" {{in_array($varietal->id, array_key_exists ('varietal', $filter)?$filter['varietal']:[])?'checked':''}}/>{{$varietal->name}}</label>
+                                    @php
+                                        $checked = in_array($varietal->id, array_key_exists ('varietal', $filter)?$filter['varietal']:[]);
+                                    @endphp
+                                    <label class="sub-cat{{$checked?' checked':''}}"><input name="varietal[]" value="{{$varietal->id}}" type="checkbox" class="d-none" {{$checked?'checked':''}}/>{{$varietal->name}}</label>
                                 @endforeach
                             </div>
                         </div>
@@ -33,7 +36,7 @@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <span class="accordion-name">REGION</span>
                                     <i class="fas fa-chevron-down"></i>
                                     <i class="fas fa-chevron-up"></i>
@@ -42,18 +45,19 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <a href="#" class="sub-cat">Wite</a>
-                                <a href="#" class="sub-cat">Red</a>
-                                <a href="#" class="sub-cat">Rosé</a>
-                                <a href="#" class="sub-cat">Sparkling</a>
-                                <a href="#" class="sub-cat">Organic/Natural</a>
+                               @foreach($wineRegions as $wineRegion)
+                                    @php
+                                        $checked = in_array($wineRegion->id, array_key_exists ('region', $filter)?$filter['region']:[]);
+                                    @endphp
+                                    <label class="sub-cat{{$checked?' checked':''}}"><input name="region[]" value="{{$wineRegion->id}}" type="checkbox" class="d-none" {{$checked?'checked':''}} />{{$wineRegion->name}}</label>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="accordion-name">PRICE</span>
                                     <i class="fas fa-chevron-down"></i>
                                     <i class="fas fa-chevron-up"></i>
@@ -62,11 +66,18 @@
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                             <div class="card-body">
-                                <a href="#" class="sub-cat">Wite</a>
-                                <a href="#" class="sub-cat">Red</a>
-                                <a href="#" class="sub-cat">Rosé</a>
-                                <a href="#" class="sub-cat">Sparkling</a>
-                                <a href="#" class="sub-cat">Organic/Natural</a>
+                                @php
+                                    $checked = in_array(1, array_key_exists ('price', $filter)?$filter['price']:[]);
+                                @endphp
+                                <label class="sub-cat{{$checked?' checked':''}}"><input name="price[]" value="1" type="checkbox" class="d-none" {{$checked?'checked':''}}/>0-50</label>
+                                @php
+                                    $checked = in_array(2, array_key_exists ('price', $filter)?$filter['price']:[]);
+                                @endphp
+                                <label class="sub-cat{{$checked?' checked':''}}"><input name="price[]" value="2" type="checkbox" class="d-none" {{$checked?'checked':''}}/>51-100</label>
+                                @php
+                                    $checked = in_array(3, array_key_exists ('price', $filter)?$filter['price']:[]);
+                                @endphp
+                                <label class="sub-cat{{$checked?' checked':''}}"><input name="price[]" value="3" type="checkbox" class="d-none" {{$checked?'checked':''}}/>100+</label>
                             </div>
                         </div>
                     </div>
@@ -77,7 +88,7 @@
         <div class="col-lg-10 col-sm-12 row row-eq-height">
             @foreach ($wines as $wine)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                    <a href="{{route('wine.show', ['wine' => $wine->id])}}">
+                    <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                         <div class="image-container">
                             <img src="{{$wine->getPhotoLink()}}">
                             <div class="overlay"></div>

@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Wine extends Model
 {
+    use Sluggable;
+
     protected $fillable = [
-        'name', 'price', 'photo'
+        'name', 'price', 'photo', 'quantity'
     ];
 
     public function winery()
@@ -20,8 +23,28 @@ class Wine extends Model
         return $this->belongsTo(Varietal::class);
     }
 
+    public function wineRegion()
+    {
+        return $this->belongsTo(WineRegion::class);
+    }
+
     public function getPhotoLink()
     {
-        return str_replace('public', '/storage', $this->photo);
+        return '/storage/images/wines/' . $this->photo;
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true
+            ]
+        ];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

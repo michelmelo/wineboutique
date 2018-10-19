@@ -14,16 +14,6 @@ class Location extends Model
         "longitude"
     ];
 
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function region()
-    {
-        return $this->belongsTo(Region::class);
-    }
-
     public function city()
     {
         return $this->belongsTo(City::class);

@@ -49,11 +49,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
     Route::post('/startup', 'StartupController@store');
 
+    Route::post('/winery/profile', 'WineryController@profile');
+    Route::post('/winery/cover', 'WineryController@cover');
+
     Route::post('/wine/store', 'WineController@store')->name('wine.store');
-    Route::post('/wine/update/{wine}', 'WineController@update')->name('wine.update');
-    Route::delete('/wine/delete/{wine}', 'WineController@delete')->name('wine.delete');
-    Route::post('/wine/clone/{wine}', 'WineController@clone')->name('wine.clone');
+    Route::post('/wine/update/{id}', 'WineController@update')->name('wine.update');
+    Route::delete('/wine/delete/{id}', 'WineController@delete')->name('wine.delete');
+    Route::post('/wine/clone/{id}', 'WineController@clone')->name('wine.clone');
 
     Route::get('/profile', 'ProfileController@show')->name('profile.show');
     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+
+    Route::get('/my-wines', 'MyWinesController@show')->name('my-wines.list')->middleware('can:list,App\Wine');
 });
