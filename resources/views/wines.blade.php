@@ -95,7 +95,7 @@
                             <i class="far fa-heart"></i>
                             <span class="sale-mark">SALE</span>
                         </div>
-                        <h5>Name Of The Store</h5>
+                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
                         <h4>${{$wine->price}}</h4>
                         <div class="star-rating">
                             <span class="fa fa-star checked"></span>
