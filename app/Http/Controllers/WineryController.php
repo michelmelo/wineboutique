@@ -33,4 +33,13 @@ class WineryController extends Controller
             'photo' => $photoName
         ];
     }
+
+    public function list()
+    {
+        $wineries = Winery::paginate(8);
+
+        return view('wineries', [
+            'wineries' => $wineries
+        ]);
+    }
 }

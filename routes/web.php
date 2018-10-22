@@ -38,12 +38,16 @@ Route::view('/my-wine', 'my-wine')->name('my-wine');
 Route::view('/new-arrivals', 'new-arrivals')->name('new-arrivals');
 Route::view('/order-track', 'order-track')->name('order-track');
 Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
-Route::view('/wineries', 'wineries')->name('wineries');
 Route::view('/winery', 'winery')->name('winery');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 
+
+Route::get('/wineries', 'WineryController@list')->name('wineries');
+
 Route::get('/wines', 'WineController@list')->name('wine.list');
 Route::get('/wine/{wine}', 'WineController@show')->name('wine.show');
+
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');

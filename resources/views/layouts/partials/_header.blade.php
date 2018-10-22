@@ -6,8 +6,8 @@
                     <img src="{{asset('img/logo.png')}}">
                 </div>
                 <div class="col-6 desktop-search">
-                    <form class="form-inline v-align">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search for wineries, regions or wines..." aria-label="Search">
+                    <form class="form-inline v-align" method="post" action="{{route('search')}}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s">
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
