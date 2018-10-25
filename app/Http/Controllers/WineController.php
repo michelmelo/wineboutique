@@ -29,6 +29,13 @@ class WineController extends Controller
     {
         $wine = Wine::findOrFail($id);
         $wine->update($request->all());
+        if($request->varietal_id) {
+            $wine->varietal()->associate(Varietal::find($request->varietal_id));
+        }
+        if($request->region_id) {
+            $wine->region()->associate(Region::find($request->region_id));
+        }
+        $wine->save();
     }
 
     public function delete($id)
@@ -86,7 +93,7 @@ class WineController extends Controller
         return view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
-            'wineRegions' => $regions,
+            'regions' => $regions,
             'filter' => $filter
         ]);
     }
@@ -96,5 +103,10 @@ class WineController extends Controller
         return view('wines-single', [
             'wine' => $wine
         ]);
+    }
+
+    public function varietals()
+    {
+        return Varietal::all();
     }
 }

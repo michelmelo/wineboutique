@@ -26,6 +26,20 @@
                             <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name&&wine.name.length?wine.name:'Name Of The Wine'}}</h5>
                             <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id'/>
                             <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
+                            <select v-model="wine.varietal_id" v-if='currentlyEditing === wine.id' v-bind:disabled="varietals.length===0">
+                                <option disabled hidden>Select varietal</option>
+                                <option v-for="varietal in varietals" v-bind:value="varietal.id">
+                                    {{ varietal.name }}
+                                </option>
+                            </select>
+                            <h4 v-else v-on:click="setEditing(wine.id)">{{getVarietal(wine.varietal_id).name}}</h4>
+                            <select v-if='currentlyEditing === wine.id' v-model="wine.region_id" v-bind:disabled="regions.length===0">
+                                <option disabled hidden value="">Select region</option>
+                                <option v-for="region in regions" v-bind:value="region.id">
+                                    {{ region.name }}
+                                </option>
+                            </select>
+                            <h4 v-else v-on:click="setEditing(wine.id)">{{getRegion(wine.region_id).name}}</h4>
                         </div>
                     </div>
 
@@ -41,13 +55,36 @@
         data: () => ({
             csrf: window.Laravel.csrfToken,
             currentlyEditing: 0,
-            wines: []
+            wines: [],
+            varietals: [],
+            regions: []
         }),
         created() {
-            console.log(this.currentWines);
             this.wines = this.currentWines;
+            this.fetchRegions();
+            this.fetchVatietals();
         },
         methods: {
+            fetchVatietals() {
+                this.varietals = [];
+                axios.get('/varietals')
+                    .then(response => {
+                        this.varietals = response.data;
+                    })
+                    .catch(error => {
+                        console.log("error", error);
+                    });
+            },
+            fetchRegions() {
+                this.regions = [];
+                axios.get('/api/regions')
+                    .then(response => {
+                        this.regions = response.data;
+                    })
+                    .catch(error => {
+                        console.log("error", error);
+                    });
+            },
             setEditing(wineId) {
                 this.currentlyEditing = wineId;
             },
@@ -105,6 +142,8 @@
                                 photo: '/'+response.data.photo.replace('public', 'storage'),
                                 name: '',
                                 price: 0,
+                                varietal_id: null,
+                                region_id: null,
                                 id: response.data.id
                             }];
                         })
@@ -112,6 +151,16 @@
                             console.log("error", error);
                         });
                 }
+            },
+            getVarietal(varietalId) {
+                const varietal = _.find(this.varietals, {id: varietalId});
+                if(varietal) return varietal;
+                return {name: "No varietal selected"};
+            },
+            getRegion(regionId) {
+                const region = _.find(this.regions, {id: regionId});
+                if(region) return region;
+                return {name: "No region selected"};
             }
         }
     }
