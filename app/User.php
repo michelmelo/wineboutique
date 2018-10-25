@@ -28,7 +28,14 @@ class User extends Authenticatable
         'phone',
         'city',
         'location',
-        'type'
+        'type',
+        'birthday'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'birthday'
     ];
 
     /**

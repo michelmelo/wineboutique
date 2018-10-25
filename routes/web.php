@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/profile', 'ProfileController@show')->name('profile.show');
     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+    Route::post('/profile/password', 'ProfileController@password')->name('profile.password');
 
     Route::get('/my-wines', 'MyWinesController@show')->name('my-wines.list')->middleware('can:list,App\Wine');
 });

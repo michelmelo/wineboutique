@@ -20,30 +20,9 @@
                 <personal-information-form user="{{json_encode($user)}}" />
             </div>
 
-            <div class="info-box shadow-box password-edit">
-                <h2>PASSWORD <div class="edit-button edit-password"><i class="far fa-edit"></i>Edit</div></h2>
-                <table id="pass">
-                    <tr>
-                        <td>Password:</td>
-                        <td class="edit-text">*******</td>
-                    </tr>
-                </table>
+            <div>
+                <password-update-form />
             </div>
-
-            <div class="info-box shadow-box website-edit">
-                <h2>WEBSITE PREFERENCES <div class="edit-button edit-preferance"><i class="far fa-edit"></i>Edit</div></h2>
-                <table id="preferance">
-                    <tr>
-                        <td>Country:</td>
-                        <td class="edit-text">US</td>
-                    </tr>
-                    <tr>
-                        <td>Language:</td>
-                        <td class="edit-text">English</td>
-                    </tr>
-                </table>
-            </div>
-
         </div>
 
     </div>

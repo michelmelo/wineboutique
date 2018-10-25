@@ -23,6 +23,8 @@
         "vuelidate": "^0.7.4"
     },
     "dependencies": {
-        "vue2-filters": "^0.3.0"
+        "moment": "^2.22.2",
+        "vue2-filters": "^0.3.0",
+        "vuejs-datepicker": "^1.5.3"
     }
 }

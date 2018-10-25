@@ -18,7 +18,10 @@
             </tr>
             <tr>
                 <td>Date of birth:</td>
-                <td class="edit-text">09/18/1990 /</td>
+                <td class="edit-text">
+                    <datepicker name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday"></datepicker>
+                    <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
+                </td>
             </tr>
             <tr>
                 <td>Email address:</td>
@@ -33,11 +36,14 @@
 
 <script>
     import { required, minLength, email } from 'vuelidate/lib/validators';
+    import Datepicker from 'vuejs-datepicker';
+    import moment from 'moment';
 
     const formFields = [
         'firstName',
         'lastName',
-        'email'
+        'email',
+        'birthday'
     ];
 
     export default {
@@ -46,13 +52,18 @@
             firstName: '',
             lastName: '',
             email: '',
-            editing: false
+            birthday: null,
+            editing: false,
+            disabledDates: {
+                from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
+            }
         }),
         created: function() {
             const user = JSON.parse(this.user);
             this.firstName = user.firstName;
             this.lastName = user.lastName;
             this.email = user.email;
+            if(user.birthday) this.birthday = new Date(user.birthday);
         },
         methods: {
             toggleEditing() {
@@ -81,6 +92,12 @@
                 }
 
                 this.editing = !this.editing;
+            },
+            getFormattedDate(date) {
+                return moment(date).format('MM/DD/Y');
+            },
+            seletedBirthday(date) {
+                this.birthday = date;
             }
         },
         validations: {
@@ -96,6 +113,9 @@
                 required,
                 email
             }
+        },
+        components: {
+            Datepicker
         }
     }
 </script>
