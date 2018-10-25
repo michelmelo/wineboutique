@@ -61,13 +61,11 @@
 
             <div class="tab-content">
                 <div id="description" class="tab-pane fade in active show">
-                    <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
-
-                    <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
+                    <p>{{$wine->description}}</p>
                 </div>
                 
                 <div id="info" class="tab-pane fade">
-                    <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content. Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
+                    <p>{{$wine->winery->description}}</p>
                 </div>
             </div>
         </div>

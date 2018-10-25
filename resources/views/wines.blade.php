@@ -45,11 +45,11 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                               @foreach($wineRegions as $wineRegion)
+                               @foreach($regions as $region)
                                     @php
-                                        $checked = in_array($wineRegion->id, array_key_exists ('region', $filter)?$filter['region']:[]);
+                                        $checked = in_array($region->id, array_key_exists ('region', $filter)?$filter['region']:[]);
                                     @endphp
-                                    <label class="sub-cat{{$checked?' checked':''}}"><input name="region[]" value="{{$wineRegion->id}}" type="checkbox" class="d-none" {{$checked?'checked':''}} />{{$wineRegion->name}}</label>
+                                    <label class="sub-cat{{$checked?' checked':''}}"><input name="region[]" value="{{$region->id}}" type="checkbox" class="d-none" {{$checked?'checked':''}} />{{$region->name}}</label>
                                 @endforeach
                             </div>
                         </div>

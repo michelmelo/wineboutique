@@ -10,7 +10,7 @@ class Wine extends Model
     use Sluggable;
 
     protected $fillable = [
-        'name', 'price', 'photo', 'quantity'
+        'name', 'price', 'photo', 'quantity', 'description'
     ];
 
     public function winery()
@@ -26,6 +26,11 @@ class Wine extends Model
     public function wineRegion()
     {
         return $this->belongsTo(WineRegion::class);
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
     }
 
     public function getPhotoLink()
