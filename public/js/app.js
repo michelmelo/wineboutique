@@ -66489,23 +66489,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
-var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'city', 'location', 'acceptTerms', 'acceptAge'];
+var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'acceptTerms', 'acceptAge'];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66516,69 +66504,37 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
             email: '',
             password: '',
             phone: '',
-            city: '',
-            location: '',
             acceptTerms: false,
             acceptAge: false,
             csrf: window.Laravel.csrfToken,
-            cities: [],
-            locations: [],
             showErrors: false,
             validEmail: null
         };
     },
-    created: function created() {
-        this.fetchCities();
-    },
-
     watch: {
-        'city': 'fetchLocations',
         'email': 'checkEmail'
     },
     methods: {
-        fetchCities: function fetchCities() {
-            var _this = this;
-
-            this.cities = [];
-            axios.get('/api/cities').then(function (response) {
-                _this.cities = response.data;
-            }).catch(function (error) {
-                console.log("error", error);
-            });
-        },
-        fetchLocations: function fetchLocations() {
-            var _this2 = this;
-
-            this.locations = [];
-            this.location = '';
-            if (this.city !== '') {
-                axios.get('/api/locations/' + this.city).then(function (response) {
-                    _this2.locations = response.data;
-                }).catch(function (error) {
-                    console.log("error", error);
-                });
-            }
-        },
         checkEmail: function checkEmail() {
-            var _this3 = this;
+            var _this = this;
 
             this.validEmail = null;
             if (this.email.length > 0 && Object(__WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["email"])(this.email)) {
                 axios.post('/api/auth/check-email', { email: this.email }).then(function () {
-                    _this3.validEmail = true;
+                    _this.validEmail = true;
                 }).catch(function () {
-                    _this3.validEmail = false;
+                    _this.validEmail = false;
                 });
             }
         },
         onSubmit: function onSubmit(event) {
-            var _this4 = this;
+            var _this2 = this;
 
             this.showErrors = true;
             if (this.$v.$invalid) {
                 event.preventDefault();
                 formFields.some(function (formField) {
-                    if (_this4.$v[formField].$invalid) {
+                    if (_this2.$v[formField].$invalid) {
                         document.querySelector('[name="' + formField + '"]').focus();
                         return true;
                     }
@@ -66614,14 +66570,6 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
         phone: {
             required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"],
             minLength: Object(__WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["minLength"])(6)
-        },
-        city: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"],
-            numeric: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["numeric"]
-        },
-        location: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"],
-            numeric: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["numeric"]
         },
         acceptTerms: {
             isTrue: __WEBPACK_IMPORTED_MODULE_1__customValidators__["a" /* isTrue */]
@@ -67412,93 +67360,6 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.city,
-              expression: "city"
-            }
-          ],
-          staticClass: "half-select",
-          class: { invalid: _vm.isInvalid("city") },
-          attrs: { name: "city", disabled: _vm.cities.length === 0 },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.city = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "" } }, [_vm._v("City")]),
-          _vm._v(" "),
-          _vm._l(_vm.cities, function(city) {
-            return _c("option", { domProps: { value: city.id } }, [
-              _vm._v("\n            " + _vm._s(city.name) + "\n        ")
-            ])
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.location,
-              expression: "location"
-            }
-          ],
-          staticClass: "half-select",
-          class: { invalid: _vm.isInvalid("location") },
-          attrs: {
-            name: "location",
-            disabled: _vm.city === "" || _vm.locations.length === 0
-          },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.location = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "" } }, [_vm._v("Store Location")]),
-          _vm._v(" "),
-          _vm._l(_vm.locations, function(location) {
-            return _c("option", { domProps: { value: location.id } }, [
-              _vm._v("\n            " + _vm._s(location.name) + "\n        ")
-            ])
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
         _c("input", {
           directives: [
@@ -67790,8 +67651,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     data: function data() {
         return {
             csrf: window.Laravel.csrfToken,
-            states: [],
-            state: "",
+            fetchedRegions: [],
+            regions: [],
             wines: [],
             currentlyEditing: 0,
             step: 1,
@@ -67804,17 +67665,16 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         };
     },
     created: function created() {
-        this.fetchStates();
+        this.fetchRegions();
     },
 
     methods: {
-        fetchStates: function fetchStates() {
+        fetchRegions: function fetchRegions() {
             var _this = this;
 
-            this.cities = [];
-            axios.get('/api/states').then(function (response) {
-                console.log(response.data);
-                _this.states = response.data;
+            this.fetchedRegions = [];
+            axios.get('/api/regions').then(function (response) {
+                _this.fetchedRegions = response.data;
             }).catch(function (error) {
                 console.log("error", error);
             });
@@ -67911,7 +67771,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             this.errors = {};
             if (this.step === 1 && step === 2) {
                 if (this.wineryName.length < 3) this.errors['wineryName'] = 'You must enter winery name.';
-                if (this.state.length === 0) this.errors['state'] = 'You must select state.';
+                if (this.regions.length === 0) this.errors['regions'] = 'You must select at least 1 region.';
 
                 if (Object.keys(this.errors).length > 0) return;
             }
@@ -68065,15 +67925,16 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.state,
-                              expression: "state"
+                              value: _vm.regions,
+                              expression: "regions"
                             }
                           ],
                           staticClass: "half-select",
-                          class: { invalid: _vm.isInvalid("state") },
+                          class: { invalid: _vm.isInvalid("regions") },
                           attrs: {
-                            disabled: _vm.states.length === 0,
-                            name: "state"
+                            disabled: _vm.fetchedRegions.length === 0,
+                            name: "regions[]",
+                            multiple: ""
                           },
                           on: {
                             change: function($event) {
@@ -68085,7 +67946,7 @@ var render = function() {
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.state = $event.target.multiple
+                              _vm.regions = $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
                             }
@@ -68098,14 +67959,14 @@ var render = function() {
                             [_vm._v("Select")]
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.states, function(state) {
+                          _vm._l(_vm.fetchedRegions, function(region) {
                             return _c(
                               "option",
-                              { domProps: { value: state.code } },
+                              { domProps: { value: region.id } },
                               [
                                 _vm._v(
                                   "\n                                    " +
-                                    _vm._s(state.name) +
+                                    _vm._s(region.name) +
                                     "\n                                "
                                 )
                               ]

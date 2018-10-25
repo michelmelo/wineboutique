@@ -20,10 +20,10 @@
                         <tr>
                             <td>Winery state *</td>
                             <td>
-                                <select class="half-select" v-model="state" v-bind:disabled="states.length===0" name="state" :class="{ 'invalid': isInvalid('state') }">
+                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="state in states" v-bind:value="state.code">
-                                        {{ state.name }}
+                                    <option v-for="region in fetchedRegions" v-bind:value="region.id">
+                                        {{ region.name }}
                                     </option>
                                 </select>
                             </td>
@@ -110,8 +110,8 @@
         props: ['wineryName'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
-            states: [],
-            state: "",
+            fetchedRegions: [],
+            regions: [],
             wines: [],
             currentlyEditing: 0,
             step: 1,
@@ -123,15 +123,14 @@
             errors: {}
         }),
         created() {
-            this.fetchStates();
+            this.fetchRegions();
         },
         methods: {
-            fetchStates() {
-                this.cities = [];
-                axios.get('/api/states')
+            fetchRegions() {
+                this.fetchedRegions = [];
+                axios.get('/api/regions')
                     .then(response => {
-                        console.log(response.data);
-                        this.states = response.data;
+                        this.fetchedRegions = response.data;
                     })
                     .catch(error => {
                         console.log("error", error);
@@ -228,7 +227,7 @@
                 this.errors = {};
                 if(this.step===1 && step===2) {
                     if(this.wineryName.length<3) this.errors['wineryName'] = 'You must enter winery name.';
-                    if(this.state.length===0) this.errors['state'] = 'You must select state.';
+                    if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
 
                     if(Object.keys(this.errors).length > 0) return;
                 }

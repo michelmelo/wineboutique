@@ -2,9 +2,9 @@
     <div class="top-header">
         <div class="container">
             <div class="row">
-                <div class="col-3 logo">
+                <a class="col-3 logo" href="/">
                     <img src="{{asset('img/logo.png')}}">
-                </div>
+                </a>
                 <div class="col-6 desktop-search">
                     <form class="form-inline v-align" method="post" action="{{route('search')}}">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s">
@@ -62,12 +62,16 @@
                     <li class="nav-item col">
                         <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
                     </li>
-                    <li class="nav-item col">
-                        <a class="nav-link" href="{{route('register')}}">Create an account</a>
-                    </li>
-                    <li class="nav-item col">
-                        <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>
-                    </li>
+                    @if(Auth::guest())
+                        <li class="nav-item col">
+                            <a class="nav-link" href="{{route('register')}}">Create an account</a>
+                        </li>
+                    @endif
+                    @if(Auth::guest() || Auth::user()->type==='CUSTOMER')
+                        <li class="nav-item col">
+                            <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

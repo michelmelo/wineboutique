@@ -8,18 +8,6 @@
         <input type="email" v-model.trim="email" :class="{ 'invalid': isInvalid('email') || validEmail===false, 'valid': validEmail }" name="email" placeholder="Email">
         <input type="password" v-model="password" :class="{ 'invalid': isInvalid('password') }" name="password" placeholder="Password">
         <input type="text" v-model.trim="phone" :class="{ 'invalid': isInvalid('phone') }" name="phone" placeholder="Phone">
-        <select class="half-select" :class="{ 'invalid': isInvalid('city') }" name="city" v-model="city" v-bind:disabled="cities.length===0">
-            <option value="">City</option>
-            <option v-for="city in cities" v-bind:value="city.id">
-                {{ city.name }}
-            </option>
-        </select>
-        <select class="half-select" :class="{ 'invalid': isInvalid('location') }" name="location" v-model="location" v-bind:disabled="city==='' || locations.length===0">
-            <option value="">Store Location</option>
-            <option v-for="location in locations" v-bind:value="location.id">
-                {{ location.name }}
-            </option>
-        </select>
         <div class="form-check">
             <input class="form-check-input" v-model="acceptTerms" type="checkbox" name="acceptTerms" id="defaultCheck1">
             <label class="form-check-label" :class="{ 'invalid': isInvalid('acceptTerms') }" for="defaultCheck1">
@@ -47,8 +35,6 @@
         'email',
         'password',
         'phone',
-        'city',
-        'location',
         'acceptTerms',
         'acceptAge'
     ];
@@ -61,47 +47,16 @@
             email: '',
             password: '',
             phone: '',
-            city: '',
-            location: '',
             acceptTerms: false,
             acceptAge: false,
             csrf: window.Laravel.csrfToken,
-            cities: [],
-            locations: [],
             showErrors: false,
             validEmail: null
         }),
-        created() {
-            this.fetchCities();
-        },
         watch: {
-            'city': 'fetchLocations',
             'email': 'checkEmail'
         },
         methods: {
-            fetchCities() {
-                this.cities = [];
-                axios.get('/api/cities')
-                    .then(response => {
-                        this.cities = response.data;
-                    })
-                    .catch(error => {
-                        console.log("error", error);
-                    });
-            },
-            fetchLocations() {
-                this.locations = [];
-                this.location = '';
-                if(this.city!=='') {
-                    axios.get(`/api/locations/${this.city}`)
-                        .then(response => {
-                            this.locations = response.data;
-                        })
-                        .catch(error => {
-                            console.log("error", error);
-                        });
-                }
-            },
             checkEmail() {
                 this.validEmail = null;
                 if(this.email.length > 0 && email(this.email)) {
@@ -155,14 +110,6 @@
             phone: {
                 required,
                 minLength: minLength(6)
-            },
-            city: {
-                required,
-                numeric
-            },
-            location: {
-                required,
-                numeric
             },
             acceptTerms: {
                 isTrue

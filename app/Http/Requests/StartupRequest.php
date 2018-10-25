@@ -27,7 +27,7 @@ class StartupRequest extends FormRequest
     {
         return [
             'wineryName' => 'required|string|min:4|max:255',
-            'state' => 'required|in:'.implode(",", array_keys(Config::get('enums.states'))),
+            'regions' => 'required',
             'description' => 'required|string|min:10'
         ];
     }

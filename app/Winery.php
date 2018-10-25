@@ -13,24 +13,14 @@ class Winery extends Model
         "name"
     ];
 
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class);
     }
 
     public function wines()

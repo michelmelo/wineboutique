@@ -28,6 +28,8 @@ class StartupController extends Controller
         $winery->description = $request->description;
         $winery->save();
 
+        $winery->regions()->sync($request->regions);
+
         return redirect()->route('profile.show');
     }
 }

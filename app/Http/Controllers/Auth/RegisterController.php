@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\City;
-use App\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,8 +78,6 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6',
             'phone' => 'required_if:type,==,SELLER|string|min:6',
             'type' => 'required|string',
-            'city' => 'required_if:type,==,SELLER|exists:cities,id',
-            'location' => 'required_if:type,==,SELLER|exists:locations,id',
             'acceptTerms' => 'required|accepted',
             'acceptAge' => 'required|accepted'
         ]);
@@ -106,11 +102,9 @@ class RegisterController extends Controller
 
         if($data['type'] === User::$types['seller'])
         {
-            $winery = $user->winery()->create([
+            $user->winery()->create([
                 'name' => $data['wineryName']
             ]);
-            City::find($data['city'])->wineries()->save($winery);
-            Location::find($data['location'])->wineries()->save($winery);
             $this->redirectTo = route('startup');
         }
 
