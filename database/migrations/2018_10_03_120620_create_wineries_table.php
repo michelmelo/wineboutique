@@ -18,12 +18,8 @@ class CreateWineriesTable extends Migration
             $table->string('name');
             $table->timestamps();
             $table->string('state')->nullable();
-            $table->integer('city_id')->unsigned()->index()->nullable();
-            $table->integer('location_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index();
 
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

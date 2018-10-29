@@ -38,6 +38,8 @@ Route::get('/search', 'SearchController@search')->name('search');
 
 Route::get('/varietals', 'WineController@varietals')->name('varietals');
 
+Route::get('/test', 'TestController@index')->name('test');
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
     Route::post('/startup', 'StartupController@store');

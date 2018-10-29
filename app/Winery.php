@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Winery extends Model
 {
-    use Sluggable;
+    use Sluggable, FullTextSearch;
 
     protected $fillable = [
         "name"
+    ];
+
+    protected $searchable = [
+        'name',
+        'description'
     ];
 
     public function user()
