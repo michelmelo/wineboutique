@@ -8,7 +8,7 @@
         <div class="row">
             @foreach ($results as $result)
                 <div class="col-12">
-                    <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('winery')}}">
+                    <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('winery', ['winery' => $result->slug])}}">
                         {{$result->name}}
                     </a>
                 </div>

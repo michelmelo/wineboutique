@@ -10,7 +10,7 @@
     <div class="row winery-info">
         <img class="winery-logo-big" src="{{asset('img/winery-logo-1.jpg')}}">
         <div>
-            <h1>WINERY NAME</h1>
+            <h1>{{$winery->name}}</h1>
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>

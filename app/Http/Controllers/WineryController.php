@@ -42,4 +42,11 @@ class WineryController extends Controller
             'wineries' => $wineries
         ]);
     }
+
+    public function show(Winery $winery)
+    {
+        return view('winery', [
+            'winery' => $winery
+        ]);
+    }
 }

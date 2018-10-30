@@ -25,11 +25,11 @@ Route::view('/my-wine', 'my-wine')->name('my-wine');
 Route::view('/new-arrivals', 'new-arrivals')->name('new-arrivals');
 Route::view('/order-track', 'order-track')->name('order-track');
 Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
-Route::view('/winery', 'winery')->name('winery');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 
 
 Route::get('/wineries', 'WineryController@list')->name('wineries');
+Route::get('/winery/{winery}', 'WineryController@show')->name('winery');
 
 Route::get('/wines', 'WineController@list')->name('wine.list');
 Route::get('/wine/{wine}', 'WineController@show')->name('wine.show');
