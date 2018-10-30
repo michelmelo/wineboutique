@@ -46,8 +46,8 @@ class SearchController extends Controller
         $offset = ($page-1)*8;
 
         $searchableTerm = $this->fullTextWildcards($searchstr);
-        $total = DB::selectOne('SELECT count(*) AS `total` FROM (SELECT `id`, `name`, `description`, \'WINE\' AS `type`, MATCH (name, description) AGAINST (?) AS `relevance` FROM `wines` UNION ALL SELECT `id`, `name`, `description`, \'WINERY\' AS `type`, MATCH (name, description) AGAINST (?) AS `relevance` FROM `wineries`) AS U WHERE `relevance` > 0', [$searchableTerm, $searchableTerm]);
-        $results = DB::select('SELECT * FROM (SELECT `id`, `name`, `description`, `slug`, \'WINE\' AS `type`, MATCH (name, description) AGAINST (?) AS `relevance` FROM `wines` UNION ALL SELECT `id`, `name`, `description`, `slug`, \'WINERY\' AS `type`, MATCH (name, description) AGAINST (?) AS `relevance` FROM `wineries`) AS U WHERE `relevance` > 0 ORDER BY `relevance` DESC LIMIT ?, 8', [$searchableTerm, $searchableTerm, $offset]);
+        $total = DB::selectOne('SELECT count(*) AS `total` FROM (SELECT `id`, `name`, `description`, \'WINE\' AS `type`, MATCH (name, description) AGAINST (? IN BOOLEAN MODE) AS `relevance` FROM `wines` UNION ALL SELECT `id`, `name`, `description`, \'WINERY\' AS `type`, MATCH (name, description) AGAINST (? IN BOOLEAN MODE) AS `relevance` FROM `wineries`) AS U WHERE `relevance` > 0', [$searchableTerm, $searchableTerm]);
+        $results = DB::select('SELECT * FROM (SELECT `id`, `name`, `description`, `slug`, \'WINE\' AS `type`, MATCH (name, description) AGAINST (? IN BOOLEAN MODE) AS `relevance` FROM `wines` UNION ALL SELECT `id`, `name`, `description`, `slug`, \'WINERY\' AS `type`, MATCH (name, description) AGAINST (? IN BOOLEAN MODE) AS `relevance` FROM `wineries`) AS U WHERE `relevance` > 0 ORDER BY `relevance` DESC LIMIT ?, 8', [$searchableTerm, $searchableTerm, $offset]);
 
         $results = new Paginator($results, $total->total, 8, $page);
         return view('search', [
