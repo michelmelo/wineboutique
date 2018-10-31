@@ -6,10 +6,10 @@
 
 <script>
     export default {
-        props: ['post', 'rating'],
+        props: ['post', 'rating', 'type'],
         watch: {
             rating: function () {
-                axios.post('/rate-wine/'+this.post, {rating: this.rating})
+                axios.post('/rate-'+this.type+'/'+this.post, {rating: this.rating})
                     .then(response => console.log(response.data))
                     .catch(response => console.log(response.data));
             }

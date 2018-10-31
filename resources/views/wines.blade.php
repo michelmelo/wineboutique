@@ -95,6 +95,7 @@
                             <favorite
                                     :post="'{{ $wine->slug }}'"
                                     :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                                    :type="'wine'"
                             ></favorite>
                             <span class="sale-mark">SALE</span>
                         </div>

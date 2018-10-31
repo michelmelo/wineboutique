@@ -15,7 +15,7 @@
                         <img class="winery-header" src="{{asset('img/winery-1.jpg')}}">
                         <img class="winery-logo" src="{{asset('img/winery-logo-1.jpg')}}">
                     </div>
-                    <p><a>{{$winery->name}}</a></p>
+                    <p><a href="{{route('winery', $winery->slug)}}">{{$winery->name}}</a></p>
                 </div>
             </div>
         @endforeach

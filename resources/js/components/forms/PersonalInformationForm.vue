@@ -19,7 +19,7 @@
             <tr>
                 <td>Date of birth:</td>
                 <td class="edit-text">
-                    <datepicker name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday"></datepicker>
+                    <datepicker name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true"></datepicker>
                     <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
                 </td>
             </tr>

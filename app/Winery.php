@@ -4,6 +4,7 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Winery extends Model
 {
@@ -46,4 +47,40 @@ class Winery extends Model
     {
         return 'slug';
     }
+    public function rated()
+    {
+        return (bool) WineryRating::where('user_id', Auth::id())
+            ->where('winery_id', $this->id)
+            ->first();
+    }
+
+    public function rating()
+    {
+        if($this->rated()) {
+            return WineryRating::where('user_id', Auth::id())
+                ->where('winery_id', $this->id)
+                ->first()->rating;
+        } else {
+            $rating = WineryRating::where('winery_id', $this->id)
+                ->avg('rating');
+            return $rating?$rating:0;
+        }
+    }
+
+    public function rate($rating)
+    {
+        if($this->rated()) {
+            WineryRating::where('user_id', Auth::id())
+                ->where('winery_id', $this->id)
+                ->update(['rating' => $rating]);
+        } else {
+            Auth::user()->wineriesRating()->attach($this->id, ['rating' => $rating]);
+        }
+    }
+
+    public function ratingCount()
+    {
+        return WineryRating::where('winery_id', $this->id)->count();
+    }
+
 }

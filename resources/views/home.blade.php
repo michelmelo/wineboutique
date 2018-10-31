@@ -47,166 +47,20 @@
         <h2 class="heading">TOP RATED WINERIES</h2>
         <div class="main__clipper">
             <div class="main__scroller row">
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Stortrrt etreter trete</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-5ths vine-box-style-1">
-                    <a href="#">
-                        <div class="image-container">
-                            <img src="{{asset('img/vine-style-1-img.jpg')}}">
-                            <div class="overlay"></div>
-                        </div>
-                        <h5>Name Of The Store</h5>
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
-                </div>
+                @foreach($topWineries as $topWinery)
+                    <div class="col-xs-5ths vine-box-style-1">
+                        <a href="{{route('winery', ['winery' => $topWinery->slug])}}">
+                            <div class="image-container">
+                                <img src="{{asset('img/vine-style-1-img.jpg')}}">
+                                <div class="overlay"></div>
+                            </div>
+                            <h5>{{$topWinery->name}}</h5>
+                            <div class="star-rating">
+                                <star-rating :star-size="20" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$topWinery->rating}}"></star-rating>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -275,215 +129,54 @@
 
     <div class="row padding-row row-eq-height">
         <h2 class="heading">NEW ARRIVALS</h2>
-
         <div class="main__clipper">
             <div class="main__scroller row">
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
+                @foreach($latestWines as $latestWine)
+                    <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
+                        <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
+                            <div  class="row">
+                                <div class="col-md-6">
+                                    <img src="{{asset('img/vine-style-2-img.PNG')}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="name">{{$latestWine->name}}</h5>
+                                    <h5 class="price">${{$latestWine->price}}</h5>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
-                    <a href="#">
-                        <div  class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('img/vine-style-2-img.PNG')}}">
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="name">Name Of The Store</h5>
-                                <h5 class="price">$49.00</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
 
-        <a href="#" class="button red-button margin-0-auto margin-t">SEE MORE</a>
+        <a href="/wines" class="button red-button margin-0-auto margin-t">SEE MORE</a>
     </div>
 
     <div class="row padding-row row-eq-height">
         <h2 class="heading">TOP RATED WINES</h2>
+        @foreach($topWines as $topWine)
+            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
+                <a href="{{route('wine.show', ['wine' => $topWine->slug])}}">
+                    <div class="image-container">
+                        <img src="{{asset('img/vine-style-3-img.png')}}">
+                        <div class="overlay"></div>
+                        <favorite
+                                :post="'{{ $topWine->slug }}'"
+                                :favorited="{{ $topWine->favorited==1 ? 'true' : 'false' }}"
+                                :type="'wine'"
+                        ></favorite>
+                    </div>
+                    <h5>{{$topWine->name}}</h5>
+                    <h4>${{$topWine->price}}</h4>
+                    <div class="star-rating">
+                        <star-rating :star-size="20" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$topWine->rating}}"></star-rating>
+                    </div>
+                    <span class="order-q">0 Orders</span>
+                </a>
+            </div>
+        @endforeach
 
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-
-        <a href="#" class="button red-button margin-0-auto">SEE MORE</a>
+        <a href="/wines" class="button red-button margin-0-auto">SEE MORE</a>
     </div>
 
     <div class="row padding-row center-text secure-section">

@@ -62,4 +62,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('unfavorite/{wine}', 'FavoriteWineController@unFavoriteWine');
 
     Route::post('rate-wine/{wine}', 'RateWineController@rate');
+    Route::post('rate-winery/{winery}', 'RateWineryController@rate');
 });

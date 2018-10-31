@@ -12,13 +12,9 @@
         <div>
             <h1>{{$winery->name}}</h1>
             <div class="star-rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                <rating :post="'{{$winery->slug}}'" :rating="{{$winery->rating()}}" :type="'winery'"></rating>
             </div>
-            <p>568 Feedback</p>
+            <p>{{$winery->ratingCount()}} Feedback</p>
         </div>
     </div>
 
