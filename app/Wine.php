@@ -4,6 +4,7 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Wine extends Model
 {
@@ -57,5 +58,43 @@ class Wine extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function favorited()
+    {
+        return (bool) FavoriteWine::where('user_id', Auth::id())
+            ->where('wine_id', $this->id)
+            ->first();
+    }
+
+    public function rated()
+    {
+        return (bool) WineRating::where('user_id', Auth::id())
+            ->where('wine_id', $this->id)
+            ->first();
+    }
+
+    public function rating()
+    {
+        if($this->rated()) {
+            return WineRating::where('user_id', Auth::id())
+                ->where('wine_id', $this->id)
+                ->first()->rating;
+        } else {
+            $rating = WineRating::where('wine_id', $this->id)
+                ->avg('rating');
+            return $rating?$rating:0;
+        }
+    }
+
+    public function rate($rating)
+    {
+        if($this->rated()) {
+            WineRating::where('user_id', Auth::id())
+                ->where('wine_id', $this->id)
+                ->update(['rating' => $rating]);
+        } else {
+            Auth::user()->winesRating()->attach($this->id, ['rating' => $rating]);
+        }
     }
 }

@@ -14,21 +14,21 @@
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="First slide">
                     <div class="slider-content">
                         <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
-                        <a href="#" class="button red-button">SHOP NOW</a>
+                        <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="Second slide">
                     <div class="slider-content">
                         <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
-                        <a href="#" class="button red-button">SHOP NOW</a>
+                        <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="Third slide">
                     <div class="slider-content">
                         <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
-                        <a href="#" class="button red-button">SHOP NOW</a>
+                        <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>
             </div>
@@ -228,11 +228,9 @@
 
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <a href="#" class="sub-cat">Wite</a>
-                        <a href="#" class="sub-cat">Red</a>
-                        <a href="#" class="sub-cat">Rosé</a>
-                        <a href="#" class="sub-cat">Sparkling</a>
-                        <a href="#" class="sub-cat">Organic/Natural</a>
+                        @foreach($varietals as $varietal)
+                            <a href="/wines?varietal[]={{$varietal->id}}" class="sub-cat">{{$varietal->name}}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -248,11 +246,9 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
-                        <a href="#" class="sub-cat">Wite</a>
-                        <a href="#" class="sub-cat">Red</a>
-                        <a href="#" class="sub-cat">Rosé</a>
-                        <a href="#" class="sub-cat">Sparkling</a>
-                        <a href="#" class="sub-cat">Organic/Natural</a>
+                        @foreach($regions as $region)
+                            <a href="/wines?region[]={{$region->id}}" class="sub-cat">{{$region->name}}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -268,11 +264,9 @@
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <a href="#" class="sub-cat">Wite</a>
-                        <a href="#" class="sub-cat">Red</a>
-                        <a href="#" class="sub-cat">Rosé</a>
-                        <a href="#" class="sub-cat">Sparkling</a>
-                        <a href="#" class="sub-cat">Organic/Natural</a>
+                        <a href="/wines?price[]=1" class="sub-cat">0-50</a>
+                        <a href="/wines?price[]=2" class="sub-cat">51-100</a>
+                        <a href="/wines?price[]=3" class="sub-cat">100+</a>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,10 @@
                 <div class="tab-pane active" id="pic-1"><img src="{{asset('img/single-1.png')}}" /></div>
                 <div class="tab-pane" id="pic-2"><img src="{{asset('img/single-2.png')}}" /></div>
                 <div class="tab-pane" id="pic-3"><img src="{{asset('img/single-2.png')}}" /></div>
-                <i class="fas fa-heart"></i>
+                <favorite
+                        :post="'{{ $wine->slug }}'"
+                        :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                ></favorite>
             </div>
             <ul class="preview-thumbnail nav nav-tabs">
                 <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{asset('img/single-1.png')}}" /></a></li>
@@ -34,13 +37,7 @@
 
                 <div class="col-4 center-text">
                     <p>RATING</p>
-                    <div class="star-rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
+                    <rating :post="'{{ $wine->slug }}'" :rating="{{$wine->rating()}}"></rating>
                 </div>
             </div>
 

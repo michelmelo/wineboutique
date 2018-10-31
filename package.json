@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "moment": "^2.22.2",
+        "vue-star-rating": "^1.6.1",
         "vue2-filters": "^0.3.0",
         "vuejs-datepicker": "^1.5.3"
     }

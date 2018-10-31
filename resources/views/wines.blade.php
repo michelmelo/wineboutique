@@ -92,17 +92,17 @@
                         <div class="image-container">
                             <img src="{{$wine->getPhotoLink()}}">
                             <div class="overlay"></div>
-                            <i class="far fa-heart"></i>
+                            <favorite
+                                    :post="'{{ $wine->slug }}'"
+                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                            ></favorite>
                             <span class="sale-mark">SALE</span>
                         </div>
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
                         <h4>${{$wine->price}}</h4>
+
                         <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
+                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
                         <span class="order-q">193 Orders</span>
                     </a>

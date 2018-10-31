@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'home')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
@@ -57,4 +57,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/profile/password', 'ProfileController@password')->name('profile.password');
 
     Route::get('/my-wines', 'MyWinesController@show')->name('my-wines.list')->middleware('can:list,App\Wine');
+
+    Route::post('favorite/{wine}', 'FavoriteWineController@favoriteWine');
+    Route::post('unfavorite/{wine}', 'FavoriteWineController@unFavoriteWine');
+
+    Route::post('rate-wine/{wine}', 'RateWineController@rate');
 });
