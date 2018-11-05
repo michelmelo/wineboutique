@@ -26,8 +26,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone',
-        'city',
-        'location',
         'type',
         'birthday'
     ];
@@ -70,5 +68,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function wineriesRating()
     {
         return $this->belongsToMany(Wine::class, 'winery_ratings', 'user_id', 'winery_id')->withTimeStamps()->withPivot('rating');
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Wine::class, 'cart_user')
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }

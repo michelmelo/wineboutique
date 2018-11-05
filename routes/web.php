@@ -17,7 +17,6 @@ Auth::routes(['verify' => true]);
 Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
 
 Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
-Route::view('/cart', 'cart')->name('cart');
 Route::view('/get-paid', 'get-paid')->name('get-paid');
 Route::view('/hot-sellers', 'hot-sellers')->name('hot-sellers');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
@@ -63,4 +62,17 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('rate-wine/{wine}', 'RateWineController@rate');
     Route::post('rate-winery/{winery}', 'RateWineryController@rate');
+
+    Route::get('/cart/get', 'CartController@get');
+
+    Route::resource('cart', 'CartController', [
+        'parameters' => [
+            'cart' => 'wine'
+        ]
+    ]);
+
+    Route::resource('addresses', 'AddressController');
+
+
+    Route::get('/checkout', 'CheckoutController@get');
 });

@@ -32,6 +32,9 @@ Vue.component('my-wines-form', require('./components/forms/MyWinesForm.vue'));
 Vue.component('favorite', require('./components/Favorite.vue'));
 Vue.component('rating', require('./components/Rating.vue'));
 Vue.component('star-rating', StarRating.default);
+Vue.component('cart', require('./components/Cart.vue'));
+Vue.component('add-to-cart', require('./components/AddToCart.vue'));
+Vue.component('checkout-form', require('./components/forms/CheckoutForm.vue'));
 
 const app = new Vue({
     el: '#app'

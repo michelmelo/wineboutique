@@ -42,7 +42,7 @@
             </div>
 
             <div class="row single-wine-buttons">
-                <a href="#" class="button pink-button full-width">ADD TO CART</a>
+                <add-to-cart wine-id="{{$wine->id}}"></add-to-cart>
                 <a href="#" class="button red-button full-width">BUY NOW</a>
             </div>
         </div>
