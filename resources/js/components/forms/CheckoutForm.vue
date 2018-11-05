@@ -7,7 +7,78 @@
                     <div class="card-body p-2">
                         <h5 class="card-title">Ship to</h5>
                         <template v-if="selecting">
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                    <tr v-for="address in addresses" :key="address.id">
+                                        <td>
+                                            <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
+                                                {{address.name}}<br>
+                                                {{address.address_1}}<br>
+                                                {{address.city}}<br>
+                                                {{address.postal_code}}<br>
+                                                {{address.region.name}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary" @click.prevent="switchAddress(address)">Ship here</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </template>
+                        <template v-else-if="creating">
+                            <form action="#">
+                                <div class="field">
+                                    <label class="label">Name</label>
+                                    <div>
+                                        <input type="text" class="form-control" v-model="newAddress.name">
+                                    </div>
+                                </div>
 
+                                <div class="field">
+                                    <label class="label">Address line 1</label>
+                                    <div>
+                                        <input class="form-control" type="text" v-model="newAddress.address_1">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">City</label>
+                                    <div>
+                                        <input class="form-control" type="text" v-model="newAddress.city">
+                                    </div>
+                                </div>
+
+                                <div class="columns mb-2">
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Postal code</label>
+                                            <div>
+                                                <input class="form-control" type="text" v-model="newAddress.postal_code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Region</label>
+                                            <div>
+                                                <select class="form-control" v-model="newAddress.region_id">
+                                                    <option v-for="region in regions" :value="region.id">{{region.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <p class="control">
+                                        <button class="btn btn-primary">
+                                            Add address
+                                        </button>
+                                        <a class="btn btn-danger" @click.prevent="creating = false">Cancel</a>
+                                    </p>
+                                </div>
+                            </form>
                         </template>
                         <template v-else>
                             <template v-if="switchAddress">
@@ -20,6 +91,7 @@
                                 </p>
                             </template>
                             <button type="button" class="btn btn-primary" @click.prevent="selecting = true">Change shipping address</button>
+                            <button type="button" class="btn btn-primary" @click.prevent="creating = true">Add an address</button>
                         </template>
                     </div>
                 </article>
@@ -80,8 +152,18 @@
         data() {
             return {
                 selecting: false,
+                creating: false,
                 addresses: [],
-                selectedAddress: null
+                selectedAddress: null,
+                regions: [],
+                newAddress: {
+                    name: '',
+                    address_1: '',
+                    city: '',
+                    postal_code: '',
+                    region_id: '',
+                    default: true
+                }
             }
         },
         mounted() {
@@ -102,8 +184,10 @@
             },
             async asyncData() {
                 const addresses = await axios.get('addresses');
+                const regions = await axios.get('/api/regions');
 
                 this.addresses = addresses.data.data;
+                this.regions = regions.data;
 
                 if(this.addresses.length) {
                     this.switchAddress(this.defaultAddress);
@@ -111,6 +195,14 @@
             },
             switchAddress(address) {
                 this.selectedAddress = address;
+                this.selecting = false;
+            },
+            addShipingaddress() {
+                axios.post('/addresses', this.newAddress)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => console.log(error));
             }
         },
         computed: {
