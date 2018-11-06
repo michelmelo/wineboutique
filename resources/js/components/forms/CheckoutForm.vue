@@ -27,25 +27,28 @@
                             </table>
                         </template>
                         <template v-else-if="creating">
-                            <form action="#">
+                            <div>
                                 <div class="field">
                                     <label class="label">Name</label>
                                     <div>
-                                        <input type="text" class="form-control" v-model="newAddress.name">
+                                        <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name">
+                                        <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label class="label">Address line 1</label>
                                     <div>
-                                        <input class="form-control" type="text" v-model="newAddress.address_1">
+                                        <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1">
+                                        <span class="error-block" v-if="hasError('address_1')">{{getError('address_1')}}</span>
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label class="label">City</label>
                                     <div>
-                                        <input class="form-control" type="text" v-model="newAddress.city">
+                                        <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
+                                        <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
                                     </div>
                                 </div>
 
@@ -54,7 +57,8 @@
                                         <div class="field">
                                             <label class="label">Postal code</label>
                                             <div>
-                                                <input class="form-control" type="text" v-model="newAddress.postal_code">
+                                                <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code">
+                                                <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -62,9 +66,10 @@
                                         <div class="field">
                                             <label class="label">Region</label>
                                             <div>
-                                                <select class="form-control" v-model="newAddress.region_id">
+                                                <select class="form-control" :class="{'invalid': hasError('region_id')}" v-model="newAddress.region_id">
                                                     <option v-for="region in regions" :value="region.id">{{region.name}}</option>
                                                 </select>
+                                                <span class="error-block" v-if="hasError('region_id')">{{getError('region_id')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -72,16 +77,16 @@
 
                                 <div class="field">
                                     <p class="control">
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" @click.prevent="addShipingAddress()">
                                             Add address
                                         </button>
                                         <a class="btn btn-danger" @click.prevent="creating = false">Cancel</a>
                                     </p>
                                 </div>
-                            </form>
+                            </div>
                         </template>
                         <template v-else>
-                            <template v-if="switchAddress">
+                            <template v-if="selectedAddress">
                                 <p>
                                     {{selectedAddress.name}}<br>
                                     {{selectedAddress.address_1}}<br>
@@ -147,6 +152,7 @@
 
 <script>
     import Cart from "../Cart";
+    import { required, minLength, numeric } from 'vuelidate/lib/validators';
     export default {
         props: ['wineId'],
         data() {
@@ -163,7 +169,8 @@
                     postal_code: '',
                     region_id: '',
                     default: true
-                }
+                },
+                showErrors: false
             }
         },
         mounted() {
@@ -197,18 +204,72 @@
                 this.selectedAddress = address;
                 this.selecting = false;
             },
-            addShipingaddress() {
+            addShipingAddress() {
+                this.showErrors = true;
+                if(this.$v.$invalid) {
+                    return false;
+                }
+
                 axios.post('/addresses', this.newAddress)
                     .then(response => {
-                        console.log(response.data);
+                        this.addresses.push(response.data.data);
+                        this.switchAddress(response.data.data);
+                        this.showErrors = false;
+                        this.creating = false;
+                        this.newAddress = {
+                            name: '',
+                            address_1: '',
+                            city: '',
+                            postal_code: '',
+                            region_id: '',
+                            default: true
+                        };
                     })
                     .catch(error => console.log(error));
+            },
+            hasError(name) {
+                return (this.$v.newAddress[name].$invalid) && this.showErrors;
+            },
+            getError(name) {
+                const model = this.$v.newAddress[name];
+
+                if(!!model.$params.required && !model.required) {
+                    return 'This field is required';
+                }
+
+                if(!!model.$params.minLength && !model.minLength) {
+                    return `This field must have at least ${model.$params.minLength.min} characters.`;
+                }
             }
         },
         computed: {
             defaultAddress() {
                 return this.addresses.find(a => a.default);
             }
+        },
+        validations: {
+            newAddress: {
+                name: {
+                    required,
+                    minLength: minLength(3)
+                },
+                address_1: {
+                    required,
+                    minLength: minLength(3)
+                },
+                city: {
+                    required,
+                    minLength: minLength(2)
+                },
+                postal_code: {
+                    required,
+                    minLength: minLength(3)
+                },
+                region_id: {
+                    required,
+                    numeric
+                }
+            },
         },
         components: {
             Cart

@@ -42,7 +42,11 @@
             </div>
 
             <div class="row single-wine-buttons">
-                <add-to-cart wine-id="{{$wine->id}}"></add-to-cart>
+                @if(Auth::check())
+                    <add-to-cart wine-id="{{$wine->id}}"></add-to-cart>
+                @else
+                    <a href="{{route('login')}}" class="button pink-button full-width">ADD TO CART</a>
+                @endif
                 <a href="#" class="button red-button full-width">BUY NOW</a>
             </div>
         </div>
