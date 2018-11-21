@@ -97,4 +97,9 @@ class Wine extends Model
             Auth::user()->winesRating()->attach($this->id, ['rating' => $rating]);
         }
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
