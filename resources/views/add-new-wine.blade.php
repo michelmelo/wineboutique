@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     
-    <div class="row padding-row add-new-wine">
+    <div class="row padding-row add-new-wine margin-row">
         <h1 class="headline-2">ADD A NEW WINE</h1>
 
         <div class="shadow-box row new-wine-photos">

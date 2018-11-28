@@ -67,7 +67,12 @@ select {
     padding: 30px 0!important;
 }
 
+.margin-row {
+    margin-top: 220px!important;
+}
+
 .main {
+    margin-top:210px; 
 	padding: 0;
 }
 
@@ -332,6 +337,10 @@ nav {
 
 header {
     background: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
 }
 
 .top-header {
@@ -349,6 +358,11 @@ header {
     box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
     color:#fff;
     background: #9C193A;
+}
+
+.form-inline .input-width, .navbar .form-control{
+    max-width: 255px;
+    width: 100%;
 }
 
 .user-area {
@@ -507,6 +521,7 @@ footer p {
 ==============================================================================================*/
 
 .home-slider {
+/*    margin-top:175px;*/
     border-bottom: 4px solid #9b1f3d;
     margin-bottom: 20px;
 }
@@ -571,6 +586,11 @@ footer p {
     top: 6px;
     position: relative;
     margin-left: 10px;
+}
+
+#collapseOne .card-body,#collapseTwo .card-body{
+    overflow-y: scroll;
+    max-height: 400px;  
 }
 
 .card-header {
@@ -771,6 +791,8 @@ footer p {
 
 .vine-box-style-3 {
     margin-bottom: 20px;
+    min-height: 250px;
+    max-height: 350px;
 }
 
 .vine-box-style-3 a {
@@ -1102,6 +1124,7 @@ footer p {
 
 .pagination-box .pagination {
     float: right;
+    margin-bottom: 30px;
 }
 
 .page-item.active .page-link {
@@ -1358,7 +1381,11 @@ footer p {
 /*=============================================================================================
                                         WINERY
 ==============================================================================================*/
-
+/*
+.page-header{
+    margin-top:175px;   
+}
+*/
 .page-header .wine-badge {
     position: absolute;
     width: auto;
@@ -2176,6 +2203,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         flex: 0 0 20%;
     }
 
+    .main {
+        margin-top:157px;
+    }
+
     .item-in-cart {
         right: 0px;
     }
@@ -2209,6 +2240,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .main__scroller {
         width: auto;
         display: inline-flex;
+    }
+
+    .accordion {
+        height: auto;
+        margin-bottom: 30px;
     }
 
     .style-3-2 .order-q {
@@ -2267,6 +2303,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .item-in-cart {
         right: 7px;
+    }
+
+    .main {
+        margin-top:145px;
     }
 
     
