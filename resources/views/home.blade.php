@@ -175,8 +175,7 @@
                 </a>
             </div>
         @endforeach
-
-        <a href="/wines" class="button red-button margin-0-auto">SEE MORE</a>
+            <a href="/wines" class="button red-button margin-0-auto">SEE MORE</a>
     </div>
 
     <div class="row padding-row center-text secure-section">

@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
-            <div id="accordion" class="accordion">
+            <div id="accordion" class="accordion mb-4">
                 <form method="get" class="auto-submit">
                     <div class="card">
                         <div class="card-header" id="headingOne">
