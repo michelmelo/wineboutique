@@ -158,7 +158,7 @@
             <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $topWine->slug])}}">
                     <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
+                        <img src="{{'/storage/images/wines/' . $topWine->photo}}">
                         <div class="overlay"></div>
                         <favorite
                                 :post="'{{ $topWine->slug }}'"
