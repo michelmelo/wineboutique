@@ -16,7 +16,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes(['verify' => true]);
 Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
 
-Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
+// Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
 Route::view('/get-paid', 'get-paid')->name('get-paid');
 Route::view('/hot-sellers', 'hot-sellers')->name('hot-sellers');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
@@ -38,6 +38,10 @@ Route::get('/search', 'SearchController@search')->name('search');
 Route::get('/varietals', 'WineController@varietals')->name('varietals');
 
 Route::get('/test', 'TestController@index')->name('test');
+
+Route::get('/images/wine/{slug}', 'ImageController@wineImage')->name('images.wine');
+
+Route::resource('/wine-image', 'WineImageController')->only(['store', 'destroy']);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
@@ -75,4 +79,11 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::get('/checkout', 'CheckoutController@get');
+
+    Route::get('my_favorites', 'UsersController@myFavorites');
+
+    Route::resource('/add-new-wine','AddNewWineController')->except([
+        'edit', 'update', 'destroy'
+    ]);
+
 });

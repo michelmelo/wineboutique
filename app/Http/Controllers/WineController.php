@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
 use Illuminate\Support\Str;
+use App\WineImage;
 
 class WineController extends Controller
 {
@@ -21,6 +22,32 @@ class WineController extends Controller
         $wine = Auth::user()->winery->wines()->create([
             'photo' => $photoName
         ]);
+
+        $data = $request->only(['name', 'price', 'quantity', 'description']);
+
+        $request->file('photo')->move(storage_path() . '/app/public', $photo = uniqid(true) . '.jpg');
+        $path = storage_path() . '/app/public/' . $photo;
+        Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+            $c->upsize();
+        })->save();
+
+        $data['photo'] = $photo;
+
+        $wine = Wine::create($data);
+        $wine->save();
+
+        $images = [];
+
+        if($request->has('images')) {
+            $images = $request->images;
+        }
+
+        WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
+        $wineImages = WineImage::whereIn("id", $images)->get();
+
+        foreach($wineImages as $wineImage) {
+            $wineImage->update([]);
+        }
 
         return $wine;
     }
