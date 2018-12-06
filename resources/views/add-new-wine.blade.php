@@ -63,9 +63,12 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <select>
-                            <option>Varietal</option>
+                            @foreach($varietals as $varietal) 
+                            <option value="{{$varietal->id}}">{{$varietal->name}}</option>
+                            <!-- <option>Varietal</option>
                             <option>Varietal 1</option>
-                            <option>Varietal 2</option>
+                            <option>Varietal 2</option> -->
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-lg-4 col-sm-12">

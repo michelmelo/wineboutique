@@ -102,4 +102,9 @@ class Wine extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function wineImages()
+    {
+        return $this->hasMany(WineImage::class);
+    }
 }
