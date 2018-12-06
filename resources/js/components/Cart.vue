@@ -59,7 +59,7 @@
             </table>
             <div class="row cart-buttons">
                 <a href="/checkout" class="button red-button full-width">CHECKOUT</a>
-                <a href="#" class="button pink-button full-width">CONTINUE SHOPPING</a>
+                <a href="/wines" class="button pink-button full-width">CONTINUE SHOPPING</a>
             </div>
         </div>
     </div>
