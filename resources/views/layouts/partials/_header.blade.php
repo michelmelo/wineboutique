@@ -41,34 +41,34 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item {{ Route::currentRouteName() === 'home' ? 'active' : '' }} ">
                         <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'wine.list' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('wine.list')}}">Wines</a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'new-arrivals' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('new-arrivals')}}">New Arrivals</a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'wineries' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('wineries')}}">Wineries</a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'hot-sellers' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('hot-sellers')}}">Hot Sellers</a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'wb-experience' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('wb-experience')}}">WB Experience</a>
                     </li>
-                    <li class="nav-item col">
+                    <li class="nav-item col {{ Route::currentRouteName() === 'my-wine' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
                     </li>
                     @if(Auth::guest())
-                        <li class="nav-item col">
+                        <li class="nav-item col {{ Route::currentRouteName() === 'register' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register')}}">Create an account</a>
                         </li>
                     @endif
                     @if(Auth::guest() || Auth::user()->type==='CUSTOMER')
-                        <li class="nav-item col">
+                        <li class="nav-item col {{ Route::currentRouteName() === 'register.sell' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>
                         </li>
                     @endif

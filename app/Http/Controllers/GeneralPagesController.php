@@ -14,4 +14,11 @@ class GeneralPagesController extends Controller
         ]);
     }
 
+    public function hot_sellers()
+    {
+        return view('hot-sellers', [
+            'wines' => Wine::limit(10)->get()
+        ]);
+    }
+
 }

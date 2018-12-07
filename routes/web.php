@@ -18,7 +18,6 @@ Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')-
 
 // Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
 Route::view('/get-paid', 'get-paid')->name('get-paid');
-Route::view('/hot-sellers', 'hot-sellers')->name('hot-sellers');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
 Route::view('/my-wine', 'my-wine')->name('my-wine');
 Route::view('/order-track', 'order-track')->name('order-track');
@@ -26,6 +25,7 @@ Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 
 Route::get('/new-arrivals', 'GeneralPagesController@new_arrivals')->name('new-arrivals');
+Route::get('/hot-sellers', 'GeneralPagesController@hot_sellers')->name('hot-sellers');
 
 Route::get('/wineries', 'WineryController@list')->name('wineries');
 Route::get('/winery/{winery}', 'WineryController@show')->name('winery');
