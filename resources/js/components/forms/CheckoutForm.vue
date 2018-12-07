@@ -31,7 +31,7 @@
                                 <div class="field">
                                     <label class="label">Name</label>
                                     <div>
-                                        <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name">
+                                        <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name" autocomplete="none">
                                         <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="field">
                                     <label class="label">Address line 1</label>
                                     <div>
-                                        <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1">
+                                        <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1" autocomplete="none">
                                         <span class="error-block" v-if="hasError('address_1')">{{getError('address_1')}}</span>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 <div class="field">
                                     <label class="label">City</label>
                                     <div>
-                                        <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
+                                        <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city" autocomplete="none">
                                         <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                         <div class="field">
                                             <label class="label">Postal code</label>
                                             <div>
-                                                <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code">
+                                                <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code" autocomplete="none">
                                                 <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
                                             </div>
                                         </div>

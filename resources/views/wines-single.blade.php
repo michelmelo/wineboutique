@@ -5,18 +5,14 @@
     <div class="row padding-row">
         <div class="col-lg-6 col-sm-12 preview">
             <div class="preview-pic tab-content single-wine-img">
-                <div class="tab-pane active" id="pic-1"><img src="{{asset('img/single-1.png')}}" /></div>
-                <div class="tab-pane" id="pic-2"><img src="{{asset('img/single-2.png')}}" /></div>
-                <div class="tab-pane" id="pic-3"><img src="{{asset('img/single-2.png')}}" /></div>
+                <div class="tab-pane active" id="pic-1"><img src="{{$wine->getPhotoLink()}}" /></div>
                 <favorite
                         :post="'{{ $wine->slug }}'"
                         :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                 ></favorite>
             </div>
             <ul class="preview-thumbnail nav nav-tabs">
-                <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{asset('img/single-1.png')}}" /></a></li>
-                <li><a data-target="#pic-2" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
-                <li><a data-target="#pic-3" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
+                <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{$wine->getPhotoLink()}}" /></a></li>
             </ul>
         </div>
 

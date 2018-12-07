@@ -27,223 +27,36 @@
 
             <div class="tab-content">
                 <div id="description" class="tab-pane fade in active show">
-
-                    <div class="row winery-categories">
-                        <h2 class="center-text">Red Wine</h2>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
+                    @foreach($winery->wines->groupBy('varietal.name') as $wineGroupName => $wineGroup)
+                        <div class="row winery-categories">
+                            <h2 class="center-text">{{$wineGroupName}} Wine</h2>
+                            @foreach($wineGroup as $wine)
+                                <div class="col-xs-5 vine-box-style-4">
+                                    <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
+                                        <div class="image-container">
+                                            <img src="{{$wine->getPhotoLink()}}">
+                                            <span class="price">${{$wine->price}}</span>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            @endforeach
                         </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row winery-categories">
-                        <h2 class="center-text">White Wine</h2>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row winery-categories">
-                        <h2 class="center-text">Rosé Wine</h2>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div>
                 
                 <div id="info" class="tab-pane fade">
                     <div class="row winery-categories">
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-5 vine-box-style-4">
-                            <a href="#">
-                                <div class="image-container">
-                                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                                    <span class="price">$21.00</span>
-                                </div>
-                            </a>
-                        </div>
+                        @foreach($winery->wines as $wine)
+                            <div class="col-xs-5 vine-box-style-4">
+                                <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
+                                    <div class="image-container">
+                                        <img src="{{$wine->getPhotoLink()}}">
+                                        <span class="price">${{$wine->price}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
 
                 </div>
