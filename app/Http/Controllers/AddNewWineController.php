@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PhotoRequest;
 use App\Varietal;
-use App\Tag;
 use App\Wine;
+use App\WineImage;
+use Image;
 
 class AddNewWineController extends Controller
 {
@@ -28,12 +30,7 @@ class AddNewWineController extends Controller
      */
     public function create()
     {
-        return view('add-new-wine', [
-            'wines' => Wine::all(),
-            'varietals' => Varietal::all(),
-            'tags' => Tag::all(),
-            'regions' => Region::all(),
-        ]);
+        return view('add-new-wine');
     }
 
     /**
@@ -42,21 +39,101 @@ class AddNewWineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotoRequest $request)
     {
-        $add_new_wine= new \App\Wine;
-        $add_new_wine->name=$request->get('name');
-        $add_new_wine->photo=$request->get('photo');
-        $add_new_wine->price=$request->get('price');
-        $add_new_wine->winery_id=$request->get('winery');
-        $add_new_wine->varietal_id=$request->get('varietal');
-        $add_new_wine->quantity=$request->get('quantity');
-        $add_new_wine->wine_region_id=$request->get('wine_region');
-        $add_new_wine->description=$request->get('description');
-        $add_new_wine->region_id=$request->get('region');
-        $add_new_wine->save();
+        $data = $request->only(['name', 'price', 'quantity', 'description']);
 
-        return redirect('/')->withInfo('Wine created successfully');
+        $request->file('photo')->move(storage_path() . '/app/public', $photo = uniqid(true) . '.jpg');
+        $path = storage_path() . '/app/public/' . $photo;
+        Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+            $c->upsize();
+        })->save();
+
+        $data['photo'] = $photo;
+
+        $wine = Wine::create($data);
+        $wine->save();
+
+        $images = [];
+
+        if($request->has('images')) {
+            $images = $request->images;
+        }
+
+        WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
+        $wineImages = WineImage::whereIn("id", $images)->get();
+
+        foreach($wineImages as $wineImage) {
+            $wineImage->update([]);
+        }
+
+        return redirect()->route('add-new-wine.index');
     }
+
+    // public function edit(wine $wine)
+    // {
+    //     $preloadedImages = $wine->wineImages->map(function($item, $key) {
+    //         return [
+    //             'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
+    //             'id' => $item->id,
+    //             'size' => Storage::size('public/' . $item->source)
+    //         ];
+    //     });
+
+    //     return view('admin.portfolio.edit', [
+    //         'portfolio' => $portfolio,
+    //         'preloadedImages' => $preloadedImages
+    //     ]);
+    // }
+
+    // public function update(PhotoRequest $request, Wine $wine)
+    // {
+    //     $data = $request->only(['name', 'category', 'details', 'link']);
+
+    //     if($request->hasFile('thumbnail')) {
+    //         $request->file('thumbnail')->move(storage_path() . '/app/public', $thumbnail = uniqid(true) . '.jpg');
+    //         $path = storage_path() . '/app/public/' . $thumbnail;
+    //         Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+    //             $c->upsize();
+    //         })->save();
+    //         $data['thumbnail'] = $thumbnail;
+    //     }
+
+    //     if($request->hasFile('cover')) {
+    //         $request->file('cover')->move(storage_path() . '/app/public', $cover = uniqid(true) . '.jpg');
+    //         $path = storage_path() . '/app/public/' . $cover;
+    //         Image::make($path)->encode('jpg')->fit(1080, 1080, function ($c) {
+    //             $c->upsize();
+    //         })->save();
+    //         $data['cover'] = $cover;
+    //     }
+
+    //     $portfolio->update($data);
+    //     $portfolio->save();
+
+    //     $images = [];
+
+    //     if($request->has('images')) {
+    //         $images = $request->images;
+    //     }
+
+    //     if($request->has('delete_images')) {
+    //         PortfolioImage::destroy($request->delete_images);
+    //     }
+
+    //     PortfolioImage::whereIn("id", $images)->update(["portfolio_id" => $portfolio->id]);
+    //     $portfolioImages = PortfolioImage::whereIn("id", $images)->get();
+
+    //     foreach($portfolioImages as $portfolioImage) {
+    //         $portfolioImage->update([]);
+    //     }
+
+    //     return redirect()->route('admin.portfolio.index');
+    // }
+
+    // public function destroy(Portfolio $portfolio)
+    // {
+    //     //
+    // }
 
 }

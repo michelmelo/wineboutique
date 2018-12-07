@@ -3,41 +3,35 @@
 @section('content')
 <div class="container">
     
-    <div class="row padding-row add-new-wine">
+    <form class="row padding-row add-new-wine">
         <h1 class="headline-2">ADD A NEW WINE</h1>
 
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
             <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/primary-photo.jpg')}}"></a>
+                <label><input style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
             </div>
-            <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/every-angle.jpg')}}"></a>
-            </div>
-            <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/every-angle.jpg')}}"></a>
-            </div>
-            <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/every-angle.jpg')}}"></a>
-            </div>
-            <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/every-angle.jpg')}}"></a>
-            </div>
-            <div class="col-lg-2 col-4">
-                <a href="#"><img src="{{asset('img/every-angle.jpg')}}"></a>
+            <div id="photos" class="dropzone">
+                <div class="fallback">
+                </div>
             </div>
         </div>
 
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
 
-            <form>
+            <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
                         <p>Wine title *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="title name" placeholder="Title name">
+                        <input type="text" name="title" placeholder="Title name">
+                        @if($errors->has('title'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
 
@@ -111,7 +105,7 @@
                         <span style="font-size: 14px; color: #afafaf">What words might someone use to search for your wine?</span>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="shadow-box row pricing">
@@ -119,7 +113,7 @@
 
             <div class="col-lg-3 col-sm-12"></div>
             <div class="col-lg-6 col-sm-12">
-                <form>
+                <div>
                     <div class="row form-inputs">
                         <div class="col-lg-4 col-sm-12">
                             <p>Pricee *</p>
@@ -129,7 +123,7 @@
                             <div class="usd">USD</div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="col-lg-3 col-sm-12"></div>
         </div>
@@ -138,7 +132,7 @@
         <div class="shadow-box row">
             <h2>SHIPPING</h2>
 
-            <form>
+            <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
@@ -209,11 +203,12 @@
                         <label for="checkbox3" name="checkbox2_lbl" class="css-label lite-red-check">Freee shipping</label>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
+        <div id="inputs" style="display: none;"></div>
         <div class="col-lg-12 col-sm-12" style="padding: 0;">
-            <a href="#" class="red-button button float-right">SAVE AND CONTINUE</a>
+            <button type="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
-    </div>
+    </form>
 </div>
 @endsection

@@ -1,7 +1,3 @@
-window.Popper = require('popper.js').default;
-window.$ = window.jQuery = require('jquery');
-require('bootstrap');
-require('@dashboardcode/bsmultiselect');
 window.Dropzone = require('./vendor/dropzone');
 
 $.ajaxSetup({
@@ -14,7 +10,7 @@ function readURL(input, selector) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            $(selector).css('background-image', 'url('+e.target.result +')');
+            $(selector).attr('src', e.target.result);
             $(selector).hide();
             $(selector).fadeIn(650);
         }
@@ -26,17 +22,10 @@ $(document).ready(function() {
     $("#picture").change(function() {
         readURL(this, '#imagePreview');
     });
-    $("#cover_picture").change(function() {
-        readURL(this, '#coverPreview');
-    });
-
-    $("select[multiple='multiple']").bsMultiSelect();
-
-    
 });
 
 Dropzone.options.photos = {
-    url: "/admin/portfolio-image",
+    url: "/wine-image",
     paramName: "image",
     maxFilesize: 10,
     resizeWidth: 1200,
@@ -65,7 +54,7 @@ Dropzone.options.photos = {
             $(`<input type="hidden" name="delete_images[]" value="${id}" />`).appendTo("#inputs");
         } else {
             $.ajax({
-                url: `/admin/portfolio-image/${id}`,
+                url: `/wine-image/${id}`,
                 type: 'DELETE'
             });
         }
