@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./main');
+require('./add-wine');
 require('jquery-ui');
 window.Vue = require('vue');
 window.Vuelidate = require('vuelidate').default;

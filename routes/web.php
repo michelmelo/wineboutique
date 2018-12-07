@@ -82,8 +82,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('my_favorites', 'UsersController@myFavorites');
 
-    Route::resource('/add-new-wine','AddNewWineController')->except([
-        'edit', 'update', 'destroy'
-    ]);
+    Route::resource('/add-new-wine', 'AddNewWineController');
 
 });
