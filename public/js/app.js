@@ -76232,6 +76232,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -76241,7 +76248,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            wines: []
+            wines: [],
+            fetchedFirst: false
         };
     },
 
@@ -76256,6 +76264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/cart/get').then(function (response) {
                 _this.wines = response.data.wines;
+                _this.fetchedFirst = true;
             }).catch(function (error) {
                 return console.log(error);
             });
@@ -76309,186 +76318,192 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.showComplete
-    ? _c("div", { staticClass: "row padding-row" }, [
-        _c("h1", { staticClass: "headline-2" }, [_vm._v("CART")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-lg-8 col-md-12" },
-          _vm._l(_vm.wines, function(wine) {
-            return _c("div", { staticClass: "vine-box-style-5" }, [
-              _c("div", [
-                _c("div", { staticClass: "row" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-9" }, [
-                    _c("h5", { staticClass: "name" }, [
-                      _vm._v(_vm._s(wine.name))
+  return _vm.fetchedFirst && _vm.wines.length > 0
+    ? _c("div", [
+        _vm.showComplete
+          ? _c("div", { staticClass: "row padding-row" }, [
+              _c("h1", { staticClass: "headline-2" }, [_vm._v("CART")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-lg-8 col-md-12" },
+                _vm._l(_vm.wines, function(wine) {
+                  return _c("div", { staticClass: "vine-box-style-5" }, [
+                    _c("div", [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-9" }, [
+                          _c("h5", { staticClass: "name" }, [
+                            _vm._v(_vm._s(wine.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "price" }, [
+                            _vm._v(_vm._s(_vm._f("currency")(wine.price || 0)))
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "quantity" }, [
+                            _c("p", [_vm._v("Quantity")]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "minus",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.decreaseQuantity(
+                                        wine.slug,
+                                        wine.pivot.quantity
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("-")]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "amount" }, [
+                                _vm._v(_vm._s(wine.pivot.quantity))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "plus",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.increaseQuantity(
+                                        wine.slug,
+                                        wine.pivot.quantity
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("+")]
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("h5", { staticClass: "price" }, [
-                      _vm._v(_vm._s(_vm._f("currency")(wine.price || 0)))
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "quantity" }, [
-                      _c("p", [_vm._v("Quantity")]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "minus",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.decreaseQuantity(
-                                  wine.slug,
-                                  wine.pivot.quantity
-                                )
-                              }
-                            }
-                          },
-                          [_vm._v("-")]
-                        ),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "amount" }, [
-                          _vm._v(_vm._s(wine.pivot.quantity))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "plus",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.increaseQuantity(
-                                  wine.slug,
-                                  wine.pivot.quantity
-                                )
-                              }
-                            }
-                          },
-                          [_vm._v("+")]
+                    _c(
+                      "span",
+                      {
+                        staticClass: "close",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.removeWine(wine.slug)
+                          }
+                        }
+                      },
+                      [_vm._v("X")]
+                    )
+                  ])
+                })
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-4 col-md-12" }, [
+                _c("table", { staticClass: "cart-table" }, [
+                  _c("tr", [
+                    _c("th", [
+                      _c("b", [_vm._v("Summary")]),
+                      _c("span", [
+                        _vm._v(
+                          " (" +
+                            _vm._s(_vm.wines.length) +
+                            " " +
+                            _vm._s(
+                              _vm._f("pluralize")(_vm.wines.length, "item")
+                            ) +
+                            ")"
                         )
                       ])
                     ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "close",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.removeWine(wine.slug)
-                    }
-                  }
-                },
-                [_vm._v("X")]
-              )
-            ])
-          })
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4 col-md-12" }, [
-          _c("table", { staticClass: "cart-table" }, [
-            _c("tr", [
-              _c("th", [
-                _c("b", [_vm._v("Summary")]),
-                _c("span", [
-                  _vm._v(
-                    " (" +
-                      _vm._s(_vm.wines.length) +
-                      " " +
-                      _vm._s(_vm._f("pluralize")(_vm.wines.length, "item")) +
-                      ")"
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Subtotal:")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _vm._m(4)
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "cart-table-total" }, [
-            _c("tr", [
-              _c("td", [_vm._v("Total:")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(5)
-        ])
-      ])
-    : _c(
-        "div",
-        [
-          _vm._l(_vm.wines, function(wine) {
-            return _c("div", { staticClass: "vine-box-style-5" }, [
-              _c("div", [
-                _c("div", { staticClass: "row" }, [
-                  _vm._m(6, true),
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-9" }, [
-                    _c("h5", { staticClass: "name" }, [
-                      _vm._v(_vm._s(wine.name))
-                    ]),
+                  _c("tr", [
+                    _c("td", [_vm._v("Subtotal:")]),
                     _vm._v(" "),
-                    _c("h5", { staticClass: "price" }, [
-                      _vm._v(_vm._s(_vm._f("currency")(wine.price || 0)))
-                    ]),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4)
+                ]),
+                _vm._v(" "),
+                _c("table", { staticClass: "cart-table-total" }, [
+                  _c("tr", [
+                    _c("td", [_vm._v("Total:")]),
                     _vm._v(" "),
-                    _vm._m(7, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "quantity" }, [
-                      _c("p", [_vm._v("Quantity")]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _c("span", { staticClass: "amount" }, [
-                          _vm._v(_vm._s(wine.pivot.quantity))
+                    _c("td", [
+                      _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(5)
+              ])
+            ])
+          : _c(
+              "div",
+              [
+                _vm._l(_vm.wines, function(wine) {
+                  return _c("div", { staticClass: "vine-box-style-5" }, [
+                    _c("div", [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(6, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-9" }, [
+                          _c("h5", { staticClass: "name" }, [
+                            _vm._v(_vm._s(wine.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "price" }, [
+                            _vm._v(_vm._s(_vm._f("currency")(wine.price || 0)))
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(7, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "quantity" }, [
+                            _c("p", [_vm._v("Quantity")]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("span", { staticClass: "amount" }, [
+                                _vm._v(_vm._s(wine.pivot.quantity))
+                              ])
+                            ])
+                          ])
                         ])
                       ])
                     ])
                   ])
+                }),
+                _vm._v(" "),
+                _c("table", { staticClass: "cart-table-total" }, [
+                  _c("tr", [
+                    _c("td", [_vm._v("Total:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
+                    ])
+                  ])
                 ])
-              ])
-            ])
-          }),
-          _vm._v(" "),
-          _c("table", { staticClass: "cart-table-total" }, [
-            _c("tr", [
-              _c("td", [_vm._v("Total:")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(_vm._s(_vm._f("currency")(_vm.getTotal() || 0)))
-              ])
-            ])
-          ])
-        ],
-        2
-      )
+              ],
+              2
+            )
+      ])
+    : _c("div", [_c("p", [_vm._v("Cart is empty.")])])
 }
 var staticRenderFns = [
   function() {
