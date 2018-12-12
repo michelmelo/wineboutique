@@ -5,11 +5,12 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Conner\Tagging\Taggable;
 
 class Wine extends Model
 {
 
-    use Sluggable, FullTextSearch;
+    use Sluggable, FullTextSearch, Taggable;
 
     protected $fillable = [
         'name', 'price', 'photo', 'quantity', 'description'
