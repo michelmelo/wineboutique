@@ -11,8 +11,16 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Styles -->
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<!-- Scripts -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+    
+    <!-- Scripts -->
+
+    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+    
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
