@@ -3,12 +3,8 @@
 @section('content')
 <div class="container">
     
-<<<<<<< HEAD
-    <div class="row padding-row add-new-wine margin-row">
-=======
     <form method="POST" action="{{ route('add-new-wine.store') }}" class="row padding-row add-new-wine">
         @csrf
->>>>>>> 4b034a54251ce593d33e0a446580910d575e4bbf
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
