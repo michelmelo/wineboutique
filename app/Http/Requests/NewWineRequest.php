@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class NewWineRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'max:192'],
+            'price' => ['required', 'numeric'],
+            'description' => ['required'],
+            'who_made_it' => ['required'],
+            'when_was_it_made' => ['required'],
+            'capacity' => ['required', 'numeric'],
+            'unit_id' => ['required', 'exists:capacity_units,id'],
+            'photo' => ['image'],
+            'varietal' => ['required', 'exists:varietals,id'],
+            // 'shipping' => ['array'],
+            // 'shipping.*.location' => ['required', 'exists:regions,id'],
+            // 'shipping.*.from' => ['required', 'numeric'],
+            // 'shipping.*.to' => ['required', 'numeric'],
+            // 'shipping.*.day_week' => ['required', 'boolean'],
+            // 'shipping.*.free' => ['boolean'],
+            // 'shipping.*.destination' => ['exists:regions,id'],
+            // 'shipping.*.price' => ['numeric'],
+            // 'shipping.*.additional' => ['numeric']
+        ]; 
+    }
+}

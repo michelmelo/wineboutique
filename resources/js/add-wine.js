@@ -60,7 +60,7 @@ Dropzone.options.photos = {
         }
     },
     init: function() {
-        if(preloadedImages) {
+        if(typeof preloadedImages !== "undefined") {
             const thisDropzone = this;
 
             preloadedImages.forEach(preloadedImage => {

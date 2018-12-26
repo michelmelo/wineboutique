@@ -13,13 +13,23 @@ class Wine extends Model
     use Sluggable, FullTextSearch, Taggable;
 
     protected $fillable = [
-        'name', 'price', 'photo', 'quantity', 'description'
+        'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id'
     ];
 
     protected $searchable = [
         'name',
         'description'
     ];
+
+    public function wineShippings()
+    {
+        return $this->hasMany(WineShipping::class);
+    }
+
+    public function capacityUnit()
+    {
+        return $this->belongsTo(CapacityUnit::class);
+    }
 
     public function winery()
     {
