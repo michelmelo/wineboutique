@@ -82,6 +82,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('my_favorites', 'UsersController@myFavorites');
 
-    Route::resource('/add-new-wine', 'AddNewWineController');
+    Route::resource('/add-new-wine', 'AddNewWineController')->except(['show']);
 
+
+    Route::get('my_winery', 'MyWineryController@index')->name('my-winery');
 });

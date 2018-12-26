@@ -116,4 +116,84 @@ class AddNewWineController extends Controller
 
     }
 
+    public function edit(Wine $wine)
+    {
+        // $preloadedImages = $wine->portfolioImages->map(function($item, $key) {
+        //     return [
+        //         'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
+        //         'id' => $item->id,
+        //         'size' => Storage::size('public/' . $item->source)
+        //     ];
+        // });
+
+        return view('edit-wine', [
+            'wine' => $wine,
+            // 'preloadedImages' => $preloadedImages,
+            'wines' => Wine::all(),
+            'varietals' => Varietal::all(),
+            'regions' => Region::all(),
+            // 'tags' => Tag::all(),
+            'wine_shippings' => WineShipping::all(),
+            'capacity_units' => CapacityUnit::all()
+        ]);
+    }
+
+    public function update(NewWineRequest $request, Wine $wine)
+    {
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id']);
+
+        if($request->hasFile('photo')) {
+            $request->file('photo')->move(storage_path() . '/app/public/images', $photo = uniqid(true) . '.jpg');
+            $path = storage_path() . '/app/public/images/' . $photo;
+            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+                $c->upsize();
+            })->save();
+            $data['photo'] = $photo;
+        }
+
+        $wine->update($data);
+
+        $wine = new Wine;
+        $wine->fill($data);
+        $wine->varietal()->associate($request->varietal);
+        // $wine->region()->associate($request->region);
+        $wine->winery()->associate(Auth::user()->winery);
+        
+        $wine->save();
+
+        foreach($request->get("shipping") as $shippingItem) {
+            $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
+            if(!isset($shippingItem['free'])) $shippingItem['free'] = false;
+            if($shippingItem['free'] === 'on') $shippingItem['free'] = true;
+            $shippingTest = $wine->wineShippings()->create($shippingItem);
+            // dd($shippingTest);
+        }
+
+        $images = [];
+
+        if($request->has('images')) {
+            $images = $request->images;
+        }
+
+        WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
+        $wineImages = WineImage::whereIn("id", $images)->get();
+
+        foreach($wineImages as $wineImage) {
+            $wineImage->update([]);
+        }
+
+        return redirect()->route('add-new-wine.index');
+
+    }
+
+    public function destroy($id)
+    {
+        // delete
+        $wine = Wine::find($id);
+        $wine->delete();
+
+        return redirect('my_winery');
+    
+    }
+
 }

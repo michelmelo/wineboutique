@@ -62,6 +62,9 @@
                     <li class="nav-item col">
                         <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
                     </li>
+                    <li class="nav-item col">
+                        <a class="nav-link" href="{{route('my-winery')}}">My Winery </a>
+                    </li>
                     @if(Auth::guest())
                         <li class="nav-item col">
                             <a class="nav-link" href="{{route('register')}}">Create an account</a>
