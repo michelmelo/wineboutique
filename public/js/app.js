@@ -53040,7 +53040,7 @@ Dropzone.options.photos = {
         return removedfile;
     }(),
     init: function init() {
-        if (preloadedImages) {
+        if (typeof preloadedImages !== "undefined") {
             var thisDropzone = this;
 
             preloadedImages.forEach(function (preloadedImage) {

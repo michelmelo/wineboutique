@@ -2,8 +2,10 @@
 
 @section('content')
 <div class="container">
-    
-    <form method="POST" action="{{ route('add-new-wine.store') }}" class="row padding-row add-new-wine">
+    <!-- @php
+        var_dump($errors);
+    @endphp -->
+    <form method="POST" action="{{ route('add-new-wine.store') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
@@ -29,7 +31,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name">
+                        <input type="text" name="name" id="name" placeholder="Title name" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -43,24 +45,24 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" name="who-made-it" placeholder="Who made it?">
-                        @if($errors->has('who-made-it'))
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
+                        @if($errors->has('who_made_it'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('who-made-it') }}</strong>
+                                <strong>{{ $errors->first('who_made_it') }}</strong>
                             </span>
                         @endif
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <select id="year" name="year">
+                        <select id="when_was_it_made" name="when_was_it_made">
                         <option>When was it made?</option>
                             @for ($i = 2018; $i >= 1900; $i--)
                                 <option value="{{ $i }}">{{ $i }}</option>
                             @endfor
                         </select>
-                        @if($errors->has('year'))
+                        @if($errors->has('when_was_it_made'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('year') }}</strong>
+                                <strong>{{ $errors->first('when_was_it_made') }}</strong>
                             </span>
                         @endif                  
                     </div>
@@ -96,20 +98,24 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" name="who-made-it" placeholder="Enter a number">
+                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" required>
+                        @if($errors->has('capacity'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('capacity') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <select>
+                        <select name="unit_id" id="unit_id">
                             <option>Choose a unit</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            @foreach($capacity_units as $capacity_unit) 
+                                <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>
+                            @endforeach
                         </select>
-                        @if($errors->has('who-made-it'))
+                        @if($errors->has('capacity_unit'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('who-made-it') }}</strong>
+                                <strong>{{ $errors->first('capacity_unit') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -154,7 +160,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="text" name="price" class="usd-input">
+                            <input type="number" min="0" name="price" class="usd-input" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
@@ -173,13 +179,13 @@
             <h2>SHIPPING</h2>
 
             <div>
-                <div class="row form-inputs">
+                <div class="row form-inputs shipping-item-wrapper">
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="region" id="region">
+                        <select id="location" name="shipping[0][location]" class="location">
                             <option>Select location</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
@@ -197,51 +203,42 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="text" name="from" placeholder="From">
+                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required>
                     </div>
-                    @if($errors->has('from'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('from') }}</strong>
-                        </span>
-                    @endif
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="text" name="to" placeholder="To">
+                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required>
                     </div>
-                    @if($errors->has('to'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('to') }}</strong>
-                        </span>
-                    @endif
 
                     <div class="col-lg-2 col-sm-12 radio-check">
                         <label class="label-container">Business days
-                            <input type="radio" checked="checked" name="day-week">
+                            <input type="radio" checked="checked" name="shipping[0][day_week]" class="day_week" value="day">
                             <span class="checkmark"></span>
                         </label>
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
                         <label class="label-container">Weeks
-                            <input type="radio" name="day-week">
+                            <input type="radio" name="shipping[0][day_week]" class="day_week" value="week">
                             <span class="checkmark"></span>
                         </label>
                     </div>
-
+                    
                     <div class="col-lg-4 col-sm-12">
                         <p>Fixed shipping costs *</p>
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select>
+                        <select name="shipping[0][destination]" class="destination">
                             <option>Add a destination</option>
-                            <option>destination 1</option>
-                            <option>destination 2</option>
+                            @foreach($regions as $region)
+                                <option value="{{$region->id}}">{{$region->name}}</option>
+                            @endforeach
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-sm-12">
-                        <input type="text" name="one-item" class="usd-input" placeholder="One item">
+                    <div class="col-lg-2 col-sm-12 show_hide">
+                        <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  >
                         <div class="usd">USD</div>
                         @if($errors->has('one-item'))
                             <span class="help-block">
@@ -250,9 +247,9 @@
                         @endif
                     </div>
 
-                    <div class="col-lg-3 col-sm-12">
-                        <input type="text" name="each-additional" class="usd-input" placeholder="Each additional">
-                        <div class="usd">USD</div>
+                    <div class="col-lg-3 col-sm-12 show_hide">
+                        <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" >
+                        <div class="usd" >USD</div>
                         @if($errors->has('each-additional'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('each-additional') }}</strong>
@@ -263,26 +260,160 @@
                     <div class="col-lg-4 col-sm-12">
                         <p></p>
                     </div>
-
+                    
                     <div class="col-lg-8 col-sm-12">
-                        <input type="checkbox" id="checkbox3" class="css-checkbox" checked="checked"/>
-                        <label for="checkbox3" name="checkbox2_lbl" class="css-label lite-red-check">Free shipping</label>
-                        @if($errors->has('checkbox2_lbl'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('checkbox2_lbl') }}</strong>
-                            </span>
-                        @endif
+                        <input type="checkbox" name="shipping[0][free]" id="shipping_check_0" class="css-checkbox shipping-check"/>
+                        <label for="shipping_check_0" class="css-label lite-red-check">Free shipping</label>
                     </div>
                 </div>
+                <div id="field_wrapper" class=""></div>
             </div>
         </div>
         <div id="inputs" style="display: none;"></div>
         <div class="col-lg-12 col-sm-12" style="padding: 0;">
-            <button type="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
+            <button type="button" class="red-button button float-left" id="add_button">ADD SHIPPING</button>
+            <button type="submit" id="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
     </form>
-    @php
-   var_dump($errors);
-@endphp
+<!-- @php
+var_dump($errors);
+@endphp -->
 </div>
+<div id="shipping-template" style="display: none;">
+    <div class="shipping-item row form-inputs shipping-item-wrapper">
+        <div class="col-lg-4 col-sm-12">
+            <p>
+                <a href="#" class="remove_button">Remove</a>
+            </p>
+        </div>
+
+        <div class="col-lg-8 col-sm-12">
+            <select name="shipping[][location]" class="location">
+                <option>Select location</option>
+                @foreach($regions as $region)
+                    <option value="{{$region->id}}">{{$region->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <p></p>
+        </div>
+
+        <div class="col-lg-2 col-sm-12">
+            <input type="number" min="0" name="shipping[][from]"  placeholder="From" class="from">
+        </div>
+
+        <div class="col-lg-2 col-sm-12">
+            <input type="number" min="0" name="shipping[][to]"  placeholder="To" class="to">
+        </div>
+
+        <div class="col-lg-2 col-sm-12 radio-check">
+            <label class="label-container">Business days
+                <input type="radio" checked="checked" name="shipping[][day_week]" class="day_week" value="day">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <div class="col-lg-2 col-sm-12 radio-check">
+            <label class="label-container">Weeks
+                <input type="radio" name="shipping[][day_week]" class="day_week" value="week">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <p></p>
+        </div>
+
+        <div class="col-lg-3 col-sm-12">
+            <select  name="shipping[][destination]" class="destination">
+                <option>Add a destination</option>
+                @foreach($regions as $region)
+                    <option value="{{$region->id}}">{{$region->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-lg-2 col-sm-12 show_hide">
+            <input type="number" min="0"  name="shipping[][price]" class="usd-input price" placeholder="One item" >
+            <div class="usd">USD</div>
+        </div>
+
+        <div class="col-lg-3 col-sm-12 show_hide">
+            <input type="number" min="0"  name="shipping[][additional]" class="usd-input additional" placeholder="Each additional" >
+            <div class="usd" >USD</div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <p></p>
+        </div>
+        <div class="col-lg-8 col-sm-12">
+            <input type="checkbox" name="shipping[][free]" id="shipping_check_0" class="css-checkbox shipping-check"/>
+            <label for="shipping_check_0" class="css-label lite-red-check">Free shipping</label>
+        </div>
+
+        <!-- <button type="button" class="red-button button " id="remove_button">DELETE</button> -->
+    </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        var maxField = 10; 
+        var $addButton = $('#add_button'); 
+        var wrapper = $('#field_wrapper'); 
+        var fieldHTML = '<div><select><option>Add a destination</option></select><a href="#" class="remove_button">Remove</a>'; 
+        
+        //Once add button is clicked
+        $addButton.click(function() {
+            var count = $(".shipping-item").length;
+            if(count < maxField){ 
+                $(wrapper).append($("#shipping-template").html()); 
+            }
+
+            $("#field_wrapper .shipping-item").each(function(index, shippingItem) {
+                var shippingIndex = index + 1;
+
+                $(shippingItem).find("[name^='shipping']").each(function(inputIndex, shippingInput) {
+                    var $shippingInput = $(shippingInput);
+                    var name = $shippingInput.attr("name");
+
+                    name = name.replace(/shipping\[\d{0,}]/, "shipping["+shippingIndex+"]");
+
+                    $shippingInput.attr('name', name);
+                });
+
+                $(shippingItem).find("[id^='shipping_check_']").attr('id', 'shipping_check_'+shippingIndex);
+                $(shippingItem).find("[for^='shipping_check_']").attr('for', 'shipping_check_'+shippingIndex);
+            });
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e){
+            e.preventDefault();
+            $(this).closest(".shipping-item-wrapper").remove();          
+        });
+
+        $(document).on('change', '.shipping-check', function(e) {
+            $(e.target).closest(".shipping-item-wrapper").find('.show_hide').css(
+                e.target.checked ? {
+                    opacity: 0,
+                    visibility: "hidden"
+                } : {
+                    opacity: 1,
+                    visibility: "visible"
+                }
+            );
+        });
+
+        // $(".shipping-check").click(function () {
+        //     console.log(this);
+        //     // $(".show_hide").css({
+        //     //     opacity: 0,
+        //     //     visibility: "hidden"
+        //     // });
+        // });
+
+    });
+</script>
 @endsection

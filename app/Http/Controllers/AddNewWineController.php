@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PhotoRequest;
+use App\Http\Requests\NewWineRequest;
 use App\Varietal;
 use App\Wine;
 use App\WineImage;
 use App\Region;
 use Image;
 use Auth;
+use App\CapacityUnit;
+use App\WineShipping;
 
 class AddNewWineController extends Controller
 {
@@ -18,11 +21,18 @@ class AddNewWineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('seller');
+    }
+
     public function index()
     {
         return view('add-new-wine', [
             'varietals' => Varietal::all(),
             'regions' => Region::all(),
+            'capacity_units' => CapacityUnit::all(),
         ]);
     }
 
@@ -38,6 +48,7 @@ class AddNewWineController extends Controller
             'varietals' => Varietal::all(),
             'regions' => Region::all(),
             'tags' => Tag::all(),
+            'wine_shippings' => WineShipping::all(),
         ]);
     }
 
@@ -47,38 +58,39 @@ class AddNewWineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PhotoRequest $request)
+    public function store(NewWineRequest $request)
     {
-        $varietal = Varietal::where('id', $request->varietal)->firstOrFail();
-        $region = Region::where('id', $request->region)->firstOrFail();
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id']);
         
-        $data = [
-            'name'          => $request->name,
-            'price'       => $request->price,
-            // 'quantity'         => $request->quantity,
-            'description'       => $request->description,
-            // 'varietal_id'          => $request->varietal,
-            // 'region_id'         => $request->region,
-        ];
-
-        // $data = $request->only(['name', 'price', 'quantity', 'description', 'varietal', 'region']);
-
         if($request->hasFile('photo'))
         {
             $request->file('photo')->move(storage_path() . '/app/public/images', $photo = uniqid(true) . '.jpg');
-            $path = storage_path() . '/app/public/images' . $photo;
+            $path = storage_path() . '/app/public/images/' . $photo;
+            #dd($path);
             Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
                 $c->upsize();
             })->save();
             $data['photo'] = $photo;
         }
-
+        
+        // dd($data);
+        // dd($request->all());
+        
         $wine = new Wine;
         $wine->fill($data);
         $wine->varietal()->associate($request->varietal);
-        $wine->region()->associate($request->region);
+        // $wine->region()->associate($request->region);
+        $wine->winery()->associate(Auth::user()->winery);
+        
+        $wine->save();
 
-        $wine = Auth::user()->winery->wines()->save($wine);
+        foreach($request->get("shipping") as $shippingItem) {
+            $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
+            if(!isset($shippingItem['free'])) $shippingItem['free'] = false;
+            if($shippingItem['free'] === 'on') $shippingItem['free'] = true;
+            $shippingTest = $wine->wineShippings()->create($shippingItem);
+            // dd($shippingTest);
+        }
 
         $images = [];
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagWineTable extends Migration
+class AddWineIdToWineShippings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTagWineTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_wine', function (Blueprint $table) {
-            $table->integer('tag_id')->unsigned()->index();
-            $table->foreign('tag_id')->references('id')->on('wine_tags')->onDelete('cascade');
+        Schema::table('wine_shippings', function (Blueprint $table) {
+            $table->integer('wine_id')->unsigned();
 
-            $table->integer('wine_id')->unsigned()->index();
             $table->foreign('wine_id')->references('id')->on('wines')->onDelete('cascade');
         });
     }
@@ -29,6 +27,9 @@ class CreateTagWineTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_wine');
+        Schema::table('wine_shippings', function (Blueprint $table) {
+            $table->dropForeign(['wine_id']);
+            $table->dropColumn('wine_id');
+        });
     }
 }
