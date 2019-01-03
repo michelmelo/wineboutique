@@ -275,9 +275,6 @@
             <button type="submit" id="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
     </form>
-<!-- @php
-var_dump($errors);
-@endphp -->
 </div>
 <div id="shipping-template" style="display: none;">
     <div class="shipping-item row form-inputs shipping-item-wrapper">

@@ -17,21 +17,19 @@ class MyWineryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        $this->middleware('seller');
+    }
+
     public function index(Request $request)
     {
-
-
         return view('my-winery', [
             'varietals' => Varietal::all(),
             'regions' => Region::all(),
             'capacity_units' => CapacityUnit::all(),
-            'wines' =>$request->user()->winery->wines,
-            'wine_shippings' => WineShipping::all(),
-            
-            
+            'wines' => $request->user()->winery->wines,
+            'wine_shippings' => WineShipping::all(),            
         ]);
-
-    
     }
-
 }

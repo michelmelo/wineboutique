@@ -118,22 +118,24 @@ class AddNewWineController extends Controller
 
     public function edit(Wine $wine)
     {
-        // $preloadedImages = $wine->portfolioImages->map(function($item, $key) {
+
+       # dd($wine);
+        // $preloadedImages = $wine->wineImages->map(function($item, $key) {
         //     return [
         //         'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
         //         'id' => $item->id,
         //         'size' => Storage::size('public/' . $item->source)
         //     ];
         // });
-
+        #dd($wine->name);
         return view('edit-wine', [
             'wine' => $wine,
             // 'preloadedImages' => $preloadedImages,
-            'wines' => Wine::all(),
+            // 'wines' => Wine::all(),
             'varietals' => Varietal::all(),
             'regions' => Region::all(),
             // 'tags' => Tag::all(),
-            'wine_shippings' => WineShipping::all(),
+            //'wine_shippings' => WineShipping::all(),
             'capacity_units' => CapacityUnit::all()
         ]);
     }
@@ -151,10 +153,10 @@ class AddNewWineController extends Controller
             $data['photo'] = $photo;
         }
 
-        $wine->update($data);
+        // dd($request->all());
 
-        $wine = new Wine;
-        $wine->fill($data);
+        // $wine = new Wine;
+        $wine->update($data);
         $wine->varietal()->associate($request->varietal);
         // $wine->region()->associate($request->region);
         $wine->winery()->associate(Auth::user()->winery);
@@ -165,7 +167,17 @@ class AddNewWineController extends Controller
             $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
             if(!isset($shippingItem['free'])) $shippingItem['free'] = false;
             if($shippingItem['free'] === 'on') $shippingItem['free'] = true;
-            $shippingTest = $wine->wineShippings()->create($shippingItem);
+            $wineShippingData = [
+                'location' => $shippingItem["location"],
+                'from' => $shippingItem["from"],
+                'to' => $shippingItem["to"],
+                'day_week' => $shippingItem["day_week"],
+                'destination' => $shippingItem["destination"],
+                'price' => $shippingItem["price"],
+                'additional' => $shippingItem["additional"],
+                'free' => $shippingItem["free"]
+            ];
+            $shippingTest = $wine->wineShippings()->where('id', $shippingItem["id"])->update($wineShippingData);
             // dd($shippingTest);
         }
 
@@ -182,7 +194,11 @@ class AddNewWineController extends Controller
             $wineImage->update([]);
         }
 
-        return redirect()->route('add-new-wine.index');
+        $tags = explode(",", $request->tags);
+
+        $wine->tag($tags);
+
+        return redirect('my_winery');
 
     }
 
