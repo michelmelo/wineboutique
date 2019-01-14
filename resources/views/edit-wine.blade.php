@@ -5,8 +5,9 @@
     <!-- @php
         var_dump($errors);
     @endphp -->
-    <form method="POST" action="{{ route('add-new-wine.store') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('add-new-wine.update', $wine->slug) }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
@@ -18,20 +19,22 @@
                 <div class="fallback">
                 </div>
             </div>
+            <script>
+                var preloadedImages = {!! $preloadedImages->toJson() !!};
+            </script>
         </div>
-      
 
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
-            
             <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
                         <p>Wine title *</p>
                     </div>
+                    <input type="hidden" name="id" value="{{ old('id') ? old('id') : $wine->id }}" />
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" required>
+                        <input type="text" name="name" id="name" placeholder="Title name" value="{{ old('name') ? old('name') : $wine->name }}" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -45,7 +48,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" value="{{ old('who_made_it') ? old('who-made-it') : $wine->who_made_it }}" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -54,10 +57,13 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
+                        @php
+                            $when_was_it_made = old('when_was_it_made', $wine->when_was_it_made);
+                        @endphp
                         <select id="when_was_it_made" name="when_was_it_made">
                         <option>When was it made?</option>
                             @for ($i = 2019; $i >= 1900; $i--)
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                <option value="{{ $i }}" {{$i==$when_was_it_made?"selected":""}}>{{ $i }}</option>
                             @endfor
                         </select>
                         @if($errors->has('when_was_it_made'))
@@ -72,10 +78,13 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
+                        @php
+                            $varietal_id = old('varietal', $wine->varietal_id);
+                        @endphp
                         <select name="varietal" id="varietal">
                             <option value="">Varietal</option>
                             @foreach($varietals as $varietal) 
-                                <option value="{{$varietal->id}}">{{$varietal->name}}</option>
+                                <option value="{{$varietal->id}}" {{$varietal->id==$varietal_id?"selected":""}}>{{ $varietal->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('varietal'))
@@ -85,20 +94,12 @@
                         @endif
                     </div>
 
-                    <!-- <div class="col-lg-4 col-sm-12">
-                        <select>
-                            <option>Type of wine</option>
-                            <option>Type of wine 1</option>
-                            <option>Type of wine 2</option>
-                        </select>
-                    </div> -->
-
                     <div class="col-lg-4 col-sm-12">
                         <p>Capacity *</p>
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" required>
+                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" value="{{ old('capacity') ? old('capacity') : $wine->capacity }}" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -107,10 +108,13 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
+                        @php
+                            $unit_id = old('unit_id', $wine->unit_id);
+                        @endphp
                         <select name="unit_id" id="unit_id">
                             <option>Choose a unit</option>
                             @foreach($capacity_units as $capacity_unit) 
-                                <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>
+                                <option value="{{$capacity_unit->id}}" {{$capacity_unit->id==$unit_id?"selected":""}}>{{$capacity_unit->name}}</option>
                             @endforeach
                         </select>
                         @if($errors->has('capacity_unit'))
@@ -124,7 +128,7 @@
                         <p>Description *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <textarea id="description" type="text" name="description" placeholder="Add text"></textarea>
+                        <textarea id="description" type="text" name="description" placeholder="Add text" >{{ old('description') ? old('description') : $wine->description }} </textarea>
                         @if($errors->has('description'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('description') }}</strong>
@@ -136,7 +140,8 @@
                         <p>Tags <span>Optional</span></p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <input data-role="tagsinput" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc.">
+                        <input data-role="tagsinput" id="tags" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." value="{{ $wine->tags->pluck('name')->implode(',') }}">
+                       
                         @if($errors->has('tags'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('tags') }}</strong>
@@ -160,7 +165,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="0" name="price" class="usd-input" required>
+                            <input type="number" min="0" name="price" class="usd-input" value="{{ old('price') ? old('price') : $wine->price }}" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
@@ -183,12 +188,16 @@
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
+                    <input type="hidden" name="shipping[0][id]" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->id : '' }}" />
 
                     <div class="col-lg-8 col-sm-12">
+                        @php
+                            $location = old('location', $wine->wineShippings[0]->location);
+                        @endphp
                         <select id="location" name="shipping[0][location]" class="location">
                             <option>Select location</option>
                             @foreach($regions as $region)
-                                <option value="{{$region->id}}">{{$region->name}}</option>
+                                <option value="{{$region->id}}" {{$region->id==$location?"selected":""}}>{{$region->name}}</option>
                             @endforeach
                         </select>
                         @if($errors->has('region'))
@@ -203,23 +212,23 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required>
+                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->from : '' }}" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required>
+                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" value="{{  isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->to : '' }}" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
                         <label class="label-container">Business days
-                            <input type="radio" checked="checked" name="shipping[0][day_week]" class="day_week" value="day">
+                            <input type="radio" checked="checked" name="shipping[0][day_week]" class="day_week" value="day" {{ (old('day_week') == 'day') ? 'checked' : '' }}>
                             <span class="checkmark"></span>
                         </label>
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
                         <label class="label-container">Weeks
-                            <input type="radio" name="shipping[0][day_week]" class="day_week" value="week">
+                            <input type="radio" name="shipping[0][day_week]" class="day_week" value="week" {{ (old('day_week') == 'day') ? 'checked' : '' }}>
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -229,16 +238,19 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select name="shipping[0][destination]" class="destination">
+                        @php
+                            $destination = old('destination', $wine->wineShippings[0]->destination);
+                        @endphp
+                        <select name="shipping[0][destination]" class="destination" >
                             <option>Add a destination</option>
                             @foreach($regions as $region)
-                                <option value="{{$region->id}}">{{$region->name}}</option>
+                                <option value="{{$region->id}}" {{$region->id==$destination?"selected":""}}>{{$region->name}}</option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-sm-12 show_hide">
-                        <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  >
+                    <div class="col-lg-2 col-sm-12 show_hide" style="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->free : '' ? 'opacity: 0; visibility: hidden;' : ''}}">
+                        <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->price : '' }}" >
                         <div class="usd">USD</div>
                         @if($errors->has('one-item'))
                             <span class="help-block">
@@ -247,8 +259,8 @@
                         @endif
                     </div>
 
-                    <div class="col-lg-3 col-sm-12 show_hide">
-                        <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" >
+                    <div class="col-lg-3 col-sm-12 show_hide" style="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->free : '' ? 'opacity: 0; visibility: hidden;' : ''}}">
+                        <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->additional : '' }}" >
                         <div class="usd" >USD</div>
                         @if($errors->has('each-additional'))
                             <span class="help-block">
@@ -262,11 +274,101 @@
                     </div>
                     
                     <div class="col-lg-8 col-sm-12">
-                        <input type="checkbox" name="shipping[0][free]" id="shipping_check_0" class="css-checkbox shipping-check"/>
+                        <input type="checkbox" name="shipping[0][free]" id="shipping_check_0" class="css-checkbox shipping-check" {{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->free : ''  ? 'checked' : ( $wine->free ? 'checked' : '' ) }}/>
                         <label for="shipping_check_0" class="css-label lite-red-check">Free shipping</label>
                     </div>
                 </div>
-                <div id="field_wrapper" class=""></div>
+                <div id="field_wrapper" class="">
+                    @if(count($wine->wineShippings) > 1)
+                    @foreach($wine->wineShippings as $index => $wineShipping)
+                        @php
+                            if($index===0) continue;
+                        @endphp
+
+                        <div class="shipping-item row form-inputs shipping-item-wrapper">
+                            <div class="col-lg-4 col-sm-12">
+                                <p>
+                                    <a href="#" class="remove_button">Remove</a>
+                                </p>
+                            </div>
+
+                            <input type="hidden" name="shipping[{{$index}}][id]" value="{{$wineShipping->id}}" />
+                            <div class="col-lg-8 col-sm-12">
+                                @php
+                                    $location = old('location', $wineShipping->location);
+                                @endphp
+                                <select name="shipping[{{$index}}][location]" class="location">
+                                    <option>Select location</option>
+                                    @foreach($regions as $region)
+                                        <option value="{{$region->id}}" {{$region->id==$location?"selected":""}}>{{$region->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 col-sm-12">
+                                <p></p>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-12">
+                                <input type="number" min="0" name="shipping[{{$index}}][from]"  placeholder="From" class="from" value="{{ $wineShipping->from }}">
+                            </div>
+
+                            <div class="col-lg-2 col-sm-12">
+                                <input type="number" min="0" name="shipping[{{$index}}][to]"  placeholder="To" class="to" value="{{ $wineShipping->to}}">
+                            </div>
+
+                            <div class="col-lg-2 col-sm-12 radio-check">
+                                <label class="label-container">Business days
+                                    <input type="radio" checked="checked" name="shipping[{{$index}}][day_week]" class="day_week" value="day" {{ $wineShipping->day_week == 'day' ? 'checked' : '' }}>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-12 radio-check">
+                                <label class="label-container">Weeks
+                                    <input type="radio" name="shipping[{{$index}}][day_week]" class="day_week" value="week" {{ $wineShipping->day_week == 'day' ? 'checked' : '' }}>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                            <div class="col-lg-4 col-sm-12">
+                                <p></p>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-12">
+                                @php
+                                    $destination = old('destination', $wineShipping->destination);
+                                @endphp
+                                <select  name="shipping[{{$index}}][destination]" class="destination" value="{{ $wineShipping->destination }}">
+                                    <option>Add a destination</option>
+                                    @foreach($regions as $region)
+                                        <option value="{{$region->id}}" {{$region->id==$destination?"selected":""}}>{{$region->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-12 show_hide" style="{{ $wineShipping->free ? 'opacity: 0; visibility: hidden;' : ''}}">
+                                <input type="number" min="0"  name="shipping[{{$index}}][price]" class="usd-input price" placeholder="One item" value="{{ $wineShipping->price }}">
+                                <div class="usd">USD</div>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-12 show_hide" style="{{ $wineShipping->free ? 'opacity: 0; visibility: hidden;' : ''}}">
+                                <input type="number" min="0"  name="shipping[{{$index}}][additional]" class="usd-input additional" placeholder="Each additional" value="{{ $wineShipping->additional}}">
+                                <div class="usd" >USD</div>
+                            </div>
+                            <div class="col-lg-4 col-sm-12">
+                                <p></p>
+                            </div>
+                            <div class="col-lg-8 col-sm-12">
+                                <input type="checkbox" name="shipping[{{$index}}][free]" id="shipping_check_{{$index}}" class="css-checkbox shipping-check" {{ $wineShipping->free  ? 'checked' : ( $wine->free ? 'checked' : '' ) }}/>
+                                <label for="shipping_check_{{$index}}" class="css-label lite-red-check">Free shipping</label>
+                            </div>
+
+                            <!-- <button type="button" class="red-button button " id="remove_button">DELETE</button> -->
+                        </div>
+                    @endforeach
+                    @endif
+                </div>
             </div>
         </div>
         <div id="inputs" style="display: none;"></div>
@@ -288,7 +390,7 @@
             <select name="shipping[][location]" class="location">
                 <option>Select location</option>
                 @foreach($regions as $region)
-                    <option value="{{$region->id}}">{{$region->name}}</option>
+                    <option value="{{$region->id}}" >{{$region->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -298,16 +400,16 @@
         </div>
 
         <div class="col-lg-2 col-sm-12">
-            <input type="number" min="0" name="shipping[][from]"  placeholder="From" class="from">
+            <input type="number" min="0" name="shipping[][from]"  placeholder="From" class="from" >
         </div>
 
         <div class="col-lg-2 col-sm-12">
-            <input type="number" min="0" name="shipping[][to]"  placeholder="To" class="to">
+            <input type="number" min="0" name="shipping[][to]"  placeholder="To" class="to" >
         </div>
 
         <div class="col-lg-2 col-sm-12 radio-check">
             <label class="label-container">Business days
-                <input type="radio" checked="checked" name="shipping[][day_week]" class="day_week" value="day">
+                <input type="radio" checked="checked" name="shipping[][day_week]" class="day_week" value="day" >
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -324,7 +426,7 @@
         </div>
 
         <div class="col-lg-3 col-sm-12">
-            <select  name="shipping[][destination]" class="destination">
+            <select  name="shipping[][destination]" class="destination" >
                 <option>Add a destination</option>
                 @foreach($regions as $region)
                     <option value="{{$region->id}}">{{$region->name}}</option>
@@ -356,6 +458,18 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#tags').on('beforeItemRemove', function(event) {
+            var tag = event.item;
+
+            if (!event.options || !event.options.preventPost) {
+                $.ajax('/add-new-wine', ajaxData, function(response) {
+                    if (response.failure) {
+                        $('#tags').tagsinput('add', tag, {preventPost: true});
+                    }
+                });
+            }
+        });
+
         var maxField = 10; 
         var $addButton = $('#add_button'); 
         var wrapper = $('#field_wrapper'); 
@@ -388,7 +502,7 @@
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button', function(e){
             e.preventDefault();
-            $(this).closest(".shipping-item-wrapper").remove();          
+            $(this).closest(".shipping-item-wrapper").remove();
         });
 
         $(document).on('change', '.shipping-check', function(e) {
@@ -402,15 +516,6 @@
                 }
             );
         });
-
-        // $(".shipping-check").click(function () {
-        //     console.log(this);
-        //     // $(".show_hide").css({
-        //     //     opacity: 0,
-        //     //     visibility: "hidden"
-        //     // });
-        // });
-
     });
 </script>
 @endsection

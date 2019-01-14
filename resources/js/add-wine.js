@@ -72,15 +72,13 @@ Dropzone.options.photos = {
                 }; 
 
                 thisDropzone.emit("addedfile", mockFile);
-                thisDropzone.emit("photo", mockFile, preloadedImage.path);
+                thisDropzone.emit("thumbnail", mockFile, preloadedImage.path);
                 thisDropzone.emit("complete", mockFile);
                 thisDropzone.files.push(mockFile);
                 $(`img[src='${preloadedImage.path}']`)
                     .closest(".dz-preview")
                     .attr("data-id", preloadedImage.id);
             });
-
-            console.log(preloadedImages);
         }
     }
 };

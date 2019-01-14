@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Conner\Tagging\Taggable;
+use Event;
 
 class Wine extends Model
 {
@@ -13,7 +14,7 @@ class Wine extends Model
     use Sluggable, FullTextSearch, Taggable;
 
     protected $fillable = [
-        'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id'
+        'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'average_rating'
     ];
 
     protected $searchable = [
@@ -101,11 +102,15 @@ class Wine extends Model
     public function rate($rating)
     {
         if($this->rated()) {
-            WineRating::where('user_id', Auth::id())
-                ->where('wine_id', $this->id)
-                ->update(['rating' => $rating]);
+            $wineRating = WineRating::where('user_id', Auth::id())->where('wine_id', $this->id)->first();
+            $wineRating->rating = $rating;
+            $wineRating->save();
         } else {
-            Auth::user()->winesRating()->attach($this->id, ['rating' => $rating]);
+            $wineRating = new WineRating;
+            $wineRating->rating = $rating;
+            $wineRating->wine()->associate($this);
+            $wineRating->user()->associate(Auth::user());
+            $wineRating->save();
         }
     }
 
@@ -118,4 +123,13 @@ class Wine extends Model
     {
         return $this->hasMany(WineImage::class);
     }
+
+    public function calculateAverageRating()
+    {
+        $averageRating = WineRating::where('wine_id', $this->id)->avg('rating');
+        $this->average_rating = $averageRating;
+
+        $this->save();
+    }
+    
 }

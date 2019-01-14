@@ -43,7 +43,13 @@
                 @else
                     <a href="{{route('login')}}" class="button pink-button full-width">ADD TO CART</a>
                 @endif
-                <a href="#" class="button red-button full-width">BUY NOW</a>
+                
+                @if(Auth::check())
+                    <buy-now wine-id="{{$wine->id}}"></buy-now>
+                @else
+                    <a href="{{route('login')}}" class="button red-button full-width">BUY NOW</a>
+                @endif
+               
             </div>
         </div>
     </div>
