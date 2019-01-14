@@ -30797,7 +30797,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(143);
-module.exports = __webpack_require__(235);
+module.exports = __webpack_require__(238);
 
 
 /***/ }),
@@ -30842,6 +30842,7 @@ Vue.component('star-rating', StarRating.default);
 Vue.component('cart', __webpack_require__(141));
 Vue.component('add-to-cart', __webpack_require__(229));
 Vue.component('checkout-form', __webpack_require__(232));
+Vue.component('buy-now', __webpack_require__(235));
 
 var app = new Vue({
     el: '#app'
@@ -53052,13 +53053,11 @@ Dropzone.options.photos = {
                 };
 
                 thisDropzone.emit("addedfile", mockFile);
-                thisDropzone.emit("photo", mockFile, preloadedImage.path);
+                thisDropzone.emit("thumbnail", mockFile, preloadedImage.path);
                 thisDropzone.emit("complete", mockFile);
                 thisDropzone.files.push(mockFile);
                 $('img[src=\'' + preloadedImage.path + '\']').closest(".dz-preview").attr("data-id", preloadedImage.id);
             });
-
-            console.log(preloadedImages);
         }
     }
 };
@@ -77617,6 +77616,116 @@ if (false) {
 
 /***/ }),
 /* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(236)
+/* template */
+var __vue_template__ = __webpack_require__(237)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/BuyNow.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-84d256ca", Component.options)
+  } else {
+    hotAPI.reload("data-v-84d256ca", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 236 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['wineId'],
+    methods: {
+        addToCart: function addToCart() {
+            axios.post('/cart', {
+                wines: [{
+                    id: this.wineId,
+                    quantity: 1
+                }]
+            }).then(function (response) {
+                $('.item-in-cart').text(response.data.wines.length);
+            }).catch(function (response) {
+                return console.log(response.data);
+            });
+            window.location.href = '/checkout';
+        }
+    }
+});
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      staticClass: "button red-button full-width",
+      attrs: { href: _vm.checkout },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          _vm.addToCart()
+        }
+      }
+    },
+    [_vm._v("BUY NOW")]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-84d256ca", module.exports)
+  }
+}
+
+/***/ }),
+/* 238 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

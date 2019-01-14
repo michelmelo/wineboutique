@@ -19,6 +19,9 @@
                 <div class="fallback">
                 </div>
             </div>
+            <script>
+                var preloadedImages = {!! $preloadedImages->toJson() !!};
+            </script>
         </div>
 
         <div class="shadow-box row details">
@@ -59,7 +62,7 @@
                         @endphp
                         <select id="when_was_it_made" name="when_was_it_made">
                         <option>When was it made?</option>
-                            @for ($i = 2018; $i >= 1900; $i--)
+                            @for ($i = 2019; $i >= 1900; $i--)
                                 <option value="{{ $i }}" {{$i==$when_was_it_made?"selected":""}}>{{ $i }}</option>
                             @endfor
                         </select>
@@ -137,9 +140,7 @@
                         <p>Tags <span>Optional</span></p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        @foreach($wine->tags as $tag)
-                        <input data-role="tagsinput" id="tags" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." value="{{ old('$tag') ? old('$tag') : $tag->name }}">
-                        @endforeach
+                        <input data-role="tagsinput" id="tags" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." value="{{ $wine->tags->pluck('name')->implode(',') }}">
                        
                         @if($errors->has('tags'))
                             <span class="help-block">
@@ -457,6 +458,18 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#tags').on('beforeItemRemove', function(event) {
+            var tag = event.item;
+
+            if (!event.options || !event.options.preventPost) {
+                $.ajax('/add-new-wine', ajaxData, function(response) {
+                    if (response.failure) {
+                        $('#tags').tagsinput('add', tag, {preventPost: true});
+                    }
+                });
+            }
+        });
+
         var maxField = 10; 
         var $addButton = $('#add_button'); 
         var wrapper = $('#field_wrapper'); 
@@ -489,7 +502,7 @@
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button', function(e){
             e.preventDefault();
-            $(this).closest(".shipping-item-wrapper").remove();          
+            $(this).closest(".shipping-item-wrapper").remove();
         });
 
         $(document).on('change', '.shipping-check', function(e) {

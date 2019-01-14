@@ -13,6 +13,8 @@ use Image;
 use Auth;
 use App\CapacityUnit;
 use App\WineShipping;
+use Storage;
+use App\Tag;
 
 class AddNewWineController extends Controller
 {
@@ -120,17 +122,17 @@ class AddNewWineController extends Controller
     {
 
        # dd($wine);
-        // $preloadedImages = $wine->wineImages->map(function($item, $key) {
-        //     return [
-        //         'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
-        //         'id' => $item->id,
-        //         'size' => Storage::size('public/' . $item->source)
-        //     ];
-        // });
+        $preloadedImages = $wine->wineImages->map(function($item, $key) {
+            return [
+                'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
+                'id' => $item->id,
+                'size' => Storage::size('public/images/' . $item->source)
+            ];
+        });
         #dd($wine->name);
         return view('edit-wine', [
             'wine' => $wine,
-            // 'preloadedImages' => $preloadedImages,
+            'preloadedImages' => $preloadedImages,
             // 'wines' => Wine::all(),
             'varietals' => Varietal::all(),
             'regions' => Region::all(),
@@ -167,6 +169,8 @@ class AddNewWineController extends Controller
             $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
             if(!isset($shippingItem['free'])) $shippingItem['free'] = false;
             if($shippingItem['free'] === 'on') $shippingItem['free'] = true;
+            if($shippingItem['free'] === true) $shippingItem['price'] = null;
+            if($shippingItem['free'] === true) $shippingItem['additional'] = null;
             $wineShippingData = [
                 'location' => $shippingItem["location"],
                 'from' => $shippingItem["from"],
@@ -187,6 +191,10 @@ class AddNewWineController extends Controller
             $images = $request->images;
         }
 
+        if($request->has('delete_images')) {
+            WineImage::destroy($request->delete_images);
+        }
+
         WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
         $wineImages = WineImage::whereIn("id", $images)->get();
 
@@ -195,9 +203,8 @@ class AddNewWineController extends Controller
         }
 
         $tags = explode(",", $request->tags);
-
-        $wine->tag($tags);
-
+        $wine->retag($tags);
+        
         return redirect('my_winery');
 
     }

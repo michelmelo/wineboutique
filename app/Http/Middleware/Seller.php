@@ -20,6 +20,6 @@ class Seller
             return $next($request);
         }
 
-        return redirect('/');
+        return redirect('/')->with('error','You are not a seller!');
     }
 }
