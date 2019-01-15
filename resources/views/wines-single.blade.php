@@ -5,7 +5,7 @@
     <div class="row padding-row">
         <div class="col-lg-6 col-sm-12 preview">
             <div class="preview-pic tab-content single-wine-img">
-                <div class="tab-pane active" id="pic-1"><img src="{{asset('img/single-1.png')}}" /></div>
+                <div class="tab-pane active" id="pic-1"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
                 <div class="tab-pane" id="pic-2"><img src="{{asset('img/single-2.png')}}" /></div>
                 <div class="tab-pane" id="pic-3"><img src="{{asset('img/single-2.png')}}" /></div>
                 <favorite

@@ -20,7 +20,7 @@
 
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
-    
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
