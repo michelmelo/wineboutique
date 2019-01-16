@@ -32,6 +32,7 @@ Route::get('/winery/{winery}', 'WineryController@show')->name('winery');
 
 Route::get('/wines', 'WineController@list')->name('wine.list');
 Route::get('/wine/{wine}', 'WineController@show')->name('wine.show');
+Route::get('/wines/top-rated', 'WineController@topRated')->name('wine.rating');
 
 Route::get('/search', 'SearchController@search')->name('search');
 

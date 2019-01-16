@@ -136,7 +136,10 @@
                         <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
                             <div  class="row">
                                 <div class="col-md-6">
-                                    <img src="{{asset('img/vine-style-2-img.PNG')}}">
+                                <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
+                                
+                                    <img src="{{ route('images.wine', ['slug' => $latestWine->slug . '.jpg']) }}" >
+                                
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="name">{{$latestWine->name}}</h5>
@@ -154,28 +157,30 @@
 
     <div class="row padding-row row-eq-height">
         <h2 class="heading">TOP RATED WINES</h2>
-        @foreach($topWines as $topWine)
+        @foreach($wines as $wine)
             <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-                <a href="{{route('wine.show', ['wine' => $topWine->slug])}}">
+                <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-container">
-                        <img src="{{'/storage/images/wines/' . $topWine->photo}}">
+                        <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
+                        <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
                         <div class="overlay"></div>
                         <favorite
-                                :post="'{{ $topWine->slug }}'"
-                                :favorited="{{ $topWine->favorited==1 ? 'true' : 'false' }}"
+                                :post="'{{ $wine->slug }}'"
+                                :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                                 :type="'wine'"
                         ></favorite>
                     </div>
-                    <h5>{{$topWine->name}}</h5>
-                    <h4>${{$topWine->price}}</h4>
+                    <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
+                    <h4>${{$wine->price}}</h4>
                     <div class="star-rating">
-                        <star-rating :star-size="20" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$topWine->rating}}"></star-rating>
+                        <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                     </div>
                     <span class="order-q">0 Orders</span>
                 </a>
             </div>
         @endforeach
-            <a href="/wines" class="button red-button margin-0-auto">SEE MORE</a>
+
+        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
     </div>
 
     <div class="row padding-row center-text secure-section">

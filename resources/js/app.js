@@ -2,6 +2,7 @@ require('./bootstrap');
 require('./main');
 require('./add-wine');
 require('jquery-ui');
+require('./vendor/jquery.cookie/jquery.cookie');
 window.Vue = require('vue');
 window.Vuelidate = require('vuelidate').default;
 window.Vue2Filters = require('vue2-filters');

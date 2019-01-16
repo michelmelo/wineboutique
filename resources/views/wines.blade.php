@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     <span class="accordion-name">VARIETAL</span>
                                     <i class="fas fa-chevron-down"></i>
                                     <i class="fas fa-chevron-up"></i>
@@ -22,7 +22,7 @@
                             </h5>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 @foreach ($varietals as $varietal)
                                     @php
@@ -90,7 +90,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                         <div class="image-container">
-                            <img src="{{$wine->getPhotoLink()}}">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
                             <div class="overlay"></div>
                             <favorite
                                     :post="'{{ $wine->slug }}'"
@@ -114,4 +114,26 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function () {
+        //when a group is shown, save it as the active accordion group
+        $("#accordion").on('shown.bs.collapse', function () {
+            var active = $("#accordion .show").attr('id');
+            $.cookie('activeAccordionGroup', active);
+          //  alert(active);
+        });
+        $("#accordion").on('hidden.bs.collapse', function () {
+            $.removeCookie('activeAccordionGroup');
+        });
+        var last = $.cookie('activeAccordionGroup');
+        if (last != null) {
+            //remove default collapse settings
+            $("#accordion .panel-collapse").removeClass('show');
+            //show the account_last visible group
+            $("#" + last).addClass("show");
+        }
+    });
+</script>
 @endsection
