@@ -14071,6 +14071,7 @@ footer p {
 .vine-box-style-2 img  {
     margin: 0 auto;
     display: block;
+    max-width: 100%;
 }
 
 .vine-box-style-2 .col-md-6 {
@@ -14115,6 +14116,7 @@ footer p {
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
+    max-width: 100%;
 }
 
 .vine-box-style-3 h5 {
@@ -14258,6 +14260,7 @@ footer p {
     margin: 0 auto;
     display: block;
     max-height: 200px!important;
+    max-width: 100%;
 }
 
 .vine-box-style-4 .price {
@@ -14296,6 +14299,7 @@ footer p {
 .vine-box-style-5 img  {
     margin: 0 auto;
     display: block;
+    max-width: 100%;
 }
 
 .vine-box-style-5 .col-3, .vine-box-style-5 .col-9 {

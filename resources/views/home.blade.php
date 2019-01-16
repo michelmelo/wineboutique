@@ -136,10 +136,10 @@
                         <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
                             <div  class="row">
                                 <div class="col-md-6">
-                                <img src="{{asset('img\vine-style-2-img.PNG')}}">
-                                <!-- @foreach($wines as $wine)
-                                    <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
-                                @endforeach -->
+                                <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
+                                
+                                    <img src="{{ route('images.wine', ['slug' => $latestWine->slug . '.jpg']) }}" >
+                                
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="name">{{$latestWine->name}}</h5>
@@ -161,8 +161,8 @@
             <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-container">
-                        <img src="{{asset('img/vine-style-3-img.png')}}">
-                        <!-- <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" > -->
+                        <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
+                        <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
                         <div class="overlay"></div>
                         <favorite
                                 :post="'{{ $wine->slug }}'"
