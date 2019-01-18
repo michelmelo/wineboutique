@@ -24,8 +24,8 @@
                 <li><a href="">Sign Up</a></li>
                 <li><a href="">FAQ</a></li>
                 <li><a href="">Order Status</a></li>
-                <li><a href="">Terms & Conditions</a></li>
-                <li><a href="">Privacy Policy</a></li>
+                <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
             </ul>
         </div>
     </div>

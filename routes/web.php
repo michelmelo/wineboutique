@@ -25,7 +25,8 @@ Route::view('/new-arrivals', 'new-arrivals')->name('new-arrivals');
 Route::view('/order-track', 'order-track')->name('order-track');
 Route::view('/wb-experience', 'wb-experience')->name('wb-experience');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
-
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+Route::view('/terms-and-conditions', 'terms-and-conditions')->name('terms-and-conditions');
 
 Route::get('/wineries', 'WineryController@list')->name('wineries');
 Route::get('/winery/{winery}', 'WineryController@show')->name('winery');
