@@ -26,6 +26,8 @@ Route::view('/wishlist', 'wishlist')->name('wishlist');
 
 Route::get('/new-arrivals', 'GeneralPagesController@new_arrivals')->name('new-arrivals');
 Route::get('/hot-sellers', 'GeneralPagesController@hot_sellers')->name('hot-sellers');
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+Route::view('/terms-and-conditions', 'terms-and-conditions')->name('terms-and-conditions');
 
 Route::get('/wineries', 'WineryController@list')->name('wineries');
 Route::get('/winery/{winery}', 'WineryController@show')->name('winery');
