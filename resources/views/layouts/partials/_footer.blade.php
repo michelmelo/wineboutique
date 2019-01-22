@@ -21,7 +21,7 @@
 
             <ul class="footer-nav">
                 <li><a href="">Sign Up</a></li>
-                <li><a href="">FAQ</a></li>
+                <li><a href="/faq">FAQ</a></li>
                 <li><a href="">Order Status</a></li>
                 <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
                 <li><a href="/privacy-policy">Privacy Policy</a></li>
