@@ -7,7 +7,7 @@
         <div class="col-lg-3 col-sm-12"></div>
         <div class="col-lg-6 col-sm-12">
             <form class="find-stores">
-                <input type="text" name="store" placeholder="Search by adress, city or state">
+                <input type="text" name="store" placeholder="Search by address, city or state">
                 <input type="submit" class="red-button" value="FIND WINERIES" name="submit">
             </form>
         </div>
@@ -20,7 +20,7 @@
             <div class="main__scroller row">
                 <div class="col-lg-3 col-sm-6 col-xs-6">
                     <h3>Name of the winery</h3>
-                    <p>Location Adress</p>
+                    <p>Location Address</p>
                     <p>12345 Street</p>
                     <p>City, XY 123456</p>
                     <p>(123) 456 - 7891</p>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-6">
                     <h3>Name of the winery</h3>
-                    <p>Location Adress</p>
+                    <p>Location Address</p>
                     <p>12345 Street</p>
                     <p>City, XY 123456</p>
                     <p>(123) 456 - 7891</p>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-6">
                     <h3>Name of the winery</h3>
-                    <p>Location Adress</p>
+                    <p>Location Address</p>
                     <p>12345 Street</p>
                     <p>City, XY 123456</p>
                     <p>(123) 456 - 7891</p>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-6">
                     <h3>Name of the winery</h3>
-                    <p>Location Adress</p>
+                    <p>Location Address</p>
                     <p>12345 Street</p>
                     <p>City, XY 123456</p>
                     <p>(123) 456 - 7891</p>

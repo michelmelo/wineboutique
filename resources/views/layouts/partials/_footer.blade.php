@@ -8,10 +8,9 @@
     <div class="container">
         <div class="footer-social">
             <h4>CONNECT WITH US</h4>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/wineboutiqueus/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/wineboutiqueus/"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/WineBoutique_?lang=en"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
 
