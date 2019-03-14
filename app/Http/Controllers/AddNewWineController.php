@@ -211,12 +211,10 @@ class AddNewWineController extends Controller
 
     public function destroy($id)
     {
-        // delete
         $wine = Wine::find($id);
         $wine->delete();
 
         return redirect('my_winery');
-    
     }
 
 }

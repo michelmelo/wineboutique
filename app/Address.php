@@ -9,6 +9,7 @@ class Address extends Model
     protected $fillable = [
         'name',
         'address_1',
+        'address_2',
         'city',
         'postal_code',
         'region_id',
@@ -41,5 +42,10 @@ class Address extends Model
     public function region()
     {
         return $this->hasOne(Region::class, 'id', 'region_id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
 }

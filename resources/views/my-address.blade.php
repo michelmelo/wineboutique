@@ -17,11 +17,7 @@
 
         <div class="col-md-8 col-sm-12">
             <div>
-                <personal-information-form user="{{json_encode($user)}}" />
-            </div>
-
-            <div>
-                <password-update-form />
+                <my-address-form user-addresses="{{json_encode($addresses)}}" regions="{{json_encode($regions)}}" />
             </div>
         </div>
 

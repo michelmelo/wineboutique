@@ -19,6 +19,7 @@ class CreateAddressesTable extends Migration
             $table->integer('region_id')->unsigned()->index();
             $table->string('name');
             $table->string('address_1');
+            $table->string('address_2')->nullable();
             $table->string('city');
             $table->string('postal_code');
 

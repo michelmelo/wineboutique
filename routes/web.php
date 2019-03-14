@@ -50,40 +50,46 @@ Route::resource('/wine-image', 'WineImageController')->only(['store', 'destroy']
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
     Route::post('/startup', 'StartupController@store');
-
+    
     Route::post('/winery/profile', 'WineryController@profile');
     Route::post('/winery/cover', 'WineryController@cover');
-
+    
     Route::post('/wine/store', 'WineController@store')->name('wine.store');
     Route::post('/wine/update/{id}', 'WineController@update')->name('wine.update');
     Route::delete('/wine/delete/{id}', 'WineController@delete')->name('wine.delete');
     Route::post('/wine/clone/{id}', 'WineController@clone')->name('wine.clone');
-
+    
     Route::get('/profile', 'ProfileController@show')->name('profile.show');
     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
     Route::post('/profile/password', 'ProfileController@password')->name('profile.password');
-
+    
     Route::get('/my-wines', 'MyWinesController@show')->name('my-wines.list')->middleware('can:list,App\Wine');
-
+    
     Route::post('favorite/{wine}', 'FavoriteWineController@favoriteWine');
     Route::post('unfavorite/{wine}', 'FavoriteWineController@unFavoriteWine');
-
+    
     Route::post('rate-wine/{wine}', 'RateWineController@rate');
     Route::post('rate-winery/{winery}', 'RateWineryController@rate');
-
+    
     Route::get('/cart/get', 'CartController@get');
-
+    
     Route::resource('cart', 'CartController', [
         'parameters' => [
             'cart' => 'wine'
         ]
     ]);
-
+            
     Route::resource('addresses', 'AddressController');
-
+    
     Route::get('/checkout', 'CheckoutController@get');
-
+    
     Route::get('my_favorites', 'UsersController@myFavorites');
+    Route::resource('/my-orders', 'MyOrdersController')->except(['create', 'edit', 'index']);
+
+    Route::get('/my-address', 'MyAddressController@show')->name('my-address.show');
+    Route::post('/my-address', 'MyAddressController@store')->name('my-address.store');
+    Route::post('/my-address/{address}', 'MyAddressController@update')->name('my-address.update');
+    Route::delete('/my-address/{address}', 'MyAddressController@destroy')->name('my-address.delete');
 
     Route::resource('/add-new-wine', 'AddNewWineController')->except(['show'])->parameters([
         'add-new-wine' => 'wine'
