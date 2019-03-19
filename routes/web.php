@@ -84,7 +84,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/checkout', 'CheckoutController@get');
     
     Route::get('my_favorites', 'UsersController@myFavorites');
-    Route::resource('/my-orders', 'MyOrdersController')->except(['create', 'edit', 'index']);
+    
+    Route::get('/my-orders', 'MyOrdersController@show')->name('my-order.show');
 
     Route::get('/my-address', 'MyAddressController@show')->name('my-address.show');
     Route::post('/my-address', 'MyAddressController@store')->name('my-address.store');

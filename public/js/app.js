@@ -4658,6 +4658,115 @@ exports.regex = regex;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4964,115 +5073,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -15696,7 +15696,7 @@ module.exports = function(module) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var normalizeHeaderName = __webpack_require__(151);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -18549,7 +18549,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var settle = __webpack_require__(152);
 var buildURL = __webpack_require__(154);
 var parseHeaders = __webpack_require__(155);
@@ -30750,7 +30750,7 @@ function withParams(paramsOrClosure, maybeValidator) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(224)
 /* template */
@@ -30797,7 +30797,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(143);
-module.exports = __webpack_require__(242);
+module.exports = __webpack_require__(245);
 
 
 /***/ }),
@@ -30839,13 +30839,13 @@ Vue.component('password-update-form', __webpack_require__(216));
 Vue.component('my-wines-form', __webpack_require__(219));
 Vue.component('checkout-form', __webpack_require__(222));
 Vue.component('my-address-form', __webpack_require__(227));
-Vue.component('my-order-form', __webpack_require__(271));
-Vue.component('favorite', __webpack_require__(230));
-Vue.component('rating', __webpack_require__(233));
+Vue.component('my-order-form', __webpack_require__(230));
+Vue.component('favorite', __webpack_require__(233));
+Vue.component('rating', __webpack_require__(236));
 Vue.component('star-rating', StarRating.default);
 Vue.component('cart', __webpack_require__(141));
-Vue.component('add-to-cart', __webpack_require__(236));
-Vue.component('buy-now', __webpack_require__(239));
+Vue.component('add-to-cart', __webpack_require__(239));
+Vue.component('buy-now', __webpack_require__(242));
 
 var app = new Vue({
     el: '#app'
@@ -51990,7 +51990,7 @@ module.exports = __webpack_require__(148);
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(150);
 var defaults = __webpack_require__(8);
@@ -52077,7 +52077,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(8);
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var InterceptorManager = __webpack_require__(159);
 var dispatchRequest = __webpack_require__(160);
 
@@ -52162,7 +52162,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -52242,7 +52242,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -52315,7 +52315,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -52375,7 +52375,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -52493,7 +52493,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -52553,7 +52553,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -52612,7 +52612,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var transformData = __webpack_require__(161);
 var isCancel = __webpack_require__(14);
 var defaults = __webpack_require__(8);
@@ -52705,7 +52705,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 /**
  * Transform the data for a request or a response
@@ -71037,7 +71037,7 @@ function pluralize (value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(182)
 /* template */
@@ -72113,7 +72113,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(209)
 /* template */
@@ -73021,7 +73021,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(212)
 /* template */
@@ -75100,7 +75100,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(217)
 /* template */
@@ -75424,7 +75424,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(220)
 /* template */
@@ -75987,7 +75987,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(223)
 /* template */
@@ -77366,7 +77366,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(228)
 /* template */
@@ -77587,6 +77587,13 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
                 postal_cod: "",
                 region_id: ""
             };
+        },
+        deleteAddress: function deleteAddress(id) {
+            var _this2 = this;
+
+            axios.delete('/my-address/' + id).then(function (response) {
+                _this2.addresses.splice(_this2.addresses.indexOf(id), 1);
+            });
         }
     },
     validations: {
@@ -77652,7 +77659,17 @@ var render = function() {
                       [_vm._v("edit")]
                     ),
                     _vm._v(" "),
-                    _c("button", [_vm._v("delete")])
+                    _c(
+                      "button",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.deleteAddress(address.id)
+                          }
+                        }
+                      },
+                      [_vm._v("delete")]
+                    )
                   ])
                 ])
               })
@@ -77977,11 +77994,178 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(231)
 /* template */
 var __vue_template__ = __webpack_require__(232)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/forms/MyOrderForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a11c12b", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a11c12b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var formFields = ['order_id', 'payment_id', 'address_id', 'status'];
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['userOrders'],
+    data: function data() {
+        return {
+            selectedOrders: null,
+            orders: []
+        };
+    },
+    created: function created() {
+        var orders = JSON.parse(this.userOrders);
+        this.orders = orders;
+    },
+    methods: {
+        selectOrder: function selectOrder(orderId) {
+            var selectedOrders = window._.find(this.orders, {
+                id: orderId
+            });
+
+            this.selectedOrders = _extends({}, selectedOrders);
+        }
+    }
+});
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "info-box shadow-box" }, [
+    _c("div", [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-striped" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.orders, function(order) {
+            return _c("tr", { key: order.id }, [
+              _c("td", [_vm._v(_vm._s(order.address.address_1))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(order.status))])
+            ])
+          })
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [_c("span", [_vm._v("MY ORDERS")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("td", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("Status")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a11c12b", module.exports)
+  }
+}
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(234)
+/* template */
+var __vue_template__ = __webpack_require__(235)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78020,7 +78204,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 231 */
+/* 234 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78080,7 +78264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 232 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78128,15 +78312,15 @@ if (false) {
 }
 
 /***/ }),
-/* 233 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(234)
+var __vue_script__ = __webpack_require__(237)
 /* template */
-var __vue_template__ = __webpack_require__(235)
+var __vue_template__ = __webpack_require__(238)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78175,7 +78359,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 234 */
+/* 237 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78201,7 +78385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 235 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78240,15 +78424,15 @@ if (false) {
 }
 
 /***/ }),
-/* 236 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(237)
+var __vue_script__ = __webpack_require__(240)
 /* template */
-var __vue_template__ = __webpack_require__(238)
+var __vue_template__ = __webpack_require__(241)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78287,7 +78471,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 237 */
+/* 240 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78316,7 +78500,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 238 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78349,15 +78533,15 @@ if (false) {
 }
 
 /***/ }),
-/* 239 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(240)
+var __vue_script__ = __webpack_require__(243)
 /* template */
-var __vue_template__ = __webpack_require__(241)
+var __vue_template__ = __webpack_require__(244)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78396,7 +78580,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 240 */
+/* 243 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78426,7 +78610,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 241 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78459,483 +78643,10 @@ if (false) {
 }
 
 /***/ }),
-/* 242 */
+/* 245 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(272)
-/* template */
-var __vue_template__ = __webpack_require__(273)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/forms/MyOrderForm.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5a11c12b", Component.options)
-  } else {
-    hotAPI.reload("data-v-5a11c12b", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 272 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-var formFields = ['order_id', 'payment_id', 'address_id', 'status'];
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['userOrders'],
-    data: function data() {
-        return {
-            selectedOrder: null,
-            orders: []
-        };
-    },
-    created: function created() {
-        var addresses = JSON.parse(this.userAddresses);
-        var regions = JSON.parse(this.regions);
-        this.addresses = addresses;
-        this.fetchedRegions = regions;
-    },
-    methods: {
-        saveAddress: function saveAddress() {
-            var _this = this;
-
-            if (this.selectedAddress) {
-                this.showErrors = true;
-                if (this.$v.$invalid) {
-                    event.preventDefault();
-                    formFields.some(function (formField) {
-                        if (_this.$v[formField].$invalid) {
-                            document.querySelector('[name="' + formField + '"]').focus();
-                            return true;
-                        }
-                        return false;
-                    });
-                }
-
-                var data = _.pick(this.selectedAddress, formFields);
-
-                if (this.selectedAddress.id) {
-                    axios.post('/my-address/' + this.selectedAddress.id, data).then(function (response) {
-                        var updatedAddress = response.data;
-                        _this.addresses = _this.addresses.map(function (address) {
-                            if (updatedAddress.id !== address.id) return address;
-                            return updatedAddress;
-                        });
-                    }).catch(function (error) {
-                        console.log("error", error);
-                    });
-                } else {
-                    axios.post('/my-address', data).then(function (response) {
-                        _this.addresses.push(response.data);
-                    });
-                }
-            }
-
-            this.selectedAddress = null;
-        },
-        cancelEditing: function cancelEditing() {
-            this.selectedAddress = null;
-        },
-        selectAddress: function selectAddress(addressId) {
-            var selectedAddress = window._.find(this.addresses, {
-                id: addressId
-            });
-
-            this.selectedAddress = _extends({}, selectedAddress);
-        },
-
-        addAddress: function addAddress(e) {
-            e.preventDefault();
-
-            this.selectedAddress = {
-                name: "",
-                address_1: "",
-                address_2: "",
-                city: "",
-                postal_cod: "",
-                region_id: ""
-            };
-        }
-    },
-    validations: {
-        order_id: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
-        },
-        payment_id: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
-        },
-        address_id: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
-        },
-        status: {
-            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
-        }
-    }
-});
-
-/***/ }),
-/* 273 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "info-box shadow-box" }, [
-    _vm.selectedAddress === null
-      ? _c("div", [
-          _c("table", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.orders, function(order) {
-                return _c("tr", { key: order.id }, [
-                  _c("td", [_vm._v(_vm._s(order.order_id))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("i", {
-                      class:
-                        "fas fa-" + (_vm.address.default ? "check" : "times")
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.selectAddress(_vm.address.id)
-                          }
-                        }
-                      },
-                      [_vm._v("edit")]
-                    ),
-                    _vm._v(" "),
-                    _c("button", [_vm._v("delete")])
-                  ])
-                ])
-              })
-            )
-          ])
-        ])
-      : _c("div", [
-          _c("h2", [
-            _c("span", [_vm._v("MY ORDERS")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "edit-button", on: { click: _vm.saveAddress } },
-              [
-                _c("i", { staticClass: "fas fa-save" }),
-                _vm._v("Save\n            ")
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "edit-button", on: { click: _vm.cancelEditing } },
-              [
-                _c("i", { staticClass: "fas fa-times" }),
-                _vm._v("Cancel\n            ")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("table", [
-            _c("tr", [
-              _c("td", [_vm._v("Order:")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "edit-text" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedAddress.order_id,
-                      expression: "selectedAddress.order_id"
-                    }
-                  ],
-                  staticClass: "w-100",
-                  attrs: { name: "order_id" },
-                  domProps: { value: _vm.selectedAddress.order_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.selectedAddress,
-                        "order_id",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Payment:")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "edit-text" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedAddress.payment_id,
-                      expression: "selectedAddress.payment_id"
-                    }
-                  ],
-                  staticClass: "w-100",
-                  attrs: { name: "payment_id" },
-                  domProps: { value: _vm.selectedAddress.payment_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.selectedAddress,
-                        "payment_id",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Address:")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "edit-text" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedAddress.address_id,
-                      expression: "selectedAddress.address_id"
-                    }
-                  ],
-                  staticClass: "w-100",
-                  attrs: { name: "address_id" },
-                  domProps: { value: _vm.selectedAddress.address_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.selectedAddress,
-                        "address_id",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Status:")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "edit-text" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedAddress.status,
-                      expression: "selectedAddress.status"
-                    }
-                  ],
-                  staticClass: "w-100",
-                  attrs: { name: "status" },
-                  domProps: { value: _vm.selectedAddress.status },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.selectedAddress,
-                        "status",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ])
-          ])
-        ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("td", [_vm._v("Order")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Actions")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5a11c12b", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

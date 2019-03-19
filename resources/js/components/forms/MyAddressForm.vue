@@ -16,7 +16,7 @@
                         <td><i v-bind:class="'fas fa-'+(address.default?'check':'times')"></i></td>
                         <td>
                             <button v-on:click="selectAddress(address.id)">edit</button>
-                            <button>delete</button>
+                            <button v-on:click="deleteAddress(address.id)">delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -172,6 +172,12 @@
                     postal_cod: "",
                     region_id: ""
                 };
+            },
+            deleteAddress(id) {
+                axios.delete(`/my-address/${id}`)
+                    .then(response => {
+                        this.addresses.splice(this.addresses.indexOf(id), 1)
+                    })
             }
         },
         validations: {
