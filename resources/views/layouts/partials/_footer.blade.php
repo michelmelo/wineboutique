@@ -24,6 +24,7 @@
             <ul class="footer-nav">
                 @if(Auth::guest())
                 <li><a href="">Sign Up</a></li>
+                @endif
                 <li><a href="/faq">FAQ</a></li>
                 <li><a href="">Order Status</a></li>
                 <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
