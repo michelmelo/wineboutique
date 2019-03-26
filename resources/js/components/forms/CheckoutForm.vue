@@ -2,6 +2,7 @@
     <div class="section">
             <form action="https://testpayments.nuvei.com/merchant/paymentpage" method="post" v-on:submit="onSubmit">
         <div class="row padding-row check">
+<<<<<<< HEAD
                 <h1 class="headline-2">CHECKOUT</h1>
                 <div class="col-md-8">
                     <article class="card mb-2">
@@ -36,8 +37,43 @@
                                             <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name">
                                             <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
                                         </div>
+=======
+            <h1 class="headline-2">CHECKOUT</h1>
+            <div class="col-md-8">
+                <article class="card mb-2">
+                    <div class="card-body p-2">
+                        <h5 class="card-title">Ship to</h5>
+                        <template v-if="selecting">
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                    <tr v-for="address in addresses" :key="address.id">
+                                        <td>
+                                            <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
+                                                {{address.name}}<br>
+                                                {{address.address_1}}<br>
+                                                {{address.city}}<br>
+                                                {{address.postal_code}}<br>
+                                                {{address.region.name}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary" @click.prevent="switchAddress(address)">Ship here</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </template>
+                        <template v-else-if="creating">
+                            <div>
+                                <div class="field">
+                                    <label class="label">Name</label>
+                                    <div>
+                                        <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name" autocomplete="none">
+                                        <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
+>>>>>>> 5cd6287ef32a3ea307ed304e7e2819fb3246bde5
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="field">
                                         <label class="label">Address line 1</label>
                                         <div>
@@ -52,16 +88,32 @@
                                             <input class="form-control" :class="{'invalid': hasError('address_2')}" type="text" v-model.trim="newAddress.address_2">
                                             <span class="error-block" v-if="hasError('address_2')">{{getError('address_2')}}</span>
                                         </div>
+=======
+                                <div class="field">
+                                    <label class="label">Address line 1</label>
+                                    <div>
+                                        <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1" autocomplete="none">
+                                        <span class="error-block" v-if="hasError('address_1')">{{getError('address_1')}}</span>
+>>>>>>> 5cd6287ef32a3ea307ed304e7e2819fb3246bde5
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="field">
                                         <label class="label">City</label>
                                         <div>
                                             <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
                                             <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
                                         </div>
+=======
+                                <div class="field">
+                                    <label class="label">City</label>
+                                    <div>
+                                        <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city" autocomplete="none">
+                                        <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
+>>>>>>> 5cd6287ef32a3ea307ed304e7e2819fb3246bde5
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="columns mb-2">
                                         <div class="column is-6">
                                             <div class="field">
@@ -70,6 +122,15 @@
                                                     <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code">
                                                     <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
                                                 </div>
+=======
+                                <div class="columns mb-2">
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Postal code</label>
+                                            <div>
+                                                <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code" autocomplete="none">
+                                                <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
+>>>>>>> 5cd6287ef32a3ea307ed304e7e2819fb3246bde5
                                             </div>
                                         </div>
                                         <div class="column is-6">

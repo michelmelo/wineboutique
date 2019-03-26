@@ -13,7 +13,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('cart');
+        return view('cart', [
+            'empty' => Auth::user()->cart->count() === 0
+        ]);
     }
 
     public function store(CartStoreRequest $request, Cart $cart)

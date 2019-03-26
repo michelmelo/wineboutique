@@ -1,7 +1,9 @@
 <footer class="justify-content-center">
+    @if(Auth::guest())
     <div class="footer-banner">
-        <a href="#" class="white-button button">SELL ON WB</a>
+        <a href="{{route('register.sell')}}" class="white-button button">SELL ON WB</a>
     </div>
+    @endif
 
     <div class="container">
         <div class="footer-social">
@@ -20,6 +22,7 @@
             </p>
 
             <ul class="footer-nav">
+                @if(Auth::guest())
                 <li><a href="">Sign Up</a></li>
                 <li><a href="/faq">FAQ</a></li>
                 <li><a href="">Order Status</a></li>
