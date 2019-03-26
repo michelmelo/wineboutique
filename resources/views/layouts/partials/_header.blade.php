@@ -62,15 +62,17 @@
                     <li class="nav-item col {{ Route::currentRouteName() === 'my-wine' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
                     </li>
+                    @if(!Auth::guest() && Auth::user()->type==='SELLER')
                     <li class="nav-item col">
                         <a class="nav-link" href="{{route('my-winery')}}">My Winery </a>
                     </li>
+                    @endif
                     @if(Auth::guest())
                         <li class="nav-item col {{ Route::currentRouteName() === 'register' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register')}}">Create an account</a>
                         </li>
                     @endif
-                    @if(Auth::guest() || Auth::user()->type==='CUSTOMER')
+                    @if(Auth::guest())
                         <li class="nav-item col {{ Route::currentRouteName() === 'register.sell' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>
                         </li>
