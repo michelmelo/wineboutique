@@ -19,7 +19,7 @@ Route::name('api.')->namespace('Api')->group(function () {
         Route::get('/regions', 'LocationsController@regions')->name('regions');
 
         Route::namespace('Auth')->prefix('auth')->group(function () {
-            Route::post('/check-email', 'RegisterController@checkEmail')->name('email');
+            Route::post('/check-email', 'RegisterController@checkEmail')->name('email');    
         });
     });
 });

@@ -14,6 +14,7 @@
                                             <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
                                                 {{address.name}}<br>
                                                 {{address.address_1}}<br>
+                                                {{address.address_2}}<br>
                                                 {{address.city}}<br>
                                                 {{address.postal_code}}<br>
                                                 {{address.region.name}}
@@ -45,6 +46,14 @@
                                 </div>
 
                                 <div class="field">
+                                    <label class="label">Address line 2</label>
+                                    <div>
+                                        <input class="form-control" :class="{'invalid': hasError('address_2')}" type="text" v-model.trim="newAddress.address_2">
+                                        <span class="error-block" v-if="hasError('address_2')">{{getError('address_2')}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
                                     <label class="label">City</label>
                                     <div>
                                         <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
@@ -67,7 +76,7 @@
                                             <label class="label">Region</label>
                                             <div>
                                                 <select class="form-control" :class="{'invalid': hasError('region_id')}" v-model="newAddress.region_id">
-                                                    <option v-for="region in regions" :value="region.id">{{region.name}}</option>
+                                                    <option v-for="region in regions" :value="region.id" v-bind:key="region.id">{{region.name}}</option>
                                                 </select>
                                                 <span class="error-block" v-if="hasError('region_id')">{{getError('region_id')}}</span>
                                             </div>
@@ -90,20 +99,16 @@
                                 <p>
                                     {{selectedAddress.name}}<br>
                                     {{selectedAddress.address_1}}<br>
+                                    <!-- {{selectedAddress.address_2}}<br> -->
                                     {{selectedAddress.city}}<br>
                                     {{selectedAddress.postal_code}}<br>
                                     {{selectedAddress.region.name}}
                                 </p>
                             </template>
+                            
                             <button type="button" class="btn btn-primary" @click.prevent="selecting = true">Change shipping address</button>
                             <button type="button" class="btn btn-primary" @click.prevent="creating = true">Add an address</button>
                         </template>
-                    </div>
-                </article>
-
-                <article class="card mb-2">
-                    <div class="card-body p-2">
-                        <h5 class="card-title">Payment</h5>
                     </div>
                 </article>
 
@@ -146,6 +151,18 @@
                     </div>
                 </article>
             </div>
+            <div class="col-md-4">
+                <article class="card">
+                    <div class="card-body p-2">
+                        <input type="hidden" name="TERMINALID" v-model="nuveiPayment.terminal_id" value=""/>
+                        <input type="hidden" name="ORDERID" v-model="nuveiPayment.order_id" value=""/>
+                        <input type="hidden" name="CURRENCY" v-model="nuveiPayment.currency" value=""/>
+                        <input type="hidden" name="AMOUNT" v-model="nuveiPayment.amount" value=""/>
+                        <input type="hidden" name="DATETIME" v-model="nuveiPayment.datetime" value=""/>
+                        <input type="hidden" name="HASH" v-model="nuveiPayment.hash" value=""/>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 </template>
@@ -165,10 +182,19 @@
                 newAddress: {
                     name: '',
                     address_1: '',
+                    address_2: '',
                     city: '',
                     postal_code: '',
                     region_id: '',
                     default: true
+                },
+                nuveiPayment: {
+                    terminal_id: '',
+                    order_id: '',
+                    currency: '',
+                    amount: '',
+                    datetime: '',
+                    hash: ''
                 },
                 showErrors: false
             }
@@ -219,6 +245,7 @@
                         this.newAddress = {
                             name: '',
                             address_1: '',
+                            address_2: '',
                             city: '',
                             postal_code: '',
                             region_id: '',

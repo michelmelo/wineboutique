@@ -76197,6 +76197,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76212,10 +76229,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             newAddress: {
                 name: '',
                 address_1: '',
+                address_2: '',
                 city: '',
                 postal_code: '',
                 region_id: '',
                 default: true
+            },
+            nuveiPayment: {
+                terminal_id: '',
+                order_id: '',
+                currency: '',
+                amount: '',
+                datetime: '',
+                hash: ''
             },
             showErrors: false
         };
@@ -76297,6 +76323,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 _this.newAddress = {
                     name: '',
                     address_1: '',
+                    address_2: '',
                     city: '',
                     postal_code: '',
                     region_id: '',
@@ -76864,6 +76891,11 @@ var render = function() {
                                     _c("br"),
                                     _vm._v(
                                       "\n                                            " +
+                                        _vm._s(address.address_2)
+                                    ),
+                                    _c("br"),
+                                    _vm._v(
+                                      "\n                                            " +
                                         _vm._s(address.city)
                                     ),
                                     _c("br"),
@@ -76991,6 +77023,51 @@ var render = function() {
                             _vm.hasError("address_1")
                               ? _c("span", { staticClass: "error-block" }, [
                                   _vm._v(_vm._s(_vm.getError("address_1")))
+                                ])
+                              : _vm._e()
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "field" }, [
+                          _c("label", { staticClass: "label" }, [
+                            _vm._v("Address line 2")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model.trim",
+                                  value: _vm.newAddress.address_2,
+                                  expression: "newAddress.address_2",
+                                  modifiers: { trim: true }
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: { invalid: _vm.hasError("address_2") },
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.newAddress.address_2 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.newAddress,
+                                    "address_2",
+                                    $event.target.value.trim()
+                                  )
+                                },
+                                blur: function($event) {
+                                  _vm.$forceUpdate()
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.hasError("address_2")
+                              ? _c("span", { staticClass: "error-block" }, [
+                                  _vm._v(_vm._s(_vm.getError("address_2")))
                                 ])
                               : _vm._e()
                           ])
@@ -77143,7 +77220,10 @@ var render = function() {
                                   _vm._l(_vm.regions, function(region) {
                                     return _c(
                                       "option",
-                                      { domProps: { value: region.id } },
+                                      {
+                                        key: region.id,
+                                        domProps: { value: region.id }
+                                      },
                                       [_vm._v(_vm._s(region.name))]
                                     )
                                   })
@@ -77210,6 +77290,7 @@ var render = function() {
                                   _vm._s(_vm.selectedAddress.address_1)
                               ),
                               _c("br"),
+                              _vm._v(" "),
                               _vm._v(
                                 "\n                                " +
                                   _vm._s(_vm.selectedAddress.city)
@@ -77266,8 +77347,6 @@ var render = function() {
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
         _c("article", { staticClass: "card mb-2" }, [
           _c(
             "div",
@@ -77285,24 +77364,146 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(1)
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(2),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("article", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.terminal_id,
+                  expression: "nuveiPayment.terminal_id"
+                }
+              ],
+              attrs: { type: "hidden", name: "TERMINALID", value: "" },
+              domProps: { value: _vm.nuveiPayment.terminal_id },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "terminal_id", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.order_id,
+                  expression: "nuveiPayment.order_id"
+                }
+              ],
+              attrs: { type: "hidden", name: "ORDERID", value: "" },
+              domProps: { value: _vm.nuveiPayment.order_id },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "order_id", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.currency,
+                  expression: "nuveiPayment.currency"
+                }
+              ],
+              attrs: { type: "hidden", name: "CURRENCY", value: "" },
+              domProps: { value: _vm.nuveiPayment.currency },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "currency", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.amount,
+                  expression: "nuveiPayment.amount"
+                }
+              ],
+              attrs: { type: "hidden", name: "AMOUNT", value: "" },
+              domProps: { value: _vm.nuveiPayment.amount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "amount", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.datetime,
+                  expression: "nuveiPayment.datetime"
+                }
+              ],
+              attrs: { type: "hidden", name: "DATETIME", value: "" },
+              domProps: { value: _vm.nuveiPayment.datetime },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "datetime", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuveiPayment.hash,
+                  expression: "nuveiPayment.hash"
+                }
+              ],
+              attrs: { type: "hidden", name: "HASH", value: "" },
+              domProps: { value: _vm.nuveiPayment.hash },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.nuveiPayment, "hash", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("article", { staticClass: "card mb-2" }, [
-      _c("div", { staticClass: "card-body p-2" }, [
-        _c("h5", { staticClass: "card-title" }, [_vm._v("Payment")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
