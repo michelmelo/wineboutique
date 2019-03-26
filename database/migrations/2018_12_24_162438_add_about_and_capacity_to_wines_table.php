@@ -14,9 +14,9 @@ class AddAboutAndCapacityToWinesTable extends Migration
     public function up()
     {
         Schema::table('wines', function (Blueprint $table) {
-            $table->string('who_made_it');
-            $table->string('when_was_it_made');
-            $table->string('capacity');
+            $table->string('who_made_it')->nullable();
+            $table->string('when_was_it_made')->nullable();
+            $table->string('capacity')->nullable();
             $table->integer('unit_id')->unsigned()->index()->nullable();
 
             $table->foreign('unit_id')->references('id')->on('capacity_units')->onDelete('cascade');
