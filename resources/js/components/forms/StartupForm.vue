@@ -22,7 +22,7 @@
                             <td>
                                 <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions" v-bind:value="region.id">
+                                    <option v-for="region in fetchedRegions" v-bind:value="region.id" v-bind:key="region.id">
                                         {{ region.name }}
                                     </option>
                                 </select>
@@ -47,7 +47,7 @@
                             </a>
                         </label>
 
-                        <div class="col-xs-5 vine-box-style-3 style-3-2" v-for="wine in wines" v-click-outside="disableEditing(wine.id)">
+                        <div class="col-xs-5 vine-box-style-3 style-3-2" v-for="wine in wines" v-click-outside="disableEditing(wine.id)" v-bind:key="wine.id" >
                             <div class="inv-container">
                                 <div class="image-container">
                                     <img v-bind:src="'/storage/images/wines/'+wine.photo">
@@ -56,9 +56,9 @@
                                         <a href="#" v-on:click.stop.prevent="cloneWine(wine.id)"><i class="far fa-copy"></i> <span>COPY</span></a>
                                     </div>
                                 </div>
-                                <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id'/>
+                                <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" />
                                 <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name.length?wine.name:'Name Of The Wine'}}</h5>
-                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id'/>
+                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)"/>
                                 <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
                             </div>
                         </div>
