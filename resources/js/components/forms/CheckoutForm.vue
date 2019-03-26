@@ -1,169 +1,157 @@
 <template>
     <div class="section">
+            <form action="https://testpayments.nuvei.com/merchant/paymentpage" method="post" v-on:submit="onSubmit">
         <div class="row padding-row check">
-            <h1 class="headline-2">CHECKOUT</h1>
-            <div class="col-md-8">
-                <article class="card mb-2">
-                    <div class="card-body p-2">
-                        <h5 class="card-title">Ship to</h5>
-                        <template v-if="selecting">
-                            <table class="table table-striped table-hover">
-                                <tbody>
-                                    <tr v-for="address in addresses" :key="address.id">
-                                        <td>
-                                            <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
-                                                {{address.name}}<br>
-                                                {{address.address_1}}<br>
-                                                {{address.address_2}}<br>
-                                                {{address.city}}<br>
-                                                {{address.postal_code}}<br>
-                                                {{address.region.name}}
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary" @click.prevent="switchAddress(address)">Ship here</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </template>
-                        <template v-else-if="creating">
-                            <div>
-                                <div class="field">
-                                    <label class="label">Name</label>
-                                    <div>
-                                        <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name">
-                                        <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <label class="label">Address line 1</label>
-                                    <div>
-                                        <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1">
-                                        <span class="error-block" v-if="hasError('address_1')">{{getError('address_1')}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <label class="label">Address line 2</label>
-                                    <div>
-                                        <input class="form-control" :class="{'invalid': hasError('address_2')}" type="text" v-model.trim="newAddress.address_2">
-                                        <span class="error-block" v-if="hasError('address_2')">{{getError('address_2')}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <label class="label">City</label>
-                                    <div>
-                                        <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
-                                        <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="columns mb-2">
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Postal code</label>
-                                            <div>
-                                                <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code">
-                                                <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Region</label>
-                                            <div>
-                                                <select class="form-control" :class="{'invalid': hasError('region_id')}" v-model="newAddress.region_id">
-                                                    <option v-for="region in regions" :value="region.id" v-bind:key="region.id">{{region.name}}</option>
-                                                </select>
-                                                <span class="error-block" v-if="hasError('region_id')">{{getError('region_id')}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <p class="control">
-                                        <button class="btn btn-primary" @click.prevent="addShipingAddress()">
-                                            Add address
-                                        </button>
-                                        <a class="btn btn-danger" @click.prevent="creating = false">Cancel</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </template>
-                        <template v-else>
-                            <template v-if="selectedAddress">
-                                <p>
-                                    {{selectedAddress.name}}<br>
-                                    {{selectedAddress.address_1}}<br>
-                                    <!-- {{selectedAddress.address_2}}<br> -->
-                                    {{selectedAddress.city}}<br>
-                                    {{selectedAddress.postal_code}}<br>
-                                    {{selectedAddress.region.name}}
-                                </p>
+                <h1 class="headline-2">CHECKOUT</h1>
+                <div class="col-md-8">
+                    <article class="card mb-2">
+                        <div class="card-body p-2">
+                            <h5 class="card-title">Ship to</h5>
+                            <template v-if="selecting">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr v-for="address in addresses" :key="address.id">
+                                            <td>
+                                                <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
+                                                    {{address.name}}<br>
+                                                    {{address.address_1}}<br>
+                                                    {{address.address_2}}<br>
+                                                    {{address.city}}<br>
+                                                    {{address.postal_code}}<br>
+                                                    {{address.region.name}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary" @click.prevent="switchAddress(address)">Ship here</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </template>
-                            
-                            <button type="button" class="btn btn-primary" @click.prevent="selecting = true">Change shipping address</button>
-                            <button type="button" class="btn btn-primary" @click.prevent="creating = true">Add an address</button>
-                        </template>
-                    </div>
-                </article>
+                            <template v-else-if="creating">
+                                <div>
+                                    <div class="field">
+                                        <label class="label">Name</label>
+                                        <div>
+                                            <input type="text" class="form-control" :class="{'invalid': hasError('name')}" v-model.trim="newAddress.name">
+                                            <span class="error-block" v-if="hasError('name')">{{getError('name')}}</span>
+                                        </div>
+                                    </div>
 
-                <article class="card mb-2">
-                    <div class="card-body p-2">
-                        <h5 class="card-title">
-                            Shipping
-                        </h5>
-                        <select class="form-control">
-                            <option>
-                                Royal Mail 1st Class
-                            </option>
-                        </select>
-                    </div>
-                </article>
+                                    <div class="field">
+                                        <label class="label">Address line 1</label>
+                                        <div>
+                                            <input class="form-control" :class="{'invalid': hasError('address_1')}" type="text" v-model.trim="newAddress.address_1">
+                                            <span class="error-block" v-if="hasError('address_1')">{{getError('address_1')}}</span>
+                                        </div>
+                                    </div>
 
-                <article class="card mb-2">
-                    <div class="card-body p-2">
-                        <h5 class="card-title">
-                            Cart summary
-                        </h5>
-                        <Cart :showComplete="false" />
-                    </div>
-                </article>
+                                    <div class="field">
+                                        <label class="label">Address line 2</label>
+                                        <div>
+                                            <input class="form-control" :class="{'invalid': hasError('address_2')}" type="text" v-model.trim="newAddress.address_2">
+                                            <span class="error-block" v-if="hasError('address_2')">{{getError('address_2')}}</span>
+                                        </div>
+                                    </div>
 
-                <article class="card mb-2">
-                    <div class="card-body p-2">
-                        <button class="btn btn-primary d-block w-100">
-                            Place order
-                        </button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-4">
-                <article class="card">
-                    <div class="card-body p-2">
-                        <button class="btn btn-primary d-block w-100">
-                            Place order
-                        </button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-4">
-                <article class="card">
-                    <div class="card-body p-2">
-                        <input type="hidden" name="TERMINALID" v-model="nuveiPayment.terminal_id" value=""/>
-                        <input type="hidden" name="ORDERID" v-model="nuveiPayment.order_id" value=""/>
-                        <input type="hidden" name="CURRENCY" v-model="nuveiPayment.currency" value=""/>
-                        <input type="hidden" name="AMOUNT" v-model="nuveiPayment.amount" value=""/>
-                        <input type="hidden" name="DATETIME" v-model="nuveiPayment.datetime" value=""/>
-                        <input type="hidden" name="HASH" v-model="nuveiPayment.hash" value=""/>
-                    </div>
-                </article>
-            </div>
+                                    <div class="field">
+                                        <label class="label">City</label>
+                                        <div>
+                                            <input class="form-control" :class="{'invalid': hasError('city')}" type="text" v-model.trim="newAddress.city">
+                                            <span class="error-block" v-if="hasError('city')">{{getError('city')}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="columns mb-2">
+                                        <div class="column is-6">
+                                            <div class="field">
+                                                <label class="label">Postal code</label>
+                                                <div>
+                                                    <input class="form-control" :class="{'invalid': hasError('postal_code')}" type="text" v-model.trim="newAddress.postal_code">
+                                                    <span class="error-block" v-if="hasError('postal_code')">{{getError('postal_code')}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column is-6">
+                                            <div class="field">
+                                                <label class="label">Region</label>
+                                                <div>
+                                                    <select class="form-control" :class="{'invalid': hasError('region_id')}" v-model="newAddress.region_id">
+                                                        <option v-for="region in regions" :value="region.id" v-bind:key="region.id">{{region.name}}</option>
+                                                    </select>
+                                                    <span class="error-block" v-if="hasError('region_id')">{{getError('region_id')}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <p class="control">
+                                            <button class="btn btn-primary" @click.prevent="addShipingAddress()">
+                                                Add address
+                                            </button>
+                                            <a class="btn btn-danger" @click.prevent="creating = false">Cancel</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <template v-if="selectedAddress">
+                                    <p>
+                                        {{selectedAddress.name}}<br>
+                                        {{selectedAddress.address_1}}<br>
+                                        <!-- {{selectedAddress.address_2}}<br> -->
+                                        {{selectedAddress.city}}<br>
+                                        {{selectedAddress.postal_code}}<br>
+                                        {{selectedAddress.region.name}}
+                                    </p>
+                                </template>
+                                
+                                <button type="button" class="btn btn-primary" @click.prevent="selecting = true" v-if="addresses.length>1">Change shipping address</button>
+                                <button type="button" class="btn btn-primary" @click.prevent="creating = true">Add an address</button>
+                            </template>
+                        </div>
+                    </article>
+
+                    <article class="card mb-2">
+                        <div class="card-body p-2">
+                            <h5 class="card-title">
+                                Shipping
+                            </h5>
+                            <select class="form-control">
+                                <option>
+                                    Royal Mail 1st Class
+                                </option>
+                            </select>
+                        </div>
+                    </article>
+
+                    <article class="card mb-2">
+                        <div class="card-body p-2">
+                            <h5 class="card-title">
+                                Cart summary
+                            </h5>
+                            <Cart :showComplete="false" />
+                        </div>
+                    </article>
+
+                    <article class="card mb-2">
+                        <div class="card-body p-2">
+                            <button class="btn btn-primary d-block w-100" type="submit">
+                                Place order
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <input type="hidden" name="TERMINALID" v-model="terminalId"/>
+                <input type="hidden" name="ORDERID" v-model="orderId"/>
+                <input type="hidden" name="CURRENCY" v-model="currency"/>
+                <input type="hidden" name="AMOUNT" v-model="amount"/>
+                <input type="hidden" name="DATETIME" v-model="dateTime"/>
+                <input type="hidden" name="VALIDATIONURL" v-model="validationUrl"/>
+                <input type="hidden" name="HASH" v-model="authHash"/>
         </div>
+            </form>
     </div>
 </template>
 
@@ -171,7 +159,20 @@
     import Cart from "../Cart";
     import { required, minLength, numeric } from 'vuelidate/lib/validators';
     export default {
-        props: ['wineId'],
+        props: [
+            'gateway',	
+            'terminalId',
+            'currency',
+            'secret',
+            'testAccount',
+            'receiptPageURL',
+            'authHash',
+            'orderId',
+            'amount',
+            'dateTime',
+            'requestURL',
+            'validationUrl'
+        ],
         data() {
             return {
                 selecting: false,
@@ -187,14 +188,6 @@
                     postal_code: '',
                     region_id: '',
                     default: true
-                },
-                nuveiPayment: {
-                    terminal_id: '',
-                    order_id: '',
-                    currency: '',
-                    amount: '',
-                    datetime: '',
-                    hash: ''
                 },
                 showErrors: false
             }
@@ -267,7 +260,17 @@
                 if(!!model.$params.minLength && !model.minLength) {
                     return `This field must have at least ${model.$params.minLength.min} characters.`;
                 }
-            }
+            },
+            onSubmit(event) {
+                this.showErrors = true;
+                if(this.$v.$anyError || this.addresses.length === 0) {
+                    event.preventDefault();
+                }
+
+                if(addresses.length===0) {
+                    alert("You must enter address to place order.");
+                }
+            },
         },
         computed: {
             defaultAddress() {
