@@ -9,6 +9,6 @@ class LocationsController extends Controller
 {
     public function regions()
     {
-        return Region::all();
+        return Region::orderBy('name')->get();
     }
 }
