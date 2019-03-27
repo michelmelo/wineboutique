@@ -34,7 +34,7 @@ class HomeController extends Controller
         
         $wines = Wine::orderBy('average_rating', 'desc');
         $varietals = Varietal::all();
-        $regions = Region::all();
+        $regions = Region::orderBy('name')->get();
 
         $filter = $request->all();
 

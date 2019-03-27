@@ -21,7 +21,7 @@ class MyAddressController extends Controller
     {
         return view('my-address', [
             'addresses' => $request->user()->addresses,
-            'regions' => Region::all()
+            'regions' => Region::orderBy('name')->get()
         ]);
     }
 

@@ -33,7 +33,7 @@ class AddNewWineController extends Controller
     {
         return view('add-new-wine', [
             'varietals' => Varietal::all(),
-            'regions' => Region::all(),
+            'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
         ]);
     }
@@ -48,7 +48,7 @@ class AddNewWineController extends Controller
         return view('add-new-wine', [
             'wines' => Wine::all(),
             'varietals' => Varietal::all(),
-            'regions' => Region::all(),
+            'regions' => Region::orderBy('name')->get(),
             'tags' => Tag::all(),
             'wine_shippings' => WineShipping::all(),
         ]);
@@ -135,7 +135,7 @@ class AddNewWineController extends Controller
             'preloadedImages' => $preloadedImages,
             // 'wines' => Wine::all(),
             'varietals' => Varietal::all(),
-            'regions' => Region::all(),
+            'regions' => Region::orderBy('name')->get(),
             // 'tags' => Tag::all(),
             //'wine_shippings' => WineShipping::all(),
             'capacity_units' => CapacityUnit::all()

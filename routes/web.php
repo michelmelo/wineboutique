@@ -16,7 +16,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes(['verify' => true]);
 Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
 
-// Route::view('/add-new-wine', 'add-new-wine')->name('add-new-wine');
 Route::view('/get-paid', 'get-paid')->name('get-paid');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
 Route::view('/my-wine', 'my-wine')->name('my-wine');
