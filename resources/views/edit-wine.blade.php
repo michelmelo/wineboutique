@@ -61,10 +61,11 @@
                             $when_was_it_made = old('when_was_it_made', $wine->when_was_it_made);
                         @endphp
                         <select id="when_was_it_made" name="when_was_it_made">
-                        <option>When was it made?</option>
-                            @for ($i = 2019; $i >= 1900; $i--)
-                                <option value="{{ $i }}" {{$i==$when_was_it_made?"selected":""}}>{{ $i }}</option>
-                            @endfor
+                            <option hidden>When was it made?</option>
+                            <?php $now = date('Y'); ?>
+                                @for ($i = $now; $i >= 1900; $i--)
+                                    <option value="{{ $i }}" {{$i==$when_was_it_made?"selected":""}}>{{ $i }}</option>
+                                @endfor
                         </select>
                         @if($errors->has('when_was_it_made'))
                             <span class="help-block">
@@ -82,7 +83,7 @@
                             $varietal_id = old('varietal', $wine->varietal_id);
                         @endphp
                         <select name="varietal" id="varietal">
-                            <option value="">Varietal</option>
+                            <option value="" hidden>Varietal</option>
                             @foreach($varietals as $varietal) 
                                 <option value="{{$varietal->id}}" {{$varietal->id==$varietal_id?"selected":""}}>{{ $varietal->name }}</option>
                             @endforeach
@@ -112,7 +113,7 @@
                             $unit_id = old('unit_id', $wine->unit_id);
                         @endphp
                         <select name="unit_id" id="unit_id">
-                            <option>Choose a unit</option>
+                            <option hidden>Choose a unit</option>
                             @foreach($capacity_units as $capacity_unit) 
                                 <option value="{{$capacity_unit->id}}" {{$capacity_unit->id==$unit_id?"selected":""}}>{{$capacity_unit->name}}</option>
                             @endforeach
@@ -195,7 +196,7 @@
                             $location = old('location', $wine->wineShippings[0]->location);
                         @endphp
                         <select id="location" name="shipping[0][location]" class="location">
-                            <option>Select location</option>
+                            <option hidden>Select location</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}" {{$region->id==$location?"selected":""}}>{{$region->name}}</option>
                             @endforeach
@@ -242,7 +243,7 @@
                             $destination = old('destination', $wine->wineShippings[0]->destination);
                         @endphp
                         <select name="shipping[0][destination]" class="destination" >
-                            <option>Add a destination</option>
+                            <option hidden>Add a destination</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}" {{$region->id==$destination?"selected":""}}>{{$region->name}}</option>
                             @endforeach
@@ -298,7 +299,7 @@
                                     $location = old('location', $wineShipping->location);
                                 @endphp
                                 <select name="shipping[{{$index}}][location]" class="location">
-                                    <option>Select location</option>
+                                    <option hidden>Select location</option>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}" {{$region->id==$location?"selected":""}}>{{$region->name}}</option>
                                     @endforeach
@@ -340,7 +341,7 @@
                                     $destination = old('destination', $wineShipping->destination);
                                 @endphp
                                 <select  name="shipping[{{$index}}][destination]" class="destination" value="{{ $wineShipping->destination }}">
-                                    <option>Add a destination</option>
+                                    <option hidden>Add a destination</option>
                                     @foreach($regions as $region)
                                         <option value="{{$region->id}}" {{$region->id==$destination?"selected":""}}>{{$region->name}}</option>
                                     @endforeach
@@ -388,7 +389,7 @@
 
         <div class="col-lg-8 col-sm-12">
             <select name="shipping[][location]" class="location">
-                <option>Select location</option>
+                <option hidden>Select location</option>
                 @foreach($regions as $region)
                     <option value="{{$region->id}}" >{{$region->name}}</option>
                 @endforeach
@@ -427,7 +428,7 @@
 
         <div class="col-lg-3 col-sm-12">
             <select  name="shipping[][destination]" class="destination" >
-                <option>Add a destination</option>
+                <option hidden>Add a destination</option>
                 @foreach($regions as $region)
                     <option value="{{$region->id}}">{{$region->name}}</option>
                 @endforeach

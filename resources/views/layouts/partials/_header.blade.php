@@ -7,7 +7,7 @@
                 </a>
                 <div class="col-5 desktop-search">
                     <form class="form-inline v-align" method="get" action="{{route('search')}}">
-                        <input class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}">
+                        <input style="width:300px" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}">
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -15,6 +15,7 @@
                     <div class="v-align row">
                         @if(Auth::guest())
                             <div class="col-6"><a href="{{route('login')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN IN</span></a></div>
+                            <div class="col-6"><a href="{{route('register')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN UP</span></a></div>
                         @else
                             <div class="col-4"><a href="{{route('profile.show')}}"><div><img src="{{asset('img/user.svg')}}"></div><span>PROFILE</span></a></div>
                             <div class="col-4 cart-icon"><a href="/cart"><div><img src="{{asset('img/cart.svg')}}"><div class="item-in-cart">{{$cartCount}}</div><span>CART</span></div></a></div>
@@ -67,11 +68,11 @@
                         <a class="nav-link" href="{{route('my-winery')}}">My Winery </a>
                     </li>
                     @endif
-                    @if(Auth::guest())
+                    <!-- @if(Auth::guest())
                         <li class="nav-item col {{ Route::currentRouteName() === 'register' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register')}}">Create an account</a>
                         </li>
-                    @endif
+                    @endif -->
                     @if(Auth::guest())
                         <li class="nav-item col {{ Route::currentRouteName() === 'register.sell' ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('register.sell')}}">Sell on WB</a>

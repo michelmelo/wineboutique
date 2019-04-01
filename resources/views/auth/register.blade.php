@@ -13,32 +13,32 @@
             <form class="form-inline" method="post" action="{{route('register')}}">
                 @csrf
                 <input type="hidden" name="type" value="CUSTOMER">
-                <input type="text" name="firstName" placeholder="First Name">
+                <input type="text" name="firstName" placeholder="First Name" required>
                 @if ($errors->has('firstName'))
                     <span class="help-block">
                         <strong>{{ $errors->first('firstName') }}</strong>
                     </span>
                 @endif
-                <input type="text" name="lastName" placeholder="Last Name">
+                <input type="text" name="lastName" placeholder="Last Name" required>
                 @if ($errors->has('lastName'))
                     <span class="help-block">
                         <strong>{{ $errors->first('lastName') }}</strong>
                     </span>
                 @endif
-                <input type="email" name="email" placeholder="Email">
+                <input type="email" name="email" placeholder="Email" required>
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" placeholder="Password" required>
                 @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="acceptTerms" id="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" name="acceptTerms" id="defaultCheck1" required>
                     <label class="form-check-label" for="defaultCheck1">
                         I agree to <a href="#">Terms and Conditions</a> of the Wine Boutique*
                     </label>
@@ -49,7 +49,7 @@
                     </span>
                 @endif
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="acceptAge" id="defaultCheck2">
+                    <input class="form-check-input" type="checkbox" name="acceptAge" id="defaultCheck2" required>
                     <label class="form-check-label" for="defaultCheck2">
                         I am at least 21 years of age.*
                     </label>

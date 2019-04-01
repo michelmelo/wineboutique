@@ -1,5 +1,5 @@
 <template>
-    <a v-bind:href="checkout" class="button red-button full-width" @click.prevent="addToCart()">BUY NOW</a>
+    <a class="button red-button full-width" @click.prevent="addToCart()">BUY NOW</a>
 </template>
 
 <script>

@@ -78780,6 +78780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (response) {
                 return console.log(response.data);
             });
+            alert("Item added to cart successfully");
         }
     }
 });
@@ -78906,7 +78907,6 @@ var render = function() {
     "a",
     {
       staticClass: "button red-button full-width",
-      attrs: { href: _vm.checkout },
       on: {
         click: function($event) {
           $event.preventDefault()

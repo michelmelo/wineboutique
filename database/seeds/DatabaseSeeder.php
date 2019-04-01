@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VarietalsTableSeeder::class);
         $this->call(WineRegionsTableSeeder::class);
         $this->call(WinesTableSeeder::class);
+        $this->call(CapacityUnitsTableSeeder::class);
     }
 }

@@ -17,6 +17,7 @@
                     $('.item-in-cart').text(response.data.wines.length);
                 })
                 .catch(response => console.log(response.data));
+                alert("Item added to cart successfully");
             }
         }
     }

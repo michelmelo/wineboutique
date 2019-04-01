@@ -55,8 +55,9 @@
 
                     <div class="col-lg-4 col-sm-12">
                         <select id="when_was_it_made" name="when_was_it_made">
-                        <option>When was it made?</option>
-                            @for ($i = 2019; $i >= 1900; $i--)
+                        <option disabled selected hidden>When was it made?</option>
+                        <?php $now = date('Y'); ?>
+                            @for ($i = $now; $i >= 1900; $i--)
                                 <option value="{{ $i }}">{{ $i }}</option>
                             @endfor
                         </select>
@@ -73,7 +74,7 @@
 
                     <div class="col-lg-8 col-sm-12">
                         <select name="varietal" id="varietal">
-                            <option value="">Varietal</option>
+                            <option value="" disabled selected hidden>Varietal</option>
                             @foreach($varietals as $varietal) 
                                 <option value="{{$varietal->id}}">{{$varietal->name}}</option>
                             @endforeach
@@ -108,7 +109,7 @@
 
                     <div class="col-lg-4 col-sm-12">
                         <select name="unit_id" id="unit_id">
-                            <option>Choose a unit</option>
+                            <option disabled selected hidden>Choose a unit</option>
                             @foreach($capacity_units as $capacity_unit) 
                                 <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>
                             @endforeach
@@ -186,7 +187,7 @@
 
                     <div class="col-lg-8 col-sm-12">
                         <select id="location" name="shipping[0][location]" class="location">
-                            <option>Select location</option>
+                            <option disabled selected hidden>Select location</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
                             @endforeach
@@ -230,7 +231,7 @@
 
                     <div class="col-lg-3 col-sm-12">
                         <select name="shipping[0][destination]" class="destination">
-                            <option>Add a destination</option>
+                            <option disabled selected hidden>Add a destination</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
                             @endforeach
@@ -286,7 +287,7 @@
 
         <div class="col-lg-8 col-sm-12">
             <select name="shipping[][location]" class="location">
-                <option>Select location</option>
+                <option disabled selected hidden>Select location</option>
                 @foreach($regions as $region)
                     <option value="{{$region->id}}">{{$region->name}}</option>
                 @endforeach
@@ -325,7 +326,7 @@
 
         <div class="col-lg-3 col-sm-12">
             <select  name="shipping[][destination]" class="destination">
-                <option>Add a destination</option>
+                <option disabled selected hidden>Add a destination</option>
                 @foreach($regions as $region)
                     <option value="{{$region->id}}">{{$region->name}}</option>
                 @endforeach
