@@ -58,7 +58,7 @@
                                 </div>
                                 <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" />
                                 <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name.length?wine.name:'Name Of The Wine'}}</h5>
-                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)"/>
+                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" min="0"/>
                                 <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
                             </div>
                         </div>
