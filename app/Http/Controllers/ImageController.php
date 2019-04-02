@@ -19,8 +19,15 @@ class ImageController extends Controller {
     {
         $slug = str_replace(".jpg", "", $filename);
 
-        $wine = WineImage::where('slug', $slug)->firstOrFail();
-        $path = storage_path() . '/app/public/images/' . $wine->source;
+        $wine = WineImage::where('slug', $slug)->first();
+
+        if($wine) {
+            $path = storage_path() . '/app/public/images/' . $wine->source;
+        } else {
+            $path = public_path("img/placeholder.png");
+        }
+
+        #dd($path);
 
         return Image::make($path)->response();
     }

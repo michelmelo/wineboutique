@@ -13,11 +13,11 @@
                         :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                 ></favorite>
             </div>
-            <ul class="preview-thumbnail nav nav-tabs">
+            <!-- <ul class="preview-thumbnail nav nav-tabs">
                 <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></a></li>
                 <li><a data-target="#pic-2" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
                 <li><a data-target="#pic-3" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
-            </ul>
+            </ul> -->
         </div>
 
         <div class="col-lg-6 col-sm-12 single-wine-info">

@@ -6,8 +6,8 @@
                     <img src="{{asset('img/logo.png')}}">
                 </a>
                 <div class="col-5 desktop-search">
-                    <form class="form-inline v-align" method="get" action="{{route('search')}}">
-                        <input style="width:300px" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}">
+                    <form class="form-inline v-align" method="get" action="{{route('search')}}" style="flex-wrap: nowrap;">
+                        <input style="max-width:unset; width: 100%;" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}">
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -57,12 +57,12 @@
                     <li class="nav-item col {{ Route::currentRouteName() === 'hot-sellers' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('hot-sellers')}}">Hot Sellers</a>
                     </li>
-                    <li class="nav-item col {{ Route::currentRouteName() === 'wb-experience' ? 'active' : '' }}">
+                    <!-- <li class="nav-item col {{ Route::currentRouteName() === 'wb-experience' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('wb-experience')}}">WB Experience</a>
-                    </li>
-                    <li class="nav-item col {{ Route::currentRouteName() === 'my-wine' ? 'active' : '' }}">
+                    </li> -->
+                    <!-- <li class="nav-item col {{ Route::currentRouteName() === 'my-wine' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('my-wine')}}">My Wine </a>
-                    </li>
+                    </li> -->
                     @if(!Auth::guest() && Auth::user()->type==='SELLER')
                     <li class="nav-item col">
                         <a class="nav-link" href="{{route('my-winery')}}">My Winery </a>

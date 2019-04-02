@@ -136,20 +136,26 @@
                                     if(updatedAddress.id !== address.id) return address;
                                     return updatedAddress;
                                 })
+
+                                this.selectedAddress = null;
                             })
                             .catch(error => {
                                 console.log("error", error);
+                                alert("Error while updating address");
                             });
                     } else {
                         axios.post('/my-address', data)
                         .then(response => {
                             this.addresses.push(response.data);
-                        })
 
+                            this.selectedAddress = null;
+                        })
+                        .catch(error => {
+                            console.log("error", error);
+                            alert("Error while creating address");
+                        });
                     }
                 }
-
-                this.selectedAddress = null;
             },
             cancelEditing() {
                 this.selectedAddress = null;

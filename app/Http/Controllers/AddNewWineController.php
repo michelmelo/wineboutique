@@ -109,10 +109,12 @@ class AddNewWineController extends Controller
 
 
         // $input = $request->all();
-        $tags = explode(",", $request->tags);
+        if($request->tags) {
+            $tags = explode(",", $request->tags);
+            $wine->tag($tags);
+        }
         
         // $wine = Wine::create($input);
-        $wine->tag($tags);
 
         return redirect()->route('add-new-wine.index');
 

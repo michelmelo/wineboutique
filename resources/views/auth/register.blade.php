@@ -13,19 +13,19 @@
             <form class="form-inline" method="post" action="{{route('register')}}">
                 @csrf
                 <input type="hidden" name="type" value="CUSTOMER">
-                <input type="text" name="firstName" placeholder="First Name" required>
+                <input type="text" name="firstName" placeholder="First Name" required value="{{ old('firstName') ? old('firstName') : '' }}">
                 @if ($errors->has('firstName'))
                     <span class="help-block">
                         <strong>{{ $errors->first('firstName') }}</strong>
                     </span>
                 @endif
-                <input type="text" name="lastName" placeholder="Last Name" required>
+                <input type="text" name="lastName" placeholder="Last Name" required value="{{ old('lastName') ? old('lastName') : '' }}">
                 @if ($errors->has('lastName'))
                     <span class="help-block">
                         <strong>{{ $errors->first('lastName') }}</strong>
                     </span>
                 @endif
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Email" required value="{{ old('email') ? old('email') : '' }}">
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>

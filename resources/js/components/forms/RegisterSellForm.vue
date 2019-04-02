@@ -3,23 +3,47 @@
         <input type="hidden" name="_token" v-model="csrf">
         <input type="hidden" name="type" value="SELLER">
         <input type="text" v-model.trim="firstName" :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name">
+        <span class="help-block" v-if="isInvalid('firstName')">
+            <strong>First Name is required.</strong>
+        </span>
         <input type="text" v-model.trim="lastName" :class="{ 'invalid': isInvalid('lastName') }" name="lastName" placeholder="Last Name">
+        <span class="help-block" v-if="isInvalid('lastName')">
+            <strong>Last Name is required.</strong>
+        </span>
         <input type="text" v-model.trim="wineryName" :class="{ 'invalid': isInvalid('wineryName') }" name="wineryName" placeholder="Winery Name">
+        <span class="help-block" v-if="isInvalid('wineryName')">
+            <strong>Winery Name is required.</strong>
+        </span>
         <input type="email" v-model.trim="email" :class="{ 'invalid': isInvalid('email') || validEmail===false, 'valid': validEmail }" name="email" placeholder="Email">
+        <span class="help-block" v-if="isInvalid('email')">
+            <strong>Email is invalid.</strong>
+        </span>
         <input type="password" v-model="password" :class="{ 'invalid': isInvalid('password') }" name="password" placeholder="Password">
+        <span class="help-block" v-if="isInvalid('password')">
+            <strong>Password is invalid.</strong>
+        </span>
         <input type="text" v-model.trim="phone" :class="{ 'invalid': isInvalid('phone') }" name="phone" placeholder="Phone">
+        <span class="help-block" v-if="isInvalid('phone')">
+            <strong>Phone is invalid.</strong>
+        </span>
         <div class="form-check">
             <input class="form-check-input" v-model="acceptTerms" type="checkbox" name="acceptTerms" id="defaultCheck1">
             <label class="form-check-label" :class="{ 'invalid': isInvalid('acceptTerms') }" for="defaultCheck1">
                 I agree to <a href="#">Terms and Conditions</a> of the Wine Boutique*
             </label>
         </div>
+        <span class="help-block" v-if="isInvalid('acceptTerms')">
+            <strong>You must accept Terms and Conditions.</strong>
+        </span>
         <div class="form-check">
             <input class="form-check-input" v-model="acceptAge" type="checkbox" name="acceptAge" id="defaultCheck2">
             <label class="form-check-label" :class="{ 'invalid': isInvalid('acceptAge') }" for="defaultCheck2">
                 I am at least 21 years of age.*
             </label>
         </div>
+        <span class="help-block" v-if="isInvalid('acceptAge')">
+            <strong>You must be 21 or older.</strong>
+        </span>
         <input type="submit" name="submit" class="button red-button full-width" value="CREATE A WINERY">
     </form>
 </template>
@@ -83,6 +107,7 @@
                 }
             },
             isInvalid(name) {
+                console.log(name, this.$v[name]);
                 return this.$v[name].$invalid && this.showErrors;
             }
         },

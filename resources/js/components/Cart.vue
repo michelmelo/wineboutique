@@ -7,7 +7,7 @@
                     <div>
                         <div  class="row">
                             <div class="col-3">
-                                <img src="/img/vine-style-2-img.PNG">
+                                <img v-bind:src="'/images/wine/'+wine.slug+'.jpg'">
                             </div>
                             <div class="col-9">
                                 <h5 class="name">{{wine.name}}</h5>
@@ -67,9 +67,9 @@
         <div v-else>
             <div class="vine-box-style-5"  v-for="wine in wines">
                 <div>
-                    <div  class="row">
+                    <div  class="row" style="margin: 0 !important;">
                         <div class="col-3">
-                            <img src="/img/vine-style-2-img.PNG">
+                            <img v-bind:src="'/images/wine/'+wine.slug+'.jpg'">
                         </div>
                         <div class="col-9">
                             <h5 class="name">{{wine.name}}</h5>

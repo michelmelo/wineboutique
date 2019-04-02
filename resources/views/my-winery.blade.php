@@ -42,7 +42,7 @@
                                     <td>{{ $wine->capacity }}</td>
                                     <td>{{ $wine->unit_id }}</td>
                                     <td>
-                                        <a href="{{route('add-new-wine.edit', $wine->slug)}}" class="btn btn-primary">Edit</a>
+                                        <a href="{{route('add-new-wine.edit', [$wine->slug])}}" class="btn btn-primary">Edit</a>
                                         <form method="POST" action="/add-new-wine/{{$wine->id}}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
