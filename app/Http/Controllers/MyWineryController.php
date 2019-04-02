@@ -26,7 +26,7 @@ class MyWineryController extends Controller
     {
         return view('my-winery', [
             'varietals' => Varietal::all(),
-            'regions' => Region::all(),
+            'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
             'wines' => $request->user()->winery->wines,
             'wine_shippings' => WineShipping::all(),            
