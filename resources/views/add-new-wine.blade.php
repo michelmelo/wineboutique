@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" required>
+                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -161,7 +161,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="0" name="price" class="usd-input" required>
+                            <input type="number" min="1" name="price" class="usd-input" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
