@@ -31,6 +31,7 @@ class AddNewWineController extends Controller
 
     public function index()
     {
+        //file_put_contents('./logs.txt', 'index');
         return view('add-new-wine', [
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
@@ -60,19 +61,21 @@ class AddNewWineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewWineRequest $request)
+    public function store(Request $request)
     {
+        file_put_contents('logs.txt', 'a'.empty($request->file('images')));
         $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id']);
+        $data['price'] = number_format((float)$data['price'], 2, '.', '');
         
         if($request->hasFile('photo'))
         {
-            $request->file('photo')->move(storage_path() . '/app/public/images', $photo = uniqid(true) . '.jpg');
-            $path = storage_path() . '/app/public/images/' . $photo;
+            $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
+            $path = public_path().'/images/wine/' . $photo;
             #dd($path);
-            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
-                $c->upsize();
-            })->save();
-            $data['photo'] = $photo;
+//            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+//                $c->upsize();
+//            })->save();
+            $data['photo'] = '/images/wine/' . $photo;
         }
         
         // dd($data);
@@ -90,6 +93,8 @@ class AddNewWineController extends Controller
             $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
             if(!isset($shippingItem['free'])) $shippingItem['free'] = false;
             if($shippingItem['free'] === 'on') $shippingItem['free'] = true;
+            $shippingItem['location'] = empty($request->get('location')) ? '' : $request->get('location');
+            $shippingItem['destination'] = empty($request->get('destination')) ? '' : $request->get('destination');
             $shippingTest = $wine->wineShippings()->create($shippingItem);
             // dd($shippingTest);
         }

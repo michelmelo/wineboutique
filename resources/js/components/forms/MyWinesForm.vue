@@ -16,7 +16,7 @@
                     <div class="col-xs-5 vine-box-style-3 style-3-2" v-for="wine in wines" v-click-outside="disableEditing(wine.id)">
                         <div class="inv-container">
                             <div class="image-container">
-                                <img v-bind:src="'/storage/images/wines/'+wine.photo">
+                                <img v-bind:src="wine.photo">
                                 <div class="delete-copy">
                                     <a href="#" v-on:click.stop.prevent="deleteWine(wine.id)"><i class="fas fa-times"></i> <span>DELETE</span></a>
                                     <a href="#" v-on:click.stop.prevent="cloneWine(wine.id)"><i class="far fa-copy"></i> <span>COPY</span></a>

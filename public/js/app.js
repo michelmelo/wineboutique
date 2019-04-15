@@ -75801,9 +75801,7 @@ var render = function() {
                 [
                   _c("div", { staticClass: "inv-container" }, [
                     _c("div", { staticClass: "image-container" }, [
-                      _c("img", {
-                        attrs: { src: "/storage/images/wines/" + wine.photo }
-                      }),
+                      _c("img", { attrs: { src: wine.photo } }),
                       _vm._v(" "),
                       _c("div", { staticClass: "delete-copy" }, [
                         _c(
