@@ -25,12 +25,12 @@ class GeneralPagesController extends Controller
             GROUP BY wines.id
          */
 
-        $wines = DB::table('wines')
-            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
-            ->select(DB::raw('wines.* count(orders.id) as orders_count'))
-            ->groupBy('wines.id')
-            ->get();
-        dd($wines);
+//        $wines = DB::table('wines')
+//            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
+//            ->select(DB::raw('wines.* count(orders.id) as orders_count'))
+//            ->groupBy('wines.id')
+//            ->get();
+//        dd($wines);
 
         return view('hot-sellers', [
             'wines' => Wine::limit(10)->get()
