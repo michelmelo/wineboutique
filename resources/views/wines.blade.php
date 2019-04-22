@@ -90,7 +90,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                         <div class="image-container">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
+                            <img src="{{ $wine->photo }}" >
                             <div class="overlay"></div>
                             <favorite
                                     :post="'{{ $wine->slug }}'"
@@ -105,7 +105,7 @@
                         <div class="star-rating">
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
-                        <span class="order-q">193 Orders</span>
+                        <span class="order-q">{{ $wine->quantity }} Orders</span>
                     </a>
                 </div>
             @endforeach

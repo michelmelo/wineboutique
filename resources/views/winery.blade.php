@@ -34,7 +34,7 @@
                                 <div class="col-xs-5 vine-box-style-4">
                                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                                         <div class="image-container">
-                                            <img src="{{$wine->getPhotoLink()}}">
+                                            <img src="{{$wine->photo}}">
                                             <span class="price">${{$wine->price}}</span>
                                         </div>
                                     </a>

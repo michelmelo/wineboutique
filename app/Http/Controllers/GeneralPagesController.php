@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Wine;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GeneralPagesController extends Controller
 {
@@ -17,7 +17,11 @@ class GeneralPagesController extends Controller
     public function hot_sellers()
     {
         return view('hot-sellers', [
-            'wines' => Wine::limit(10)->get()
+            'wines' => Wine::limit(10)
+            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
+            ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+            ->groupBy('wines.id')
+            ->get()
         ]);
     }
 

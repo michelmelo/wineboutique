@@ -61,7 +61,7 @@
                 <tr>
                     <td>Postal Code:</td>
                     <td class="edit-text">
-                        <input name="postal_code" v-model="selectedAddress.postal_code" class="w-100"/>
+                        <input type="number" name="postal_code" v-model="selectedAddress.postal_code" class="w-100"/>
                     </td>
                 </tr>
                 <tr>

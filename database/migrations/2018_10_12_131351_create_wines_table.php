@@ -17,7 +17,7 @@ class CreateWinesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('photo')->nullable();
-            $table->double('price', 8, 6)->nullable();
+            $table->double('price', 8, 2);
             $table->timestamps();
             $table->integer('winery_id')->unsigned()->index();
 

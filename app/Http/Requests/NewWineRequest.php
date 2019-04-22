@@ -25,7 +25,7 @@ class NewWineRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:192'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:1'],
             'description' => ['required'],
             'who_made_it' => ['required'],
             'when_was_it_made' => ['required'],

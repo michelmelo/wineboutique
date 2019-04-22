@@ -15,16 +15,35 @@ use Illuminate\Support\Facades\DB;
 
 class WineController extends Controller
 {
-    public function store(PhotoRequest $request)
+    public function store(Request $request)
     {
-        $photoName = Str::uuid() . "." . $request->file('photo')->extension();
+        /*$photoName = Str::uuid() . "." . $request->file('photo')->extension();
         $request->photo->storeAs('public/images/wines', $photoName);
 
         $wine = Auth::user()->winery->wines()->create([
             'photo' => $photoName
         ]);
 
-        return $wine;
+        return $wine;*/
+        // protected $fillable = [
+        //        'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'average_rating'
+        //    ];
+        file_put_contents('logs.txt', $_SESSION['HTTP_REFERER']);
+
+
+        return Auth::user()->winery->wines()->create([
+            'name' => empty($request->get('name')) ? null : $request->get('name'),
+            'price' => empty($request->get('price')) ? null : $request->get('price'),
+            'photo' => empty($request->file('photo')) ? null : $request->file('photo'),
+            'quantity' => empty($request->get('quantity')) ? null : $request->get('quantity'),
+            'description' => empty($request->get('description')) ? null : $request->get('description'),
+            'who_made_it' => empty($request->get('who_made_it')) ? null : $request->get('who_made_it'),
+            'when_was_it_made' => empty($request->get('when_was_it_made')) ? null : $request->get('when_was_it_made'),
+            'capacity' => empty($request->get('capacity')) ? null : $request->get('capacity'),
+            'unit_id' => empty($request->get('unit_id')) ? null : $request->get('unit_id'),
+            'average_rating' => empty($request->get('average_rating')) ? null : $request->get('average_rating')
+        ]);
+
     }
 
     public function update(Request $request, $id)

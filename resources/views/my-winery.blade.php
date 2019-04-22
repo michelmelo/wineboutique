@@ -33,7 +33,7 @@
                                 <tr>
                                     <th scope="row">{{ $wine->id }}</th>
                                     <td>{{ $wine->name }}</td>
-                                    <td>{{ $wine->photo }}</td>
+                                    <td><img src="{{ $wine->photo }}"></td>
                                     <td>{{ $wine->price }}</td>
                                     <td>{{ $wine->varietal_id }}</td>
                                     <td>{{ $wine->description }}</td>
