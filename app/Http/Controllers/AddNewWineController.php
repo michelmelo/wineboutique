@@ -63,18 +63,19 @@ class AddNewWineController extends Controller
      */
     public function store(Request $request)
     {
-        file_put_contents('logs.txt', 'a'.empty($request->file('images')));
+        $logFile = 'INIT ';
         $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id']);
         $data['price'] = number_format((float)$data['price'], 2, '.', '');
         
         if($request->hasFile('photo'))
         {
+            $logFile .= 'hasFile ';
             $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
             $path = public_path().'/images/wine/' . $photo;
             #dd($path);
-//            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
-//                $c->upsize();
-//            })->save();
+            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
+                $c->upsize();
+            })->save();
             $data['photo'] = '/images/wine/' . $photo;
         }
         
@@ -86,8 +87,11 @@ class AddNewWineController extends Controller
         $wine->varietal()->associate($request->varietal);
         // $wine->region()->associate($request->region);
         $wine->winery()->associate(Auth::user()->winery);
+
+        //INIT hasFile wineSaved \nshipping
         
         $wine->save();
+        $logFile .= 'wineSaved ';
 
         foreach($request->get("shipping") as $shippingItem) {
             $shippingItem['day_week'] = $shippingItem['day_week'] == 'day';
@@ -96,19 +100,21 @@ class AddNewWineController extends Controller
             $shippingItem['location'] = empty($request->get('location')) ? '' : $request->get('location');
             $shippingItem['destination'] = empty($request->get('destination')) ? '' : $request->get('destination');
             $shippingTest = $wine->wineShippings()->create($shippingItem);
-            // dd($shippingTest);
+            $logFile .= '\nshipping';
         }
 
         $images = [];
 
         if($request->has('images')) {
             $images = $request->images;
+            $logFile .= '\nhasImages';
         }
 
         WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
         $wineImages = WineImage::whereIn("id", $images)->get();
 
         foreach($wineImages as $wineImage) {
+            $logFile .= '\n update wineimg';
             $wineImage->update([]);
         }
 
@@ -117,9 +123,12 @@ class AddNewWineController extends Controller
         if($request->tags) {
             $tags = explode(",", $request->tags);
             $wine->tag($tags);
+            $logFile .= '\ntags added';
         }
         
         // $wine = Wine::create($input);
+
+        file_put_contents('logs.txt', $logFile);
 
         return redirect()->route('add-new-wine.index');
 

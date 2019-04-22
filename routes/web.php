@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function() {
             'cart' => 'wine'
         ]
     ]);
-            
+
     Route::resource('addresses', 'AddressController');
     
     Route::get('/checkout', 'CheckoutController@get');
