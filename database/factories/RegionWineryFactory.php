@@ -18,7 +18,6 @@ $factory->define(App\WineRegion::class, function (Faker $faker) {
     $winery = \App\Winery::inRandomOrder()->first();
 
     return [
-        'region_id' => $region->id,
-        'winery_id' => $winery->id
+        'name' => 'test wine region',
     ];
 });
