@@ -138,7 +138,7 @@
                                 <div class="col-md-6">
                                 <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
                                 
-                                    <img src="{{ route('images.wine', ['slug' => $latestWine->slug . '.jpg']) }}" >
+                                    <img src="{{ $latestWine->photo }}" >
                                 
                                 </div>
                                 <div class="col-md-6">
@@ -162,7 +162,7 @@
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-container">
                         <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
-                        <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" >
+                        <img src="{{ $wine->photo }}" >
                         <div class="overlay"></div>
                         <favorite
                                 :post="'{{ $wine->slug }}'"

@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function() {
             'cart' => 'wine'
         ]
     ]);
-            
+
     Route::resource('addresses', 'AddressController');
     
     Route::get('/checkout', 'CheckoutController@get');
@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('/add-new-wine', 'AddNewWineController')->except(['show'])->parameters([
         'add-new-wine' => 'wine'
     ]);
+    Route::post('/store-new-wine', 'AddNewWineController@store')->name('store-new-wine');
 
     Route::get('my_winery', 'MyWineryController@index')->name('my-winery');
 

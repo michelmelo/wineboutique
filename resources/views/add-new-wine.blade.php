@@ -5,7 +5,7 @@
     <!-- @php
         var_dump($errors);
     @endphp -->
-    <form method="POST" action="{{ route('add-new-wine.store') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('store-new-wine') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" required>
+                        <input type="text" name="name" id="name" placeholder="Title name" required value="title">
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required value="meeee">
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" required>
+                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required value="123">
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -161,7 +161,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="0" name="price" class="usd-input" required>
+                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" required value="50">
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
@@ -184,9 +184,9 @@
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
-
+                    <input type="hidden" name="location" value="unknown">
                     <div class="col-lg-8 col-sm-12">
-                        <select id="location" name="shipping[0][location]" class="location">
+                        <select id="location" name="shipping[0][location]" class="location" required>
                             <option disabled selected hidden>Select location</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
@@ -204,11 +204,11 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required>
+                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required value="1">
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required>
+                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required value="2">
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
@@ -334,12 +334,12 @@
         </div>
 
         <div class="col-lg-2 col-sm-12 show_hide">
-            <input type="number" min="0"  name="shipping[][price]" class="usd-input price" placeholder="One item" >
+            <input type="number" min="0" max="999999.99" name="shipping[][price]" class="usd-input price" placeholder="One item" >
             <div class="usd">USD</div>
         </div>
 
         <div class="col-lg-3 col-sm-12 show_hide">
-            <input type="number" min="0"  name="shipping[][additional]" class="usd-input additional" placeholder="Each additional" >
+            <input type="number" min="0" max="999999.99" name="shipping[][additional]" class="usd-input additional" placeholder="Each additional" >
             <div class="usd" >USD</div>
         </div>
         <div class="col-lg-4 col-sm-12">
