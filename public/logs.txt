@@ -1,1 +1,0 @@
-INIT hasFile wineSaved \nshipping
