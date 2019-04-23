@@ -127,6 +127,10 @@
                     }
 
                     const data = _.pick(this.selectedAddress, formFields);
+
+                    if(data.default===1) {
+                        data.default = true;
+                    }
                     
                     if(this.selectedAddress.id) {
                         axios.post(`/my-address/${this.selectedAddress.id}`, data)
@@ -166,6 +170,7 @@
                 });
 
                 this.selectedAddress = {...selectedAddress};
+                this.default();
             },
             addAddress: function (e) {
                 e.preventDefault();
@@ -178,12 +183,26 @@
                     postal_cod: "",
                     region_id: ""
                 };
+                this.default();
             },
             deleteAddress(id) {
                 axios.delete(`/my-address/${id}`)
                     .then(response => {
                         this.addresses.splice(this.addresses.indexOf(id), 1)
                     })
+            },
+            default: function () {
+                axios.post('/default').then(
+                    response => {
+                        if(response.data===1&&!this.selectedAddress.default) {
+                            document.getElementById("default").disabled = true;
+                        } else {
+                            document.getElementById("default").disabled = false;
+                        }
+                    }
+                ).catch(error => {
+                    console.log("error", error);
+                });
             }
         },
         validations: {

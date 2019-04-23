@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PhotoRequest;
+use App\Order;
 use App\Region;
 use App\Varietal;
 use App\WineRegion;
@@ -28,7 +29,7 @@ class WineController extends Controller
         // protected $fillable = [
         //        'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'average_rating'
         //    ];
-        file_put_contents('logs.txt', $_SESSION['HTTP_REFERER']);
+//        file_put_contents('logs.txt', $_SESSION['HTTP_REFERER']);
 
 
         return Auth::user()->winery->wines()->create([
@@ -76,6 +77,7 @@ class WineController extends Controller
     public function list(Request $request)
     {
         $wines = Wine::query();
+
         $varietals = Varietal::all();
         $regions = Region::all();
 
@@ -109,7 +111,11 @@ class WineController extends Controller
             });
         }
 
-        $wines = $wines->paginate(8);
+        $wines = $wines
+            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
+            ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+            ->groupBy('wines.id')
+            ->paginate(8);
 
         return view('wines', [
             'wines' => $wines,
@@ -122,7 +128,11 @@ class WineController extends Controller
     public function show(Wine $wine)
     {
         return view('wines-single', [
-            'wine' => $wine
+            'wine' => $wine,
+            'orders_count' =>  DB::table('orders')
+                ->selectRaw('COUNT(id) as cnt')
+                ->where('id','=',$wine->id)
+                ->get()[0]
         ]);
     }
 
