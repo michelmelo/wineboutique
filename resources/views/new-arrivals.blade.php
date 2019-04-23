@@ -13,7 +13,7 @@
         <div class="col-xs-5 vine-box-style-3 style-3-2">
             <a href="#">
                 <div class="image-container">
-                    <img src="{{$wine->getPhotoLink()}}">
+                    <img src="{{$wine->photo}}">
                     <div class="overlay"></div>
                     <favorite
                             :post="'{{ $wine->slug }}'"
