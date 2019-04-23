@@ -192,7 +192,7 @@
                     })
             },
             default: function () {
-                axios.post('/default').then(
+                axios.post('/addresses/default').then(
                     response => {
                         if(response.data===1&&!this.selectedAddress.default) {
                             document.getElementById("default").disabled = true;

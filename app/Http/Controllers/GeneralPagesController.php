@@ -14,6 +14,7 @@ class GeneralPagesController extends Controller
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
+                ->orderBy('wines.created_at', 'desc')
                 ->get()
         ]);
     }

@@ -33,8 +33,7 @@ class AddressController extends Controller
 
     public function isDefaultSet(Request $request) {
         if($request->user()===null) return 0;
-        $addresses = DB::table('addresses')
-            ->where('user_id', '=', $request->user()->id)->get();
+        $addresses = Address::where('user_id', '=', $request->user()->id)->get();
         foreach ($addresses as $address) {
             if($address->default===1) return 1;
         }

@@ -77970,7 +77970,7 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
         default: function _default() {
             var _this3 = this;
 
-            axios.post('/default').then(function (response) {
+            axios.post('/addresses/default').then(function (response) {
                 if (response.data === 1 && !_this3.selectedAddress.default) {
                     document.getElementById("default").disabled = true;
                 } else {
