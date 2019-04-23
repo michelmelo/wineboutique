@@ -6,7 +6,7 @@
                 <h2>NAME YOUR WINERY</h2>
                 <div class="col-lg-3 col-sm-12"></div>
                 <div class="col-lg-6 col-sm-12 enter-name">
-                    <input type="text" placeholder="Enter your winery name" v-model.trim="wineryName" name="wineryName" :class="{ 'invalid': isInvalid('wineryName') }">
+                    <input type="text" placeholder="Enter your winery name" v-model.trim="wineryName" name="wineryName" :class="{ 'invalid': isInvalid('wineryName') }" required>
                     <div class="name-check"><i class="fas fa-check"></i></div>
                 </div>
                 <div class="col-lg-3 col-sm-12"></div>
@@ -56,9 +56,9 @@
                                         <a href="#" v-on:click.stop.prevent="cloneWine(wine.id)"><i class="far fa-copy"></i> <span>COPY</span></a>
                                     </div>
                                 </div>
-                                <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" />
+                                <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" required/>
                                 <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name.length?wine.name:'Name Of The Wine'}}</h5>
-                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" min="0"/>
+                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" min="0" required/>
                                 <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
                             </div>
                         </div>

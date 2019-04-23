@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" required value="title">
+                        <input type="text" name="name" id="name" placeholder="Title name" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required value="meeee">
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required value="123">
+                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -161,7 +161,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" required value="50">
+                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
@@ -204,11 +204,11 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required value="1">
+                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required value="2">
+                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
