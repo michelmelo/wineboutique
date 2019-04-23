@@ -43,6 +43,8 @@ Route::get('/varietals', 'WineController@varietals')->name('varietals');
 
 Route::get('/test', 'TestController@index')->name('test');
 
+Route::post('/addresses/default', 'AddressController@isDefaultSet');
+
 Route::get('/images/wine/{slug}', 'ImageController@wineImage')->name('images.wine');
 
 Route::resource('/wine-image', 'WineImageController')->only(['store', 'destroy']);

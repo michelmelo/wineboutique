@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Http\Requests\AddressStoreRequest;
 use App\Http\Resources\AddressResource;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AddressController extends Controller
 {
@@ -27,5 +29,14 @@ class AddressController extends Controller
         return new AddressResource(
             $address
         );
+    }
+
+    public function isDefaultSet(Request $request) {
+        if($request->user()===null) return 0;
+        $addresses = Address::where('user_id', '=', $request->user()->id)->get();
+        foreach ($addresses as $address) {
+            if($address->default===1) return 1;
+        }
+        return 0;
     }
 }

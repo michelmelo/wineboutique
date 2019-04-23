@@ -77905,6 +77905,10 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
 
                 var data = _.pick(this.selectedAddress, formFields);
 
+                if (data.default === 1) {
+                    data.default = true;
+                }
+
                 if (this.selectedAddress.id) {
                     axios.post('/my-address/' + this.selectedAddress.id, data).then(function (response) {
                         var updatedAddress = response.data;
@@ -77939,6 +77943,7 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
             });
 
             this.selectedAddress = _extends({}, selectedAddress);
+            this.default();
         },
 
         addAddress: function addAddress(e) {
@@ -77952,12 +77957,27 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
                 postal_cod: "",
                 region_id: ""
             };
+            this.default();
         },
         deleteAddress: function deleteAddress(id) {
             var _this2 = this;
 
             axios.delete('/my-address/' + id).then(function (response) {
                 _this2.addresses.splice(_this2.addresses.indexOf(id), 1);
+            });
+        },
+
+        default: function _default() {
+            var _this3 = this;
+
+            axios.post('/addresses/default').then(function (response) {
+                if (response.data === 1 && !_this3.selectedAddress.default) {
+                    document.getElementById("default").disabled = true;
+                } else {
+                    document.getElementById("default").disabled = false;
+                }
+            }).catch(function (error) {
+                console.log("error", error);
             });
         }
     },

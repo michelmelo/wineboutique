@@ -32,7 +32,7 @@
 
                 <div class="col-4 center-text">
                     <p>ORDERS</p>
-                    <span>379</span>
+                    <span>{{ $orders_count->cnt }}</span>
                 </div>
 
                 <div class="col-4 center-text">

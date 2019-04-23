@@ -41,7 +41,7 @@ class MyAddressController extends Controller
 
         $request->user()->addresses()->save($address);
 
-        $this->check_default($address);
+//        $this->check_default($address);
 
         return $address;
     }
@@ -51,7 +51,7 @@ class MyAddressController extends Controller
         $data = $request->only('name', 'address_1', 'address_2', 'city', 'postal_code', 'region_id', 'default');
         $address->update($data);
 
-        $this->check_default($address);
+//        $this->check_default($address);
      
         return $address;
     }

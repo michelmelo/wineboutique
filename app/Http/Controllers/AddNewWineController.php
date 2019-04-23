@@ -128,7 +128,7 @@ class AddNewWineController extends Controller
         
         // $wine = Wine::create($input);
 
-        file_put_contents('logs.txt', $logFile);
+//        file_put_contents('logs.txt', $logFile);
 
         return redirect()->route('add-new-wine.index');
 

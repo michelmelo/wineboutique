@@ -13,7 +13,7 @@
         <div class="col-xs-5 vine-box-style-3 style-3-2">
             <a href="#">
                 <div class="image-container">
-                    <img src="{{$wine->getPhotoLink()}}">
+                    <img src="{{$wine->photo}}">
                     <div class="overlay"></div>
                     <favorite
                             :post="'{{ $wine->slug }}'"
@@ -25,7 +25,7 @@
                 <h5>{{$wine->name}}</h5>
                 <h4>${{$wine->price}}</h4>
                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
-                <span class="order-q">193 Orders</span>
+                <span class="order-q">{{ $wine->orders_count }} Orders</span>
             </a>
         </div>
         @endforeach
