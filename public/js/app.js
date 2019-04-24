@@ -76687,7 +76687,8 @@ var render = function() {
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-3" }, [
                           _c("img", {
-                            attrs: { src: "/images/wine/" + wine.slug + ".jpg" }
+                            //attrs: { src: "/images/wine/" + wine.slug + ".jpg" }
+                            attrs: { src: wine.photo }
                           })
                         ]),
                         _vm._v(" "),
@@ -76829,7 +76830,8 @@ var render = function() {
                           _c("div", { staticClass: "col-3" }, [
                             _c("img", {
                               attrs: {
-                                src: "/images/wine/" + wine.slug + ".jpg"
+                                //src: "/images/wine/" + wine.slug + ".jpg"
+                                src: wine.photo
                               }
                             })
                           ]),
