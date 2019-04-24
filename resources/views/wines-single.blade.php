@@ -8,10 +8,12 @@
                 <div class="tab-pane active" id="pic-1"><img src="{{ $wine->photo }}" ></div>
                 <div class="tab-pane" id="pic-2"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
                 <div class="tab-pane" id="pic-3"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
+                @if(Auth::user())
                 <favorite
                         :post="'{{ $wine->slug }}'"
                         :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                 ></favorite>
+                @endif
             </div>
             <!-- <ul class="preview-thumbnail nav nav-tabs">
                 <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></a></li>

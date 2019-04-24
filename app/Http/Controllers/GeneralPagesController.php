@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Wine;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralPagesController extends Controller
 {

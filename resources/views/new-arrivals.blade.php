@@ -15,11 +15,13 @@
                 <div class="image-container">
                     <img src="{{$wine->photo}}">
                     <div class="overlay"></div>
+                    @if(Auth::user())
                     <favorite
                             :post="'{{ $wine->slug }}'"
                             :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                             :type="'wine'"
                     ></favorite>
+                    @endif
                     <span class="sale-mark">SALE</span>
                 </div>
                 <h5>{{$wine->name}}</h5>
