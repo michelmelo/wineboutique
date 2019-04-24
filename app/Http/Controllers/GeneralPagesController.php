@@ -16,8 +16,7 @@ class GeneralPagesController extends Controller
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
                 ->orderBy('wines.created_at', 'desc')
-                ->get(),
-            'auth_user' => Auth::user()
+                ->get()
         ]);
     }
 
@@ -28,8 +27,7 @@ class GeneralPagesController extends Controller
             ->leftJoin('orders', 'wines.id', '=', 'orders.id')
             ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
             ->groupBy('wines.id')
-            ->get(),
-            'auth_user' => Auth::user()
+            ->get()
         ]);
     }
 

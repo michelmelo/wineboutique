@@ -92,7 +92,7 @@
                         <div class="image-container">
                             <img src="{{ $wine->photo }}" >
                             <div class="overlay"></div>
-                            @if($auth_user)
+                            @if(Auth::user())
                             <favorite
                                     :post="'{{ $wine->slug }}'"
                                     :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"

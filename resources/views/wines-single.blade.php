@@ -8,7 +8,7 @@
                 <div class="tab-pane active" id="pic-1"><img src="{{ $wine->photo }}" ></div>
                 <div class="tab-pane" id="pic-2"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
                 <div class="tab-pane" id="pic-3"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
-                @if($auth_user)
+                @if(Auth::user())
                 <favorite
                         :post="'{{ $wine->slug }}'"
                         :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
