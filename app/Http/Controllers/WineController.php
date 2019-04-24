@@ -121,7 +121,8 @@ class WineController extends Controller
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
-            'filter' => $filter
+            'filter' => $filter,
+            'auth_user' => Auth::user()
         ]);
     }
 
@@ -132,7 +133,8 @@ class WineController extends Controller
             'orders_count' =>  DB::table('orders')
                 ->selectRaw('COUNT(id) as cnt')
                 ->where('id','=',$wine->id)
-                ->get()[0]
+                ->get()[0],
+            'auth_user' => Auth::user()
         ]);
     }
 

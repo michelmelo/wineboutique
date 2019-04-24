@@ -46,7 +46,8 @@ class WineryController extends Controller
     public function show(Winery $winery)
     {
         return view('winery', [
-            'winery' => $winery
+            'winery' => $winery,
+            'auth_user' => Auth::user()
         ]);
     }
 }
