@@ -7,7 +7,7 @@
                     <div>
                         <div  class="row">
                             <div class="col-3">
-                                <img v-bind:src="'/images/wine/'+wine.slug+'.jpg'">
+                                <img src="{{ wine.photo }}" />
                             </div>
                             <div class="col-9">
                                 <h5 class="name">{{wine.name}}</h5>
@@ -68,8 +68,8 @@
             <div class="vine-box-style-5"  v-for="wine in wines">
                 <div>
                     <div  class="row" style="margin: 0 !important;">
-                        <div class="col-3">
-                            <img v-bind:src="'/images/wine/'+wine.slug+'.jpg'">
+                        <div class="col-3 teas">
+                            <img src="{{ wine.photo }}" />
                         </div>
                         <div class="col-9">
                             <h5 class="name">{{wine.name}}</h5>
@@ -112,7 +112,8 @@
         data: function() {
             return {
                 wines: [],
-                fetchedFirst: false
+                fetchedFirst: false,
+                photo: ''
             }
         },
 
