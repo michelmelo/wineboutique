@@ -32,42 +32,7 @@
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
-
             <div class="shadow-box row" v-show="step===1">
-                <h2>INVENTORY UPLOAD</h2>
-                <div class="col-lg-12 col-sm-12 inventory">
-                    <div class="row">
-
-                        <label class="col-xs-5 vine-box-style-3 style-3-2 add-wine">
-                            <input type="file" @change="handleFileChange" accept="image/*" />
-                            <a>
-                                <div class="image-container">
-                                    <img src="/img/add-wine.jpg">
-                                </div>
-                            </a>
-                        </label>
-
-                        <div class="col-xs-5 vine-box-style-3 style-3-2" v-for="wine in wines" v-click-outside="disableEditing(wine.id)" v-bind:key="wine.id" >
-                            <div class="inv-container">
-                                <div class="image-container">
-                                    <img v-bind:src="'/storage/images/wines/'+wine.photo">
-                                    <div class="delete-copy">
-                                        <a href="#" v-on:click.stop.prevent="deleteWine(wine.id)"><i class="fas fa-times"></i> <span>DELETE</span></a>
-                                        <a href="#" v-on:click.stop.prevent="cloneWine(wine.id)"><i class="far fa-copy"></i> <span>COPY</span></a>
-                                    </div>
-                                </div>
-                                <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" />
-                                <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name.length?wine.name:'Name Of The Wine'}}</h5>
-                                <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' v-on:keypress.prevent.enter="setEditing(null)" min="0"/>
-                                <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="shadow-box row" v-show="step===2">
                 <h2>WINERY DESCRIPTION</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
@@ -76,7 +41,7 @@
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
 
-            <div class="shadow-box row" v-show="step===2">
+            <div class="shadow-box row" v-show="step===1">
                 <h2>WINERY APPEARANCE</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
