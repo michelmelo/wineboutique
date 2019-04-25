@@ -54,7 +54,7 @@ class Wine extends Model
 
     public function getPhotoLink()
     {
-        return '/images/wine/' . $this->slug;
+        return $this->photo;
     }
 
     public function sluggable()
