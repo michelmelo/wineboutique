@@ -9,7 +9,6 @@
 
     <div class="row">
 
-
         <div class="col-lg-10 col-sm-12 row row-eq-height">
             @foreach ($myFavorites as $myFavorite)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
@@ -30,7 +29,7 @@
                         <div class="star-rating">
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$myFavorite->rating()}}"></star-rating>
                         </div>
-                        <span class="order-q">193 Orders</span>
+                        <span class="order-q">{{ $orderNo[$myFavorite->id]->orderNo }} orders</span>
                     </a>
                 </div>
             @endforeach
