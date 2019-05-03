@@ -16,7 +16,7 @@
                         <td><i v-bind:class="'fas fa-'+(address.default?'check':'times')"></i></td>
                         <td>
                             <button v-on:click="selectAddress(address.id)">edit</button>
-                            <button v-on:click="deleteAddress(address.id)">delete</button>
+                            <button v-on:click="deleteAddress(address.id)" v-if="!address.default">delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -37,37 +37,42 @@
                 <tr>
                     <td>Name:</td>
                     <td class="edit-text">
-                        <input name="name" v-model="selectedAddress.name" class="w-100"/>
+                        <div class="error-block" v-model="errors.name">{{errors.name}}</div>
+                        <input name="name" id="name" v-model="selectedAddress.name" class="w-100" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address1:</td>
                     <td class="edit-text">
-                        <input name="address_1" v-model="selectedAddress.address_1" class="w-100"/>
+                        <div class="error-block" v-model="errors.address_1">{{errors.address_1}}</div>
+                        <input name="address_1" id="address_1" v-model="selectedAddress.address_1" class="w-100" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address2:</td>
                     <td class="edit-text">
-                        <input name="address_2" v-model="selectedAddress.address_2" class="w-100"/>
+                        <input name="address_2" id="address_2" v-model="selectedAddress.address_2" class="w-100"/>
                     </td>
                 </tr>
                 <tr>
                     <td>City:</td>
                     <td class="edit-text">
-                        <input name="city" v-model="selectedAddress.city" class="w-100"/>
+                        <div class="error-block" v-model="errors.city">{{errors.city}}</div>
+                        <input name="city" id="city" v-model="selectedAddress.city" class="w-100" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Postal Code:</td>
                     <td class="edit-text">
-                        <input type="number" name="postal_code" v-model="selectedAddress.postal_code" class="w-100"/>
+                        <div class="error-block" v-model="errors.postal">{{errors.postal}}</div>
+                        <input type="number" id="postal-code" name="postal_code" v-model="selectedAddress.postal_code" class="w-100" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Region:</td>
                     <td class="edit-text">
-                        <select name="region_id" v-model="selectedAddress.region_id" class="w-100">
+                        <div class="error-block" v-model="errors.region">{{errors.region}}</div>
+                        <select name="region_id" id="region" v-model="selectedAddress.region_id" class="w-100" required>
                             <option v-for="region in fetchedRegions" v-bind:key="region.id" v-bind:value="region.id">{{region.name}}</option>
                         </select>
                     </td>
@@ -75,7 +80,8 @@
                 <tr>
                     <td>Default:</td>
                     <td class="edit-text">
-                        <input type="checkbox" name="default" id="default" class="css-checkbox shipping-check" v-model="selectedAddress.default"/>
+                        <input type="checkbox" name="default" id="default" class="css-checkbox shipping-check" v-model="selectedAddress.default"
+                               :disabled="disableSelected"/>
                         <label for="default" class="css-label lite-red-check">Default</label>
                     </td>
                 </tr>
@@ -103,7 +109,15 @@
         data: () => ({
             selectedAddress: null,
             addresses: [],
-            fetchedRegions: []
+            fetchedRegions: [],
+            disableSelected: true,
+            errors: {
+                name: null,
+                address_1: null,
+                city: null,
+                postal: null,
+                region: null
+            }
         }),
         created: function() {
             const addresses = JSON.parse(this.userAddresses);
@@ -112,7 +126,55 @@
             this.fetchedRegions = regions;
         },
         methods: {
+            validate() {
+                this.errors= {
+                    name: null,
+                    address_1:
+                        null,
+                    city:
+                        null,
+                    region:
+                        null,
+                    postal:
+                        null,
+                }
+                if (!this.selectedAddress.name) {
+                    console.log("no name");
+                    this.errors.name = "You must enter a name.";
+                    document.getElementById("name").focus();
+                    return false;
+                }
+                if (!this.selectedAddress.address_1) {
+                    console.log("no address");
+                    this.errors.address_1 = "You must enter your address.";
+                    document.getElementById("address_1").focus();
+                    return false;
+                }
+                if (!this.selectedAddress.city) {
+                    console.log("no city");
+                    this.errors.city = "You must enter your city.";
+                    document.getElementById("city").focus();
+                    return false;
+                }
+                if (!this.selectedAddress.postal_code) {
+                    console.log("no postal code");
+                    document.getElementById("postal-code").focus();
+                    this.errors.postal = "You must enter your postal code.";
+                    return false;
+                }
+                if (!this.selectedAddress.region_id) {
+                    console.log("no region");
+                    document.getElementById("region").focus();
+                    this.errors.region = "You must select your region.";
+                    return false;
+                }
+                return true;
+            },
             saveAddress() {
+                if(!this.validate()) {
+                    console.log('invalid');
+                    return false;
+                }
                 if(this.selectedAddress) {
                     this.showErrors = true;
                     if(this.$v.$invalid) {
@@ -135,6 +197,11 @@
                     if(this.selectedAddress.id) {
                         axios.post(`/my-address/${this.selectedAddress.id}`, data)
                             .then(response => {
+                                if(data.default) {
+                                    this.addresses.forEach(function (address) {
+                                        address.default = false;
+                                    });
+                                }
                                 const updatedAddress = response.data;
                                 this.addresses = this.addresses.map(address => {
                                     if(updatedAddress.id !== address.id) return address;
@@ -150,6 +217,11 @@
                     } else {
                         axios.post('/my-address', data)
                         .then(response => {
+                            if(data.default) {
+                                this.addresses.forEach(function (address) {
+                                    address.default = false;
+                                });
+                            }
                             this.addresses.push(response.data);
 
                             this.selectedAddress = null;
@@ -165,14 +237,29 @@
                 this.selectedAddress = null;
             },
             selectAddress(addressId) {
+                this.errors = {
+                    name: null,
+                    address_1: null,
+                    city: null,
+                    postal: null,
+                    region: null
+                }
                 const selectedAddress = window._.find(this.addresses, {
                     id: addressId
                 });
 
                 this.selectedAddress = {...selectedAddress};
+                this.disableSelected = this.selectedAddress.default===1||this.selectedAddress.default===true;
                 this.default();
             },
             addAddress: function (e) {
+                this.errors = {
+                    name: null,
+                    address_1: null,
+                    city: null,
+                    postal: null,
+                    region: null
+                }
                 e.preventDefault();
                 
                 this.selectedAddress = {
@@ -181,24 +268,32 @@
                     address_2: "",
                     city: "",
                     postal_cod: "",
-                    region_id: ""
+                    region_id: "",
+                    default: true
                 };
                 this.default();
             },
             deleteAddress(id) {
                 axios.delete(`/my-address/${id}`)
                     .then(response => {
-                        this.addresses.splice(this.addresses.indexOf(id), 1)
+                        var removable;
+                        this.addresses.forEach(function (address) {
+                            if(address.id===id) {
+                                removable = address;
+                            }
+                        });
+                        console.log(removable);
+                        this.addresses.splice(this.addresses.indexOf(removable), 1);
                     })
             },
             default: function () {
                 axios.post('/addresses/default').then(
                     response => {
-                        if(response.data===1&&!this.selectedAddress.default) {
-                            document.getElementById("default").disabled = true;
-                        } else {
-                            document.getElementById("default").disabled = false;
-                        }
+                        // if(response.data===1&&!this.selectedAddress.default) {
+                        //     document.getElementById("default").disabled = true;
+                        // } else {
+                        //     document.getElementById("default").disabled = false;
+                        // }
                     }
                 ).catch(error => {
                     console.log("error", error);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddressStoreRequest;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,10 +49,14 @@ class MyAddressController extends Controller
 
     public function update(AddressStoreRequest $request, Address $address)
     {
+        if($request->get('default')==true) {
+            Address::where('user_id', '=', \Auth::user()->id)
+                ->update([
+                    'default' => false
+                ]);
+        }
         $data = $request->only('name', 'address_1', 'address_2', 'city', 'postal_code', 'region_id', 'default');
         $address->update($data);
-
-//        $this->check_default($address);
      
         return $address;
     }
