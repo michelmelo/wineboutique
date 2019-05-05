@@ -84,14 +84,15 @@
 
                     axios.post('/profile/update', data)
                         .then(response => {
-
+                            this.editing = !this.editing;
                         })
                         .catch(error => {
                             console.log("error", error);
                         });
                 }
-
-                this.editing = !this.editing;
+                else{
+                    this.editing = !this.editing;
+                }
             },
             getFormattedDate(date) {
                 return moment(date).format('MM/DD/Y');
