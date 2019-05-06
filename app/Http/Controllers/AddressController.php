@@ -39,17 +39,4 @@ class AddressController extends Controller
         }
         return 0;
     }
-
-    public function setDefault(Request $request) {
-        dd(\Auth::user()->id);
-//        $id = $request->post('id');
-//        $old_id = $request->post('old_id');
-//
-//        Address::where('id', '=', $old_id)
-//            ->update(['default' => 0]);
-//        Address::where('id', '=', $id)
-//            ->update(['default' => 1]);
-//
-//        return $old_id;
-    }
 }

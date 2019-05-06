@@ -139,31 +139,26 @@
                         null,
                 }
                 if (!this.selectedAddress.name) {
-                    console.log("no name");
                     this.errors.name = "You must enter a name.";
                     document.getElementById("name").focus();
                     return false;
                 }
                 if (!this.selectedAddress.address_1) {
-                    console.log("no address");
                     this.errors.address_1 = "You must enter your address.";
                     document.getElementById("address_1").focus();
                     return false;
                 }
                 if (!this.selectedAddress.city) {
-                    console.log("no city");
                     this.errors.city = "You must enter your city.";
                     document.getElementById("city").focus();
                     return false;
                 }
                 if (!this.selectedAddress.postal_code) {
-                    console.log("no postal code");
                     document.getElementById("postal-code").focus();
                     this.errors.postal = "You must enter your postal code.";
                     return false;
                 }
                 if (!this.selectedAddress.region_id) {
-                    console.log("no region");
                     document.getElementById("region").focus();
                     this.errors.region = "You must select your region.";
                     return false;
@@ -172,7 +167,6 @@
             },
             saveAddress() {
                 if(!this.validate()) {
-                    console.log('invalid');
                     return false;
                 }
                 if(this.selectedAddress) {
@@ -282,18 +276,12 @@
                                 removable = address;
                             }
                         });
-                        console.log(removable);
                         this.addresses.splice(this.addresses.indexOf(removable), 1);
                     })
             },
             default: function () {
                 axios.post('/addresses/default').then(
                     response => {
-                        // if(response.data===1&&!this.selectedAddress.default) {
-                        //     document.getElementById("default").disabled = true;
-                        // } else {
-                        //     document.getElementById("default").disabled = false;
-                        // }
                     }
                 ).catch(error => {
                     console.log("error", error);
