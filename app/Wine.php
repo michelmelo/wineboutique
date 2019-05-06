@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Conner\Tagging\Taggable;
 use Event;
+use Illuminate\Support\Facades\DB;
 
 class Wine extends Model
 {
@@ -130,6 +131,35 @@ class Wine extends Model
         $this->average_rating = $averageRating;
 
         $this->save();
+    }
+
+    /*
+     * Similar wines are defined as in same price range AND same varietal.
+     */
+    public function similarWines() {
+        if($this->price<50) {
+            $minPrice = 0;
+            $maxPrice = 50;
+        } elseif ($this->price<100) {
+            $minPrice = 50;
+            $maxPrice = 100;
+        } else {
+            $minPrice = 100;
+            $maxPrice = DB::table('wines')->select(DB::raw('max(wines.price) as max_price'))->get()[0]->max_price+0.01;
+        }
+
+        return DB::table('wines')
+            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
+            ->leftJoin('wine_ratings', 'wines.id', '=', 'wine_ratings.wine_id')
+            ->select(DB::raw('wines.*, COUNT(orders.id) as orders_count, AVG(coalesce(wine_ratings.rating,0)) as avg_rating'))
+            ->where([
+                ['wines.price','>=', $minPrice],
+                ['wines.price','<', $maxPrice],
+                ['wines.varietal_id', '=', $this->varietal_id],
+                ['wines.id', '<>', $this->id]
+            ])
+            ->groupBy('wines.id')
+            ->paginate(4);
     }
     
 }
