@@ -32,11 +32,12 @@ Dropzone.options.photos = {
     resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,
+    dictDefaultMessage: "Click here to add more images!",
     accept: function(file, done) {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         }
-        else { done(); }
+        else { document.getElementById('drop-more').style.visibility = "visible"; done(); }
     },
     sending: function(file, xhr, formData) {
         formData.append("_token", document.querySelector("input[name='_token']").value);
@@ -64,6 +65,7 @@ Dropzone.options.photos = {
             const thisDropzone = this;
 
             preloadedImages.forEach(preloadedImage => {
+                document.getElementById('drop-more').style.visibility = "visible";
                 const mockFile = { 
                     name: preloadedImage.path.replace(/^.*[\\\/]/, ''), 
                     size: preloadedImage.size,
