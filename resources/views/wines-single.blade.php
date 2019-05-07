@@ -82,87 +82,29 @@
 
     <div class="col-lg-12 col-sm-12 row row-eq-height padding-row">
         <h2 class="heading">RECOMMENDATIONS</h2>
-        <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-            <a href="#">
-                <div class="image-container">
-                    <img src="{{asset('img/vine-style-3-img.png')}}">
-                    <div class="overlay"></div>
-                    <i class="far fa-heart"></i>
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>Name Of The Store</h5>
-                <h4>$49.00</h4>
-                <div class="star-rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="order-q">193 Orders</span>
-            </a>
-        </div>
-        <a href="#" class="button red-button margin-0-auto margin-t">SEE MORE</a>
+        @foreach($recommendations as $recommendation)
+            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
+                <a href="{{route('wine.show', ['wine' => $recommendation->slug])}}">
+                    <div class="image-container">
+                        <img src="{{ $recommendation->photo }}">
+                        <div class="overlay"></div>
+                    </div>
+                    <h5>{{ $recommendation->name }}</h5>
+                    <h4>${{ $recommendation->price }}</h4>
+                    <div class="star-rating">
+                        @for($i = 0; $i<intval($recommendation->avg_rating);$i++)
+                            <span class="fa fa-star checked"></span>
+                        @endfor
+                        @for($i = intval($recommendation->avg_rating); $i<5;$i++)
+                            <span class="fa fa-star"></span>
+                        @endfor
+                    </div>
+                    <span class="order-q">{{ $recommendation->orders_count }} Orders</span>
+                </a>
+
+            </div>
+        @endforeach
+        {{ $recommendations->links() }}
     </div>
 
 </div>
