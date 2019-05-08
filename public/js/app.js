@@ -72955,7 +72955,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -72974,7 +72973,8 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
             editing: false,
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
-            }
+            },
+            focusedDate: null
         };
     },
     created: function created() {
@@ -72983,6 +72983,9 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
         this.lastName = user.lastName;
         this.email = user.email;
         if (user.birthday) this.birthday = new Date(user.birthday);
+        var d = new Date();
+        d.setFullYear(d.getFullYear() - 22);
+        this.focusedDate = d;
     },
     methods: {
         toggleEditing: function toggleEditing() {
@@ -74880,11 +74883,13 @@ var render = function() {
             _vm.editing
               ? _c("datepicker", {
                   attrs: {
+                    id: "datepicker",
                     name: "birthday",
                     "minimum-view": "day",
                     "disabled-dates": _vm.disabledDates,
                     value: _vm.birthday,
-                    typeable: true
+                    typeable: true,
+                    "open-date": _vm.focusedDate
                   },
                   on: { selected: _vm.seletedBirthday }
                 })
@@ -74906,28 +74911,7 @@ var render = function() {
         _c("td", [_vm._v("Email address:")]),
         _vm._v(" "),
         _c("td", { staticClass: "edit-text" }, [
-          _vm.editing
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email"
-                  }
-                ],
-                attrs: { name: "email" },
-                domProps: { value: _vm.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.email = $event.target.value
-                  }
-                }
-              })
-            : _c("span", [_vm._v(_vm._s(_vm.email))])
+          _c("span", [_vm._v(_vm._s(_vm.email))])
         ])
       ])
     ])
