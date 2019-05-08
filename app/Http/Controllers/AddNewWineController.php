@@ -118,11 +118,9 @@ class AddNewWineController extends Controller
             $tags = explode(",", $request->tags);
             $wine->tag($tags);
         }
-        
-        // $wine = Wine::create($input);
 
-//        file_put_contents('logs.txt', $logFile);
 
+        $request->session()->put('msg', 'Wine successfully added!');
         return redirect('my_winery');
 
     }
@@ -225,6 +223,10 @@ class AddNewWineController extends Controller
         $wine->delete();
 
         return redirect('my_winery');
+    }
+
+    public function hideMsg(Request $request) {
+        $request->session()->forget('msg');
     }
 
 }
