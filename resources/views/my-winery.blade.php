@@ -50,7 +50,7 @@
                                     <td>{{ $wine->name }}</td>
                                     <td><img src="{{ $wine->photo }}"></td>
                                     <td>{{ $wine->price }}</td>
-                                    <td>{{ $wine->varietal_id }}</td>
+                                    <td>{{ $wine->varietal }}</td>
                                     <td>{{ $wine->description }}</td>
                                     <td>{{ $wine->who_made_it }}</td>
                                     <td>{{ $wine->when_was_it_made }}</td>
