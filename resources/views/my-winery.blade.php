@@ -4,6 +4,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if(Session::has('msg'))
+                <div class="message" id="msg">
+                    <p>{{Session::get('msg')}}</p>
+                </div>
+            @endif
+            <script>
+                (function() {
+                    setTimeout(function () {
+                        if(document.getElementById("msg")!==null) {
+                            document.getElementById("msg").style.display = 'none';
+                            $.post('/hideMsg');
+                        }
+                    }, 5000);
+                })();
+            </script>
             <div class="card">
                 <div class="card-header">
                     {{ __('My Winery') }}

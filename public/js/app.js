@@ -52996,11 +52996,12 @@ Dropzone.options.photos = {
     resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,
+    dictDefaultMessage: "Click here to add more images!",
     accept: function accept(file, done) {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         } else {
-            done();
+            document.getElementById('drop-more').style.visibility = "visible";done();
         }
     },
     sending: function sending(file, xhr, formData) {
@@ -53050,6 +53051,7 @@ Dropzone.options.photos = {
             var thisDropzone = this;
 
             preloadedImages.forEach(function (preloadedImage) {
+                document.getElementById('drop-more').style.visibility = "visible";
                 var mockFile = {
                     name: preloadedImage.path.replace(/^.*[\\\/]/, ''),
                     size: preloadedImage.size,
@@ -72310,41 +72312,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['wineryName'],
@@ -72820,6 +72787,54 @@ var render = function() {
               }
             ],
             staticClass: "red-button button float-right",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                $event.preventDefault()
+                _vm.setStep(2)
+              }
+            }
+          },
+          [_vm._v("NEXT STEP")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.step === 2,
+                expression: "step===2"
+              }
+            ],
+            staticClass: "red-button button float-left",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                $event.preventDefault()
+                _vm.setStep(1)
+              }
+            }
+          },
+          [_vm._v("PREVIOUS STEP")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.step === 2,
+                expression: "step===2"
+              }
+            ],
+            staticClass: "red-button button float-right",
             attrs: { type: "submit" }
           },
           [_vm._v("FINISH")]
@@ -72835,16 +72850,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "name-check" }, [
       _c("i", { staticClass: "fas fa-check" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c("div", { staticClass: "image-container" }, [
-        _c("img", { attrs: { src: "/img/add-wine.jpg" } })
-      ])
     ])
   }
 ]
@@ -72998,12 +73003,14 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
 
                 var data = _.pick(this, formFields);
 
-                axios.post('/profile/update', data).then(function (response) {}).catch(function (error) {
+                axios.post('/profile/update', data).then(function (response) {
+                    _this.editing = !_this.editing;
+                }).catch(function (error) {
                     console.log("error", error);
                 });
+            } else {
+                this.editing = !this.editing;
             }
-
-            this.editing = !this.editing;
         },
         getFormattedDate: function getFormattedDate(date) {
             return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('MM/DD/Y');
@@ -76333,7 +76340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             wines: [],
-            fetchedFirst: false
+            fetchedFirst: false,
+            photo: ''
         };
     },
 
@@ -76416,10 +76424,7 @@ var render = function() {
                     _c("div", [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-3" }, [
-                          _c("img", {
-                            //attrs: { src: "/images/wine/" + wine.slug + ".jpg" }
-                            attrs: { src: wine.photo }
-                          })
+                          _c("img", { attrs: { src: wine.photo } })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-9" }, [
@@ -76557,13 +76562,8 @@ var render = function() {
                           staticStyle: { margin: "0 !important" }
                         },
                         [
-                          _c("div", { staticClass: "col-3" }, [
-                            _c("img", {
-                              attrs: {
-                                //src: "/images/wine/" + wine.slug + ".jpg"
-                                src: wine.photo
-                              }
-                            })
+                          _c("div", { staticClass: "col-3 teas" }, [
+                            _c("img", { attrs: { src: wine.photo } })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [

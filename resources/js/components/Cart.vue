@@ -7,7 +7,7 @@
                     <div>
                         <div  class="row">
                             <div class="col-3">
-                                <img src="{{ wine.photo }}" />
+                                <img :src="wine.photo" />
                             </div>
                             <div class="col-9">
                                 <h5 class="name">{{wine.name}}</h5>
@@ -69,7 +69,7 @@
                 <div>
                     <div  class="row" style="margin: 0 !important;">
                         <div class="col-3 teas">
-                            <img src="{{ wine.photo }}" />
+                            <img :src="wine.photo" />
                         </div>
                         <div class="col-9">
                             <h5 class="name">{{wine.name}}</h5>
