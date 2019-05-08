@@ -72310,41 +72310,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['wineryName'],
@@ -72820,6 +72785,54 @@ var render = function() {
               }
             ],
             staticClass: "red-button button float-right",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                $event.preventDefault()
+                _vm.setStep(2)
+              }
+            }
+          },
+          [_vm._v("NEXT STEP")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.step === 2,
+                expression: "step===2"
+              }
+            ],
+            staticClass: "red-button button float-left",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                $event.preventDefault()
+                _vm.setStep(1)
+              }
+            }
+          },
+          [_vm._v("PREVIOUS STEP")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.step === 2,
+                expression: "step===2"
+              }
+            ],
+            staticClass: "red-button button float-right",
             attrs: { type: "submit" }
           },
           [_vm._v("FINISH")]
@@ -72835,16 +72848,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "name-check" }, [
       _c("i", { staticClass: "fas fa-check" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c("div", { staticClass: "image-container" }, [
-        _c("img", { attrs: { src: "/img/add-wine.jpg" } })
-      ])
     ])
   }
 ]
@@ -72950,7 +72953,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -72969,7 +72971,8 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
             editing: false,
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
-            }
+            },
+            focusedDate: null
         };
     },
     created: function created() {
@@ -72978,6 +72981,9 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
         this.lastName = user.lastName;
         this.email = user.email;
         if (user.birthday) this.birthday = new Date(user.birthday);
+        var d = new Date();
+        d.setFullYear(d.getFullYear() - 22);
+        this.focusedDate = d;
     },
     methods: {
         toggleEditing: function toggleEditing() {
@@ -72998,12 +73004,14 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
 
                 var data = _.pick(this, formFields);
 
-                axios.post('/profile/update', data).then(function (response) {}).catch(function (error) {
+                axios.post('/profile/update', data).then(function (response) {
+                    _this.editing = !_this.editing;
+                }).catch(function (error) {
                     console.log("error", error);
                 });
+            } else {
+                this.editing = !this.editing;
             }
-
-            this.editing = !this.editing;
         },
         getFormattedDate: function getFormattedDate(date) {
             return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('MM/DD/Y');
@@ -74873,11 +74881,13 @@ var render = function() {
             _vm.editing
               ? _c("datepicker", {
                   attrs: {
+                    id: "datepicker",
                     name: "birthday",
                     "minimum-view": "day",
                     "disabled-dates": _vm.disabledDates,
                     value: _vm.birthday,
-                    typeable: true
+                    typeable: true,
+                    "open-date": _vm.focusedDate
                   },
                   on: { selected: _vm.seletedBirthday }
                 })
@@ -74899,28 +74909,7 @@ var render = function() {
         _c("td", [_vm._v("Email address:")]),
         _vm._v(" "),
         _c("td", { staticClass: "edit-text" }, [
-          _vm.editing
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email"
-                  }
-                ],
-                attrs: { name: "email" },
-                domProps: { value: _vm.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.email = $event.target.value
-                  }
-                }
-              })
-            : _c("span", [_vm._v(_vm._s(_vm.email))])
+          _c("span", [_vm._v(_vm._s(_vm.email))])
         ])
       ])
     ])
@@ -76333,7 +76322,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             wines: [],
-            fetchedFirst: false
+            fetchedFirst: false,
+            photo: ''
         };
     },
 
@@ -76416,10 +76406,7 @@ var render = function() {
                     _c("div", [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-3" }, [
-                          _c("img", {
-                            //attrs: { src: "/images/wine/" + wine.slug + ".jpg" }
-                            attrs: { src: wine.photo }
-                          })
+                          _c("img", { attrs: { src: wine.photo } })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-9" }, [
@@ -76557,13 +76544,8 @@ var render = function() {
                           staticStyle: { margin: "0 !important" }
                         },
                         [
-                          _c("div", { staticClass: "col-3" }, [
-                            _c("img", {
-                              attrs: {
-                                //src: "/images/wine/" + wine.slug + ".jpg"
-                                src: wine.photo
-                              }
-                            })
+                          _c("div", { staticClass: "col-3 teas" }, [
+                            _c("img", { attrs: { src: wine.photo } })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-9" }, [
