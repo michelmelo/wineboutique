@@ -170,7 +170,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="0" name="price" class="usd-input" value="{{ old('price') ? old('price') : $wine->price }}" required>
+                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" value="{{ old('price') ? old('price') : $wine->price }}" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
