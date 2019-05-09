@@ -103,4 +103,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('my_winery', 'MyWineryController@index')->name('my-winery');
 
+    Route::get('my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
+    Route::post('my-winery-store', 'MyWineryController@store')->name('my-winery-store');
 });

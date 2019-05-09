@@ -31,7 +31,6 @@ class WineController extends Controller
         //    ];
 //        file_put_contents('logs.txt', $_SESSION['HTTP_REFERER']);
 
-
         return Auth::user()->winery->wines()->create([
             'name' => empty($request->get('name')) ? null : $request->get('name'),
             'price' => empty($request->get('price')) ? null : $request->get('price'),

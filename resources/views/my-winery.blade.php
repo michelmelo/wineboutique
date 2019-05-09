@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('My Winery') }}
+                    <a class="btn btn-primary float-left" href="{{ route('my-winery-edit') }}">Edit Winery Info</a>
                     <a class="btn btn-primary float-right" href="{{ route('add-new-wine.index') }}">Add New Wine</a>
                 </div>
 
