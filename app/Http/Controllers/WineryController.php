@@ -15,7 +15,7 @@ class WineryController extends Controller
         $photoName = Str::uuid() . "." . $request->file('photo')->extension();
         $request->photo->storeAs('public/images/wineries/profile', $photoName);
 
-        Auth::user()->winery->update(['profile' => $photoName]);
+        Auth::user()->winery->where('id', $request->wid)->update(['profile' => $photoName]);
 
         return [
             'photo' => $photoName
@@ -27,7 +27,7 @@ class WineryController extends Controller
         $photoName = Str::uuid() . "." . $request->file('photo')->extension();
         $request->photo->storeAs('public/images/wineries/cover', $photoName);
 
-        Auth::user()->winery->update(['cover' => $photoName]);
+        Auth::user()->winery->where('id', $request->wid)->update(['cover' => $photoName]);
 
         return [
             'photo' => $photoName
