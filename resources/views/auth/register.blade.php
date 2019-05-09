@@ -59,6 +59,11 @@
                         <strong>{{ $errors->first('acceptAge') }}</strong>
                     </span>
                 @endif
+
+                <div id="over-21" >
+                    <input type="date" class="form-control" min="2019-01-02" />
+                </div>
+
                 <input type="submit" name="submit" class="button red-button full-width" value="CREATE AN ACCOUNT">
             </form>
         </div>
