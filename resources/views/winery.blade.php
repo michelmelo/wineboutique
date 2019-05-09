@@ -12,7 +12,7 @@
         <div>
             <h1>{{$winery->name}}</h1>
             <div class="star-rating">
-                <rating :post="'{{$winery->slug}}'" :rating="{{$winery->rating()}}" :type="'winery'"></rating>
+                <rating :post="'{{$winery->slug}}'" :rating="{{$winery->rating()}}" :readonly="{{ Auth::check() ? 'false' : 'true' }}" :type="'winery'"></rating>
             </div>
             <p>{{$winery->ratingCount()}} Feedback</p>
         </div>
