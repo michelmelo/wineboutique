@@ -11,13 +11,19 @@
         
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-4 col-sm-12">
+                <p>Main picture *</p>
+                <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
             </div>
+        </div>
+        <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
                 <div class="fallback">
+                    <p>Click into box to add more.</p>
                 </div>
             </div>
+            <div class="message" id="drop-more" style="visibility: hidden">Click on the box to add more.</div>
         </div>
       
 
@@ -31,7 +37,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" required value="title">
+                        <input type="text" name="name" id="name" placeholder="Title name" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -45,7 +51,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required value="meeee">
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -54,8 +60,8 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <select id="when_was_it_made" name="when_was_it_made">
-                        <option disabled selected hidden>When was it made?</option>
+                        <select id="when_was_it_made" name="when_was_it_made" required>
+                        <option value="" disabled selected hidden>When was it made?</option>
                         <?php $now = date('Y'); ?>
                             @for ($i = $now; $i >= 1900; $i--)
                                 <option value="{{ $i }}">{{ $i }}</option>
@@ -73,7 +79,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="varietal" id="varietal">
+                        <select name="varietal" id="varietal" required>
                             <option value="" disabled selected hidden>Varietal</option>
                             @foreach($varietals as $varietal) 
                                 <option value="{{$varietal->id}}">{{$varietal->name}}</option>
@@ -99,7 +105,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required value="123">
+                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -108,8 +114,8 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <select name="unit_id" id="unit_id">
-                            <option disabled selected hidden>Choose a unit</option>
+                        <select name="unit_id" id="unit_id" required>
+                            <option value="" disabled selected hidden>Choose a unit</option>
                             @foreach($capacity_units as $capacity_unit) 
                                 <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>
                             @endforeach
@@ -125,7 +131,7 @@
                         <p>Description *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <textarea id="description" type="text" name="description" placeholder="Add text"></textarea>
+                        <textarea id="description" type="text" name="description" placeholder="Add text" required></textarea>
                         @if($errors->has('description'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('description') }}</strong>
@@ -161,7 +167,7 @@
                             <p>Price *</p>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" required value="50">
+                            <input type="number" min="1" max="999999.99" name="price" class="usd-input no-sliders" step="0.01" required>
                             <div class="usd">USD</div>
                         </div>
                         @if($errors->has('price'))
@@ -187,7 +193,7 @@
                     <input type="hidden" name="location" value="unknown">
                     <div class="col-lg-8 col-sm-12">
                         <select id="location" name="shipping[0][location]" class="location" required>
-                            <option disabled selected hidden>Select location</option>
+                            <option value="" disabled selected hidden>Select location</option>
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}">{{$region->name}}</option>
                             @endforeach
@@ -204,11 +210,11 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required value="1">
+                        <input type="number" min="0" name="shipping[0][from]" placeholder="From" class="from" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required value="2">
+                        <input type="number" min="0" name="shipping[0][to]" placeholder="To" class="to" required>
                     </div>
 
                     <div class="col-lg-2 col-sm-12 radio-check">
@@ -359,7 +365,8 @@
     $(document).ready(function(){
         var maxField = 10; 
         var $addButton = $('#add_button'); 
-        var wrapper = $('#field_wrapper'); 
+        var wrapper = $('#field_wrapper');
+        var $submitButton = $('#submit');
         var fieldHTML = '<div><select><option>Add a destination</option></select><a href="#" class="remove_button">Remove</a>'; 
         
         //Once add button is clicked
@@ -384,6 +391,17 @@
                 $(shippingItem).find("[id^='shipping_check_']").attr('id', 'shipping_check_'+shippingIndex);
                 $(shippingItem).find("[for^='shipping_check_']").attr('for', 'shipping_check_'+shippingIndex);
             });
+        });
+
+        //Once submit button is clicked
+        $submitButton.click(function() {
+           if($('#imagePreview').prop('src').includes("primary-photo.jpg")) {
+               window.scrollTo(0,0);
+               $('#main-img-err').prop('style').display = 'block';
+               return false;
+           } else {
+               $('#main-img-err').prop('style').display = "none";
+           }
         });
         
         //Once remove button is clicked

@@ -19,15 +19,14 @@
             <tr>
                 <td>Date of birth:</td>
                 <td class="edit-text">
-                    <datepicker name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true"></datepicker>
+                    <datepicker id="datepicker" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
                     <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
                 </td>
             </tr>
             <tr>
                 <td>Email address:</td>
                 <td class="edit-text">
-                    <input name="email" v-model="email" v-if="editing" />
-                    <span v-else>{{email}}</span>
+                    <span>{{email}}</span>
                 </td>
             </tr>
         </table>
@@ -56,7 +55,8 @@
             editing: false,
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
-            }
+            },
+            focusedDate: null
         }),
         created: function() {
             const user = JSON.parse(this.user);
@@ -64,6 +64,9 @@
             this.lastName = user.lastName;
             this.email = user.email;
             if(user.birthday) this.birthday = new Date(user.birthday);
+            let d = new Date();
+            d.setFullYear(d.getFullYear()-22);
+            this.focusedDate = d;
         },
         methods: {
             toggleEditing() {
@@ -84,14 +87,15 @@
 
                     axios.post('/profile/update', data)
                         .then(response => {
-
+                            this.editing = !this.editing;
                         })
                         .catch(error => {
                             console.log("error", error);
                         });
                 }
-
-                this.editing = !this.editing;
+                else{
+                    this.editing = !this.editing;
+                }
             },
             getFormattedDate(date) {
                 return moment(date).format('MM/DD/Y');

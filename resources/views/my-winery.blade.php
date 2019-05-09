@@ -4,6 +4,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if(Session::has('msg'))
+                <div class="message" id="msg">
+                    <p>{{Session::get('msg')}}</p>
+                </div>
+            @endif
+            <script>
+                (function() {
+                    setTimeout(function () {
+                        if(document.getElementById("msg")!==null) {
+                            document.getElementById("msg").style.display = 'none';
+                            $.post('/hideMsg');
+                        }
+                    }, 5000);
+                })();
+            </script>
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-primary float-left" href="{{ route('my-winery-edit') }}">Edit Winery Info</a>
@@ -35,7 +50,7 @@
                                     <td>{{ $wine->name }}</td>
                                     <td><img src="{{ $wine->photo }}"></td>
                                     <td>{{ $wine->price }}</td>
-                                    <td>{{ $wine->varietal_id }}</td>
+                                    <td>{{ $wine->varietal }}</td>
                                     <td>{{ $wine->description }}</td>
                                     <td>{{ $wine->who_made_it }}</td>
                                     <td>{{ $wine->when_was_it_made }}</td>

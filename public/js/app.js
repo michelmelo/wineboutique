@@ -53231,11 +53231,12 @@ Dropzone.options.photos = {
     resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,
+    dictDefaultMessage: "Click here to add more images!",
     accept: function accept(file, done) {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         } else {
-            done();
+            document.getElementById('drop-more').style.visibility = "visible";done();
         }
     },
     sending: function sending(file, xhr, formData) {
@@ -53285,6 +53286,7 @@ Dropzone.options.photos = {
             var thisDropzone = this;
 
             preloadedImages.forEach(function (preloadedImage) {
+                document.getElementById('drop-more').style.visibility = "visible";
                 var mockFile = {
                     name: preloadedImage.path.replace(/^.*[\\\/]/, ''),
                     size: preloadedImage.size,
@@ -73188,7 +73190,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -73207,7 +73208,8 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
             editing: false,
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
-            }
+            },
+            focusedDate: null
         };
     },
     created: function created() {
@@ -73216,6 +73218,9 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
         this.lastName = user.lastName;
         this.email = user.email;
         if (user.birthday) this.birthday = new Date(user.birthday);
+        var d = new Date();
+        d.setFullYear(d.getFullYear() - 22);
+        this.focusedDate = d;
     },
     methods: {
         toggleEditing: function toggleEditing() {
@@ -73236,12 +73241,14 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
 
                 var data = _.pick(this, formFields);
 
-                axios.post('/profile/update', data).then(function (response) {}).catch(function (error) {
+                axios.post('/profile/update', data).then(function (response) {
+                    _this.editing = !_this.editing;
+                }).catch(function (error) {
                     console.log("error", error);
                 });
+            } else {
+                this.editing = !this.editing;
             }
-
-            this.editing = !this.editing;
         },
         getFormattedDate: function getFormattedDate(date) {
             return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('MM/DD/Y');
@@ -75111,11 +75118,13 @@ var render = function() {
             _vm.editing
               ? _c("datepicker", {
                   attrs: {
+                    id: "datepicker",
                     name: "birthday",
                     "minimum-view": "day",
                     "disabled-dates": _vm.disabledDates,
                     value: _vm.birthday,
-                    typeable: true
+                    typeable: true,
+                    "open-date": _vm.focusedDate
                   },
                   on: { selected: _vm.seletedBirthday }
                 })
@@ -75137,28 +75146,7 @@ var render = function() {
         _c("td", [_vm._v("Email address:")]),
         _vm._v(" "),
         _c("td", { staticClass: "edit-text" }, [
-          _vm.editing
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email"
-                  }
-                ],
-                attrs: { name: "email" },
-                domProps: { value: _vm.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.email = $event.target.value
-                  }
-                }
-              })
-            : _c("span", [_vm._v(_vm._s(_vm.email))])
+          _c("span", [_vm._v(_vm._s(_vm.email))])
         ])
       ])
     ])
@@ -77828,6 +77816,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77840,7 +77834,15 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
         return {
             selectedAddress: null,
             addresses: [],
-            fetchedRegions: []
+            fetchedRegions: [],
+            disableSelected: true,
+            errors: {
+                name: null,
+                address_1: null,
+                city: null,
+                postal: null,
+                region: null
+            }
         };
     },
     created: function created() {
@@ -77850,9 +77852,47 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
         this.fetchedRegions = regions;
     },
     methods: {
+        validate: function validate() {
+            this.errors = {
+                name: null,
+                address_1: null,
+                city: null,
+                region: null,
+                postal: null
+            };
+            if (!this.selectedAddress.name) {
+                this.errors.name = "You must enter a name.";
+                document.getElementById("name").focus();
+                return false;
+            }
+            if (!this.selectedAddress.address_1) {
+                this.errors.address_1 = "You must enter your address.";
+                document.getElementById("address_1").focus();
+                return false;
+            }
+            if (!this.selectedAddress.city) {
+                this.errors.city = "You must enter your city.";
+                document.getElementById("city").focus();
+                return false;
+            }
+            if (!this.selectedAddress.postal_code) {
+                document.getElementById("postal-code").focus();
+                this.errors.postal = "You must enter your postal code.";
+                return false;
+            }
+            if (!this.selectedAddress.region_id) {
+                document.getElementById("region").focus();
+                this.errors.region = "You must select your region.";
+                return false;
+            }
+            return true;
+        },
         saveAddress: function saveAddress() {
             var _this = this;
 
+            if (!this.validate()) {
+                return false;
+            }
             if (this.selectedAddress) {
                 this.showErrors = true;
                 if (this.$v.$invalid) {
@@ -77874,6 +77914,11 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
 
                 if (this.selectedAddress.id) {
                     axios.post('/my-address/' + this.selectedAddress.id, data).then(function (response) {
+                        if (data.default) {
+                            _this.addresses.forEach(function (address) {
+                                address.default = false;
+                            });
+                        }
                         var updatedAddress = response.data;
                         _this.addresses = _this.addresses.map(function (address) {
                             if (updatedAddress.id !== address.id) return address;
@@ -77887,6 +77932,11 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
                     });
                 } else {
                     axios.post('/my-address', data).then(function (response) {
+                        if (data.default) {
+                            _this.addresses.forEach(function (address) {
+                                address.default = false;
+                            });
+                        }
                         _this.addresses.push(response.data);
 
                         _this.selectedAddress = null;
@@ -77901,15 +77951,30 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
             this.selectedAddress = null;
         },
         selectAddress: function selectAddress(addressId) {
+            this.errors = {
+                name: null,
+                address_1: null,
+                city: null,
+                postal: null,
+                region: null
+            };
             var selectedAddress = window._.find(this.addresses, {
                 id: addressId
             });
 
             this.selectedAddress = _extends({}, selectedAddress);
+            this.disableSelected = this.selectedAddress.default === 1 || this.selectedAddress.default === true;
             this.default();
         },
 
         addAddress: function addAddress(e) {
+            this.errors = {
+                name: null,
+                address_1: null,
+                city: null,
+                postal: null,
+                region: null
+            };
             e.preventDefault();
 
             this.selectedAddress = {
@@ -77918,7 +77983,8 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
                 address_2: "",
                 city: "",
                 postal_cod: "",
-                region_id: ""
+                region_id: "",
+                default: true
             };
             this.default();
         },
@@ -77926,20 +77992,18 @@ var formFields = ['name', 'address_1', 'address_2', 'city', 'postal_code', 'regi
             var _this2 = this;
 
             axios.delete('/my-address/' + id).then(function (response) {
-                _this2.addresses.splice(_this2.addresses.indexOf(id), 1);
+                var removable;
+                _this2.addresses.forEach(function (address) {
+                    if (address.id === id) {
+                        removable = address;
+                    }
+                });
+                _this2.addresses.splice(_this2.addresses.indexOf(removable), 1);
             });
         },
 
         default: function _default() {
-            var _this3 = this;
-
-            axios.post('/addresses/default').then(function (response) {
-                if (response.data === 1 && !_this3.selectedAddress.default) {
-                    document.getElementById("default").disabled = true;
-                } else {
-                    document.getElementById("default").disabled = false;
-                }
-            }).catch(function (error) {
+            axios.post('/addresses/default').then(function (response) {}).catch(function (error) {
                 console.log("error", error);
             });
         }
@@ -78007,17 +78071,19 @@ var render = function() {
                       [_vm._v("edit")]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.deleteAddress(address.id)
-                          }
-                        }
-                      },
-                      [_vm._v("delete")]
-                    )
+                    !address.default
+                      ? _c(
+                          "button",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.deleteAddress(address.id)
+                              }
+                            }
+                          },
+                          [_vm._v("delete")]
+                        )
+                      : _vm._e()
                   ])
                 ])
               })
@@ -78052,6 +78118,21 @@ var render = function() {
               _c("td", [_vm._v("Name:")]),
               _vm._v(" "),
               _c("td", { staticClass: "edit-text" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "error-block",
+                    model: {
+                      value: _vm.errors.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.errors, "name", $$v)
+                      },
+                      expression: "errors.name"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.errors.name))]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -78062,7 +78143,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "w-100",
-                  attrs: { name: "name" },
+                  attrs: { name: "name", id: "name", required: "" },
                   domProps: { value: _vm.selectedAddress.name },
                   on: {
                     input: function($event) {
@@ -78080,6 +78161,21 @@ var render = function() {
               _c("td", [_vm._v("Address1:")]),
               _vm._v(" "),
               _c("td", { staticClass: "edit-text" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "error-block",
+                    model: {
+                      value: _vm.errors.address_1,
+                      callback: function($$v) {
+                        _vm.$set(_vm.errors, "address_1", $$v)
+                      },
+                      expression: "errors.address_1"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.errors.address_1))]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -78090,7 +78186,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "w-100",
-                  attrs: { name: "address_1" },
+                  attrs: { name: "address_1", id: "address_1", required: "" },
                   domProps: { value: _vm.selectedAddress.address_1 },
                   on: {
                     input: function($event) {
@@ -78122,7 +78218,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "w-100",
-                  attrs: { name: "address_2" },
+                  attrs: { name: "address_2", id: "address_2" },
                   domProps: { value: _vm.selectedAddress.address_2 },
                   on: {
                     input: function($event) {
@@ -78144,6 +78240,21 @@ var render = function() {
               _c("td", [_vm._v("City:")]),
               _vm._v(" "),
               _c("td", { staticClass: "edit-text" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "error-block",
+                    model: {
+                      value: _vm.errors.city,
+                      callback: function($$v) {
+                        _vm.$set(_vm.errors, "city", $$v)
+                      },
+                      expression: "errors.city"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.errors.city))]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -78154,7 +78265,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "w-100",
-                  attrs: { name: "city" },
+                  attrs: { name: "city", id: "city", required: "" },
                   domProps: { value: _vm.selectedAddress.city },
                   on: {
                     input: function($event) {
@@ -78172,6 +78283,21 @@ var render = function() {
               _c("td", [_vm._v("Postal Code:")]),
               _vm._v(" "),
               _c("td", { staticClass: "edit-text" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "error-block",
+                    model: {
+                      value: _vm.errors.postal,
+                      callback: function($$v) {
+                        _vm.$set(_vm.errors, "postal", $$v)
+                      },
+                      expression: "errors.postal"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.errors.postal))]
+                ),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -78182,7 +78308,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "w-100",
-                  attrs: { type: "number", name: "postal_code" },
+                  attrs: {
+                    type: "number",
+                    id: "postal-code",
+                    name: "postal_code",
+                    required: ""
+                  },
                   domProps: { value: _vm.selectedAddress.postal_code },
                   on: {
                     input: function($event) {
@@ -78205,6 +78336,21 @@ var render = function() {
               _vm._v(" "),
               _c("td", { staticClass: "edit-text" }, [
                 _c(
+                  "div",
+                  {
+                    staticClass: "error-block",
+                    model: {
+                      value: _vm.errors.region,
+                      callback: function($$v) {
+                        _vm.$set(_vm.errors, "region", $$v)
+                      },
+                      expression: "errors.region"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.errors.region))]
+                ),
+                _vm._v(" "),
+                _c(
                   "select",
                   {
                     directives: [
@@ -78216,7 +78362,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "w-100",
-                    attrs: { name: "region_id" },
+                    attrs: { name: "region_id", id: "region", required: "" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -78262,7 +78408,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "css-checkbox shipping-check",
-                  attrs: { type: "checkbox", name: "default", id: "default" },
+                  attrs: {
+                    type: "checkbox",
+                    name: "default",
+                    id: "default",
+                    disabled: _vm.disableSelected
+                  },
                   domProps: {
                     checked: Array.isArray(_vm.selectedAddress.default)
                       ? _vm._i(_vm.selectedAddress.default, null) > -1
