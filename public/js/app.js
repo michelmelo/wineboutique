@@ -78637,7 +78637,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['post', 'rating', 'type'],
+    props: ['post', 'rating', 'type', 'readonly'],
     watch: {
         rating: function rating() {
             axios.post('/rate-' + this.type + '/' + this.post, { rating: this.rating }).then(function (response) {
@@ -78664,6 +78664,7 @@ var render = function() {
         attrs: {
           "star-size": 20,
           "active-color": "#991D3F",
+          "read-only": _vm.readonly,
           "show-rating": false
         },
         model: {

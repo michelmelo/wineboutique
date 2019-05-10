@@ -39,7 +39,7 @@
 
                 <div class="col-4 center-text">
                     <p>RATING</p>
-                    <rating :post="'{{ $wine->slug }}'" :rating="{{$wine->rating()}}" :type="'wine'"></rating>
+                    <rating :post="'{{ $wine->slug }}'" :rating="{{$wine->rating()}}" :readonly="{{ Auth::check() ? 'false' : 'true' }}" :type="'wine'"></rating>
                 </div>
             </div>
 
