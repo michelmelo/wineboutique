@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="page-header">
-        <img src="{{asset('img/winery-1.jpg')}}">
+        <img src="{{ $winery->cover==null ? asset('img/winery-1.jpg') : '/images/winery/cover/'.$winery->cover }}">
         <img class="wine-badge" src="{{asset('img/badge.png')}}">
     </div>
 
     <div class="row winery-info">
-        <img class="winery-logo-big" src="{{asset('img/winery-logo-1.jpg')}}">
+        <img class="winery-logo-big" src="{{ $winery->profile==null ? asset('img/winery-logo-1.jpg') : '/images/winery/profile/'.$winery->profile }}">
         <div>
             <h1>{{$winery->name}}</h1>
             <div class="star-rating">

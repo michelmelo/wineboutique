@@ -96,7 +96,11 @@
 
                     axios.post(`/winery/${type}`, data)
                         .then(response => {
-                            this[type] = response.data.photo;
+                            if(e.target.dataset.type==='cover') {
+                                this.wineryCover = response.data.photo;
+                            } else {
+                                this.wineryProfile = response.data.photo;
+                            }
                         })
                         .catch(error => {
                             console.log("error", error);
@@ -114,10 +118,10 @@
                 return this.errors[name];
             },
             getProfilePhoto() {
-                return this.wineryProfile?`/storage/images/wineries/profile/${this.wineryProfile}`:this.defaultProfilePhoto;
+                return this.wineryProfile?`/images/winery/profile/${this.wineryProfile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.wineryCover?`/storage/images/wineries/cover/${this.wineryCover}`:this.defaultCoverPhoto;
+                return this.wineryCover?`/images/winery/cover/${this.wineryCover}`:this.defaultCoverPhoto;
             }
         }
     }
