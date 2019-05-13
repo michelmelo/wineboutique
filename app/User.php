@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\MailResetPasswordNotification;
+use App\Notifications\MailVarifyNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -81,4 +83,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Address::class);
     }
+
+      public function sendPasswordResetNotification($token)
+   {
+      $this->notify(new MailResetPasswordNotification($token));
+   }
+
+      public function sendVarifyNotification()
+   {
+      $this->notify(new MailVarifyNotification());
+   }
 }
