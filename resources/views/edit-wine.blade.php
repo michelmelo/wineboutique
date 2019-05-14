@@ -5,20 +5,24 @@
     <!-- @php
         var_dump($errors);
     @endphp -->
-    <form method="POST" action="{{ route('add-new-wine.update', $wine->slug) }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
+    <form method="POST" action="{{url('/store-edited-wine').'/'.$wine->name}}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <h1 class="headline-2">ADD A NEW WINE</h1>
+        <h1 class="headline-2">EDIT WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
             <div class="col-lg-2 col-4">
-                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
-            </div>
-            <div id="photos" class="dropzone">
-                <div class="fallback">
+                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview"></label>
+                <div class="help-message">
+                    {{ $wine->photo === null ? '' : '(click to change)' }}
                 </div>
             </div>
+        </div>
+        <div class="shadow-box row new-wine-photos">
+            <div id="photos" class="dropzone">
+            </div>
+            <div class="message" id="drop-more" style="visibility: hidden">Click on the box to add more.</div>
             <script>
                 var preloadedImages = {!! $preloadedImages->toJson() !!};
             </script>
@@ -48,7 +52,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" value="{{ old('who_made_it') ? old('who-made-it') : $wine->who_made_it }}" required>
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" value="{{ old('who_made_it') ? old('who_made_it') : $wine->who_made_it }}" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -129,7 +133,7 @@
                         <p>Description *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <textarea id="description" type="text" name="description" placeholder="Add text" >{{ old('description') ? old('description') : $wine->description }} </textarea>
+                        <textarea id="description" type="text" name="description" placeholder="Add text" required >{{ old('description') ? old('description') : $wine->description }} </textarea>
                         @if($errors->has('description'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('description') }}</strong>
@@ -189,7 +193,7 @@
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
-                    <input type="hidden" name="shipping[0][id]" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->id : '' }}" />
+                    <input type="hidden" name="shipping[0][id]" value="{{ isset($wine->wineShippings[0]) ? $wine->wineShippings[0]->id : '' }}" required/>
 
                     <div class="col-lg-8 col-sm-12">
                         @php

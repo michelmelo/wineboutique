@@ -11,7 +11,7 @@
 
         @foreach($wines as $wine)
         <div class="col-xs-5 vine-box-style-3 style-3-2">
-            <a href="#">
+            <a href="/wine/{{$wine->slug}}">
                 <div class="image-container">
                     <img src="{{$wine->photo}}">
                     <div class="overlay"></div>

@@ -30846,6 +30846,7 @@ Vue.component('star-rating', StarRating.default);
 Vue.component('cart', __webpack_require__(141));
 Vue.component('add-to-cart', __webpack_require__(239));
 Vue.component('buy-now', __webpack_require__(242));
+Vue.component('winery-edit-form', __webpack_require__(245));
 
 var app = new Vue({
     el: '#app'
@@ -53000,11 +53001,12 @@ Dropzone.options.photos = {
     resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,
+    dictDefaultMessage: "Click here to add more images!",
     accept: function accept(file, done) {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         } else {
-            done();
+            document.getElementById('drop-more').style.visibility = "visible";done();
         }
     },
     sending: function sending(file, xhr, formData) {
@@ -53054,6 +53056,7 @@ Dropzone.options.photos = {
             var thisDropzone = this;
 
             preloadedImages.forEach(function (preloadedImage) {
+                document.getElementById('drop-more').style.visibility = "visible";
                 var mockFile = {
                     name: preloadedImage.path.replace(/^.*[\\\/]/, ''),
                     size: preloadedImage.size,
@@ -72957,7 +72960,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -72976,7 +72978,8 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
             editing: false,
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
-            }
+            },
+            focusedDate: null
         };
     },
     created: function created() {
@@ -72985,6 +72988,9 @@ var formFields = ['firstName', 'lastName', 'email', 'birthday'];
         this.lastName = user.lastName;
         this.email = user.email;
         if (user.birthday) this.birthday = new Date(user.birthday);
+        var d = new Date();
+        d.setFullYear(d.getFullYear() - 22);
+        this.focusedDate = d;
     },
     methods: {
         toggleEditing: function toggleEditing() {
@@ -74882,11 +74888,13 @@ var render = function() {
             _vm.editing
               ? _c("datepicker", {
                   attrs: {
+                    id: "datepicker",
                     name: "birthday",
                     "minimum-view": "day",
                     "disabled-dates": _vm.disabledDates,
                     value: _vm.birthday,
-                    typeable: true
+                    typeable: true,
+                    "open-date": _vm.focusedDate
                   },
                   on: { selected: _vm.seletedBirthday }
                 })
@@ -74908,28 +74916,7 @@ var render = function() {
         _c("td", [_vm._v("Email address:")]),
         _vm._v(" "),
         _c("td", { staticClass: "edit-text" }, [
-          _vm.editing
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email"
-                  }
-                ],
-                attrs: { name: "email" },
-                domProps: { value: _vm.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.email = $event.target.value
-                  }
-                }
-              })
-            : _c("span", [_vm._v(_vm._s(_vm.email))])
+          _c("span", [_vm._v(_vm._s(_vm.email))])
         ])
       ])
     ])
@@ -78654,7 +78641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['post', 'rating', 'type'],
+    props: ['post', 'rating', 'type', 'readonly'],
     watch: {
         rating: function rating() {
             axios.post('/rate-' + this.type + '/' + this.post, { rating: this.rating }).then(function (response) {
@@ -78681,6 +78668,7 @@ var render = function() {
         attrs: {
           "star-size": 20,
           "active-color": "#991D3F",
+          "read-only": _vm.readonly,
           "show-rating": false
         },
         model: {
