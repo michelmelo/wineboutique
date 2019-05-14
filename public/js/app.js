@@ -77191,16 +77191,10 @@ var render = function() {
                             : _vm._e(),
                           _vm._v(" "),
                           _c(
-                            "button",
+                            "a",
                             {
                               staticClass: "btn btn-primary",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.creating = true
-                                }
-                              }
+                              attrs: { href: "/my-address" }
                             },
                             [_vm._v("Add an address")]
                           )
