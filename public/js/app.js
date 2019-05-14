@@ -78917,9 +78917,336 @@ if (false) {
 }
 
 /***/ }),
-/* 245 */,
-/* 246 */,
-/* 247 */,
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(246)
+/* template */
+var __vue_template__ = __webpack_require__(247)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/forms/WineryEditForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1975cc2e", Component.options)
+  } else {
+    hotAPI.reload("data-v-1975cc2e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 246 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover'],
+    data: function data() {
+        return {
+            csrf: window.Laravel.csrfToken,
+            profile: _this.wineryProfile,
+            defaultProfilePhoto: '/img/winery-logo-1.jpg',
+            cover: _this.wineryCover,
+            defaultCoverPhoto: '/img/winery-1.jpg',
+            description: '',
+            publicPath: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BASE_URL,
+            errors: {}
+        };
+    },
+    methods: {
+        handleFileChange: function handleFileChange(e) {
+            var _this2 = this;
+
+            if (e.target.files && e.target.files.length) {
+                var file = e.target.files[0];
+
+                if (file.type.indexOf('image/') !== 0) {
+                    return console.log('Selected file must be an image!');
+                }
+
+                var data = new FormData();
+                data.append('photo', file);
+
+                axios.post('/wine/store', data).then(function (response) {
+                    _this2.wines = [].concat(_toConsumableArray(_this2.wines), [{
+                        photo: response.data.photo,
+                        name: '',
+                        price: 0,
+                        id: response.data.id
+                    }]);
+                }).catch(function (error) {
+                    console.log("error", error);
+                });
+            }
+        },
+        handlePhotoChange: function handlePhotoChange(e) {
+            var _this3 = this;
+
+            if (e.target.files && e.target.files.length) {
+                var file = e.target.files[0];
+
+                if (file.type.indexOf('image/') !== 0) {
+                    return console.log('Selected file must be an image!');
+                }
+
+                var data = new FormData();
+                data.append('photo', file);
+                data.append('wid', this.wineryId);
+
+                var type = e.target.dataset.type;
+
+                axios.post('/winery/' + type, data).then(function (response) {
+                    if (e.target.dataset.type === 'cover') {
+                        _this3.wineryCover = response.data.photo;
+                    } else {
+                        _this3.wineryProfile = response.data.photo;
+                    }
+                }).catch(function (error) {
+                    console.log("error", error);
+                });
+            }
+        },
+        onSubmit: function onSubmit() {
+            this.errors = {};
+            if (this.description.length < 10) {
+                this.errors['description'] = 'You must enter at least 10 characters.';
+                return false;
+            }
+        },
+        isInvalid: function isInvalid(name) {
+            return this.errors[name];
+        },
+        getProfilePhoto: function getProfilePhoto() {
+            return this.wineryProfile ? '/images/winery/profile/' + this.wineryProfile : this.defaultProfilePhoto;
+        },
+        getCoverPhoto: function getCoverPhoto() {
+            return this.wineryCover ? '/images/winery/cover/' + this.wineryCover : this.defaultCoverPhoto;
+        }
+    }
+});
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+    _c("h1", [_vm._v(_vm._s(_vm.wineryName) + " - edit info")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        attrs: { method: "post", action: "my-winery-store" },
+        on: { submit: _vm.onSubmit }
+      },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.csrf,
+              expression: "csrf"
+            }
+          ],
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.csrf = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "wineryId" },
+          domProps: { value: _vm.wineryId }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("WINERY DESCRIPTION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
+            _c(
+              "textarea",
+              {
+                staticStyle: { width: "100%", "min-height": "150px" },
+                attrs: { name: "description" }
+              },
+              [_vm._v(_vm._s(_vm.wineryDesc))]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("WINERY APPEARANCE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
+            _c("div", { staticClass: "col-lg-12 wineries-box" }, [
+              _c("div", [
+                _c("div", { staticClass: "wineries-brand" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "winery-header uploader",
+                      style:
+                        "background-image: url(" + _vm.getCoverPhoto() + ")"
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          "data-type": "cover"
+                        },
+                        on: { change: _vm.handlePhotoChange }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "wineries-brand" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "winery-logo uploader",
+                      style:
+                        "background-image: url(" + _vm.getProfilePhoto() + ")"
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          "data-type": "profile"
+                        },
+                        on: { change: _vm.handlePhotoChange }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.wineryName))])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "red-button button float-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("UPDATE")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1975cc2e", module.exports)
+  }
+}
+
+/***/ }),
 /* 248 */
 /***/ (function(module, exports) {
 
