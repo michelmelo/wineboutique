@@ -5,7 +5,7 @@
     <!-- @php
         var_dump($errors);
     @endphp -->
-    <form method="POST" action="{{url('/store-edited-wine').'/'.$wine->name}}" class="row padding-row add-new-wine" enctype="multipart/form-data">
+    <form method="POST" action="{{url('/store-edited-wine').'/'.$wine->slug}}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <h1 class="headline-2">EDIT WINE</h1>
