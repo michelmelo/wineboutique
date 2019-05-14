@@ -81,5 +81,9 @@ $( document ).ready(function() {
 
         form.submit();
 	});
+
+	$("#defaultCheck2").change(function(){
+		$("#over-21").toggleClass("d-none");
+	});
 });
 

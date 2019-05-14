@@ -97,6 +97,7 @@ class RegisterController extends Controller
             'phone' => isset($data['phone']) ? $data['phone'] : null,
             'type' => $data['type'],
             'email' => $data['email'],
+            'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
         ]);
 
