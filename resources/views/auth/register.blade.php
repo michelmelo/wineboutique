@@ -59,6 +59,11 @@
                         <strong>{{ $errors->first('acceptAge') }}</strong>
                     </span>
                 @endif
+
+                <div id="over-21" class="d-none">
+                    <input type="date" name="birthday" max="{{ date("Y-m-d", strtotime("-21 year", time())) }}" />
+                </div>
+
                 <input type="submit" name="submit" class="button red-button full-width" value="CREATE AN ACCOUNT">
             </form>
         </div>
