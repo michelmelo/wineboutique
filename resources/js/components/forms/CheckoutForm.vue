@@ -108,7 +108,7 @@
                                 </template>
                                 
                                 <button type="button" class="btn btn-primary" @click.prevent="selecting = true" v-if="addresses.length>1">Change shipping address</button>
-                                <button type="button" class="btn btn-primary" @click.prevent="creating = true">Add an address</button>
+                                <a href="/my-address" class="btn btn-primary">Add an address</a>
                             </template>
                         </div>
                     </article>
