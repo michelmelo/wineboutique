@@ -85,5 +85,14 @@ $( document ).ready(function() {
 	$("#defaultCheck2").change(function(){
 		$("#over-21").toggleClass("d-none");
 	});
+
+	(function() {
+		setTimeout(function () {
+			if(document.getElementById("msg")!==null) {
+				document.getElementById("msg").style.display = 'none';
+				$.post('/hideMsg');
+			}
+		}, 5000);
+	})();
 });
 

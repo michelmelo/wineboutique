@@ -52871,88 +52871,97 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-				$(window).on('resize', function () {
-								var win = $(this); //this = window
-								if (win.width() <= 974) {
-												$(".main__scroller").removeClass("row");
-								} else {
-												$(".main__scroller").addClass("row");
-								}
+	$(window).on('resize', function () {
+		var win = $(this); //this = window
+		if (win.width() <= 974) {
+			$(".main__scroller").removeClass("row");
+		} else {
+			$(".main__scroller").addClass("row");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:first-child").addClass("col-4");
-								} else {
-												$(".my-wine div a>div:first-child").removeClass("col-4");
-								}
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:first-child").addClass("col-4");
+		} else {
+			$(".my-wine div a>div:first-child").removeClass("col-4");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-								} else {
-												$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-								}
-				});
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+		} else {
+			$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+		}
+	});
 
-				if ($(window).width() < 960) {
-								$(".main__scroller").removeClass("row");
-				} else {
-								$(".main__scroller").addClass("row");
-				}
+	if ($(window).width() < 960) {
+		$(".main__scroller").removeClass("row");
+	} else {
+		$(".main__scroller").addClass("row");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:first-child").addClass("col-4");
-				} else {
-								$(".my-wine div a>div:first-child").removeClass("col-4");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:first-child").addClass("col-4");
+	} else {
+		$(".my-wine div a>div:first-child").removeClass("col-4");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-				} else {
-								$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+	} else {
+		$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+	}
 
-				/*
-        $(window).scroll(function(){
-            if ($(window).scrollTop() > 0){
-                $('header').addClass('sticky');
-            } else {
-        		$('header').removeClass('sticky');
-    		}
-        });
-    */
+	/*
+     $(window).scroll(function(){
+         if ($(window).scrollTop() > 0){
+             $('header').addClass('sticky');
+         } else {
+     		$('header').removeClass('sticky');
+ 		}
+     });
+ */
 
-				//PROFILE EDIT
+	//PROFILE EDIT
 
-				$(".edit-personal").click(function () {
-								$('#personal .edit-text').empty();
-								$('#personal .edit-text').append("<input type='text'>");
-				});
+	$(".edit-personal").click(function () {
+		$('#personal .edit-text').empty();
+		$('#personal .edit-text').append("<input type='text'>");
+	});
 
-				$(".edit-password").click(function () {
-								$('#pass .edit-text').empty();
-								$('#pass .edit-text').append("<input type='password'>");
-				});
+	$(".edit-password").click(function () {
+		$('#pass .edit-text').empty();
+		$('#pass .edit-text').append("<input type='password'>");
+	});
 
-				$(".edit-preferance").click(function () {
-								$('#preferance .edit-text').empty();
-								$('#preferance .edit-text').append("<input type='text'>");
-				});
+	$(".edit-preferance").click(function () {
+		$('#preferance .edit-text').empty();
+		$('#preferance .edit-text').append("<input type='text'>");
+	});
 
-				$(".auto-submit").change(function () {
-								var el = $(this);
-								var form = void 0;
+	$(".auto-submit").change(function () {
+		var el = $(this);
+		var form = void 0;
 
-								if (el.is('form')) {
-												form = el;
-								} else {
-												form = el.closest('form');
-								}
+		if (el.is('form')) {
+			form = el;
+		} else {
+			form = el.closest('form');
+		}
 
-								form.submit();
-				});
+		form.submit();
+	});
 
-				$("#defaultCheck2").change(function () {
-								$("#over-21").toggleClass("d-none");
-				});
+	$("#defaultCheck2").change(function () {
+		$("#over-21").toggleClass("d-none");
+	});
+
+	(function () {
+		setTimeout(function () {
+			if (document.getElementById("msg") !== null) {
+				document.getElementById("msg").style.display = 'none';
+				$.post('/hideMsg');
+			}
+		}, 5000);
+	})();
 });
 
 /***/ }),
@@ -72243,6 +72252,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 //
@@ -72317,40 +72328,32 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['wineryName'],
+    props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "fetchedRegions"],
     data: function data() {
         return {
             csrf: window.Laravel.csrfToken,
-            fetchedRegions: [],
+            fetchedRegions_: [],
             regions: [],
             wines: [],
             currentlyEditing: 0,
             step: 1,
-            profile: null,
+            profile: _this.wineryProfile,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: null,
+            cover: _this.wineryCover,
             defaultCoverPhoto: '/img/winery-1.jpg',
-            description: "",
+            description: _this.wineryDesc,
             errors: {}
         };
     },
     created: function created() {
-        this.fetchRegions();
+        this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
     },
 
     methods: {
-        fetchRegions: function fetchRegions() {
-            var _this = this;
-
-            this.fetchedRegions = [];
-            axios.get('/api/regions').then(function (response) {
-                _this.fetchedRegions = response.data;
-            }).catch(function (error) {
-                console.log("error", error);
-            });
-        },
         setEditing: function setEditing(wineId) {
             this.currentlyEditing = wineId;
         },
@@ -72429,11 +72432,16 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
                 var data = new FormData();
                 data.append('photo', file);
+                data.append('wid', this.wineryId);
 
                 var type = e.target.dataset.type;
 
                 axios.post('/winery/' + type, data).then(function (response) {
-                    _this6[type] = response.data.photo;
+                    if (e.target.dataset.type === 'cover') {
+                        _this6.cover = response.data.photo;
+                    } else {
+                        _this6.profile = response.data.photo;
+                    }
                 }).catch(function (error) {
                     console.log("error", error);
                 });
@@ -72462,10 +72470,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return this.errors[name];
         },
         getProfilePhoto: function getProfilePhoto() {
-            return this.profile ? '/storage/images/wineries/profile/' + this.profile : this.defaultProfilePhoto;
+            return this.profile ? '/images/winery/profile/' + this.profile : this.defaultProfilePhoto;
         },
         getCoverPhoto: function getCoverPhoto() {
-            return this.cover ? '/storage/images/wineries/cover/' + this.cover : this.defaultCoverPhoto;
+            return this.cover ? '/images/winery/cover/' + this.cover : this.defaultCoverPhoto;
         }
     }
 });
@@ -72604,7 +72612,7 @@ var render = function() {
                           staticClass: "half-select",
                           class: { invalid: _vm.isInvalid("regions") },
                           attrs: {
-                            disabled: _vm.fetchedRegions.length === 0,
+                            disabled: _vm.fetchedRegions_.length === 0,
                             name: "regions[]",
                             multiple: ""
                           },
@@ -72631,7 +72639,7 @@ var render = function() {
                             [_vm._v("Select")]
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.fetchedRegions, function(region) {
+                          _vm._l(_vm.fetchedRegions_, function(region) {
                             return _c(
                               "option",
                               {
@@ -72749,8 +72757,10 @@ var render = function() {
                           on: { change: _vm.handlePhotoChange }
                         })
                       ]
-                    ),
-                    _vm._v(" "),
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "wineries-brand" }, [
                     _c(
                       "label",
                       {
@@ -79069,9 +79079,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
                 axios.post('/winery/' + type, data).then(function (response) {
                     if (e.target.dataset.type === 'cover') {
-                        _this3.wineryCover = response.data.photo;
+                        _this3.cover = response.data.photo;
                     } else {
-                        _this3.wineryProfile = response.data.photo;
+                        _this3.profile = response.data.photo;
                     }
                 }).catch(function (error) {
                     console.log("error", error);
@@ -79089,10 +79099,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return this.errors[name];
         },
         getProfilePhoto: function getProfilePhoto() {
-            return this.wineryProfile ? '/images/winery/profile/' + this.wineryProfile : this.defaultProfilePhoto;
+            return this.profile ? '/images/winery/profile/' + this.profile : this.defaultProfilePhoto;
         },
         getCoverPhoto: function getCoverPhoto() {
-            return this.wineryCover ? '/images/winery/cover/' + this.wineryCover : this.defaultCoverPhoto;
+            return this.cover ? '/images/winery/cover/' + this.cover : this.defaultCoverPhoto;
         }
     }
 });
