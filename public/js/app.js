@@ -71097,6 +71097,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__customValidators__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+//
+//
+//
 //
 //
 //
@@ -71151,7 +71156,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'acceptTerms', 'acceptAge'];
+
+var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'acceptTerms', 'acceptAge', 'birthday'];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -71164,6 +71170,7 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
             phone: '',
             acceptTerms: false,
             acceptAge: false,
+            birthday: '',
             csrf: window.Laravel.csrfToken,
             showErrors: false,
             validEmail: null
@@ -71203,6 +71210,12 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
         isInvalid: function isInvalid(name) {
             console.log(name, this.$v[name]);
             return this.$v[name].$invalid && this.showErrors;
+        },
+        initialDate: function initialDate() {
+            var date = new Date();
+            date.setFullYear(date.getFullYear() - 21);
+
+            return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('Y-MM-DD');
         }
     },
     validations: {
@@ -71235,6 +71248,9 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
         },
         acceptAge: {
             isTrue: __WEBPACK_IMPORTED_MODULE_1__customValidators__["a" /* isTrue */]
+        },
+        birthday: {
+            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
         }
     }
 });
@@ -72170,6 +72186,31 @@ var render = function() {
       _vm.isInvalid("acceptAge")
         ? _c("span", { staticClass: "help-block" }, [
             _c("strong", [_vm._v("You must be 21 or older.")])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.acceptAge
+        ? _c("div", { attrs: { id: "over-21" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.birthday,
+                  expression: "birthday"
+                }
+              ],
+              attrs: { type: "date", name: "birthday", max: _vm.initialDate() },
+              domProps: { value: _vm.birthday },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.birthday = $event.target.value
+                }
+              }
+            })
           ])
         : _vm._e(),
       _vm._v(" "),
