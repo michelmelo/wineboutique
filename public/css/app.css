@@ -13711,7 +13711,7 @@ header {
 }
 
 .user-area {
-
+  z-index: 2;
 }
 
 .user-area .col {
@@ -13742,11 +13742,12 @@ header {
     position: absolute;
     color: #fff;
     font-size: 8px;
-    padding: 2px;
+    line-height: 1em;
+    padding: 5px 1px 5px 0;
     background: #9A1E3E;
     border-radius: 20px;
-    top: -3px;
-    right: 37px;
+    top: -10px;
+    right: -8px;
     min-width: 16px;
     height: 16px;
     text-align: center;
@@ -13756,7 +13757,7 @@ header {
     text-align: center;
 }
 
-.cart-icon > div {
+.cart-icon a > div {
     display: inline-block;
     position: relative;
     margin: 0 auto;
@@ -15539,10 +15540,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         -ms-flex-preferred-size: auto;
             flex-basis: auto;
     }
-
-    .item-in-cart {
-        right: 28px;
-    }
 }
 
 
@@ -15554,6 +15551,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .navbar .form-inline {
         display: block;
         margin: 0 auto;
+        max-width: 400px;
+        width: 100%;
     }
 
     .navbar .form-inline .form-control {
@@ -15593,10 +15592,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .main {
         margin-top:157px;
-    }
-
-    .item-in-cart {
-        right: 0px;
     }
 
     .col-xs-5ths, .main__scroller .col-xs-6 {
@@ -15665,6 +15660,24 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 }
 
+@media only screen and (min-width : 998px){
+  .logo img{
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width : 768px) and (max-width : 998px) {    
+    .navbar .navbar-collapse.collapse{
+        display: none!important; 
+    }
+    .navbar .navbar-collapse.show {
+        display: block!important;
+    }
+    .form-inline, .form-inline .input-width {
+      width: 100%!important;
+      max-width: 350px;
+    }
+}
 
 @media only screen and (max-width : 768px) {
     .mobile-display {
@@ -15700,9 +15713,25 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             -ms-flex: 0 0 30%;
                 flex: 0 0 30%;
     }
+    .user-area .sign-in.show, .user-area .sign-up.show{
+        display: flex!important;
+    }
+
+    .form-inline .input-width {
+        max-width: 85%;
+    }
+
+    .user-area span {
+        font-size: 10px;
+    }
+
+    .user-area img {
+      width: 20px;
+      height: 20px;
+    }
 
     .item-in-cart {
-        right: 7px;
+        right: -5px;
     }
 
     .main {
@@ -15960,7 +15989,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .form-inline .form-control {
         display: inline-block;
-        width: auto;
         vertical-align: middle;
     }
 
@@ -15970,7 +15998,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .item-in-cart {
-        right: 2px;
+        padding: 4px 0px 3px 0;
+        min-width: 14px;
+        height: 14px;
     }
 
     .home-slider {
@@ -16020,7 +16050,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 370px) {
-    
+    .form-inline .input-width {
+        max-width: 84%;
+    }    
 }
 
 /*! jQuery UI - v1.10.3 - 2013-12-09
