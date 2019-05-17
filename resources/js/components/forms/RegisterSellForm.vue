@@ -44,6 +44,9 @@
         <span class="help-block" v-if="isInvalid('acceptAge')">
             <strong>You must be 21 or older.</strong>
         </span>
+        <div id="over-21" v-if="acceptAge">
+            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
+        </div>
         <input type="submit" name="submit" class="button red-button full-width" value="CREATE A WINERY">
     </form>
 </template>
@@ -51,6 +54,7 @@
 <script>
     import { required, minLength, email, numeric } from 'vuelidate/lib/validators';
     import { isTrue } from "../../customValidators";
+    import moment from 'moment';
 
     const formFields = [
         'firstName',
@@ -60,7 +64,8 @@
         'password',
         'phone',
         'acceptTerms',
-        'acceptAge'
+        'acceptAge',
+        'birthday'
     ];
 
     export default {
@@ -73,6 +78,7 @@
             phone: '',
             acceptTerms: false,
             acceptAge: false,
+            birthday: '',
             csrf: window.Laravel.csrfToken,
             showErrors: false,
             validEmail: null
@@ -109,6 +115,12 @@
             isInvalid(name) {
                 console.log(name, this.$v[name]);
                 return this.$v[name].$invalid && this.showErrors;
+            },
+            initialDate(){
+                let date = new Date();
+                date.setFullYear(date.getFullYear() - 21);
+
+                return moment(date).format('Y-MM-DD');
             }
         },
         validations: {
@@ -141,6 +153,9 @@
             },
             acceptAge: {
                 isTrue
+            },
+            birthday: {
+                required
             }
         }
     }
