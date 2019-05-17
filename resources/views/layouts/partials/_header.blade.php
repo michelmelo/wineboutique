@@ -7,7 +7,7 @@
                 </a>
                 <div class="col-5 desktop-search">
                     <form class="form-inline v-align" method="get" action="{{route('search')}}" style="flex-wrap: nowrap;">
-                        <input style="max-width:unset; width: 100%;" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}">
+                        <input style="max-width:unset; width: 100%;" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}" required>
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>

@@ -14167,6 +14167,11 @@ footer p {
     font-weight: 600;
 }
 
+.vine-box-style-3 small {
+    padding: 0 10px;
+    display: inline-block;
+}
+
 .vine-box-style-3 input {
     border: 0;
     width: calc(100% - 20px);
