@@ -73,6 +73,9 @@
                         .then(response => {
                             this.showErrors = false;
                             this.editing = false;
+                            this.password = "";
+                            this.current_password= "";
+                            this.password_confirmation = "";
                         })
                         .catch(error => {
                             if(error.response && error.response.data && error.response.data.errors) {
@@ -104,7 +107,8 @@
                         return `This field and ${model.$params.sameAs.eq} must be identical.`;
                     }
                 }
-            }
+            },
+          
         },
         validations: {
             current_password: {
