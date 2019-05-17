@@ -6315,6 +6315,14 @@ textarea.form-control {
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
+.card .btn:not(:disabled):not(.disabled){
+  color: #646464;
+}
+
+.card .btn.active.focus, .card .btn.active:focus, .card .btn.focus, 
+.card .btn:active.focus, .card .btn:active:focus, .card .btn:focus{
+  outline: none;
+}
 
 a.btn.disabled,
 fieldset:disabled a.btn {
@@ -13380,7 +13388,7 @@ select {
 }
 
 .main {
-    margin-top:210px; 
+  margin-top:180px; 
 	padding: 0;
 }
 
@@ -13972,7 +13980,7 @@ footer p {
     width: 100%;
     color: #646464;
     font-size: 18px;
-    padding: 5px 5px 5px 7%;
+    padding: 5px 5px 5px 10%;
     margin-bottom: 3px;
     display: block;
     cursor: pointer;
@@ -14038,8 +14046,8 @@ footer p {
 ==========================================================================================================================================================================================*/
 
 .star-rating {
-     padding: 0 5px;
-     padding-bottom: 5px;
+     padding: 0 10px;
+     padding-bottom: 10px;
      position: absolute;
      bottom: 0px;
 }
@@ -14058,6 +14066,7 @@ footer p {
 
 .vine-box-style-1 {
     margin-bottom: 20px;
+    min-height: 305px;
 }
 
 .vine-box-style-1 a {
@@ -14069,7 +14078,13 @@ footer p {
 }
 
 .vine-box-style-1 img {
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+    margin: 0 auto;
 }
 
 
@@ -14078,13 +14093,22 @@ footer p {
     color: #2b2e32;
     text-transform: uppercase;
     margin-top: 10px;
-    padding: 0 5px;
-    margin-bottom: 45px;
+    padding: 0 10px;
+    margin-bottom: 40px;
 }
 
 .image-container {
     position: relative;
     overflow: hidden;
+
+}
+
+.vine-box-style-1 .image-container{
+    /*remove styles below if needed*/
+    padding-bottom: 100%;
+    width: 100%;
+    height: 0;
+    vertical-align: middle;  
 }
 
 .overlay {
@@ -14121,6 +14145,7 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .vine-box-style-2 img  {
@@ -14130,6 +14155,10 @@ footer p {
 }
 
 .vine-box-style-2 .col-md-6 {
+    padding: 0;
+}
+
+.vine-box-style-2 .col-md-6:last-child {
     padding: 10px;
 }
 
@@ -14173,7 +14202,13 @@ footer p {
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
-    max-width: 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.vine-box-style-3 .product-info{
+    padding: 10px;
 }
 
 .vine-box-style-3 h5 {
@@ -14214,7 +14249,7 @@ footer p {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
-    padding: 15px 10px;
+    padding-bottom: 100%;
 }
 
 .vine-box-style-3 .image-container i {
@@ -14241,8 +14276,8 @@ footer p {
 }
 
 .vine-box-style-3 .star-rating {
-    padding: 0 10px;
-    padding-bottom: 5px;
+    padding: 0 0 0 10px;
+    padding-bottom: 10px;
 }
 
 .sale-mark {
@@ -14261,8 +14296,8 @@ footer p {
     color: #646464;
     font-size: 18px;
     position: absolute;
-    right: 22px;
-    bottom: 4px;
+    right: 30px;
+    bottom: 5px;
 }
 
 
@@ -15540,6 +15575,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         -ms-flex-preferred-size: auto;
             flex-basis: auto;
     }
+    .vine-box-style-1 {
+      min-height: 275px;
+  }
 }
 
 
@@ -15601,11 +15639,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
         -webkit-box-flex: 0;
 
-            -ms-flex: 0 0 250px;
+            -ms-flex: 0 0 280px;
 
-                flex: 0 0 250px;
-        max-width: 250px;
-        width: 250px;
+                flex: 0 0 280px;
+        max-width: 280px;
+        width: 100%;
         position: relative;
         float: left;
     }
@@ -15781,7 +15819,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
-    .col-xs-5ths, .main__scroller .col-xs-6 {
+    .col-xs-5ths {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 180px;
                 flex: 0 0 180px;
@@ -15810,11 +15848,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-2 h5 {
         font-size: 16px;
     }
-
+/*
     .vine-box-style-3 img {
         width: 30%;
     }
-
+*/
     .vine-box-style-3 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 50%;
