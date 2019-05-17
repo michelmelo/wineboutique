@@ -6,16 +6,22 @@ use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\StartupRequest;
 use App\Winery;
 use Illuminate\Support\Facades\Auth;
+use App\Region;
 
 
 class StartupController extends Controller
 {
     public function show()
     {
-        $wineryName = Auth::user()->winery->name;
+        $winery = Auth::user()->winery;
 
         return view('startup', [
-            'wineryName' => $wineryName
+            'wineryId' => $winery->id,
+            'wineryName' => $winery->name,
+            'winery_desc' => $winery->description,
+            'winery_profile' => $winery->profile,
+            'winery_cover' => $winery->cover,
+            'regions' => Region::orderBy('name')->get()
         ]);
     }
 

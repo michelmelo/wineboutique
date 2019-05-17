@@ -20,9 +20,9 @@
                         <tr>
                             <td>Winery state *</td>
                             <td>
-                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
+                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions" v-bind:value="region.id" v-bind:key="region.id">
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                         {{ region.name }}
                                     </option>
                                 </select>
@@ -48,10 +48,12 @@
                     <div class="col-lg-12 wineries-box">
                         <div>
                             <div class="wineries-brand">
-                                <label class="winery-header uploader" v-bind:style="'background-image: url('+getCoverPhoto()+')'">
+                                <label class="winery-header uploader" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
-                                <label class="winery-logo uploader" v-bind:style="'background-image: url('+getProfilePhoto()+')'">
+                            </div>
+                            <div class="wineries-brand">
+                                <label class="winery-logo uploader" v-bind:style="'background-image: url(' + getProfilePhoto() + ')'">
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="profile" />
                                 </label>
                             </div>
@@ -72,35 +74,25 @@
 
 <script>
     export default {
-        props: ['wineryName'],
+        props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "fetchedRegions"],
         data: () => ({
             csrf: window.Laravel.csrfToken,
-            fetchedRegions: [],
+            fetchedRegions_: [],
             regions: [],
             wines: [],
             currentlyEditing: 0,
             step: 1,
-            profile: null,
+            profile: this.wineryProfile,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: null,
+            cover: this.wineryCover,
             defaultCoverPhoto: '/img/winery-1.jpg',
-            description: "",
+            description: this.wineryDesc,
             errors: {}
         }),
         created() {
-            this.fetchRegions();
+            this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
         },
         methods: {
-            fetchRegions() {
-                this.fetchedRegions = [];
-                axios.get('/api/regions')
-                    .then(response => {
-                        this.fetchedRegions = response.data;
-                    })
-                    .catch(error => {
-                        console.log("error", error);
-                    });
-            },
             setEditing(wineId) {
                 this.currentlyEditing = wineId;
             },
@@ -176,12 +168,17 @@
 
                     let data = new FormData();
                     data.append('photo', file);
+                    data.append('wid', this.wineryId);
 
                     const type = e.target.dataset.type;
 
                     axios.post(`/winery/${type}`, data)
                         .then(response => {
-                            this[type] = response.data.photo;
+                            if(e.target.dataset.type==='cover') {
+                                this.cover = response.data.photo;
+                            } else {
+                                this.profile = response.data.photo;
+                            }
                         })
                         .catch(error => {
                             console.log("error", error);
@@ -211,10 +208,10 @@
                 return this.errors[name];
             },
             getProfilePhoto() {
-                return this.profile?`/storage/images/wineries/profile/${this.profile}`:this.defaultProfilePhoto;
+                return this.profile?`/images/winery/profile/${this.profile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.cover?`/storage/images/wineries/cover/${this.cover}`:this.defaultCoverPhoto;
+                return this.cover?`/images/winery/cover/${this.cover}`:this.defaultCoverPhoto;
             }
         }
     }

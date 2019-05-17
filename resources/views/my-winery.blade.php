@@ -9,16 +9,6 @@
                     <p>{{Session::get('msg')}}</p>
                 </div>
             @endif
-            <script>
-                (function() {
-                    setTimeout(function () {
-                        if(document.getElementById("msg")!==null) {
-                            document.getElementById("msg").style.display = 'none';
-                            $.post('/hideMsg');
-                        }
-                    }, 5000);
-                })();
-            </script>
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-primary float-left" href="{{ route('my-winery-edit') }}">Edit Winery Info</a>
