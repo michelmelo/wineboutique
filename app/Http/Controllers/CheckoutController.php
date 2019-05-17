@@ -67,7 +67,7 @@ class CheckoutController extends Controller
             'currency' => config('payment.nuvei.currency'),
             'secret' => config('payment.nuvei.secret'),
             'testAccount' => config('payment.nuvei.testAccount'),
-            'receiptPageURL' => config('payment.nuvei.receiptPageURL'),
+            'receiptPageURL' => $this->receiptPageURL,
             'orderId' => $this->generateUniqueOrderId(),
             'requestDateTime' => $this->requestDateTime(),
             'validationURL' => $this->validationURL,
@@ -79,6 +79,7 @@ class CheckoutController extends Controller
 
     public function validateHash(Request $request)
     {
+
         if($this->authResponseHashIsValid($request->input("ORDERID"), $request->input("AMOUNT"), $request->input("DATETIME"), $request->input("RESPONSECODE"), $request->input("RESPONSETEXT"), $request->input("HASH"))) {
             if($request->has("ORDERID")) {
                 switch($request->input("RESPONSECODE")) {

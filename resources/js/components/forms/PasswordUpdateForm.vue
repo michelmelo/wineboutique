@@ -56,6 +56,7 @@
                 if(this.editing) {
                     this.showErrors = true;
                     this.errors = {};
+
                     if(this.$v.$invalid) {
                         formFields.some(formField => {
                             if(this.$v[formField].$invalid) {
@@ -72,12 +73,16 @@
                     axios.post('/profile/password', data)
                         .then(response => {
                             this.showErrors = false;
-                            this.editing = false;
+                            this.editing = false;  
+                            clearForm();                         
                         })
                         .catch(error => {
                             if(error.response && error.response.data && error.response.data.errors) {
                                 this.errors = error.response.data.errors;
                             }
+                        this.password = "";
+                        this.current_password= "";
+                        this.password_confirmation = "";   
                         });
                 } else {
                     this.editing = true;
@@ -104,6 +109,11 @@
                         return `This field and ${model.$params.sameAs.eq} must be identical.`;
                     }
                 }
+            },
+            clearForm(){
+                this.password = "";
+                this.current_password= "";
+                this.password_confirmation = "";
             }
         },
         validations: {
