@@ -30,7 +30,7 @@ class Wine extends Model
 
     public function capacityUnit()
     {
-        return $this->belongsTo(CapacityUnit::class);
+        return $this->belongsTo(CapacityUnit::class,'unit_id','id');
     }
 
     public function winery()
