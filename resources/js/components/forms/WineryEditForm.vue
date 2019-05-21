@@ -29,7 +29,7 @@
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="profile" />
                                 </label>
                             </div>
-                            <p>{{wineryName}}</p>
+                            <p class="winery-title">{{wineryName}}</p>
                         </div>
                     </div>
                 </div>
@@ -46,14 +46,18 @@
         props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
-            profile: this.wineryProfile,
+            profile: null,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: this.wineryCover,
+            cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
             publicPath: process.env.BASE_URL,
             errors: {}
-        }),
+        }),created() {
+            this.description = this.wineryDesc;
+            this.profile = this.wineryProfile;
+            this.cover = this.wineryCover;
+        },
         methods: {
             handleFileChange(e) {
                 if(e.target.files && e.target.files.length) {
