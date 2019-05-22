@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="home-slider">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="home-slider row">
+        <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="row padding-row row-eq-height">
-        <h2 class="heading">TOP RATED WINERIES</h2>
+        <h2 class="heading mb-5">TOP RATED WINERIES</h2>
         <div class="main__clipper">
             <div class="main__scroller row">
                 @foreach($topWineries as $topWinery)
@@ -66,7 +66,7 @@
     </div>
 
     <div class="row padding-row">
-        <h2 class="heading">SHOP BY CATEGORY</h2>
+        <h2 class="heading mb-5">SHOP BY CATEGORY</h2>
 
         <div id="accordion" class="accordion">
             <div class="card">
@@ -128,20 +128,20 @@
     </div>
 
     <div class="row padding-row row-eq-height">
-        <h2 class="heading">NEW ARRIVALS</h2>
+        <h2 class="heading mb-5">NEW ARRIVALS</h2>
         <div class="main__clipper">
             <div class="main__scroller row">
                 @foreach($latestWines as $latestWine)
                     <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
                         <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
                             <div  class="row">
-                                <div class="col-md-6">
+                                <div class="col-6">
                                 <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
                                 
                                     <img src="{{ $latestWine->photo }}" >
                                 
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <h5 class="name">{{$latestWine->name}}</h5>
                                     <h5 class="price">${{$latestWine->price}}</h5>
                                 </div>
@@ -156,7 +156,7 @@
     </div>
 
     <div class="row padding-row row-eq-height">
-        <h2 class="heading">TOP RATED WINES</h2>
+        <h2 class="heading mb-5">TOP RATED WINES</h2>
         @foreach($wines as $wine)
             <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
@@ -170,12 +170,14 @@
                                 :type="'wine'"
                         ></favorite>
                     </div>
-                    <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                    <h4>${{$wine->price}}</h4>
-                    <div class="star-rating">
-                        <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                    <div class="product-info">
+                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
+                        <h4>${{$wine->price}}</h4>
+                        <div class="star-rating">
+                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                        </div>
+                        <span class="order-q">0 Orders</span>
                     </div>
-                    <span class="order-q">0 Orders</span>
                 </a>
             </div>
         @endforeach
@@ -184,7 +186,7 @@
     </div>
 
     <div class="row padding-row center-text secure-section">
-        <h2 class="heading">YOU’RE SECURE WITH US</h2>
+        <h2 class="heading mb-5">YOU’RE SECURE WITH US</h2>
 
         <div class="col-md-4">
             <img src="{{asset('img/truck-icon.png')}}">
