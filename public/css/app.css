@@ -14316,13 +14316,17 @@ footer p {
 /*=============================================================================================
                                         3.2
 ==============================================================================================*/
-
+/*
 .style-3-2{
     max-height: 350px;
 }
 
 .style-3-2 img {
     width: 30%;
+}*/
+
+.vine-boxes .style-3-2{
+  padding:0 5px!important;
 }
 
 .style-3-2 .sale-mark {
@@ -14336,6 +14340,10 @@ footer p {
 
 .style-3-2 h4 {
     font-size: 16px;
+}
+
+.style-3-2 .product-info{
+    padding: 0;
 }
 
 .style-3-2 .star-rating .fa {
@@ -15691,7 +15699,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         height: auto;
         margin-bottom: 30px;
     }
-
+/*
     .style-3-2 .order-q {
         font-size: 10px;
         right: 0;
@@ -15701,7 +15709,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         float: left;
         padding: 0 10px;
     }
-
+*/
     .style-3-2 h4 {
         margin-bottom: 15px;
     }
@@ -15792,6 +15800,13 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-top:165px;
     }
 
+    .main .page-header{
+      margin: 0px 0 20px;
+    }
+
+    .page-header h1 {
+      top: 25%;
+    }
     
     .footer-nav {
         margin-top: 35px;
@@ -15823,6 +15838,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding: 0 10px;
     }
 */
+
+    .vine-boxes{
+      padding: 0!important;
+      margin: 0 auto!important;
+    }
+
     .vine-box-style-3 .image-container i{
         font-size: 30px;
     }
@@ -16141,6 +16162,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .padding-row{
       padding: 0!important;
+    }
+
+    .user-area a.mx-4 {
+      margin-left: 1rem !important;
+      margin-right: 1rem !important;
+    }
+
+    .user-area span {
+        font-size: 8px;
     }
 }
 

@@ -13,7 +13,7 @@
                 <form method="get" class="auto-submit">
                     <div class="card">
                         <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
+                            <h5 class="my-2">
                                 <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     <span class="accordion-name">VARIETAL</span>
                                     <i class="fas fa-chevron-down"></i>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingTwo">
-                            <h5 class="mb-0">
+                            <h5 class="my-2">
                                 <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <span class="accordion-name">REGION</span>
                                     <i class="fas fa-chevron-down"></i>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
+                            <h5 class="my-2">
                                 <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="accordion-name">PRICE</span>
                                     <i class="fas fa-chevron-down"></i>
@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="col-lg-10 col-sm-12 row row-eq-height">
+        <div class="col-lg-10 col-sm-12 row row-eq-height pr-0 vine-boxes">
             @foreach ($wines as $wine)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
@@ -101,13 +101,15 @@
                             @endif
                             <span class="sale-mark">SALE</span>
                         </div>
-                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                        <h4>${{$wine->price}}</h4>
+                        <div class="product-info">
+                            <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
+                            <h4>${{$wine->price}}</h4>
 
-                        <div class="star-rating">
-                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                            <div class="star-rating">
+                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                            </div>
+                            <span class="order-q">{{ $wine->orders_count }} Orders</span>
                         </div>
-                        <span class="order-q">{{ $wine->orders_count }} Orders</span>
                     </a>
                 </div>
             @endforeach
