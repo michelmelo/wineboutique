@@ -16,7 +16,7 @@
             </div>
             <p>{{$winery->ratingCount()}} Feedback</p>
         </div>
-        <div class="winery-desc">
+        <div class="winery-desc col-12">
             <h3>Description</h3>
             <p>{{$winery->description}}</p>
         </div>
