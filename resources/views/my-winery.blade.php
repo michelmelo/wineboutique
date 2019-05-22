@@ -16,36 +16,33 @@
                 </div>
 
                 <div class="card-body">
-
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Id</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Photo</th>
                                 <th scope="col">Price</th>
-                                <th scope="col">Varietal ID</th>
+                                <th scope="col">Varietal</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Who Made It?</th>
-                                <th scope="col">When Was It Made?</th>
+                                <th scope="col">Winery</th>
+                                <th scope="col">Year</th>
                                 <th scope="col">Capacity</th>
-                                <th scope="col">Unit ID</th>
+                                <th scope="col">Unit</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($wines as $wine)
                                 <tr>
-                                    <th scope="row">{{ $wine->id }}</th>
                                     <td>{{ $wine->name }}</td>
                                     <td><img src="{{ $wine->photo }}"></td>
-                                    <td>{{ $wine->price }}</td>
-                                    <td>{{ $wine->varietal }}</td>
+                                    <td>${{ number_format($wine->price, 2) }}</td>
+                                    <td>{{ $wine->varietal->name }}</td>
                                     <td>{{ $wine->description }}</td>
                                     <td>{{ $wine->who_made_it }}</td>
                                     <td>{{ $wine->when_was_it_made }}</td>
                                     <td>{{ $wine->capacity }}</td>
-                                    <td>{{ $wine->unit_id }}</td>
+                                    <td>{{ $wine->capacityUnit->name }}</td>
                                     <td>
                                         <a href="{{route('add-new-wine.edit', [$wine->slug])}}" class="btn btn-primary">Edit</a>
                                         <form method="POST" action="/add-new-wine/{{$wine->id}}">
