@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Closure;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,21 +14,21 @@ class MailResetPasswordNotification extends Notification
 
     /**
      * Create a new notification instance.
-      * @return void
+     * @return void
      */
-       public $token;
+    public $token;
 
     /**
      * The callback that should be used to build the mail message.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     public static $toMailCallback;
 
     /**
      * Create a notification instance.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function __construct($token)
@@ -39,10 +40,9 @@ class MailResetPasswordNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
@@ -50,34 +50,31 @@ class MailResetPasswordNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->subject('Reset Password Notification')
             ->line('We have received your rquest to reset your account password. Please use the link below to set up a new password for your account.')
             ->action('Reset Password', route('password.reset', $this->token))
             ->line('If you did not request to reset your password, please ignore this email and the link will automatically expire.')
-             ->line('If you’re having trouble clicking the "Reset Password" button, copy and paste the URL below into your web browser: ');
+            ->line('If you’re having trouble clicking the "Reset Password" button, copy and paste the URL below into your web browser: ');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
-     * @return array
+     * @param $callback
+     * @return void
      */
-     public static function toMailUsing($callback)
+    public static function toMailUsing($callback)
     {
         static::$toMailCallback = $callback;
     }
 
-    public function toArray($notifiable)
+    public function toArray()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
