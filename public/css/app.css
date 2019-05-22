@@ -4488,7 +4488,7 @@ pre code {
 .col-6 {
   -ms-flex: 0 0 50%;
   -webkit-box-flex: 0;
-        flex: 0 0 50%;
+          flex: 0 0 50%;
   max-width: 50%;
 }
 
@@ -6315,14 +6315,6 @@ textarea.form-control {
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.card .btn:not(:disabled):not(.disabled){
-  color: #646464;
-}
-
-.card .btn.active.focus, .card .btn.active:focus, .card .btn.focus, 
-.card .btn:active.focus, .card .btn:active:focus, .card .btn:focus{
-  outline: none;
-}
 
 a.btn.disabled,
 fieldset:disabled a.btn {
@@ -8047,7 +8039,6 @@ input[type="button"].btn-block {
   -webkit-box-pack: justify;
           justify-content: space-between;
   padding: 0.5rem 1rem;
-  border-top: 1px solid #CAC9C9 !important;
 }
 
 .navbar > .container,
@@ -13388,7 +13379,7 @@ select {
 }
 
 .main {
-  margin-top:180px; 
+    margin-top:210px; 
 	padding: 0;
 }
 
@@ -13667,11 +13658,11 @@ header {
     top: 0px;
     z-index: 9999;
 }
-/*
+
 .top-header {
     padding: 20px 0;
 }
-*/
+
 .form-control {
     border-radius: 10px 0 0 10px;
     -webkit-box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
@@ -13692,34 +13683,15 @@ header {
             box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
     color:#fff;
     background: #9C193A;
-    height: 45px;
-    padding: 6px 15px;
 }
 
 .form-inline .input-width{
     max-width: 255px;
     width: 100%;
-    height: 45px;
-}
-
-.form-inline .search-shadow{
-  box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
-  background-color: #f8f9fa;
-  outline: none;
-  -webkit-transition: .18s ease-out;
-  -moz-transition: .18s ease-out;
-  -o-transition: .18s ease-out;
-  transition: .18s ease-out;
-}
-
-.form-inline .search-shadow:hover, .form-inline .search-shadow:focus {
-  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
-  outline: none;
-  border: 1px solid #ccc;
 }
 
 .user-area {
-  z-index: 2;
+
 }
 
 .user-area .col {
@@ -13742,20 +13714,15 @@ header {
     font-weight: 500;
 }
 
-.user-area .sign-in, .user-area .sign-up{
-    background-color: #f8f9fa;  
-}
-
 .item-in-cart {
     position: absolute;
     color: #fff;
     font-size: 8px;
-    line-height: 1em;
-    padding: 5px 1px 5px 0;
+    padding: 2px;
     background: #9A1E3E;
     border-radius: 20px;
-    top: -10px;
-    right: -8px;
+    top: -3px;
+    right: 37px;
     min-width: 16px;
     height: 16px;
     text-align: center;
@@ -13765,7 +13732,7 @@ header {
     text-align: center;
 }
 
-.cart-icon a > div {
+.cart-icon > div {
     display: inline-block;
     position: relative;
     margin: 0 auto;
@@ -13980,7 +13947,7 @@ footer p {
     width: 100%;
     color: #646464;
     font-size: 18px;
-    padding: 5px 5px 5px 10%;
+    padding: 5px 5px 5px 7%;
     margin-bottom: 3px;
     display: block;
     cursor: pointer;
@@ -14046,8 +14013,8 @@ footer p {
 ==========================================================================================================================================================================================*/
 
 .star-rating {
-     padding: 0 10px;
-     padding-bottom: 10px;
+     padding: 0 5px;
+     padding-bottom: 5px;
      position: absolute;
      bottom: 0px;
 }
@@ -14066,7 +14033,6 @@ footer p {
 
 .vine-box-style-1 {
     margin-bottom: 20px;
-    min-height: 305px;
 }
 
 .vine-box-style-1 a {
@@ -14078,13 +14044,7 @@ footer p {
 }
 
 .vine-box-style-1 img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    vertical-align: middle;
-    object-fit: cover;
-    margin: 0 auto;
+    width: 100%;
 }
 
 
@@ -14093,22 +14053,13 @@ footer p {
     color: #2b2e32;
     text-transform: uppercase;
     margin-top: 10px;
-    padding: 0 10px;
-    margin-bottom: 40px;
+    padding: 0 5px;
+    margin-bottom: 45px;
 }
 
 .image-container {
     position: relative;
     overflow: hidden;
-
-}
-
-.vine-box-style-1 .image-container{
-    /*remove styles below if needed*/
-    padding-bottom: 100%;
-    width: 100%;
-    height: 0;
-    vertical-align: middle;  
 }
 
 .overlay {
@@ -14136,11 +14087,7 @@ footer p {
 }
 
 .vine-box-style-2 .row {
-    height: 150px;
-}
-
-.vine-box-style-2 .row .col-6{
-    overflow: hidden;
+    height: 100%;
 }
 
 .vine-box-style-2 a {
@@ -14149,22 +14096,15 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 .vine-box-style-2 img  {
+    margin: 0 auto;
     display: block;
-    width: unset;
-    height: 100%;
-    max-height: 150px;
-    margin-left: -10%;
+    max-width: 100%;
 }
 
 .vine-box-style-2 .col-md-6 {
-    padding: 0;
-}
-
-.vine-box-style-2 .col-md-6:last-child {
     padding: 10px;
 }
 
@@ -14194,7 +14134,7 @@ footer p {
 .vine-box-style-3 {
     margin-bottom: 20px;
     min-height: 250px;
-    max-height: 530px;
+    max-height: 480px;
 }
 
 .vine-box-style-3 a {
@@ -14208,14 +14148,7 @@ footer p {
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    margin-left: -50%;
-}
-
-.vine-box-style-3 .product-info{
-    padding: 10px;
+    max-width: 100%;
 }
 
 .vine-box-style-3 h5 {
@@ -14261,7 +14194,7 @@ footer p {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
-    padding-bottom: 115%;
+    padding: 15px 10px;
 }
 
 .vine-box-style-3 .image-container i {
@@ -14288,8 +14221,8 @@ footer p {
 }
 
 .vine-box-style-3 .star-rating {
-    padding: 0 0 0 10px;
-    padding-bottom: 10px;
+    padding: 0 10px;
+    padding-bottom: 5px;
 }
 
 .sale-mark {
@@ -14308,8 +14241,8 @@ footer p {
     color: #646464;
     font-size: 18px;
     position: absolute;
-    right: 30px;
-    bottom: 5px;
+    right: 22px;
+    bottom: 4px;
 }
 
 
@@ -14744,10 +14677,6 @@ footer p {
     position: relative;
     float: left;
     padding: 20px 5px;
-}
-
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-    border-bottom-width: 3px!important;
 }
 
 .wine-description ul li a.active {
@@ -15599,9 +15528,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         -ms-flex-preferred-size: auto;
             flex-basis: auto;
     }
-    .vine-box-style-1 {
-      min-height: 275px;
-  }
+
+    .item-in-cart {
+        right: 28px;
+    }
 }
 
 
@@ -15613,8 +15543,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .navbar .form-inline {
         display: block;
         margin: 0 auto;
-        max-width: 400px;
-        width: 100%;
     }
 
     .navbar .form-inline .form-control {
@@ -15656,6 +15584,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-top:157px;
     }
 
+    .item-in-cart {
+        right: 0px;
+    }
+
     .col-xs-5ths, .main__scroller .col-xs-6 {
         /*flex: 0 0 50%;
         max-width: 50%;
@@ -15663,11 +15595,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
         -webkit-box-flex: 0;
 
-            -ms-flex: 0 0 280px;
+            -ms-flex: 0 0 250px;
 
-                flex: 0 0 280px;
-        max-width: 280px;
-        width: 100%;
+                flex: 0 0 250px;
+        max-width: 250px;
+        width: 250px;
         position: relative;
         float: left;
     }
@@ -15722,24 +15654,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 }
 
-@media only screen and (min-width : 998px){
-  .logo img{
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width : 768px) and (max-width : 998px) {    
-    .navbar .navbar-collapse.collapse{
-        display: none!important; 
-    }
-    .navbar .navbar-collapse.show {
-        display: block!important;
-    }
-    .form-inline, .form-inline .input-width {
-      width: 100%!important;
-      max-width: 350px;
-    }
-}
 
 @media only screen and (max-width : 768px) {
     .mobile-display {
@@ -15775,29 +15689,13 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             -ms-flex: 0 0 30%;
                 flex: 0 0 30%;
     }
-    .user-area .sign-in.show, .user-area .sign-up.show{
-        display: flex!important;
-    }
-
-    .form-inline .input-width {
-        max-width: 85%;
-    }
-
-    .user-area span {
-        font-size: 10px;
-    }
-
-    .user-area img {
-      width: 20px;
-      height: 20px;
-    }
 
     .item-in-cart {
-        right: -5px;
+        right: 7px;
     }
 
     .main {
-        margin-top:165px;
+        margin-top:145px;
     }
 
     .main .page-header{
@@ -15828,7 +15726,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         width: 30px;
         height: 30px;
     }
-/*
+
     .order-q {
         position: relative;
         right: 0;
@@ -15837,8 +15735,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         float: left;
         padding: 0 10px;
     }
-*/
-
     .vine-boxes{
       padding: 0!important;
       margin: 0 auto!important;
@@ -15859,6 +15755,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
       padding-bottom: 6px;
       bottom: 8px;
     }
+
     .vine-box-style-3 h4 {
         margin-bottom: 10px;
     }
@@ -15871,7 +15768,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
-    .col-xs-5ths {
+    .col-xs-5ths, .main__scroller .col-xs-6 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 180px;
                 flex: 0 0 180px;
@@ -15900,11 +15797,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-2 h5 {
         font-size: 16px;
     }
-/*
+
     .vine-box-style-3 img {
         width: 30%;
     }
-*/
+
     .vine-box-style-3 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 50%;
@@ -16068,38 +15965,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .edit-button {
         top: 2px;
     }
-
-    .vine-box-style-1 {
-        min-height: 250px;
-    }
-
-    .main__scroller .vine-box-style-2,
-    .row-eq-height .vine-box-style-3{
-        padding: 0 10px;
-    }
-
-    .vine-box-style-3 .image-container{
-        padding-bottom: 115%;
-    }
-
-    .vine-box-style-3 .product-info{
-        padding: 0
-    }
-
-    .vue-star-rating-star{
-        height: 12px!important;
-        width: 12px!important;
-    }
-    
-    .vine-box-style-2 .row {
-        height: 130px;
-    }
-
-    .vine-box-style-2 img{
-        height: 100%;
-        max-height: 130px;
-        max-width: fit-content;
-    }
 }
 
 
@@ -16111,6 +15976,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .form-inline .form-control {
         display: inline-block;
+        width: auto;
         vertical-align: middle;
     }
 
@@ -16120,9 +15986,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .item-in-cart {
-        padding: 4px 0px 3px 0;
-        min-width: 14px;
-        height: 14px;
+        right: 2px;
     }
 
     .home-slider {
@@ -16148,7 +16012,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .winery-preferences table {
         font-size: 12px;
     }
-
 }
 
 @media only screen and (max-width : 450px) {
@@ -16159,6 +16022,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .wineries-box p {
         font-size: 14px;
     }
+
 
     .padding-row{
       padding: 0!important;
@@ -16172,6 +16036,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .user-area span {
         font-size: 8px;
     }
+
 }
 
 @media only screen and (max-width : 400px) {
@@ -16186,9 +16051,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 370px) {
-    .form-inline .input-width {
-        max-width: 84%;
-    }    
+    
 }
 
 /*! jQuery UI - v1.10.3 - 2013-12-09

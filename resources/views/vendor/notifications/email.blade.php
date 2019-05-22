@@ -74,7 +74,7 @@
                                         <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; border-top: 1px solid #000000; margin-top: 25px; padding-top: 25px;">
                                             <tr>
                                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #000; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 12px;">{{ $outroLines[1] }}
+                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #000; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 12px;">{{ isset($outroLines[1]) ? $outroLines[1] : "" }}
                                                         into your web browser: <a href="{{ $actionUrl }}" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #3869D4;">{{ $actionUrl }}</a></p>
                                                 </td>
                                             </tr>
