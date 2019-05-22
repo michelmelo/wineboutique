@@ -52871,88 +52871,97 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-				$(window).on('resize', function () {
-								var win = $(this); //this = window
-								if (win.width() <= 974) {
-												$(".main__scroller").removeClass("row");
-								} else {
-												$(".main__scroller").addClass("row");
-								}
+	$(window).on('resize', function () {
+		var win = $(this); //this = window
+		if (win.width() <= 974) {
+			$(".main__scroller").removeClass("row");
+		} else {
+			$(".main__scroller").addClass("row");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:first-child").addClass("col-4");
-								} else {
-												$(".my-wine div a>div:first-child").removeClass("col-4");
-								}
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:first-child").addClass("col-4");
+		} else {
+			$(".my-wine div a>div:first-child").removeClass("col-4");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-								} else {
-												$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-								}
-				});
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+		} else {
+			$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+		}
+	});
 
-				if ($(window).width() < 960) {
-								$(".main__scroller").removeClass("row");
-				} else {
-								$(".main__scroller").addClass("row");
-				}
+	if ($(window).width() < 960) {
+		$(".main__scroller").removeClass("row");
+	} else {
+		$(".main__scroller").addClass("row");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:first-child").addClass("col-4");
-				} else {
-								$(".my-wine div a>div:first-child").removeClass("col-4");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:first-child").addClass("col-4");
+	} else {
+		$(".my-wine div a>div:first-child").removeClass("col-4");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-				} else {
-								$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+	} else {
+		$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+	}
 
-				/*
-        $(window).scroll(function(){
-            if ($(window).scrollTop() > 0){
-                $('header').addClass('sticky');
-            } else {
-        		$('header').removeClass('sticky');
-    		}
-        });
-    */
+	/*
+     $(window).scroll(function(){
+         if ($(window).scrollTop() > 0){
+             $('header').addClass('sticky');
+         } else {
+     		$('header').removeClass('sticky');
+ 		}
+     });
+ */
 
-				//PROFILE EDIT
+	//PROFILE EDIT
 
-				$(".edit-personal").click(function () {
-								$('#personal .edit-text').empty();
-								$('#personal .edit-text').append("<input type='text'>");
-				});
+	$(".edit-personal").click(function () {
+		$('#personal .edit-text').empty();
+		$('#personal .edit-text').append("<input type='text'>");
+	});
 
-				$(".edit-password").click(function () {
-								$('#pass .edit-text').empty();
-								$('#pass .edit-text').append("<input type='password'>");
-				});
+	$(".edit-password").click(function () {
+		$('#pass .edit-text').empty();
+		$('#pass .edit-text').append("<input type='password'>");
+	});
 
-				$(".edit-preferance").click(function () {
-								$('#preferance .edit-text').empty();
-								$('#preferance .edit-text').append("<input type='text'>");
-				});
+	$(".edit-preferance").click(function () {
+		$('#preferance .edit-text').empty();
+		$('#preferance .edit-text').append("<input type='text'>");
+	});
 
-				$(".auto-submit").change(function () {
-								var el = $(this);
-								var form = void 0;
+	$(".auto-submit").change(function () {
+		var el = $(this);
+		var form = void 0;
 
-								if (el.is('form')) {
-												form = el;
-								} else {
-												form = el.closest('form');
-								}
+		if (el.is('form')) {
+			form = el;
+		} else {
+			form = el.closest('form');
+		}
 
-								form.submit();
-				});
+		form.submit();
+	});
 
-				$("#defaultCheck2").change(function () {
-								$("#over-21").toggleClass("d-none");
-				});
+	$("#defaultCheck2").change(function () {
+		$("#over-21").toggleClass("d-none");
+	});
+
+	(function () {
+		setTimeout(function () {
+			if (document.getElementById("msg") !== null) {
+				document.getElementById("msg").style.display = 'none';
+				$.post('/hideMsg');
+			}
+		}, 5000);
+	})();
 });
 
 /***/ }),
@@ -71097,6 +71106,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__customValidators__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+//
+//
+//
 //
 //
 //
@@ -71151,7 +71165,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'acceptTerms', 'acceptAge'];
+
+var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'phone', 'acceptTerms', 'acceptAge', 'birthday'];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -71164,6 +71179,7 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
             phone: '',
             acceptTerms: false,
             acceptAge: false,
+            birthday: '',
             csrf: window.Laravel.csrfToken,
             showErrors: false,
             validEmail: null
@@ -71203,6 +71219,12 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
         isInvalid: function isInvalid(name) {
             console.log(name, this.$v[name]);
             return this.$v[name].$invalid && this.showErrors;
+        },
+        initialDate: function initialDate() {
+            var date = new Date();
+            date.setFullYear(date.getFullYear() - 21);
+
+            return __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('Y-MM-DD');
         }
     },
     validations: {
@@ -71235,6 +71257,9 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
         },
         acceptAge: {
             isTrue: __WEBPACK_IMPORTED_MODULE_1__customValidators__["a" /* isTrue */]
+        },
+        birthday: {
+            required: __WEBPACK_IMPORTED_MODULE_0_vuelidate_lib_validators__["required"]
         }
     }
 });
@@ -72173,6 +72198,31 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
+      _vm.acceptAge
+        ? _c("div", { attrs: { id: "over-21" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.birthday,
+                  expression: "birthday"
+                }
+              ],
+              attrs: { type: "date", name: "birthday", max: _vm.initialDate() },
+              domProps: { value: _vm.birthday },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.birthday = $event.target.value
+                }
+              }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("input", {
         staticClass: "button red-button full-width",
         attrs: { type: "submit", name: "submit", value: "CREATE A WINERY" }
@@ -72243,9 +72293,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-//
 //
 //
 //
@@ -72319,48 +72366,43 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['wineryName'],
+    props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "selectedRegions", "fetchedRegions"],
     data: function data() {
         return {
             csrf: window.Laravel.csrfToken,
-            fetchedRegions: [],
+            fetchedRegions_: [],
             regions: [],
             wines: [],
             currentlyEditing: 0,
-            step: 1,
-            profile: null,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
-            description: "",
-            errors: {}
+            errors: {},
+            profile: null,
+            cover: null,
+            name: null,
+            description: null
         };
     },
     created: function created() {
-        this.fetchRegions();
+        this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
+        this.description = this.wineryDesc;
+        this.profile = this.wineryProfile;
+        this.cover = this.wineryCover;
+        this.regions = JSON.parse(this.selectedRegions);
+        this.name = this.wineryName;
     },
 
     methods: {
-        fetchRegions: function fetchRegions() {
-            var _this = this;
-
-            this.fetchedRegions = [];
-            axios.get('/api/regions').then(function (response) {
-                _this.fetchedRegions = response.data;
-            }).catch(function (error) {
-                console.log("error", error);
-            });
-        },
         setEditing: function setEditing(wineId) {
             this.currentlyEditing = wineId;
         },
         disableEditing: function disableEditing(wineId) {
-            var _this2 = this;
+            var _this = this;
 
             return function (event) {
-                if (_this2.currentlyEditing === wineId) {
-                    _this2.currentlyEditing = 0;
-                    var wine = _.find(_this2.wines, { id: wineId });
+                if (_this.currentlyEditing === wineId) {
+                    _this.currentlyEditing = 0;
+                    var wine = _.find(_this.wines, { id: wineId });
                     axios.post('/wine/update/' + wineId, wine).then(function (response) {}).catch(function (error) {
                         console.log("error", error);
                     });
@@ -72368,57 +72410,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             };
         },
         deleteWine: function deleteWine(wineId) {
-            var _this3 = this;
+            var _this2 = this;
 
             axios.delete('/wine/delete/' + wineId).then(function (response) {
-                _this3.wines = _this3.wines.filter(function (wine) {
+                _this2.wines = _this2.wines.filter(function (wine) {
                     return wine.id !== wineId;
                 });
             }).catch(function (error) {
                 console.log("error", error);
             });
         },
-        cloneWine: function cloneWine(wineId) {
-            var _this4 = this;
-
-            axios.post('/wine/clone/' + wineId).then(function (response) {
-                _this4.wines = [].concat(_toConsumableArray(_this4.wines), [{
-                    photo: response.data.photo,
-                    name: '',
-                    price: 0,
-                    id: response.data.id
-                }]);
-            }).catch(function (error) {
-                console.log("error", error);
-            });
-        },
-        handleFileChange: function handleFileChange(e) {
-            var _this5 = this;
-
-            if (e.target.files && e.target.files.length) {
-                var file = e.target.files[0];
-
-                if (file.type.indexOf('image/') !== 0) {
-                    return console.log('Selected file must be an image!');
-                }
-
-                var data = new FormData();
-                data.append('photo', file);
-
-                axios.post('/wine/store', data).then(function (response) {
-                    _this5.wines = [].concat(_toConsumableArray(_this5.wines), [{
-                        photo: response.data.photo,
-                        name: '',
-                        price: 0,
-                        id: response.data.id
-                    }]);
-                }).catch(function (error) {
-                    console.log("error", error);
-                });
-            }
-        },
         handlePhotoChange: function handlePhotoChange(e) {
-            var _this6 = this;
+            var _this3 = this;
 
             if (e.target.files && e.target.files.length) {
                 var file = e.target.files[0];
@@ -72429,43 +72432,38 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
                 var data = new FormData();
                 data.append('photo', file);
+                data.append('wid', this.wineryId);
 
                 var type = e.target.dataset.type;
 
                 axios.post('/winery/' + type, data).then(function (response) {
-                    _this6[type] = response.data.photo;
+                    if (e.target.dataset.type === 'cover') {
+                        _this3.cover = response.data.photo;
+                    } else {
+                        _this3.profile = response.data.photo;
+                    }
+                    vm.$forceUpdate();
                 }).catch(function (error) {
                     console.log("error", error);
                 });
             }
         },
-        setStep: function setStep(step) {
-            this.errors = {};
-            if (this.step === 1 && step === 2) {
-                if (this.wineryName.length < 3) this.errors['wineryName'] = 'You must enter winery name.';
-                if (this.regions.length === 0) this.errors['regions'] = 'You must select at least 1 region.';
-
-                if (Object.keys(this.errors).length > 0) return;
-            }
-
-            this.step = step;
-            window.scrollTo(0, 0);
-        },
         onSubmit: function onSubmit() {
             this.errors = {};
-            if (this.description.length < 10) {
-                this.errors['description'] = 'You must enter at least 10 characters.';
-                return false;
-            }
+            if (this.name.length < 3) this.errors['name'] = 'You must enter winery name.';
+            if (this.regions.length === 0) this.errors['regions'] = 'You must select at least 1 region.';
+
+            if (this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
+            if (Object.keys(this.errors).length > 0) return false;
         },
         isInvalid: function isInvalid(name) {
             return this.errors[name];
         },
         getProfilePhoto: function getProfilePhoto() {
-            return this.profile ? '/storage/images/wineries/profile/' + this.profile : this.defaultProfilePhoto;
+            return this.profile ? '/images/winery/profile/' + this.profile : this.defaultProfilePhoto;
         },
         getCoverPhoto: function getCoverPhoto() {
-            return this.cover ? '/storage/images/wineries/cover/' + this.cover : this.defaultCoverPhoto;
+            return this.cover ? '/images/winery/cover/' + this.cover : this.defaultCoverPhoto;
         }
     }
 });
@@ -72507,338 +72505,226 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 1,
-                expression: "step===1"
-              }
-            ],
-            staticClass: "shadow-box row"
-          },
-          [
-            _c("h2", [_vm._v("NAME YOUR WINERY")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-3 col-sm-12" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6 col-sm-12 enter-name" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.wineryName,
-                    expression: "wineryName",
-                    modifiers: { trim: true }
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("NAME YOUR WINERY")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6 col-sm-12 enter-name" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.name,
+                  expression: "name",
+                  modifiers: { trim: true }
+                }
+              ],
+              class: { invalid: _vm.isInvalid("name") },
+              attrs: {
+                type: "text",
+                placeholder: "Enter your winery name",
+                name: "wineryName",
+                min: "4",
+                required: ""
+              },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                class: { invalid: _vm.isInvalid("wineryName") },
-                attrs: {
-                  type: "text",
-                  placeholder: "Enter your winery name",
-                  name: "wineryName"
+                  _vm.name = $event.target.value.trim()
                 },
-                domProps: { value: _vm.wineryName },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.wineryName = $event.target.value.trim()
-                  },
-                  blur: function($event) {
-                    _vm.$forceUpdate()
-                  }
+                blur: function($event) {
+                  _vm.$forceUpdate()
                 }
-              }),
-              _vm._v(" "),
-              _vm._m(0)
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-3 col-sm-12" })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 1,
-                expression: "step===1"
               }
-            ],
-            staticClass: "shadow-box row"
-          },
-          [
-            _c("h2", [_vm._v("WINERY PREFERENCES")]),
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-8 col-sm-12 winery-preferences" },
-              [
-                _c("table", [
-                  _c("tr", [
-                    _c("td", [_vm._v("Winery state *")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "select",
+            _vm._m(0)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-sm-12" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("WINERY PREFERENCES")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 col-sm-12 winery-preferences" }, [
+            _c("table", [
+              _c("tr", [
+                _c("td", [_vm._v("Winery state *")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "select",
+                    {
+                      directives: [
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.regions,
-                              expression: "regions"
-                            }
-                          ],
-                          staticClass: "half-select",
-                          class: { invalid: _vm.isInvalid("regions") },
-                          attrs: {
-                            disabled: _vm.fetchedRegions.length === 0,
-                            name: "regions[]",
-                            multiple: ""
-                          },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.regions = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            { attrs: { disabled: "", hidden: "", value: "" } },
-                            [_vm._v("Select")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.fetchedRegions, function(region) {
-                            return _c(
-                              "option",
-                              {
-                                key: region.id,
-                                domProps: { value: region.id }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(region.name) +
-                                    "\n                                "
-                                )
-                              ]
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.regions,
+                          expression: "regions"
+                        }
+                      ],
+                      staticClass: "half-select",
+                      class: { invalid: _vm.isInvalid("regions") },
+                      attrs: {
+                        disabled: _vm.fetchedRegions_.length === 0,
+                        name: "regions[]",
+                        multiple: "",
+                        required: ""
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.regions = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { disabled: "", hidden: "", value: "" } },
+                        [_vm._v("Select")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.fetchedRegions_, function(region) {
+                        return _c(
+                          "option",
+                          { key: region.id, domProps: { value: region.id } },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(region.name) +
+                                "\n                                "
                             )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 1,
-                expression: "step===1"
-              }
-            ],
-            staticClass: "shadow-box row"
-          },
-          [
-            _c("h2", [_vm._v("WINERY DESCRIPTION")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.description,
-                    expression: "description",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticStyle: { width: "100%", "min-height": "150px" },
-                attrs: { name: "description" },
-                domProps: { value: _vm.description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.description = $event.target.value.trim()
-                  },
-                  blur: function($event) {
-                    _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 1,
-                expression: "step===1"
-              }
-            ],
-            staticClass: "shadow-box row"
-          },
-          [
-            _c("h2", [_vm._v("WINERY APPEARANCE")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
-              _c("div", { staticClass: "col-lg-12 wineries-box" }, [
-                _c("div", [
-                  _c("div", { staticClass: "wineries-brand" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "winery-header uploader",
-                        style:
-                          "background-image: url(" + _vm.getCoverPhoto() + ")"
-                      },
-                      [
-                        _c("input", {
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            "data-type": "cover"
-                          },
-                          on: { change: _vm.handlePhotoChange }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "winery-logo uploader",
-                        style:
-                          "background-image: url(" + _vm.getProfilePhoto() + ")"
-                      },
-                      [
-                        _c("input", {
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            "data-type": "profile"
-                          },
-                          on: { change: _vm.handlePhotoChange }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.wineryName))])
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 col-sm-12" })
-          ]
-        ),
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("WINERY DESCRIPTION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.description,
+                  expression: "description",
+                  modifiers: { trim: true }
+                }
+              ],
+              staticStyle: { width: "100%", "min-height": "150px" },
+              attrs: { name: "description", minlength: "10", required: "" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value.trim()
+                },
+                blur: function($event) {
+                  _vm.$forceUpdate()
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "shadow-box row" }, [
+          _c("h2", [_vm._v("WINERY APPEARANCE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8 col-sm-12" }, [
+            _c("div", { staticClass: "col-lg-12 wineries-box" }, [
+              _c("div", [
+                _c("div", { staticClass: "wineries-brand" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "winery-header uploader",
+                      style:
+                        "background-image: url(" + _vm.getCoverPhoto() + ")"
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          "data-type": "cover"
+                        },
+                        on: { change: _vm.handlePhotoChange }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "wineries-brand" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "winery-logo uploader",
+                      style:
+                        "background-image: url(" + _vm.getProfilePhoto() + ")"
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          "data-type": "profile"
+                        },
+                        on: { change: _vm.handlePhotoChange }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "winery-title" }, [
+                  _vm._v(_vm._s(_vm.wineryName))
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 col-sm-12" })
+        ]),
         _vm._v(" "),
         _c(
           "button",
           {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 1,
-                expression: "step===1"
-              }
-            ],
-            staticClass: "red-button button float-right",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                $event.stopPropagation()
-                $event.preventDefault()
-                _vm.setStep(2)
-              }
-            }
-          },
-          [_vm._v("NEXT STEP")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 2,
-                expression: "step===2"
-              }
-            ],
-            staticClass: "red-button button float-left",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                $event.stopPropagation()
-                $event.preventDefault()
-                _vm.setStep(1)
-              }
-            }
-          },
-          [_vm._v("PREVIOUS STEP")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step === 2,
-                expression: "step===2"
-              }
-            ],
             staticClass: "red-button button float-right",
             attrs: { type: "submit" }
           },
@@ -78963,8 +78849,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _this = this;
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 //
@@ -79016,18 +78900,23 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     data: function data() {
         return {
             csrf: window.Laravel.csrfToken,
-            profile: _this.wineryProfile,
+            profile: null,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: _this.wineryCover,
+            cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
             publicPath: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BASE_URL,
             errors: {}
         };
+    }, created: function created() {
+        this.description = this.wineryDesc;
+        this.profile = this.wineryProfile;
+        this.cover = this.wineryCover;
     },
+
     methods: {
         handleFileChange: function handleFileChange(e) {
-            var _this2 = this;
+            var _this = this;
 
             if (e.target.files && e.target.files.length) {
                 var file = e.target.files[0];
@@ -79040,7 +78929,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 data.append('photo', file);
 
                 axios.post('/wine/store', data).then(function (response) {
-                    _this2.wines = [].concat(_toConsumableArray(_this2.wines), [{
+                    _this.wines = [].concat(_toConsumableArray(_this.wines), [{
                         photo: response.data.photo,
                         name: '',
                         price: 0,
@@ -79052,7 +78941,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             }
         },
         handlePhotoChange: function handlePhotoChange(e) {
-            var _this3 = this;
+            var _this2 = this;
 
             if (e.target.files && e.target.files.length) {
                 var file = e.target.files[0];
@@ -79069,9 +78958,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
                 axios.post('/winery/' + type, data).then(function (response) {
                     if (e.target.dataset.type === 'cover') {
-                        _this3.wineryCover = response.data.photo;
+                        _this2.cover = response.data.photo;
                     } else {
-                        _this3.wineryProfile = response.data.photo;
+                        _this2.profile = response.data.photo;
                     }
                 }).catch(function (error) {
                     console.log("error", error);
@@ -79089,10 +78978,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return this.errors[name];
         },
         getProfilePhoto: function getProfilePhoto() {
-            return this.wineryProfile ? '/images/winery/profile/' + this.wineryProfile : this.defaultProfilePhoto;
+            return this.profile ? '/images/winery/profile/' + this.profile : this.defaultProfilePhoto;
         },
         getCoverPhoto: function getCoverPhoto() {
-            return this.wineryCover ? '/images/winery/cover/' + this.wineryCover : this.defaultCoverPhoto;
+            return this.cover ? '/images/winery/cover/' + this.cover : this.defaultCoverPhoto;
         }
     }
 });
@@ -79210,7 +79099,9 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.wineryName))])
+                _c("p", { staticClass: "winery-title" }, [
+                  _vm._v(_vm._s(_vm.wineryName))
+                ])
               ])
             ])
           ]),

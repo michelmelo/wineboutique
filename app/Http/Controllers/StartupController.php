@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\StartupRequest;
-use App\Winery;
 use Illuminate\Support\Facades\Auth;
+use App\Region;
 
 
 class StartupController extends Controller
 {
     public function show()
     {
-        $wineryName = Auth::user()->winery->name;
+        $winery = Auth::user()->winery;
 
         return view('startup', [
-            'wineryName' => $wineryName
+            'wineryId' => $winery->id,
+            'wineryName' => $winery->name,
+            'winery_desc' => $winery->description,
+            'winery_profile' => $winery->profile,
+            'winery_cover' => $winery->cover,
+            'winery_regions' => $this->onlyIDs($winery->regions),
+            'regions' => Region::orderBy('name')->get()
         ]);
     }
 
@@ -30,6 +35,15 @@ class StartupController extends Controller
 
         $winery->regions()->sync($request->regions);
 
-        return redirect()->route('profile.show');
+        return redirect()->route('my-winery');
+    }
+
+    private function onlyIDs($obj)
+    {
+        $retVal = array();
+        foreach ($obj as $item) {
+            array_push($retVal,$item->id);
+        }
+        return $retVal;
     }
 }

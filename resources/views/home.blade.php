@@ -51,7 +51,7 @@
                     <div class="col-xs-5ths vine-box-style-1">
                         <a href="{{route('winery', ['winery' => $topWinery->slug])}}">
                             <div class="image-container">
-                                <img src="{{ $topWinery->cover?'/storage/images/wineries/cover/'.$topWinery->cover:asset('img/vine-style-1-img.jpg') }}">
+                                <img src="{{ $topWinery->cover?'/images/winery/cover/'.$topWinery->cover:asset('img/vine-style-1-img.jpg') }}">
                                 <div class="overlay"></div>
                             </div>
                             <h5>{{$topWinery->name}}</h5>

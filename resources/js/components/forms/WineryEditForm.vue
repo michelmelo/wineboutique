@@ -29,7 +29,7 @@
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="profile" />
                                 </label>
                             </div>
-                            <p>{{wineryName}}</p>
+                            <p class="winery-title">{{wineryName}}</p>
                         </div>
                     </div>
                 </div>
@@ -46,14 +46,18 @@
         props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
-            profile: this.wineryProfile,
+            profile: null,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
-            cover: this.wineryCover,
+            cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
             publicPath: process.env.BASE_URL,
             errors: {}
-        }),
+        }),created() {
+            this.description = this.wineryDesc;
+            this.profile = this.wineryProfile;
+            this.cover = this.wineryCover;
+        },
         methods: {
             handleFileChange(e) {
                 if(e.target.files && e.target.files.length) {
@@ -97,9 +101,9 @@
                     axios.post(`/winery/${type}`, data)
                         .then(response => {
                             if(e.target.dataset.type==='cover') {
-                                this.wineryCover = response.data.photo;
+                                this.cover = response.data.photo;
                             } else {
-                                this.wineryProfile = response.data.photo;
+                                this.profile = response.data.photo;
                             }
                         })
                         .catch(error => {
@@ -118,10 +122,10 @@
                 return this.errors[name];
             },
             getProfilePhoto() {
-                return this.wineryProfile?`/images/winery/profile/${this.wineryProfile}`:this.defaultProfilePhoto;
+                return this.profile?`/images/winery/profile/${this.profile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.wineryCover?`/images/winery/cover/${this.wineryCover}`:this.defaultCoverPhoto;
+                return this.cover?`/images/winery/cover/${this.cover}`:this.defaultCoverPhoto;
             }
         }
     }

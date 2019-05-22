@@ -14234,6 +14234,11 @@ footer p {
     font-weight: 600;
 }
 
+.vine-box-style-3 small {
+    padding: 0 10px;
+    display: inline-block;
+}
+
 .vine-box-style-3 input {
     border: 0;
     width: calc(100% - 20px);
@@ -14629,7 +14634,7 @@ footer p {
 }
 
 .tab-content img {
-    width: auto;
+    width: 100%;
     -webkit-animation-name: opacity;
     animation-name: opacity;
     -webkit-animation-duration: .3s;
@@ -14731,6 +14736,10 @@ footer p {
     position: relative;
     float: left;
     padding: 20px 5px;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    border-bottom-width: 3px!important;
 }
 
 .wine-description ul li a.active {
