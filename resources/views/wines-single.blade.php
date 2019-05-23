@@ -74,7 +74,8 @@
                 </div>
                 
                 <div id="info" class="tab-pane fade">
-                    <p>{{$wine->winery->description}}</p>
+                    <p class="winery-name">{{$wine->winery->name}}</p>
+                    <p class="winery-description">{{$wine->winery->description}}</p>
                 </div>
             </div>
         </div>
