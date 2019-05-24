@@ -14276,7 +14276,7 @@ footer p {
 }
 
 .style-3-2 .order-q {
-    font-size: 10px;
+    font-size: 12px;
     right: 20px;
     bottom: 8px;
 }
@@ -15732,6 +15732,23 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-bottom: 40px;
         float: left;
         padding: 0 10px;
+    }
+
+
+    .vine-boxes{
+      padding: 0!important;
+      margin: 0 auto!important;
+    }
+
+    .vine-box-style-3 .image-container i{
+        font-size: 30px;
+    }
+    .vine-box-style-3 .order-q {
+        bottom: 5px;
+    }
+    .vine-box-style-3 .star-rating {
+      padding-bottom: 6px;
+      bottom: 8px;
     }
 
     .vine-box-style-3 h4 {

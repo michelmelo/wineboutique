@@ -24,10 +24,14 @@
                     @endif
                     <span class="sale-mark">SALE</span>
                 </div>
-                <h5>{{$wine->name}}</h5>
-                <h4>${{$wine->price}}</h4>
-                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
-                <span class="order-q">{{ $wine->orders_count }} Orders</span>
+                <div class="product-info">
+                    <h5>{{$wine->name}}</h5>
+                    <h4>${{$wine->price}}</h4>
+                    <div class="star-rating">
+                        <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                    </div>
+                    <span class="order-q">{{ $wine->orders_count }} Orders</span>
+                </div>
             </a>
         </div>
         @endforeach
