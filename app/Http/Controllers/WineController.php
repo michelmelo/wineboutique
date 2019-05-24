@@ -75,6 +75,11 @@ class WineController extends Controller
 
     public function list(Request $request)
     {
+        $page_offset = false;
+        if ($request->get('page_offset')) {
+            $page_offset = $request->get('page_offset');
+        }
+
         $wines = Wine::query();
 
         $varietals = Varietal::all();
@@ -114,13 +119,24 @@ class WineController extends Controller
             ->leftJoin('orders', 'wines.id', '=', 'orders.id')
             ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
             ->groupBy('wines.id')
-            ->paginate(8);
+            ->get();
 
-        return view('wines', [
+        foreach ($wines as $wine) {
+            if (Auth::user()) {
+                $wine->favorited = $wine->favorited();
+            }
+            $wine->rating = $wine->rating();
+        }
+
+        $loadMore = count($wines) > $page_offset+4;
+        $wines = array_slice($wines->toArray(), $page_offset, 4);
+
+        return $request->ajax() ? ['wines' => $wines, 'loadMore' => $loadMore] : view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
-            'filter' => $filter
+            'filter' => $filter,
+            'loadMore' => $loadMore
         ]);
     }
 
