@@ -73,7 +73,7 @@
                     <p>{{$wine->description}}</p>
                 </div>
                 
-                <div id="info" class="tab-pane fade">
+                <div id="info" class="tab-pane fade in">
                     <p class="winery-name">{{$wine->winery->name}}</p>
                     <p class="winery-description">{{$wine->winery->description}}</p>
                 </div>
