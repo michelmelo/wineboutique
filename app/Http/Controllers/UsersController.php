@@ -17,7 +17,8 @@ class UsersController extends Controller
         foreach ($myFavorites as $myFavorite) {
         	$orderNo[$myFavorite->id] = DB::select("SELECT count(*) as orderNo FROM orders WHERE order_id =  $myFavorite->id LIMIT 1")[0];
         }
-
+        //dd($myFavorites);
+        $orderNo = json_encode($orderNo);
         return view('my_favorites', compact('myFavorites', 'orderNo'));
     }
 
