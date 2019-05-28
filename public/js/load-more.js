@@ -49,9 +49,19 @@ $( document ).ready(function() {
         });
     });
 
+    $(document).on("click", ".toggle-fav", function (e) {
+        e.preventDefault();
+
+        var that = $(this);
+
+        $.post("/favorite/" + that.data("winename"), function (response) {
+            that.toggleClass("fas far");
+        });
+    });
+
     function moreWine(data) {
         let retValFinal = '';
-        data.forEach(function (element) { //"\t" +
+        data.forEach(function (element) {
             let retVal = '';
             retVal += '<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">' + "\n";
             retVal += "\t" + '<a href="' + '/wine/' + element.slug + '">' + "\n";
@@ -59,9 +69,9 @@ $( document ).ready(function() {
             retVal += "\t\t\t" + '<img src="' + element.photo + '">' + "\n";
             retVal += "\t\t\t" + '<div class="overlay"></div>' + "\n";
             if(typeof element.favorited !== 'undefined') {
-                let favText = "\t\t\t" +'<span type="wine">' + "\n\t\t\t\t" + '<a href="#">'  + "\n\t\t\t\t\t" + '<i class="';
+                let favText = "\t\t\t" +'<span type="wine">' + "\n\t\t\t\t" + '<span>'  + "\n\t\t\t\t\t" + '<i class="';
                 favText += element.favorited ? 'fas' : 'far';
-                favText += ' fa-heart">' + '</i>' + "\n\t\t\t\t" + '</a>' +  "\n\t\t\t" + '</span>';
+                favText += ' fa-heart toggle-fav" data-winename="' + element.slug + '">' + '</i>' + "\n\t\t\t\t" + '</span>' +  "\n\t\t\t" + '</span>';
                 retVal += favText;
             }
             retVal += "\n\t\t\t" + '<span class="sale-mark">SALE</span>' + "\n\t\t" + '</div>' + "\n\t\t";
