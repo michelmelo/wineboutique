@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PhotoRequest;
-use App\Order;
 use App\Region;
 use App\Varietal;
-use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
-use Illuminate\Support\Str;
-use App\WineImage;
 use Illuminate\Support\Facades\DB;
 
 class WineController extends Controller
@@ -75,9 +70,11 @@ class WineController extends Controller
 
     public function list(Request $request)
     {
-        $page_offset = false;
-        if ($request->get('page_offset')) {
+        $page_offset = 0;
+        $page_limit = 4;
+        if ($request->get('page_offset')&&$request->get('page_limit')) {
             $page_offset = $request->get('page_offset');
+            $page_limit = $request->get('page_limit');
         }
 
         $wines = Wine::query();
@@ -119,6 +116,8 @@ class WineController extends Controller
             ->leftJoin('orders', 'wines.id', '=', 'orders.id')
             ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
             ->groupBy('wines.id')
+            ->skip($page_offset)
+            ->take($page_limit)
             ->get();
 
         foreach ($wines as $wine) {
@@ -128,15 +127,11 @@ class WineController extends Controller
             $wine->rating = $wine->rating();
         }
 
-        $loadMore = count($wines) > $page_offset+4;
-        $wines = array_slice($wines->toArray(), $page_offset, 4);
-
-        return $request->ajax() ? ['wines' => $wines, 'loadMore' => $loadMore] : view('wines', [
+        return $request->ajax() ? ['wines' => $wines] : view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
-            'filter' => $filter,
-            'loadMore' => $loadMore
+            'filter' => $filter
         ]);
     }
 
@@ -201,5 +196,9 @@ class WineController extends Controller
             'regions' => $regions,
             'filter' => $filter
         ]);
+    }
+
+    public function totalWines() {
+        return Wine::count();
     }
 }

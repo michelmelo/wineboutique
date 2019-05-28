@@ -7,7 +7,7 @@
         <h1>WINERIES</h1>
     </div>
 
-    <div class="row padding-row">
+    <div class="row padding-row vine-boxes">
         @foreach ($wineries as $winery)
             <div class="col-lg-6 wineries-box">
                 <div>
@@ -19,8 +19,7 @@
                 </div>
             </div>
         @endforeach
-        
-        {{ $wineries->links() }}
     </div>
+    @include('layouts.partials.load_more')
 </div>
 @endsection

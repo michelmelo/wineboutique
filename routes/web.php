@@ -49,6 +49,9 @@ Route::get('/images/wine/{slug}', 'ImageController@wineImage')->name('images.win
 
 Route::resource('/wine-image', 'WineImageController')->only(['store', 'destroy']);
 
+Route::post('/totalWines', 'WineController@totalWines');
+Route::post('/totalWineries', 'WineryController@totalWineries');
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
     Route::post('/startup', 'StartupController@store');

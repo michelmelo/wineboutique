@@ -6,7 +6,6 @@ use App\Http\Requests\PhotoRequest;
 use App\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Image;
 
 class WineryController extends Controller
@@ -45,11 +44,20 @@ class WineryController extends Controller
         ];
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $wineries = Winery::paginate(8);
+        $page_offset = 0;
+        $page_limit = 4;
+        if ($request->get('page_offset')&&$request->get('page_limit')) {
+            $page_offset = $request->get('page_offset');
+            $page_limit = $request->get('page_limit');
+        }
 
-        return view('wineries', [
+        $wineries = Winery::skip($page_offset)
+            ->take($page_limit)
+            ->get();
+
+        return  $request->ajax() ? ['wineries' => $wineries] : view('wineries', [
             'wineries' => $wineries
         ]);
     }
@@ -59,5 +67,9 @@ class WineryController extends Controller
         return view('winery', [
             'winery' => $winery
         ]);
+    }
+
+    public function totalWineries() {
+        return Winery::count();
     }
 }
