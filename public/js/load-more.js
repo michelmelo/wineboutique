@@ -26,8 +26,6 @@ $( document ).ready(function() {
         if(loadedMoreCount + page_offset >= total) $("#loadMore").fadeOut('slow');
     }
 
-    console.log(window.location.pathname);
-
 
     $('#loadMoreLink').attr('href', window.location.pathname + '?page_offset=' + page_offset + '&page_limit=' + page_offset);
 
@@ -51,10 +49,9 @@ $( document ).ready(function() {
 
     $(document).on("click", ".toggle-fav", function (e) {
         e.preventDefault();
-
         var that = $(this);
-
-        $.post("/favorite/" + that.data("winename"), function (response) {
+        let method = that.hasClass('far') ? '/favorite/' : '/unfavorite/';
+        $.post(method + that.data("winename"), function (response) {
             that.toggleClass("fas far");
         });
     });
@@ -63,28 +60,27 @@ $( document ).ready(function() {
         let retValFinal = '';
         data.forEach(function (element) {
             let retVal = '';
-            retVal += '<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">' + "\n";
-            retVal += "\t" + '<a href="' + '/wine/' + element.slug + '">' + "\n";
-            retVal += "\t\t" + '<div class="image-container">' + "\n";
-            retVal += "\t\t\t" + '<img src="' + element.photo + '">' + "\n";
-            retVal += "\t\t\t" + '<div class="overlay"></div>' + "\n";
+            retVal += '<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">';
+            retVal += '<a href="' + '/wine/' + element.slug + '">';
+            retVal += '<div class="image-container">';
+            retVal += '<img src="' + element.photo + '">';
+            retVal += '<div class="overlay"></div>';
             if(typeof element.favorited !== 'undefined') {
-                let favText = "\t\t\t" +'<span type="wine">' + "\n\t\t\t\t" + '<span>'  + "\n\t\t\t\t\t" + '<i class="';
+                let favText = '<span type="wine">' + '<span>' + '<i class="';
                 favText += element.favorited ? 'fas' : 'far';
-                favText += ' fa-heart toggle-fav" data-winename="' + element.slug + '">' + '</i>' + "\n\t\t\t\t" + '</span>' +  "\n\t\t\t" + '</span>';
+                favText += ' fa-heart toggle-fav" data-winename="' + element.slug + '">' + '</i>' + '</span>' + '</span>';
                 retVal += favText;
             }
-            retVal += "\n\t\t\t" + '<span class="sale-mark">SALE</span>' + "\n\t\t" + '</div>' + "\n\t\t";
-            retVal += '<div class="product-info">' + "\n";
-            retVal += '<h5>' + "\n" + typeof element.name !== 'undefined' ? element.name : 'Name of wine' + '</h5>' + "\n";
-            retVal += '<h4>' + element.price + '</h4>' + "\n";
-            retVal += '<div class="star-rating">' + "\n";
-            retVal += '<div data-v-34cbeed1="" class="vue-star-rating">' + "\n" + '<div data-v-34cbeed1="" class="vue-star-rating">' + "\n";
+            retVal += '<span class="sale-mark">SALE</span>' + '</div>';
+            retVal += '<div class="product-info">';
+            retVal += '<h5>' + typeof element.name !== 'undefined' ? element.name : 'Name of wine' + '</h5>';
+            retVal += '<h4>' + element.price + '</h4>';
+            retVal += '<div class="star-rating">';
+            retVal += '<div data-v-34cbeed1="" class="vue-star-rating">' + '<div data-v-34cbeed1="" class="vue-star-rating">';
             for(let i=0;i<element.rating;i++) retVal += selectedStar();
             for(let i=element.rating;i<5;i++) retVal += unselectedStar();
-            retVal += '</div></div></div>' + "\n" + '<span class="order-q">' + element.orders_count + ' Orders</span>' + "\n" + '</div></a></div>' + "\n";
+            retVal += '</div></div></div>' + '<span class="order-q">' + element.orders_count + ' Orders</span>' + '</div></a></div>';
             retValFinal += retVal;
-            console.log(retVal);
         });
         return retValFinal;
     }
@@ -93,7 +89,6 @@ $( document ).ready(function() {
         let retVal = '';
         data.forEach(function (element) {
             retVal += '<div class="col-lg-6 wineries-box"><div><div class="wineries-brand">';
-            console.log(element);
             retVal += '<img class="winery-header" src="' + (element.cover===null ? 'img/winery-1.jpg' : '/images/winery/cover/' + element.cover) + '">';
             retVal += '<img class="winery-logo" src="' + (element.profile===null ? 'img/winery-1.jpg' : '/images/winery/profile/' + element.profile) + '">';
             retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p></div></div>';
