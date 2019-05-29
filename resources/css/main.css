@@ -178,8 +178,9 @@ select {
 }
 
 
-.page-header {
+.main .page-header {
     border-bottom: 4px solid #9b1f3d;
+    padding-bottom: 0;
     margin-bottom: 40px;
     position: relative;
 }
@@ -2573,7 +2574,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .page-header h1 {
-      top: 25%;
+      top: 35%;
     }
     
     .footer-nav {
