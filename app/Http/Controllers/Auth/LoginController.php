@@ -75,6 +75,7 @@ class LoginController extends Controller
             $newUser->google_id       = $user->id;
             $newUser->avatar          = $user->avatar;
             $newUser->avatar_original = $user->avatar_original;
+            $newUser->email           = $user->email;
             $newUser->type            = "CUSTOMER";
             $newUser->save();
             auth()->login($newUser, true);
