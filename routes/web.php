@@ -16,6 +16,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes(['verify' => true]);
 Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
 
+Route::get('/redirect/{service}', 'Auth\LoginController@redirectProvider');
+Route::get('/callback', 'Auth\LoginController@handleGoogleProviderCallback');
+//Route::get ( '/callback/{service}', 'Auth\LoginController@FacebookCallback' );
+
 Route::view('/get-paid', 'get-paid')->name('get-paid');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
 Route::view('/my-wine', 'my-wine')->name('my-wine');
