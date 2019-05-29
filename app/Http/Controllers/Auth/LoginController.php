@@ -60,10 +60,6 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             return redirect('/login');
         }
-        // only allow people with @company.com to login
-        if(explode("@", $user->email)[1] !== 'company.com'){
-            return redirect()->to('/');
-        }
         // check if they're an existing user
         $existingUser = User::where('email', $user->email)->first();
         if($existingUser){
@@ -80,7 +76,7 @@ class LoginController extends Controller
             $newUser->save();
             auth()->login($newUser, true);
         }
-        return redirect()->to('/home');
+        return redirect()->to('/');
     }
 
     public function FacebookCallback($service) {
