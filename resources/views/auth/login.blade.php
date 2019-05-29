@@ -32,6 +32,14 @@
                     </label>
                 </div>
                 <input type="submit" name="submit" class="button red-button full-width" value="SIGN IN">
+                <div class="other-login">
+                    <div class="google-login">
+                        <a href="{{url('/redirect/google")}}>Login in with Google</a>
+                    </div>
+                    {{--<div class="facebook-login">--}}
+                        {{--<a href="{{url('/redirect/facebook')}}">Login in with Facebook</a>--}}
+                    {{--</div>--}}
+                </div>
             </form>
         </div>
     </div>

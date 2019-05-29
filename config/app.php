@@ -165,6 +165,9 @@ return [
         Conner\Tagging\Providers\TaggingServiceProvider::class,
         App\Providers\AgentServiceProvider::class,
 
+        // Other service providers...
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
     ],
 
     /*
@@ -215,6 +218,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
