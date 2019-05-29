@@ -4488,7 +4488,7 @@ pre code {
 .col-6 {
   -ms-flex: 0 0 50%;
   -webkit-box-flex: 0;
-        flex: 0 0 50%;
+          flex: 0 0 50%;
   max-width: 50%;
 }
 
@@ -6315,14 +6315,6 @@ textarea.form-control {
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.card .btn:not(:disabled):not(.disabled){
-  color: #646464;
-}
-
-.card .btn.active.focus, .card .btn.active:focus, .card .btn.focus, 
-.card .btn:active.focus, .card .btn:active:focus, .card .btn:focus{
-  outline: none;
-}
 
 a.btn.disabled,
 fieldset:disabled a.btn {
@@ -8047,7 +8039,6 @@ input[type="button"].btn-block {
   -webkit-box-pack: justify;
           justify-content: space-between;
   padding: 0.5rem 1rem;
-  border-top: 1px solid #CAC9C9 !important;
 }
 
 .navbar > .container,
@@ -13358,7 +13349,7 @@ select {
 }
 
 .btn-link, .btn-link:hover {
-    color: #525457;
+    color: #525457!important;
     text-decoration: none!important;
 }
 
@@ -13632,6 +13623,9 @@ nav {
     -webkit-box-shadow: 0px 9px 17px -8px #0000002b;
             box-shadow: 0px 9px 17px -8px #0000002b;
 }
+.navbar{
+    border-top: 1px solid #CAC9C9 !important;
+}
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: rgb(155, 31, 61);
@@ -13667,11 +13661,7 @@ header {
     top: 0px;
     z-index: 9999;
 }
-/*
-.top-header {
-    padding: 20px 0;
-}
-*/
+
 .form-control {
     border-radius: 10px 0 0 10px;
     -webkit-box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
@@ -13703,17 +13693,17 @@ header {
 }
 
 .form-inline .search-shadow{
-  box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
+          box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
   background-color: #f8f9fa;
   outline: none;
   -webkit-transition: .18s ease-out;
-  -moz-transition: .18s ease-out;
-  -o-transition: .18s ease-out;
   transition: .18s ease-out;
 }
 
 .form-inline .search-shadow:hover, .form-inline .search-shadow:focus {
-  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+  -webkit-box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+          box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
   outline: none;
   border: 1px solid #ccc;
 }
@@ -13894,7 +13884,6 @@ footer p {
 ==============================================================================================*/
 
 .home-slider {
-/*    margin-top:175px;*/
     border-bottom: 4px solid #9b1f3d;
     margin-bottom: 20px;
 }
@@ -13990,6 +13979,11 @@ footer p {
     margin-bottom: 0px;
 }
 
+.card .btn.active.focus, .card .btn.active:focus, .card .btn.focus, 
+.card .btn:active.focus, .card .btn:active:focus, .card .btn:focus {
+    outline: none;
+}
+
 .accordion button i {
     position: absolute;
     right: 30px;
@@ -14081,9 +14075,11 @@ footer p {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
     vertical-align: middle;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     margin: 0 auto;
 }
 
@@ -14210,8 +14206,10 @@ footer p {
     display: block;
     position: absolute;
     top: 0;
+    width: 100%;
     height: 100%;
-    margin-left: -50%;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
 
 .vine-box-style-3 .product-info{
@@ -14317,14 +14315,7 @@ footer p {
 /*=============================================================================================
                                         3.2
 ==============================================================================================*/
-/*
-.style-3-2{
-    max-height: 350px;
-}
 
-.style-3-2 img {
-    width: 30%;
-}*/
 
 .vine-boxes .style-3-2{
   padding:0 5px!important;
@@ -14596,7 +14587,6 @@ footer p {
     flex-grow: 1; 
     background: #F5F5F5;
     padding: 20px 10px;
-    /*min-height: 540px;*/
 }
 
 .preview-pic i {
@@ -14654,14 +14644,6 @@ footer p {
     margin: 0 auto;
     display: block;
 }
-
-/*.card {
-    margin-top: 50px;
-    background: #eee;
-    padding: 3em;
-    line-height: 1.5em; 
-}*/
-
 
 
 @-webkit-keyframes opacity {
@@ -14748,11 +14730,9 @@ footer p {
     padding: 20px 5px;
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+.wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
+.wine-description .nav-tabs>li.active>.active,.wine-description .nav-tabs>li.active>.show:hover{
     border-bottom-width: 3px!important;
-}
-
-.wine-description ul li a.active {
     background: #f5f5f5;
     border-bottom: 3px solid #D48699;
 }
@@ -14816,11 +14796,6 @@ footer p {
 /*=============================================================================================
                                         WINERY
 ==============================================================================================*/
-/*
-.page-header{
-    margin-top:175px;   
-}
-*/
 .page-header .wine-badge {
     position: absolute;
     width: auto;
@@ -15206,7 +15181,6 @@ footer p {
 }
 
 .edit-button {
-    /* position: absolute; */
     right: 5px;
     color:#9b1f3d;
     font-size: 14px;
@@ -15581,6 +15555,122 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             justify-content: left;
 }
 
+
+
+/*=========================================================================================================================================================================================
+                                                                                 POPUP
+==========================================================================================================================================================================================*/
+
+.terms-popup.is-visible {
+    z-index: 10000;
+}
+
+.terms-popup {
+    z-index: 2500;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(248, 238, 232, 0.6);
+}
+
+.fade-enter-active, .fade-leave-active {
+  -webkit-transition: opacity .5s ease-out;
+  transition: opacity .5s ease-out;
+}
+.fade-enter, .fade-leave-to, .fade-leave-active  {
+  opacity: 0;
+}
+
+.popup-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 4em auto;
+    background-color: #FFF;
+    border: 3px solid #aec4ce;
+    color: #303038;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+    -webkit-backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.popup-head {
+    margin: 100px 0 50px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
+}
+
+.terms-popup .popup-head {
+    margin: 20px 0 50px;
+}
+
+.popup-body{
+    padding: 0 4em;   
+}
+
+.popup-container h2 {
+    margin: 0 1em 0.4em;
+    font-weight: bold;
+}
+
+.popup-container .popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.favorite-popup a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 12px;
+}
+.img-replace {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100%;
+    color: transparent;
+    white-space: nowrap;
+}
+.popup-container .popup-close::before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 8px;
+}
+.popup-container .popup-close::after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    right: 8px;
+}
+.popup-container .popup-close::before, .popup-container .popup-close::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    width: 14px;
+    height: 2px;
+    background-color: #8f9cb5;
+}
+
+
+
 /*=========================================================================================================================================================================================
                                                                                  MEDIA QUERY
 ==========================================================================================================================================================================================*/
@@ -15659,14 +15749,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .col-xs-5ths, .main__scroller .col-xs-6 {
-        /*flex: 0 0 50%;
-        max-width: 50%;
-        float: left;*/
-
         -webkit-box-flex: 0;
-
             -ms-flex: 0 0 280px;
-
                 flex: 0 0 280px;
         max-width: 280px;
         width: 100%;
@@ -15701,17 +15785,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         height: auto;
         margin-bottom: 30px;
     }
-/*
-    .style-3-2 .order-q {
-        font-size: 10px;
-        right: 0;
-        bottom: 8px;
-        margin-bottom: 20px;
-        position: relative;
-        float: left;
-        padding: 0 10px;
-    }
-*/
+
     .style-3-2 h4 {
         margin-bottom: 15px;
     }
@@ -15778,6 +15852,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                 flex: 0 0 30%;
     }
     .user-area .sign-in.show, .user-area .sign-up.show{
+        display: -webkit-box!important;
+        display: -ms-flexbox!important;
         display: flex!important;
     }
 
@@ -15830,16 +15906,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         width: 30px;
         height: 30px;
     }
-/*
-    .order-q {
-        position: relative;
-        right: 0;
-        bottom: 0;
-        margin-bottom: 40px;
-        float: left;
-        padding: 0 10px;
-    }
-*/
 
     .vine-boxes{
       padding: 0!important;
@@ -15848,13 +15914,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .vine-box-style-3 .image-container i{
         font-size: 30px;
-    }/*
-    .vine-box-style-3 .product-info{
-      height: 80px;
-    }*/
+    }
     .vine-box-style-3 .order-q {
         font-size: 14px;
-        right: 15px;
+        right: 20px;
         bottom: 5px;
     }
     .vine-box-style-3 .star-rating {
@@ -16100,6 +16163,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-2 img{
         height: 100%;
         max-height: 130px;
+        max-width: -webkit-fit-content;
+        max-width: -moz-fit-content;
         max-width: fit-content;
     }
 }
@@ -16191,9 +16256,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .form-inline .input-width {
         max-width: 84%;
     }    
-}
-
-/*! jQuery UI - v1.10.3 - 2013-12-09
+}/*! jQuery UI - v1.10.3 - 2013-12-09
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.datepicker.css, jquery.ui.theme.css
 * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
