@@ -96,3 +96,30 @@ $( document ).ready(function() {
 	})();
 });
 
+// POPUP   
+
+$('#acceptTerms').on('click', function(event){
+	console.log("click");
+    if( $(event.target).is('#acceptTerms')) {
+        console.log("click");
+        event.preventDefault();
+        $('.terms-popup').addClass('is-visible');
+        $('body').addClass('overflow-hidden');
+    }
+});
+    //close popup
+    $('.terms-popup').on('click', function(event){
+        if( $(event.target).is('.popup-close') || $(event.target).is('.terms-popup') ) {
+            event.preventDefault();
+            $(this).removeClass('is-visible');
+            $('body').removeClass('overflow-hidden');
+        }
+    });
+    //close popup when clicking the esc keyboard button
+    $(document).keyup(function(event){
+        if(event.which=='27'){
+            $('.terms-popup').removeClass('is-visible');
+        }
+    });
+   
+

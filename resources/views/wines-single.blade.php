@@ -65,7 +65,7 @@
         <div class="wine-description">
             <ul class="nav nav-tabs row">
                 <li class="cat-tab active col-6 center-text"><a data-toggle="tab" href="#description" class="active">DESCRIPTION</a></li>
-                <li class="cat-tab col-6 center-text"><a data-toggle="tab" href="#info">WINERY INFO</a></li>
+                <li class="cat-tab active col-6 center-text"><a data-toggle="tab" href="#info">WINERY INFO</a></li>
             </ul>
 
             <div class="tab-content">
@@ -90,17 +90,19 @@
                         <img src="{{ $recommendation->photo }}">
                         <div class="overlay"></div>
                     </div>
-                    <h5>{{ $recommendation->name }}</h5>
-                    <h4>${{ $recommendation->price }}</h4>
-                    <div class="star-rating">
-                        @for($i = 0; $i<intval($recommendation->avg_rating);$i++)
-                            <span class="fa fa-star checked"></span>
-                        @endfor
-                        @for($i = intval($recommendation->avg_rating); $i<5;$i++)
-                            <span class="fa fa-star"></span>
-                        @endfor
+                    <div class="product-info">
+                        <h5>{{ $recommendation->name }}</h5>
+                        <h4>${{ $recommendation->price }}</h4>
+                        <div class="star-rating">
+                            @for($i = 0; $i<intval($recommendation->avg_rating);$i++)
+                                <span class="fa fa-star checked"></span>
+                            @endfor
+                            @for($i = intval($recommendation->avg_rating); $i<5;$i++)
+                                <span class="fa fa-star"></span>
+                            @endfor
+                        </div>
+                        <span class="order-q">{{ $recommendation->orders_count }} Orders</span>
                     </div>
-                    <span class="order-q">{{ $recommendation->orders_count }} Orders</span>
                 </a>
 
             </div>

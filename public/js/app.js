@@ -52964,6 +52964,32 @@ $(document).ready(function () {
 	})();
 });
 
+// POPUP   
+
+$('#acceptTerms').on('click', function (event) {
+	console.log("click");
+	if ($(event.target).is('#acceptTerms')) {
+		console.log("click");
+		event.preventDefault();
+		$('.terms-popup').addClass('is-visible');
+		$('body').addClass('overflow-hidden');
+	}
+});
+//close popup
+$('.terms-popup').on('click', function (event) {
+	if ($(event.target).is('.popup-close') || $(event.target).is('.terms-popup')) {
+		event.preventDefault();
+		$(this).removeClass('is-visible');
+		$('body').removeClass('overflow-hidden');
+	}
+});
+//close popup when clicking the esc keyboard button
+$(document).keyup(function (event) {
+	if (event.which == '27') {
+		$('.terms-popup').removeClass('is-visible');
+	}
+});
+
 /***/ }),
 /* 167 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -71161,6 +71187,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -71171,6 +71282,7 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+
             firstName: '',
             lastName: '',
             wineryName: '',
@@ -71182,7 +71294,8 @@ var formFields = ['firstName', 'lastName', 'wineryName', 'email', 'password', 'p
             birthday: '',
             csrf: window.Laravel.csrfToken,
             showErrors: false,
-            validEmail: null
+            validEmail: null,
+            activePopup: false
         };
     },
     watch: {
@@ -71293,7 +71406,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
+var withParams = Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
 var _default = withParams;
 exports.default = _default;
 
@@ -72127,375 +72240,677 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "form",
-    {
-      staticClass: "form-inline",
-      attrs: { method: "post", action: "/register" },
-      on: { submit: _vm.onSubmit }
-    },
+    "div",
     [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.csrf,
-            expression: "csrf"
-          }
-        ],
-        attrs: { type: "hidden", name: "_token" },
-        domProps: { value: _vm.csrf },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.csrf = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "hidden", name: "type", value: "SELLER" } }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model.trim",
-            value: _vm.firstName,
-            expression: "firstName",
-            modifiers: { trim: true }
-          }
-        ],
-        class: { invalid: _vm.isInvalid("firstName") },
-        attrs: { type: "text", name: "firstName", placeholder: "First Name" },
-        domProps: { value: _vm.firstName },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.firstName = $event.target.value.trim()
-          },
-          blur: function($event) {
-            _vm.$forceUpdate()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("firstName")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("First Name is required.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model.trim",
-            value: _vm.lastName,
-            expression: "lastName",
-            modifiers: { trim: true }
-          }
-        ],
-        class: { invalid: _vm.isInvalid("lastName") },
-        attrs: { type: "text", name: "lastName", placeholder: "Last Name" },
-        domProps: { value: _vm.lastName },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.lastName = $event.target.value.trim()
-          },
-          blur: function($event) {
-            _vm.$forceUpdate()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("lastName")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Last Name is required.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model.trim",
-            value: _vm.wineryName,
-            expression: "wineryName",
-            modifiers: { trim: true }
-          }
-        ],
-        class: { invalid: _vm.isInvalid("wineryName") },
-        attrs: { type: "text", name: "wineryName", placeholder: "Winery Name" },
-        domProps: { value: _vm.wineryName },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.wineryName = $event.target.value.trim()
-          },
-          blur: function($event) {
-            _vm.$forceUpdate()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("wineryName")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Winery Name is required.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model.trim",
-            value: _vm.email,
-            expression: "email",
-            modifiers: { trim: true }
-          }
-        ],
-        class: {
-          invalid: _vm.isInvalid("email") || _vm.validEmail === false,
-          valid: _vm.validEmail
+      _c(
+        "form",
+        {
+          staticClass: "form-inline",
+          attrs: { method: "post", action: "/register" },
+          on: { submit: _vm.onSubmit }
         },
-        attrs: { type: "email", name: "email", placeholder: "Email" },
-        domProps: { value: _vm.email },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.email = $event.target.value.trim()
-          },
-          blur: function($event) {
-            _vm.$forceUpdate()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("email")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Email is invalid.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.password,
-            expression: "password"
-          }
-        ],
-        class: { invalid: _vm.isInvalid("password") },
-        attrs: { type: "password", name: "password", placeholder: "Password" },
-        domProps: { value: _vm.password },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.password = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("password")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Password is invalid.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model.trim",
-            value: _vm.phone,
-            expression: "phone",
-            modifiers: { trim: true }
-          }
-        ],
-        class: { invalid: _vm.isInvalid("phone") },
-        attrs: { type: "text", name: "phone", placeholder: "Phone" },
-        domProps: { value: _vm.phone },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.phone = $event.target.value.trim()
-          },
-          blur: function($event) {
-            _vm.$forceUpdate()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.isInvalid("phone")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Phone is invalid.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.acceptTerms,
-              expression: "acceptTerms"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", name: "acceptTerms", id: "defaultCheck1" },
-          domProps: {
-            checked: Array.isArray(_vm.acceptTerms)
-              ? _vm._i(_vm.acceptTerms, null) > -1
-              : _vm.acceptTerms
-          },
-          on: {
-            change: function($event) {
-              var $$a = _vm.acceptTerms,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.acceptTerms = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.acceptTerms = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.csrf,
+                expression: "csrf"
+              }
+            ],
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              } else {
-                _vm.acceptTerms = $$c
+                _vm.csrf = $event.target.value
               }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "form-check-label",
-            class: { invalid: _vm.isInvalid("acceptTerms") },
-            attrs: { for: "defaultCheck1" }
-          },
-          [
-            _vm._v("\n            I agree to "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Terms and Conditions")]),
-            _vm._v(" of the Wine Boutique*\n        ")
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm.isInvalid("acceptTerms")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("You must accept Terms and Conditions.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.acceptAge,
-              expression: "acceptAge"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", name: "acceptAge", id: "defaultCheck2" },
-          domProps: {
-            checked: Array.isArray(_vm.acceptAge)
-              ? _vm._i(_vm.acceptAge, null) > -1
-              : _vm.acceptAge
-          },
-          on: {
-            change: function($event) {
-              var $$a = _vm.acceptAge,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.acceptAge = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.acceptAge = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "type", value: "SELLER" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.firstName,
+                expression: "firstName",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { invalid: _vm.isInvalid("firstName") },
+            attrs: {
+              type: "text",
+              name: "firstName",
+              placeholder: "First Name"
+            },
+            domProps: { value: _vm.firstName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              } else {
-                _vm.acceptAge = $$c
+                _vm.firstName = $event.target.value.trim()
+              },
+              blur: function($event) {
+                _vm.$forceUpdate()
               }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "form-check-label",
-            class: { invalid: _vm.isInvalid("acceptAge") },
-            attrs: { for: "defaultCheck2" }
-          },
-          [_vm._v("\n            I am at least 21 years of age.*\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _vm.isInvalid("acceptAge")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("You must be 21 or older.")])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.acceptAge
-        ? _c("div", { attrs: { id: "over-21" } }, [
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("firstName")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("First Name is required.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.lastName,
+                expression: "lastName",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { invalid: _vm.isInvalid("lastName") },
+            attrs: { type: "text", name: "lastName", placeholder: "Last Name" },
+            domProps: { value: _vm.lastName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.lastName = $event.target.value.trim()
+              },
+              blur: function($event) {
+                _vm.$forceUpdate()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("lastName")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("Last Name is required.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.wineryName,
+                expression: "wineryName",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { invalid: _vm.isInvalid("wineryName") },
+            attrs: {
+              type: "text",
+              name: "wineryName",
+              placeholder: "Winery Name"
+            },
+            domProps: { value: _vm.wineryName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.wineryName = $event.target.value.trim()
+              },
+              blur: function($event) {
+                _vm.$forceUpdate()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("wineryName")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("Winery Name is required.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.email,
+                expression: "email",
+                modifiers: { trim: true }
+              }
+            ],
+            class: {
+              invalid: _vm.isInvalid("email") || _vm.validEmail === false,
+              valid: _vm.validEmail
+            },
+            attrs: { type: "email", name: "email", placeholder: "Email" },
+            domProps: { value: _vm.email },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value.trim()
+              },
+              blur: function($event) {
+                _vm.$forceUpdate()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("email")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("Email is invalid.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            class: { invalid: _vm.isInvalid("password") },
+            attrs: {
+              type: "password",
+              name: "password",
+              placeholder: "Password"
+            },
+            domProps: { value: _vm.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("password")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("Password is invalid.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.phone,
+                expression: "phone",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { invalid: _vm.isInvalid("phone") },
+            attrs: { type: "text", name: "phone", placeholder: "Phone" },
+            domProps: { value: _vm.phone },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.phone = $event.target.value.trim()
+              },
+              blur: function($event) {
+                _vm.$forceUpdate()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.isInvalid("phone")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("Phone is invalid.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check" }, [
             _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.birthday,
-                  expression: "birthday"
+                  value: _vm.acceptTerms,
+                  expression: "acceptTerms"
                 }
               ],
-              attrs: { type: "date", name: "birthday", max: _vm.initialDate() },
-              domProps: { value: _vm.birthday },
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                name: "acceptTerms",
+                id: "defaultCheck1"
+              },
+              domProps: {
+                checked: Array.isArray(_vm.acceptTerms)
+                  ? _vm._i(_vm.acceptTerms, null) > -1
+                  : _vm.acceptTerms
+              },
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                change: function($event) {
+                  var $$a = _vm.acceptTerms,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.acceptTerms = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.acceptTerms = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.acceptTerms = $$c
                   }
-                  _vm.birthday = $event.target.value
                 }
               }
-            })
-          ])
-        : _vm._e(),
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label",
+                class: { invalid: _vm.isInvalid("acceptTerms") },
+                attrs: { for: "defaultCheck1" }
+              },
+              [
+                _vm._v("\r\n                I agree to "),
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        _vm.activePopup = !_vm.activePopup
+                      }
+                    }
+                  },
+                  [_vm._v("Terms and Conditions.")]
+                ),
+                _vm._v(" of the Wine Boutique*\r\n            ")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm.isInvalid("acceptTerms")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("You must accept Terms and Conditions.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.acceptAge,
+                  expression: "acceptAge"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                name: "acceptAge",
+                id: "defaultCheck2"
+              },
+              domProps: {
+                checked: Array.isArray(_vm.acceptAge)
+                  ? _vm._i(_vm.acceptAge, null) > -1
+                  : _vm.acceptAge
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.acceptAge,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.acceptAge = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.acceptAge = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.acceptAge = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label",
+                class: { invalid: _vm.isInvalid("acceptAge") },
+                attrs: { for: "defaultCheck2" }
+              },
+              [
+                _vm._v(
+                  "\r\n                I am at least 21 years of age.*\r\n            "
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm.isInvalid("acceptAge")
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", [_vm._v("You must be 21 or older.")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.acceptAge
+            ? _c("div", { attrs: { id: "over-21" } }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.birthday,
+                      expression: "birthday"
+                    }
+                  ],
+                  attrs: {
+                    type: "date",
+                    name: "birthday",
+                    max: _vm.initialDate()
+                  },
+                  domProps: { value: _vm.birthday },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.birthday = $event.target.value
+                    }
+                  }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "button red-button full-width",
+            attrs: { type: "submit", name: "submit", value: "CREATE A WINERY" }
+          })
+        ]
+      ),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "button red-button full-width",
-        attrs: { type: "submit", name: "submit", value: "CREATE A WINERY" }
-      })
-    ]
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.activePopup
+          ? _c(
+              "div",
+              {
+                staticClass: "terms-popup is-visible",
+                attrs: { role: "alert" }
+              },
+              [
+                _c("div", { staticClass: "popup-container" }, [
+                  _c("div", { staticClass: "popup-head" }, [
+                    _c("h2", { staticClass: "text-center" }, [
+                      _c("strong", [_vm._v("Terms and Conditions")])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-center" }, [
+                      _vm._v("Last updated: January 14, 2019")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "popup-body" }, [
+                    _c("div", {}, [
+                      _c("p", [
+                        _vm._v(
+                          'Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the https://wineboutique.com website (the "Service") operated by Wine Boutique Technologies LLC ("us", "we", or "our").Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service.By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you do not have permission to access the Service.'
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Purchases")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          'If you wish to purchase any product or service made available through the Service ("Purchase"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your credit card number, the expiration date of your credit card, your billing address, and your shipping information.You represent and warrant that: (i) you havethe legal right to use any credit card(s) or other payment method(s) in connection with any Purchase; and that (ii) the information you supply to us is true, correct and complete.The service may employ the use of third party services for the purpose of facilitating payment and the completion of Purchases. By submitting your information, you grant us the right to provide the information to these third parties subject to our Privacy Policy.We reserve the right to refuse or cancel your order at any time forreasons including but not limited to: product or service availability, errors in the description or price of the product or service, error in your order or other reasons.We reserve the right to refuse or cancel your order if fraud or an unauthorized or illegal transaction is suspected.'
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Availability, Errors and Inaccuracies")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "We are constantly updating product and service offerings on the Service. We may experience delays in updating information on the Service and in our advertising on other web sites. The information found on the Service may contain errors or inaccuracies and may not be complete or current. Products or services may be mispriced, described inaccurately, or unavailable on the Service and we cannot guarantee the accuracy or completeness of any information found on the Service.We therefore reserve the right to change or update information and to correct errors, inaccuracies, or omissions at any time without prior notice."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Contests, Sweepstakes and Promotions")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          'Any contests, sweepstakes or other promotions (collectively, "Promotions") made available through the Service may be governed by rules that are separate from these Terms Conditions. If you participate in any Promotions, please review the applicable rules as well as our Privacy Policy. If the rules for a Promotion conflict with these Terms and Conditions, the Promotion rules will apply.'
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Accounts")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "When you create an account with us, you guarantee that you are above the age of 18, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on the Service.You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password, whether your password is with our Service or a third-party service. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in our sole discretion."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Copyright Policy")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          'We respect the intellectual property rights of others. It is our policy to respond to any claim that Content posted on the Service infringes on the copyright or other intellectual property rights ("Infringement") of any person or entity.If you are a copyright owner, or authorized on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to dmca@wineboutique.com, with the subject line: "Copyright Infringement" and include in your claim a detailed description of the alleged Infringement as detailed below, under "DMCA Notice and Procedure for Copyright Infringement Claims"You may be held accountable for damages (including costs and attorneys\' fees) for misrepresentation or bad-faith claims on the infringement of any Content found on and/or through the Service on your copyright.'
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v(
+                          "DMCA Notice and Procedure for Copyright Infringement Claims"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "You may submit a notification pursuant to the Digital Millennium Copyright Act (DMCA) by providing our Copyright Agent with the following information in writing (see 17 U.S.C 512(c)(3) for further detail):"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", [
+                        _c("li", [
+                          _vm._v(
+                            "an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright's interest;"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _vm._v(
+                            "a description of the copyrighted work that you claim has been infringed, including the URL (i.e., web page address) of the location where the copyrighted work exists or a copy of the copyrighted work;"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _vm._v(
+                            "identification of the URL or other specific location on the Service where the material that you claim is infringing is located;"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _vm._v(
+                            "your address, telephone number, and email address;"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _vm._v(
+                            "a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _vm._v(
+                            "a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "You can contact our Copyright Agent via email at dmca@wineboutique.com"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Intellectual Property")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "The Service and its original content, features and functionality are and will remain the exclusive property of Wine Boutique Technologies LLC and its licensors. The Service is protected by copyright, trademark, and otherlaws of both the United States and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Wine Boutique Technologies LLC."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Links To Other Web Sites")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Our Service may contain links to third party web sites or services that are not owned or controlled by Wine Boutique Technologies LLCWine Boutique Technologies LLC has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.You acknowledge and agree that Wine Boutique Technologies LLC shall not be responsible or liable, directly or indirectly, for any damageor loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such third party web sites or services.We strongly advise you to read the terms and conditions and privacy policies of any third party web sites or services that you visit."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Termination")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever andwithout limitation, including but not limited to a breach of the Terms.\r\n\r\n                    If you wish to terminate your account, you may simply discontinue using the Service.\r\n\r\n                    All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Indemnification")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "You agree to defend, indemnify and hold harmless Wine Boutique Technologies LLC and its licensee and licensors, and their employees, contractors, agents, officers and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), resulting from or arising out of a) your use and access of the Service, by you or any person using your account and password, or b) a breach of these Terms."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Limitation Of Liability")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "In no event shall Wine Boutique Technologies LLC, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Service; (ii) any conduct or content of any third party on the Service; (iii) any content obtained from the Service; and (iv) unauthorized access, use or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not we have been informed of the possibility of such damage, and even if a remedy set forth herein is found to have failed of its essential purpose."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Disclaimer")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          'Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.\r\n\r\n                    Wine Boutique Technologies LLC its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.'
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Exclusions")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Some jurisdictions do not allow the exclusion of certain warranties or the exclusion or limitation of liability for consequential or incidental damages, so the limitations above may not apply to you."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Governing Law")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "These Terms shall be governed and construed in accordance with the laws of Florida, United States, withoutregard to its conflict of law provisions.\r\n\r\n                    Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have had between us regarding the Service."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Changes")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "text-center" }, [
+                        _vm._v("Contact Us")
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "If you have any questions about these Terms, please contact us."
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "popup-close img-replace",
+                      attrs: { href: "#0" },
+                      on: {
+                        click: function($event) {
+                          _vm.activePopup = !_vm.activePopup
+                        }
+                      }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ]
+            )
+          : _vm._e()
+      ])
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -78905,7 +79320,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
-            publicPath: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BASE_URL,
+            publicPath: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BASE_URL,
             errors: {}
         };
     }, created: function created() {

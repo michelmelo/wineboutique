@@ -13349,7 +13349,7 @@ select {
 }
 
 .btn-link, .btn-link:hover {
-    color: #525457;
+    color: #525457!important;
     text-decoration: none!important;
 }
 
@@ -13623,6 +13623,9 @@ nav {
     -webkit-box-shadow: 0px 9px 17px -8px #0000002b;
             box-shadow: 0px 9px 17px -8px #0000002b;
 }
+.navbar{
+    border-top: 1px solid #CAC9C9 !important;
+}
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: rgb(155, 31, 61);
@@ -13659,9 +13662,11 @@ header {
     z-index: 9999;
 }
 
+
 .top-header {
     padding: 20px 0;
 }
+
 
 .form-control {
     border-radius: 10px 0 0 10px;
@@ -13688,6 +13693,24 @@ header {
 .form-inline .input-width{
     max-width: 255px;
     width: 100%;
+    height: 45px;
+}
+
+.form-inline .search-shadow{
+  -webkit-box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
+          box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.12);
+  background-color: #f8f9fa;
+  outline: none;
+  -webkit-transition: .18s ease-out;
+  transition: .18s ease-out;
+}
+
+.form-inline .search-shadow:hover, .form-inline .search-shadow:focus {
+  -webkit-box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+          box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+  outline: none;
+  border: 1px solid #ccc;
+
 }
 
 .user-area {
@@ -13861,7 +13884,6 @@ footer p {
 ==============================================================================================*/
 
 .home-slider {
-/*    margin-top:175px;*/
     border-bottom: 4px solid #9b1f3d;
     margin-bottom: 20px;
 }
@@ -13957,6 +13979,11 @@ footer p {
     margin-bottom: 0px;
 }
 
+.card .btn.active.focus, .card .btn.active:focus, .card .btn.focus, 
+.card .btn:active.focus, .card .btn:active:focus, .card .btn:focus {
+    outline: none;
+}
+
 .accordion button i {
     position: absolute;
     right: 30px;
@@ -14044,6 +14071,15 @@ footer p {
 }
 
 .vine-box-style-1 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    -o-object-fit: cover;
+       object-fit: cover;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -14148,6 +14184,17 @@ footer p {
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.vine-box-style-3 .product-info{
+    padding: 10px;
+    min-height: 70px;
     max-width: 100%;
 }
 
@@ -14249,6 +14296,9 @@ footer p {
 /*=============================================================================================
                                         3.2
 ==============================================================================================*/
+
+.vine-boxes .style-3-2{
+  padding:0 5px!important;
 
 .style-3-2{
     max-height: 350px;
@@ -14519,7 +14569,6 @@ footer p {
     flex-grow: 1; 
     background: #F5F5F5;
     padding: 20px 10px;
-    /*min-height: 540px;*/
 }
 
 .preview-pic i {
@@ -14577,14 +14626,6 @@ footer p {
     margin: 0 auto;
     display: block;
 }
-
-/*.card {
-    margin-top: 50px;
-    background: #eee;
-    padding: 3em;
-    line-height: 1.5em; 
-}*/
-
 
 
 @-webkit-keyframes opacity {
@@ -14671,6 +14712,10 @@ footer p {
     padding: 20px 5px;
 }
 
+.wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
+.wine-description .nav-tabs>li.active>.active,.wine-description .nav-tabs>li.active>.show:hover{
+    border-bottom-width: 3px!important;
+
 .wine-description .nav-tabs li.cat-tab a{
     border-bottom-width: 3px!important;
     color: #555;
@@ -14684,7 +14729,6 @@ footer p {
 .wine-description .nav-tabs li.cat-tab a:hover {
 
 .wine-description ul li a.active {
-
     background: #f5f5f5;
     border-bottom: 3px solid #D48699;
 }
@@ -14748,11 +14792,6 @@ footer p {
 /*=============================================================================================
                                         WINERY
 ==============================================================================================*/
-/*
-.page-header{
-    margin-top:175px;   
-}
-*/
 .page-header .wine-badge {
     position: absolute;
     width: auto;
@@ -15138,7 +15177,6 @@ footer p {
 }
 
 .edit-button {
-    /* position: absolute; */
     right: 5px;
     color:#9b1f3d;
     font-size: 14px;
@@ -15513,6 +15551,122 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             justify-content: left;
 }
 
+
+
+/*=========================================================================================================================================================================================
+                                                                                 POPUP
+==========================================================================================================================================================================================*/
+
+.terms-popup.is-visible {
+    z-index: 10000;
+}
+
+.terms-popup {
+    z-index: 2500;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(248, 238, 232, 0.6);
+}
+
+.fade-enter-active, .fade-leave-active {
+  -webkit-transition: opacity .5s ease-out;
+  transition: opacity .5s ease-out;
+}
+.fade-enter, .fade-leave-to, .fade-leave-active  {
+  opacity: 0;
+}
+
+.popup-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 4em auto;
+    background-color: #FFF;
+    border: 3px solid #aec4ce;
+    color: #303038;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+    -webkit-backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.popup-head {
+    margin: 100px 0 50px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
+}
+
+.terms-popup .popup-head {
+    margin: 20px 0 50px;
+}
+
+.popup-body{
+    padding: 0 4em;   
+}
+
+.popup-container h2 {
+    margin: 0 1em 0.4em;
+    font-weight: bold;
+}
+
+.popup-container .popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.favorite-popup a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 12px;
+}
+.img-replace {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100%;
+    color: transparent;
+    white-space: nowrap;
+}
+.popup-container .popup-close::before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 8px;
+}
+.popup-container .popup-close::after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    right: 8px;
+}
+.popup-container .popup-close::before, .popup-container .popup-close::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    width: 14px;
+    height: 2px;
+    background-color: #8f9cb5;
+}
+
+
+
 /*=========================================================================================================================================================================================
                                                                                  MEDIA QUERY
 ==========================================================================================================================================================================================*/
@@ -15594,14 +15748,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .col-xs-5ths, .main__scroller .col-xs-6 {
-        /*flex: 0 0 50%;
-        max-width: 50%;
-        float: left;*/
-
         -webkit-box-flex: 0;
-
+            -ms-flex: 0 0 280px;
+                flex: 0 0 280px;
+        max-width: 280px;
+        width: 100%;
             -ms-flex: 0 0 250px;
-
                 flex: 0 0 250px;
         max-width: 250px;
         width: 250px;
@@ -15695,6 +15847,25 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                 flex: 0 0 30%;
     }
 
+    .user-area .sign-in.show, .user-area .sign-up.show{
+        display: -webkit-box!important;
+        display: -ms-flexbox!important;
+        display: flex!important;
+    }
+
+    .form-inline .input-width {
+        max-width: 85%;
+    }
+
+    .user-area span {
+        font-size: 10px;
+    }
+
+    .user-area img {
+      width: 20px;
+      height: 20px;
+    }
+
     .item-in-cart {
         right: 7px;
     }
@@ -15734,7 +15905,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding: 0 10px;
     }
 
-
     .vine-boxes{
       padding: 0!important;
       margin: 0 auto!important;
@@ -15744,6 +15914,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 30px;
     }
     .vine-box-style-3 .order-q {
+        font-size: 14px;
+        right: 20px;
         bottom: 5px;
     }
     .vine-box-style-3 .star-rating {
@@ -15960,6 +16132,40 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .edit-button {
         top: 2px;
     }
+  
+    .vine-box-style-1 {
+        min-height: 250px;
+    }
+
+    .main__scroller .vine-box-style-2,
+    .row-eq-height .vine-box-style-3{
+        padding: 0 10px;
+    }
+
+    .vine-box-style-3 .image-container{
+        padding-bottom: 115%;
+    }
+
+    .vine-box-style-3 .product-info{
+        padding: 0
+    }
+
+    .vue-star-rating-star{
+        height: 12px!important;
+        width: 12px!important;
+    }
+    
+    .vine-box-style-2 .row {
+        height: 130px;
+    }
+
+    .vine-box-style-2 img{
+        height: 100%;
+        max-height: 130px;
+        max-width: -webkit-fit-content;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+    }
 }
 
 
@@ -16031,9 +16237,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 370px) {
-    
+    .form-inline .input-width {
+        max-width: 84%;
+    }    
 }
-
 /*! jQuery UI - v1.10.3 - 2013-12-09
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.datepicker.css, jquery.ui.theme.css
