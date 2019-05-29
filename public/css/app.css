@@ -13309,15 +13309,15 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }body {
-  font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 
 a {
-  text-decoration:none!important;
+	text-decoration:none!important;
 }
 
 a.underline {
-  text-decoration:underline!important;
+	text-decoration:underline!important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13361,7 +13361,7 @@ select {
 }
 
 .row {
-  margin: 0px;
+	margin: 0px;
 }
 
 .row-eq-height {
@@ -13379,12 +13379,12 @@ select {
 }
 
 .main {
-  margin-top:180px; 
-  padding: 0;
+    margin-top:210px; 
+	padding: 0;
 }
 
 .color-r {
-  color: #9C193A;
+	color: #9C193A;
 }
 
 .color-w {
@@ -13662,6 +13662,12 @@ header {
     z-index: 9999;
 }
 
+
+.top-header {
+    padding: 20px 0;
+}
+
+
 .form-control {
     border-radius: 10px 0 0 10px;
     -webkit-box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
@@ -13682,8 +13688,6 @@ header {
             box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
     color:#fff;
     background: #9C193A;
-    height: 45px;
-    padding: 6px 15px;
 }
 
 .form-inline .input-width{
@@ -13706,10 +13710,11 @@ header {
           box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
   outline: none;
   border: 1px solid #ccc;
+
 }
 
 .user-area {
-  z-index: 2;
+
 }
 
 .user-area .col {
@@ -13732,20 +13737,15 @@ header {
     font-weight: 500;
 }
 
-.user-area .sign-in, .user-area .sign-up{
-    background-color: #f8f9fa;  
-}
-
 .item-in-cart {
     position: absolute;
     color: #fff;
     font-size: 8px;
-    line-height: 1em;
-    padding: 5px 1px 5px 0;
+    padding: 2px;
     background: #9A1E3E;
     border-radius: 20px;
-    top: -10px;
-    right: -8px;
+    top: -3px;
+    right: 37px;
     min-width: 16px;
     height: 16px;
     text-align: center;
@@ -13755,7 +13755,7 @@ header {
     text-align: center;
 }
 
-.cart-icon a > div {
+.cart-icon > div {
     display: inline-block;
     position: relative;
     margin: 0 auto;
@@ -13969,7 +13969,7 @@ footer p {
     width: 100%;
     color: #646464;
     font-size: 18px;
-    padding: 5px 5px 5px 10%;
+    padding: 5px 5px 5px 7%;
     margin-bottom: 3px;
     display: block;
     cursor: pointer;
@@ -14040,8 +14040,8 @@ footer p {
 ==========================================================================================================================================================================================*/
 
 .star-rating {
-     padding: 0 10px;
-     padding-bottom: 10px;
+     padding: 0 5px;
+     padding-bottom: 5px;
      position: absolute;
      bottom: 0px;
 }
@@ -14060,7 +14060,6 @@ footer p {
 
 .vine-box-style-1 {
     margin-bottom: 20px;
-    min-height: 305px;
 }
 
 .vine-box-style-1 a {
@@ -14081,6 +14080,7 @@ footer p {
     -o-object-fit: cover;
        object-fit: cover;
     margin: 0 auto;
+    width: 100%;
 }
 
 
@@ -14089,22 +14089,13 @@ footer p {
     color: #2b2e32;
     text-transform: uppercase;
     margin-top: 10px;
-    padding: 0 10px;
-    margin-bottom: 40px;
+    padding: 0 5px;
+    margin-bottom: 45px;
 }
 
 .image-container {
     position: relative;
     overflow: hidden;
-
-}
-
-.vine-box-style-1 .image-container{
-    /*remove styles below if needed*/
-    padding-bottom: 100%;
-    width: 100%;
-    height: 0;
-    vertical-align: middle;  
 }
 
 .overlay {
@@ -14132,11 +14123,7 @@ footer p {
 }
 
 .vine-box-style-2 .row {
-    height: 150px;
-}
-
-.vine-box-style-2 .row .col-6{
-    overflow: hidden;
+    height: 100%;
 }
 
 .vine-box-style-2 a {
@@ -14145,22 +14132,15 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 .vine-box-style-2 img  {
+    margin: 0 auto;
     display: block;
-    width: unset;
-    height: 100%;
-    max-height: 150px;
-    margin-left: -10%;
+    max-width: 100%;
 }
 
 .vine-box-style-2 .col-md-6 {
-    padding: 0;
-}
-
-.vine-box-style-2 .col-md-6:last-child {
     padding: 10px;
 }
 
@@ -14190,7 +14170,7 @@ footer p {
 .vine-box-style-3 {
     margin-bottom: 20px;
     min-height: 250px;
-    max-height: 530px;
+    max-height: 480px;
 }
 
 .vine-box-style-3 a {
@@ -14215,6 +14195,7 @@ footer p {
 .vine-box-style-3 .product-info{
     padding: 10px;
     min-height: 70px;
+    max-width: 100%;
 }
 
 .vine-box-style-3 h5 {
@@ -14260,7 +14241,7 @@ footer p {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
-    padding-bottom: 115%;
+    padding: 15px 10px;
 }
 
 .vine-box-style-3 .image-container i {
@@ -14287,8 +14268,8 @@ footer p {
 }
 
 .vine-box-style-3 .star-rating {
-    padding: 0 0 0 10px;
-    padding-bottom: 10px;
+    padding: 0 10px;
+    padding-bottom: 5px;
 }
 
 .sale-mark {
@@ -14307,8 +14288,8 @@ footer p {
     color: #646464;
     font-size: 18px;
     position: absolute;
-    right: 30px;
-    bottom: 5px;
+    right: 22px;
+    bottom: 4px;
 }
 
 
@@ -14316,9 +14297,15 @@ footer p {
                                         3.2
 ==============================================================================================*/
 
-
 .vine-boxes .style-3-2{
   padding:0 5px!important;
+
+.style-3-2{
+    max-height: 350px;
+}
+
+.style-3-2 img {
+    width: 30%;
 }
 
 .style-3-2 .sale-mark {
@@ -14332,11 +14319,6 @@ footer p {
 
 .style-3-2 h4 {
     font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.style-3-2 .product-info{
-    padding: 0;
 }
 
 .style-3-2 .star-rating .fa {
@@ -14344,7 +14326,7 @@ footer p {
 }
 
 .style-3-2 .order-q {
-    font-size: 10px;
+    font-size: 12px;
     right: 20px;
     bottom: 8px;
 }
@@ -14733,6 +14715,20 @@ footer p {
 .wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
 .wine-description .nav-tabs>li.active>.active,.wine-description .nav-tabs>li.active>.show:hover{
     border-bottom-width: 3px!important;
+
+.wine-description .nav-tabs li.cat-tab a{
+    border-bottom-width: 3px!important;
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.wine-description .nav-tabs li.cat-tab a.active,
+.wine-description .nav-tabs li.cat-tab a:hover {
+
+.wine-description ul li a.active {
     background: #f5f5f5;
     border-bottom: 3px solid #D48699;
 }
@@ -15691,9 +15687,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         -ms-flex-preferred-size: auto;
             flex-basis: auto;
     }
-    .vine-box-style-1 {
-      min-height: 275px;
-  }
+
+    .item-in-cart {
+        right: 28px;
+    }
 }
 
 
@@ -15705,8 +15702,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .navbar .form-inline {
         display: block;
         margin: 0 auto;
-        max-width: 400px;
-        width: 100%;
     }
 
     .navbar .form-inline .form-control {
@@ -15748,12 +15743,20 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-top:157px;
     }
 
+    .item-in-cart {
+        right: 0px;
+    }
+
     .col-xs-5ths, .main__scroller .col-xs-6 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 280px;
                 flex: 0 0 280px;
         max-width: 280px;
         width: 100%;
+            -ms-flex: 0 0 250px;
+                flex: 0 0 250px;
+        max-width: 250px;
+        width: 250px;
         position: relative;
         float: left;
     }
@@ -15786,6 +15789,16 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-bottom: 30px;
     }
 
+    .style-3-2 .order-q {
+        font-size: 10px;
+        right: 0;
+        bottom: 8px;
+        margin-bottom: 20px;
+        position: relative;
+        float: left;
+        padding: 0 10px;
+    }
+
     .style-3-2 h4 {
         margin-bottom: 15px;
     }
@@ -15798,24 +15811,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 }
 
-@media only screen and (min-width : 998px){
-  .logo img{
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width : 768px) and (max-width : 998px) {    
-    .navbar .navbar-collapse.collapse{
-        display: none!important; 
-    }
-    .navbar .navbar-collapse.show {
-        display: block!important;
-    }
-    .form-inline, .form-inline .input-width {
-      width: 100%!important;
-      max-width: 350px;
-    }
-}
 
 @media only screen and (max-width : 768px) {
     .mobile-display {
@@ -15851,6 +15846,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             -ms-flex: 0 0 30%;
                 flex: 0 0 30%;
     }
+
     .user-area .sign-in.show, .user-area .sign-up.show{
         display: -webkit-box!important;
         display: -ms-flexbox!important;
@@ -15871,20 +15867,13 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .item-in-cart {
-        right: -5px;
+        right: 7px;
     }
 
     .main {
-        margin-top:165px;
+        margin-top:145px;
     }
 
-    .main .page-header{
-      margin: 0px 0 20px;
-    }
-
-    .page-header h1 {
-      top: 25%;
-    }
     
     .footer-nav {
         margin-top: 35px;
@@ -15907,6 +15896,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         height: 30px;
     }
 
+    .order-q {
+        position: relative;
+        right: 0;
+        bottom: 0;
+        margin-bottom: 40px;
+        float: left;
+        padding: 0 10px;
+    }
+
     .vine-boxes{
       padding: 0!important;
       margin: 0 auto!important;
@@ -15924,6 +15922,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
       padding-bottom: 6px;
       bottom: 8px;
     }
+
     .vine-box-style-3 h4 {
         margin-bottom: 10px;
     }
@@ -15936,7 +15935,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
-    .col-xs-5ths {
+    .col-xs-5ths, .main__scroller .col-xs-6 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 180px;
                 flex: 0 0 180px;
@@ -15965,11 +15964,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-2 h5 {
         font-size: 16px;
     }
-/*
+
     .vine-box-style-3 img {
         width: 30%;
     }
-*/
+
     .vine-box-style-3 {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 50%;
@@ -16133,7 +16132,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .edit-button {
         top: 2px;
     }
-
+  
     .vine-box-style-1 {
         min-height: 250px;
     }
@@ -16178,6 +16177,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .form-inline .form-control {
         display: inline-block;
+        width: auto;
         vertical-align: middle;
     }
 
@@ -16187,9 +16187,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .item-in-cart {
-        padding: 4px 0px 3px 0;
-        min-width: 14px;
-        height: 14px;
+        right: 2px;
     }
 
     .home-slider {
@@ -16215,7 +16213,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .winery-preferences table {
         font-size: 12px;
     }
-
 }
 
 @media only screen and (max-width : 450px) {
@@ -16225,19 +16222,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .wineries-box p {
         font-size: 14px;
-    }
-
-    .padding-row{
-      padding: 0!important;
-    }
-
-    .user-area a.mx-4 {
-      margin-left: 1rem !important;
-      margin-right: 1rem !important;
-    }
-
-    .user-area span {
-        font-size: 8px;
     }
 }
 
@@ -16256,7 +16240,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .form-inline .input-width {
         max-width: 84%;
     }    
-}/*! jQuery UI - v1.10.3 - 2013-12-09
+}
+/*! jQuery UI - v1.10.3 - 2013-12-09
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.datepicker.css, jquery.ui.theme.css
 * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
