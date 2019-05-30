@@ -17,6 +17,20 @@
                     </div>
                     <p><a href="{{route('winery', $winery->slug)}}">{{$winery->name}}</a></p>
                 </div>
+                @if(count($winery->wines)>0)
+                    <div class="latest-wines-list">
+                        @foreach($winery->wines as $topWine)
+                            <div class="top-wine">
+                                <a href="{{url('/wine/'.$topWine->slug)}}">
+                                    <img src="{{$topWine->photo}}">
+                                    <div class="pricing">
+                                        ${{ sprintf('%0.2f', $topWine->price) }}
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>

@@ -4,6 +4,8 @@
 /public/images/wine
 /public/images/winery/cover
 /public/images/winery/profile
+/public/css/app.css
+/public/js/app.js
 /storage/*.key
 /vendor
 /.idea
