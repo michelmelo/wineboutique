@@ -89,35 +89,35 @@
             <div class="row ">
             @foreach ($wines as $wine)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
-                    <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
+                    <a href="{{route('wine.show', ['wine' => $wine['slug']])}}">
                         <div class="image-container">
-                            <img src="{{ $wine->photo }}" >
+                            <img src="{{ $wine['photo'] }}" >
                             <div class="overlay"></div>
                             @if(Auth::user())
                             <favorite
-                                    :post="'{{ $wine->slug }}'"
-                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                                    :post="'{{ $wine['slug'] }}'"
+                                    :favorited="{{ $wine['favorited'] ? 'true' : 'false' }}"
                                     :type="'wine'"
                             ></favorite>
                             @endif
                             <span class="sale-mark">SALE</span>
                         </div>
                         <div class="product-info">
-                            <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                            <h4>${{$wine->price}}</h4>
+                            <h5>{{$wine['name']?$wine['name']:'Name of wine'}}</h5>
+                            <h4>${{$wine['price']}}</h4>
 
                             <div class="star-rating">
-                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine['rating']}}"></star-rating>
                             </div>
-                            <span class="order-q">{{ $wine->orders_count }} Orders</span>
+                            <span class="order-q">{{ $wine['orders_count']}} Orders</span>
                         </div>
                     </a>
                 </div>
             @endforeach
             </div>
-
             {{ $wines->links() }}
         </div>
+        @include('layouts.partials.load_more')
     </div>
 </div>
 @endsection

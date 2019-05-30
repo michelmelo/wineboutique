@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PhotoRequest;
-use App\Order;
 use App\Region;
 use App\Varietal;
-use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
-use Illuminate\Support\Str;
-use App\WineImage;
 use Illuminate\Support\Facades\DB;
 
 class WineController extends Controller
@@ -75,6 +70,13 @@ class WineController extends Controller
 
     public function list(Request $request)
     {
+        $page_offset = 0;
+        $page_limit = 4;
+        if ($request->get('page_offset')&&$request->get('page_limit')) {
+            $page_offset = $request->get('page_offset');
+            $page_limit = $request->get('page_limit');
+        }
+
         $wines = Wine::query();
 
         $varietals = Varietal::all();
@@ -114,9 +116,18 @@ class WineController extends Controller
             ->leftJoin('orders', 'wines.id', '=', 'orders.id')
             ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
             ->groupBy('wines.id')
-            ->paginate(8);
+            ->skip($page_offset)
+            ->take($page_limit)
+            ->get();
 
-        return view('wines', [
+        foreach ($wines as $wine) {
+            if (Auth::user()) {
+                $wine->favorited = $wine->favorited();
+            }
+            $wine->rating = $wine->rating();
+        }
+
+        return $request->ajax() ? ['wines' => $wines] : view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
@@ -185,5 +196,9 @@ class WineController extends Controller
             'regions' => $regions,
             'filter' => $filter
         ]);
+    }
+
+    public function totalWines() {
+        return Wine::count();
     }
 }

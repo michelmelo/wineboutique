@@ -39,6 +39,7 @@
 	
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/load-more.js') }}"></script>
     @yield('script')
 </body>
 </html>
