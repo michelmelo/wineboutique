@@ -97,8 +97,8 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2 search-shadow input-width" type="search" placeholder="Search for wineries, regions or wines..." aria-label="Search">
+            <form class="form-inline" method="get" action="{{route('search')}}">
+                <input class="form-control mr-sm-2 search-shadow input-width" type="search" name="s" placeholder="Search for wineries, regions or wines..." aria-label="Search" required>
                 <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
