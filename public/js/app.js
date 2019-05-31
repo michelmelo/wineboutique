@@ -30797,7 +30797,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(143);
-module.exports = __webpack_require__(248);
+module.exports = __webpack_require__(251);
 
 
 /***/ }),
@@ -30847,6 +30847,7 @@ Vue.component('cart', __webpack_require__(141));
 Vue.component('add-to-cart', __webpack_require__(239));
 Vue.component('buy-now', __webpack_require__(242));
 Vue.component('winery-edit-form', __webpack_require__(245));
+Vue.component('my-favorites', __webpack_require__(248));
 
 var app = new Vue({
     el: '#app'
@@ -52871,123 +52872,123 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-	$(window).on('resize', function () {
-		var win = $(this); //this = window
-		if (win.width() <= 974) {
-			$(".main__scroller").removeClass("row");
-		} else {
-			$(".main__scroller").addClass("row");
-		}
+				$(window).on('resize', function () {
+								var win = $(this); //this = window
+								if (win.width() <= 974) {
+												$(".main__scroller").removeClass("row");
+								} else {
+												$(".main__scroller").addClass("row");
+								}
 
-		if (win.width() <= 750) {
-			$(".my-wine div a>div:first-child").addClass("col-4");
-		} else {
-			$(".my-wine div a>div:first-child").removeClass("col-4");
-		}
+								if (win.width() <= 750) {
+												$(".my-wine div a>div:first-child").addClass("col-4");
+								} else {
+												$(".my-wine div a>div:first-child").removeClass("col-4");
+								}
 
-		if (win.width() <= 750) {
-			$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-		} else {
-			$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-		}
-	});
+								if (win.width() <= 750) {
+												$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+								} else {
+												$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+								}
+				});
 
-	if ($(window).width() < 960) {
-		$(".main__scroller").removeClass("row");
-	} else {
-		$(".main__scroller").addClass("row");
-	}
+				if ($(window).width() < 960) {
+								$(".main__scroller").removeClass("row");
+				} else {
+								$(".main__scroller").addClass("row");
+				}
 
-	if ($(window).width() < 768) {
-		$(".my-wine div a>div:first-child").addClass("col-4");
-	} else {
-		$(".my-wine div a>div:first-child").removeClass("col-4");
-	}
+				if ($(window).width() < 768) {
+								$(".my-wine div a>div:first-child").addClass("col-4");
+				} else {
+								$(".my-wine div a>div:first-child").removeClass("col-4");
+				}
 
-	if ($(window).width() < 768) {
-		$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-	} else {
-		$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-	}
+				if ($(window).width() < 768) {
+								$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+				} else {
+								$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+				}
 
-	/*
-     $(window).scroll(function(){
-         if ($(window).scrollTop() > 0){
-             $('header').addClass('sticky');
-         } else {
-     		$('header').removeClass('sticky');
- 		}
-     });
- */
+				/*
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > 0){
+                $('header').addClass('sticky');
+            } else {
+        		$('header').removeClass('sticky');
+    		}
+        });
+    */
 
-	//PROFILE EDIT
+				//PROFILE EDIT
 
-	$(".edit-personal").click(function () {
-		$('#personal .edit-text').empty();
-		$('#personal .edit-text').append("<input type='text'>");
-	});
+				$(".edit-personal").click(function () {
+								$('#personal .edit-text').empty();
+								$('#personal .edit-text').append("<input type='text'>");
+				});
 
-	$(".edit-password").click(function () {
-		$('#pass .edit-text').empty();
-		$('#pass .edit-text').append("<input type='password'>");
-	});
+				$(".edit-password").click(function () {
+								$('#pass .edit-text').empty();
+								$('#pass .edit-text').append("<input type='password'>");
+				});
 
-	$(".edit-preferance").click(function () {
-		$('#preferance .edit-text').empty();
-		$('#preferance .edit-text').append("<input type='text'>");
-	});
+				$(".edit-preferance").click(function () {
+								$('#preferance .edit-text').empty();
+								$('#preferance .edit-text').append("<input type='text'>");
+				});
 
-	$(".auto-submit").change(function () {
-		var el = $(this);
-		var form = void 0;
+				$(".auto-submit").change(function () {
+								var el = $(this);
+								var form = void 0;
 
-		if (el.is('form')) {
-			form = el;
-		} else {
-			form = el.closest('form');
-		}
+								if (el.is('form')) {
+												form = el;
+								} else {
+												form = el.closest('form');
+								}
 
-		form.submit();
-	});
+								form.submit();
+				});
 
-	$("#defaultCheck2").change(function () {
-		$("#over-21").toggleClass("d-none");
-	});
+				$("#defaultCheck2").change(function () {
+								$("#over-21").toggleClass("d-none");
+				});
 
-	(function () {
-		setTimeout(function () {
-			if (document.getElementById("msg") !== null) {
-				document.getElementById("msg").style.display = 'none';
-				$.post('/hideMsg');
-			}
-		}, 5000);
-	})();
+				(function () {
+								setTimeout(function () {
+												if (document.getElementById("msg") !== null) {
+																document.getElementById("msg").style.display = 'none';
+																$.post('/hideMsg');
+												}
+								}, 5000);
+				})();
 });
 
 // POPUP   
 
 $('#acceptTerms').on('click', function (event) {
-	console.log("click");
-	if ($(event.target).is('#acceptTerms')) {
-		console.log("click");
-		event.preventDefault();
-		$('.terms-popup').addClass('is-visible');
-		$('body').addClass('overflow-hidden');
-	}
+				console.log("click");
+				if ($(event.target).is('#acceptTerms')) {
+								console.log("click");
+								event.preventDefault();
+								$('.terms-popup').addClass('is-visible');
+								$('body').addClass('overflow-hidden');
+				}
 });
 //close popup
 $('.terms-popup').on('click', function (event) {
-	if ($(event.target).is('.popup-close') || $(event.target).is('.terms-popup')) {
-		event.preventDefault();
-		$(this).removeClass('is-visible');
-		$('body').removeClass('overflow-hidden');
-	}
+				if ($(event.target).is('.popup-close') || $(event.target).is('.terms-popup')) {
+								event.preventDefault();
+								$(this).removeClass('is-visible');
+								$('body').removeClass('overflow-hidden');
+				}
 });
 //close popup when clicking the esc keyboard button
 $(document).keyup(function (event) {
-	if (event.which == '27') {
-		$('.terms-popup').removeClass('is-visible');
-	}
+				if (event.which == '27') {
+								$('.terms-popup').removeClass('is-visible');
+				}
 });
 
 /***/ }),
@@ -71406,7 +71407,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var withParams = Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
+var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
 var _default = withParams;
 exports.default = _default;
 
@@ -72530,7 +72531,7 @@ var render = function() {
                 attrs: { for: "defaultCheck1" }
               },
               [
-                _vm._v("\r\n                I agree to "),
+                _vm._v("\n                I agree to "),
                 _c(
                   "a",
                   {
@@ -72543,7 +72544,7 @@ var render = function() {
                   },
                   [_vm._v("Terms and Conditions.")]
                 ),
-                _vm._v(" of the Wine Boutique*\r\n            ")
+                _vm._v(" of the Wine Boutique*\n            ")
               ]
             )
           ]),
@@ -72607,7 +72608,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n                I am at least 21 years of age.*\r\n            "
+                  "\n                I am at least 21 years of age.*\n            "
                 )
               ]
             )
@@ -72815,7 +72816,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever andwithout limitation, including but not limited to a breach of the Terms.\r\n\r\n                    If you wish to terminate your account, you may simply discontinue using the Service.\r\n\r\n                    All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability."
+                          "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever andwithout limitation, including but not limited to a breach of the Terms.\n\n                    If you wish to terminate your account, you may simply discontinue using the Service.\n\n                    All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability."
                         )
                       ]),
                       _vm._v(" "),
@@ -72845,7 +72846,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          'Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.\r\n\r\n                    Wine Boutique Technologies LLC its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.'
+                          'Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.\n\n                    Wine Boutique Technologies LLC its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.'
                         )
                       ]),
                       _vm._v(" "),
@@ -72865,7 +72866,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "These Terms shall be governed and construed in accordance with the laws of Florida, United States, withoutregard to its conflict of law provisions.\r\n\r\n                    Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have had between us regarding the Service."
+                          "These Terms shall be governed and construed in accordance with the laws of Florida, United States, withoutregard to its conflict of law provisions.\n\n                    Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have had between us regarding the Service."
                         )
                       ]),
                       _vm._v(" "),
@@ -78823,6 +78824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (response) {
                 return console.log(response.data);
             });
+            this.$emit('deleted');
         }
     }
 });
@@ -79320,7 +79322,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
-            publicPath: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BASE_URL,
+            publicPath: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BASE_URL,
             errors: {}
         };
     }, created: function created() {
@@ -79548,6 +79550,201 @@ if (false) {
 
 /***/ }),
 /* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(249)
+/* template */
+var __vue_template__ = __webpack_require__(250)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/forms/MyFavorites.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c3e94060", Component.options)
+  } else {
+    hotAPI.reload("data-v-c3e94060", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "MyFavorites",
+    props: ['favorites', 'orders'],
+    data: function data() {
+        return {
+            displaying: []
+        };
+    },
+    mounted: function mounted() {
+        var that = this;
+        this.favorites.forEach(function () {
+            that.displaying.push(true);
+        });
+    },
+
+    methods: {
+        hide: function hide(cnt) {
+            this.displaying[cnt] = false;
+            this.$forceUpdate();
+        }
+    }
+});
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "col-lg-10 col-sm-12 row row-eq-height" },
+    _vm._l(_vm.favorites, function(favorite, counter) {
+      return _vm.displaying[counter]
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2"
+            },
+            [
+              _c("a", { attrs: { href: "/wine/" + favorite.slug } }, [
+                _c(
+                  "div",
+                  { staticClass: "image-container" },
+                  [
+                    _c("img", { attrs: { src: favorite.photo } }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "overlay" }),
+                    _vm._v(" "),
+                    _c("favorite", {
+                      attrs: {
+                        post: favorite.slug,
+                        favorited: "true",
+                        type: "wine"
+                      },
+                      on: {
+                        deleted: function($event) {
+                          _vm.hide(counter)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sale-mark" }, [_vm._v("SALE")])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("h5", [
+                  _vm._v(_vm._s(favorite.name ? favorite.name : "Name of wine"))
+                ]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("$" + _vm._s(favorite.price))]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "star-rating" },
+                  [
+                    _c("star-rating", {
+                      attrs: {
+                        "star-size": 15,
+                        "active-color": "#991D3F",
+                        "show-rating": false,
+                        "read-only": true,
+                        rating: favorite.rating
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "order-q" }, [
+                  _vm._v(_vm._s(_vm.orders[favorite.id].orderNo) + " orders")
+                ])
+              ])
+            ]
+          )
+        : _vm._e()
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c3e94060", module.exports)
+  }
+}
+
+/***/ }),
+/* 251 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
