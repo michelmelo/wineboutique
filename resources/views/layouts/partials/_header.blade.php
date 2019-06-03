@@ -11,7 +11,7 @@
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-                <div class="col-6 user-area px-0">
+                <div class="col-6 user-area px-1">
                     <div class="v-align row h-100">
                         @if(Auth::guest())
                             <div class="col-12 d-flex justify-content-end h-100">
