@@ -8,7 +8,7 @@ class Newsletter extends Model
 {
     protected $fillable = [
         'email',
-        'state'
+        'state_id'
     ];
 
     protected $table = 'newsletters';

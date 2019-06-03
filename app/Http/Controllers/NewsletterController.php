@@ -15,7 +15,7 @@ class NewsletterController extends Controller
 
         Newsletter::firstOrCreate(
             ['email' => $request['email']],		//search db for existing email
-            ['state' => $request['state']]		//create new if not found
+            ['state_id' => $request['state']]		//create new if not found
         );
 
         return redirect()->route('home');

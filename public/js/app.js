@@ -79621,9 +79621,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 var processing = false;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79752,12 +79749,6 @@ var render = function() {
           }
         }
       }),
-      _vm._v(" "),
-      _vm.isInvalid("dat.email")
-        ? _c("span", { staticClass: "help-block" }, [
-            _c("strong", [_vm._v("Email is invalid.")])
-          ])
-        : _vm._e(),
       _vm._v(" "),
       _vm.err.state
         ? _c("div", { staticClass: "error-block" }, [

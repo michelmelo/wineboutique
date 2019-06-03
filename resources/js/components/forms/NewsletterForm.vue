@@ -2,9 +2,6 @@
     <div class="subscription-form">
         <div class="error-block" v-if="err.email">{{err.email}}</div>
         <input type="email" v-model.trim="dat.email" :class="{ 'invalid': isInvalid('dat.email') }" name="email" placeholder="Email">
-        <span class="help-block" v-if="isInvalid('dat.email')">
-                <strong>Email is invalid.</strong>
-        </span>
         <div class="error-block" v-if="err.state">{{err.state}}</div>
         <select name="state" id="state" v-model="dat.state" class="w-100">
             <option value="" selected disabled hidden>Select state</option>
