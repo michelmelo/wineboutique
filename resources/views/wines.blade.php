@@ -86,7 +86,7 @@
         </div>
 
         <div class="col-lg-10 col-sm-12 ">
-            <div class="row ">
+            <div class="row vine-boxes">
             @foreach ($wines as $wine)
                 <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
                     <a href="{{route('wine.show', ['wine' => $wine['slug']])}}">
@@ -115,7 +115,6 @@
                 </div>
             @endforeach
             </div>
-            {{ $wines->links() }}
         </div>
         @include('layouts.partials.load_more')
     </div>
