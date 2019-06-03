@@ -1,10 +1,11 @@
 <footer class="justify-content-center">
     @if(Auth::guest())
-    <div class="footer-banner">
-        <a href="{{route('register.sell')}}" class="white-button button">SELL ON WB</a>
-    </div>
+        @if(Request::url() !== url('/register/sell'))
+            <div class="footer-banner">
+                <a href="{{route('register.sell')}}" class="white-button button">SELL ON WB</a>
+            </div>
+        @endif
     @endif
-
     <div class="container">
         <div class="footer-social">
             <h4>CONNECT WITH US</h4>
