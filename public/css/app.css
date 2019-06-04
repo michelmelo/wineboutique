@@ -13950,11 +13950,12 @@ footer p {
     top: 6px;
     position: relative;
     margin-left: 10px;
+    white-space: normal;
 }
 
 #collapseOne .card-body,#collapseTwo .card-body{
-    overflow-y: scroll;
-    max-height: 400px;  
+    overflow-y: auto;
+    max-height: 400px; 
 }
 
 .card-header {
