@@ -1,6 +1,7 @@
 <template>
     <div class="info-box shadow-box">
-        <h2>PERSONAL INFORMATION <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div></h2>
+        <h2>PERSONAL INFORMATION</h2>
+        <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div>
         <table>
             <tr>
                 <td>First Name:</td>

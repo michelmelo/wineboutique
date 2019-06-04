@@ -1,13 +1,13 @@
 <template>
     <div class="info-box shadow-box">
         <div v-if="selectedAddress === null">
-            <button v-on:click="addAddress">Add address</button>
-            <table>
+            <button v-on:click="addAddress" class="button red-button">Add address</button>
+            <table class="address-table">
                 <thead>
                     <tr>
-                        <td>Address name</td>
-                        <td>Default</td>
-                        <td>Actions</td>
+                        <th>Address name</th>
+                        <th>Default</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -15,8 +15,8 @@
                         <td>{{address.name}}</td>
                         <td><i v-bind:class="'fas fa-'+(address.default?'check':'times')"></i></td>
                         <td>
-                            <button v-on:click="selectAddress(address.id)">edit</button>
-                            <button v-on:click="deleteAddress(address.id)" v-if="!address.default">delete</button>
+                            <button v-on:click="selectAddress(address.id)" class="btn btn-default d-inline-block"><i class="far fa-edit"></i> Edit</button>
+                            <button v-on:click="deleteAddress(address.id)" v-if="!address.default" class="btn btn-default d-inline-block"><i class="fas fa-trash-alt"></i> Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -25,14 +25,13 @@
         <div v-else>
             <h2>
                 <span>MY ADDRESS</span>
-                <div class="edit-button" v-on:click="saveAddress">
-                    <i class="fas fa-save"></i>Save
-                </div>
-                <div class="edit-button" v-on:click="cancelEditing">
-                    <i class="fas fa-times"></i>Cancel
-                </div>
-                
             </h2>
+            <div class="edit-button save-button" v-on:click="saveAddress">
+                <i class="fas fa-save"></i>
+            </div>
+            <div class="edit-button" v-on:click="cancelEditing">
+                <i class="fas fa-times"></i>
+            </div>
             <table>
                 <tr>
                     <td>Name:</td>
