@@ -86,14 +86,31 @@ $( document ).ready(function() {
     }
 
     function moreWineries(data) {
-        let retVal = '';
+        let retValFinal = '';
         data.forEach(function (element) {
+            let retVal = '';
             retVal += '<div class="col-lg-6 wineries-box"><div><div class="wineries-brand">';
             retVal += '<img class="winery-header" src="' + (element.cover===null ? 'img/winery-1.jpg' : '/images/winery/cover/' + element.cover) + '">';
             retVal += '<img class="winery-logo" src="' + (element.profile===null ? 'img/winery-1.jpg' : '/images/winery/profile/' + element.profile) + '">';
-            retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p></div></div>';
+            retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p></div>';
+            if(element.wines.length>0) {
+                retVal += '<div class="latest-wines-list">';
+                element.wines.forEach(function (wine) {
+                    let wineHTML = '';
+                    wineHTML += '<div class="top-wine">';
+                    wineHTML += '<a href="' + '/wine/' + wine.slug + '">';
+                    wineHTML += '<img src="' + wine.photo + '">';
+                    wineHTML += '<div class="pricing">$' + wine.price.toFixed(2) + '</div>';
+                    wineHTML += '</a>';
+                    wineHTML += '</div>';
+                    retVal += wineHTML;
+                });
+                retVal += '</div>';
+            }
+            retVal+=   '</div>';
+            retValFinal += retVal;
         });
-        return retVal;
+        return retValFinal;
     }
 
     function selectedStar() {

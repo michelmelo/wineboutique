@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PhotoRequest;
+use App\Wine;
 use App\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,9 @@ class WineryController extends Controller
 
         $wineries = Winery::skip($page_offset)
             ->take($page_limit)
+            ->with(['wines'=>function($query) {
+                return $query->limit(3);
+            }])
             ->get();
 
         return  $request->ajax() ? ['wineries' => $wineries] : view('wineries', [
