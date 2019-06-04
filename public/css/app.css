@@ -13519,8 +13519,12 @@ select {
     margin-top: -1px;
 }
 
+.forms input:focus, .forms input:focus-within {
+    outline: none;
+}
+
 .invalid {
-    border: 1px solid darkred !important;
+    border: 3px solid darkred !important;
 }
 
 .forms .valid {
