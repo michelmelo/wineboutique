@@ -23,6 +23,7 @@
 
             <ul class="footer-nav">
                 @if(Auth::guest())
+                <li><newsletter-form></newsletter-form></li>
                 <li><a href="">Sign Up</a></li>
                 @endif
                 <li><a href="/faq">FAQ</a></li>

@@ -34,8 +34,8 @@
     @include('layouts.partials._header')
 	<div class="main" id="app">
         @yield('content')
+        @include('layouts.partials._footer')
 	</div>
-    @include('layouts.partials._footer')
 	
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

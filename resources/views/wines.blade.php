@@ -115,7 +115,7 @@
                 </div>
             @endforeach
             </div>
-            {{ $wines->links() }}
+            {{--{{ $wines->links() }}--}}
         </div>
         @include('layouts.partials.load_more')
     </div>
