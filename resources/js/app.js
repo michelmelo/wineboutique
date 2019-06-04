@@ -42,6 +42,7 @@ Vue.component('add-to-cart', require('./components/AddToCart.vue'));
 Vue.component('buy-now', require('./components/BuyNow.vue'));
 Vue.component('winery-edit-form', require('./components/forms/WineryEditForm.vue'));
 Vue.component('newsletter-form', require('./components/forms/NewsletterForm'));
+Vue.component('my-favorites', require('./components/forms/MyFavorites.vue'));
 
 const app = new Vue({
     el: '#app'

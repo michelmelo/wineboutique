@@ -40,6 +40,7 @@
                 axios.post('/unfavorite/'+post)
                     .then(response => this.isFavorited = false)
                     .catch(response => console.log(response.data));
+                this.$emit('deleted');
             }
         }
     }

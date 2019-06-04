@@ -30848,6 +30848,7 @@ Vue.component('add-to-cart', __webpack_require__(239));
 Vue.component('buy-now', __webpack_require__(242));
 Vue.component('winery-edit-form', __webpack_require__(245));
 Vue.component('newsletter-form', __webpack_require__(248));
+Vue.component('my-favorites', __webpack_require__(276));
 
 var app = new Vue({
     el: '#app'
@@ -78824,6 +78825,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (response) {
                 return console.log(response.data);
             });
+            this.$emit('deleted');
         }
     }
 });
@@ -79859,6 +79861,225 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(277)
+/* template */
+var __vue_template__ = __webpack_require__(278)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/forms/MyFavorites.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c3e94060", Component.options)
+  } else {
+    hotAPI.reload("data-v-c3e94060", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 277 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "MyFavorites",
+    props: ['favorites', 'orders'],
+    data: function data() {
+        return {
+            displaying: []
+        };
+    },
+    mounted: function mounted() {
+        var that = this;
+        this.favorites.forEach(function () {
+            that.displaying.push(true);
+        });
+    },
+
+    methods: {
+        hide: function hide(cnt) {
+            this.displaying[cnt] = false;
+            this.$forceUpdate();
+        }
+    }
+});
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "col-lg-10 col-sm-12 row row-eq-height" },
+    _vm._l(_vm.favorites, function(favorite, counter) {
+      return _vm.displaying[counter]
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2"
+            },
+            [
+              _c("a", { attrs: { href: "/wine/" + favorite.slug } }, [
+                _c(
+                  "div",
+                  { staticClass: "image-container" },
+                  [
+                    _c("img", { attrs: { src: favorite.photo } }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "overlay" }),
+                    _vm._v(" "),
+                    _c("favorite", {
+                      attrs: {
+                        post: favorite.slug,
+                        favorited: "true",
+                        type: "wine"
+                      },
+                      on: {
+                        deleted: function($event) {
+                          _vm.hide(counter)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sale-mark" }, [_vm._v("SALE")])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("h5", [
+                  _vm._v(_vm._s(favorite.name ? favorite.name : "Name of wine"))
+                ]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("$" + _vm._s(favorite.price))]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "star-rating" },
+                  [
+                    _c("star-rating", {
+                      attrs: {
+                        "star-size": 15,
+                        "active-color": "#991D3F",
+                        "show-rating": false,
+                        "read-only": true,
+                        rating: favorite.rating
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "order-q" }, [
+                  _vm._v(_vm._s(_vm.orders[favorite.id].orderNo) + " orders")
+                ])
+              ])
+            ]
+          )
+        : _vm._e()
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c3e94060", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
