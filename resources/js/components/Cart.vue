@@ -6,22 +6,30 @@
                 <div class="vine-box-style-5"  v-for="wine in wines">
                     <div>
                         <div  class="row">
-                            <div class="col-3">
+                            <div class="col-4 image-wrap">
                                 <img :src="wine.photo" />
                             </div>
-                            <div class="col-9">
-                                <h5 class="name">{{wine.name}}</h5>
-                                <h5 class="price">{{ (wine.price || 0) | currency }}</h5>
-                                <div class="shipping">
-                                    <span>Free Shipping</span>
-                                </div>
-                                <div class="quantity">
-                                    <p>Quantity</p>
-                                    <p>
-                                        <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)">-</span>
-                                        <span class="amount">{{wine.pivot.quantity}}</span>
-                                        <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)">+</span>
-                                    </p>
+                            <div class="col-8 ">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="name">{{wine.name}}</h5>
+                                        <h5 class="price"><strong>{{ (wine.price || 0) | currency }}</strong></h5>
+                                    </div>
+                                    <div class="col-6 d-flex align-items-end">
+                                        <div class="shipping">
+                                            <span>Free Shipping</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end align-items-end">
+                                        <div class="quantity">
+                                            <p>Quantity</p>
+                                            <p>
+                                                <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)">-</span>
+                                                <span class="amount">{{wine.pivot.quantity}}</span>
+                                                <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)">+</span>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

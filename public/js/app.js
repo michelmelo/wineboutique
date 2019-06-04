@@ -76620,6 +76620,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -76713,63 +76721,80 @@ var render = function() {
                   return _c("div", { staticClass: "vine-box-style-5" }, [
                     _c("div", [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-3" }, [
+                        _c("div", { staticClass: "col-4 image-wrap" }, [
                           _c("img", { attrs: { src: wine.photo } })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-9" }, [
-                          _c("h5", { staticClass: "name" }, [
-                            _vm._v(_vm._s(wine.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "price" }, [
-                            _vm._v(_vm._s(_vm._f("currency")(wine.price || 0)))
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(0, true),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "quantity" }, [
-                            _c("p", [_vm._v("Quantity")]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "minus",
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.decreaseQuantity(
-                                        wine.slug,
-                                        wine.pivot.quantity
-                                      )
-                                    }
-                                  }
-                                },
-                                [_vm._v("-")]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "amount" }, [
-                                _vm._v(_vm._s(wine.pivot.quantity))
+                        _c("div", { staticClass: "col-8 " }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-12" }, [
+                              _c("h5", { staticClass: "name" }, [
+                                _vm._v(_vm._s(wine.name))
                               ]),
                               _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "plus",
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.increaseQuantity(
-                                        wine.slug,
-                                        wine.pivot.quantity
-                                      )
-                                    }
-                                  }
-                                },
-                                [_vm._v("+")]
-                              )
-                            ])
+                              _c("h5", { staticClass: "price" }, [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm._f("currency")(wine.price || 0))
+                                  )
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(0, true),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-6 d-flex justify-content-end align-items-end"
+                              },
+                              [
+                                _c("div", { staticClass: "quantity" }, [
+                                  _c("p", [_vm._v("Quantity")]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "minus",
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.decreaseQuantity(
+                                              wine.slug,
+                                              wine.pivot.quantity
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("-")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "amount" }, [
+                                      _vm._v(_vm._s(wine.pivot.quantity))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "plus",
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.increaseQuantity(
+                                              wine.slug,
+                                              wine.pivot.quantity
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("+")]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
                           ])
                         ])
                       ])
@@ -76905,8 +76930,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shipping" }, [
-      _c("span", [_vm._v("Free Shipping")])
+    return _c("div", { staticClass: "col-6 d-flex align-items-end" }, [
+      _c("div", { staticClass: "shipping" }, [
+        _c("span", [_vm._v("Free Shipping")])
+      ])
     ])
   },
   function() {
