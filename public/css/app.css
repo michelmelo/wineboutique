@@ -13519,12 +13519,17 @@ select {
     margin-top: -1px;
 }
 
+<<<<<<< HEAD
 .forms input:focus, .forms input:focus-within {
     outline: none;
 }
 
 .invalid {
     border: 3px solid darkred !important;
+=======
+.invalid {
+    border: 1px solid darkred !important;
+>>>>>>> origin/WB-115
 }
 
 .forms .valid {
@@ -13954,12 +13959,20 @@ footer p {
     top: 6px;
     position: relative;
     margin-left: 10px;
+<<<<<<< HEAD
     white-space: normal;
 }
 
 #collapseOne .card-body,#collapseTwo .card-body{
     overflow-y: auto;
     max-height: 400px; 
+=======
+}
+
+#collapseOne .card-body,#collapseTwo .card-body{
+    overflow-y: scroll;
+    max-height: 400px;  
+>>>>>>> origin/WB-115
 }
 
 .card-header {
@@ -14408,16 +14421,35 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
+<<<<<<< HEAD
+=======
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.vine-box-style-5 .image-wrap{
+    padding: 0;
+    overflow: hidden;
+>>>>>>> origin/WB-115
 }
 
 .vine-box-style-5 img  {
     margin: 0 auto;
     display: block;
+<<<<<<< HEAD
     max-width: 100%;
 }
 
 .vine-box-style-5 .col-3, .vine-box-style-5 .col-9 {
     padding: 10px;
+=======
+    width: 100%;
+    height: 100%;
+}
+
+.vine-box-style-5 .col-9 {
+    padding: 15px;
+>>>>>>> origin/WB-115
 }
 
 .vine-box-style-5 .col-3 {
@@ -14426,6 +14458,10 @@ footer p {
 
 .vine-box-style-5 h5 {
     font-size: 20px;
+<<<<<<< HEAD
+=======
+    padding: 0 10px;
+>>>>>>> origin/WB-115
 }
 
 .vine-box-style-5 .name {
@@ -14439,9 +14475,16 @@ footer p {
 }
 
 .shipping {
+<<<<<<< HEAD
     position: absolute;
     bottom: 10px;
     left: 10px
+=======
+/*    position: absolute;
+    bottom: 10px;
+    left: 10px*/
+    padding: 10px;
+>>>>>>> origin/WB-115
 }
 
 .shipping  span {
@@ -14451,9 +14494,16 @@ footer p {
 
 
 .quantity {
+<<<<<<< HEAD
     position: absolute;
     bottom: 10px;
     right: 30px;
+=======
+/*    position: absolute;
+    bottom: 10px;
+    right: 30px;*/
+    padding: 10px 20px;
+>>>>>>> origin/WB-115
     text-align: center;
 }
 
@@ -15152,7 +15202,10 @@ footer p {
     padding: 10px;
     margin-bottom: 20px;
     width: 100%;
+<<<<<<< HEAD
     position: relative;
+=======
+>>>>>>> origin/WB-115
 }
 
 
@@ -15179,7 +15232,11 @@ footer p {
 }
 
 .info-box table tr td {
+<<<<<<< HEAD
     padding: 10px 5px 10px 20px;
+=======
+    padding: 10px 5px;
+>>>>>>> origin/WB-115
     width: 50%;
 }
 
@@ -15188,6 +15245,7 @@ footer p {
 }
 
 .edit-button {
+<<<<<<< HEAD
     color:#9b1f3d;
     font-size: 16px;
     cursor: pointer;
@@ -15219,6 +15277,14 @@ footer p {
 .info-box .address-table tr td:last-child,
 .info-box .address-table tr th:last-child {
     text-align: right;
+=======
+    right: 5px;
+    color:#9b1f3d;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    top: 7px;
+>>>>>>> origin/WB-115
 }
 
 
@@ -16163,7 +16229,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .edit-button {
+<<<<<<< HEAD
         top: 18px;
+=======
+        top: 2px;
+>>>>>>> origin/WB-115
     }
 
     .vine-box-style-1 {
@@ -16203,6 +16273,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 580px) {
+<<<<<<< HEAD
+=======
+    .main, .margin-row {
+        margin-top: 150px!important;
+    }
+>>>>>>> origin/WB-115
     .container {
         padding-right: 5px;
         padding-left: 5px;
@@ -16248,6 +16324,45 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 12px;
     }
 
+<<<<<<< HEAD
+=======
+    .vine-box-style-5 h5, .vine-box-style-5 .name {
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+
+    .shipping {
+        padding: 10px 0 10px 10px;
+    }
+
+    .shipping span {
+        font-size: 12px;
+    }
+
+    .quantity {
+        padding: 10px 20px 10px 0;
+    }
+
+    .quantity p {
+        font-size: 12px;
+    }
+
+    .quantity p span:not(.amount) {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 20px!important;
+    }
+
+    .quantity .minus {
+        line-height: 15px;
+    }
+
+    .quantity .amount {
+        font-size: 18px;
+    }
+
+>>>>>>> origin/WB-115
 }
 
 @media only screen and (max-width : 450px) {
@@ -16282,10 +16397,16 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         right: -3px;
     }
 
+<<<<<<< HEAD
     .address-table .btn {
         padding: 4px;
         margin-top: 2px;
         font-size: 10px;
+=======
+    .quantity .amount {
+        margin: 0 4px;
+        font-size: 18px;
+>>>>>>> origin/WB-115
     }
 }
 
