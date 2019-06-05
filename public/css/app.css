@@ -13434,6 +13434,11 @@ select {
     color: #fff;
 }
 
+.my-winery-head .button {
+    font-size: 14px;
+    padding: 6px 15px;
+}
+
 .full-width {
     width: 100%;
 }
@@ -14985,6 +14990,22 @@ footer p {
     display: none;
 }
 
+.my-winery-table .table>tbody>tr{
+    border-top: 1px solid #ddd;
+}
+
+.my-winery-table .table>tbody>tr>td{
+    border-top: none;
+    vertical-align: middle;
+}
+
+.my-winery-table .btn-default, .my-winery-table form{
+    display: inline-block;
+    max-height: 38px;
+    max-width: 38px;
+    margin-top: 2px
+}
+
 
 /*=========================================================================================================================================================================================
                                                                                  LOCAL PICKUP
@@ -15894,6 +15915,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding-right: 20px;
     }
 
+    .my-winery-table{
+        overflow-x: auto;
+    }
+
 }
 
 @media only screen and (min-width : 998px){
@@ -16398,6 +16423,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     .address-table .btn {
         padding: 4px;
         margin-top: 2px;
@@ -16407,6 +16433,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin: 0 4px;
         font-size: 18px;
 >>>>>>> origin/WB-115
+=======
+    .my-winery-head .button {
+        padding: 5px 10px;
+>>>>>>> origin/WB-117
     }
 }
 
