@@ -116,7 +116,9 @@
             @endforeach
             </div>
         </div>
-        @include('layouts.partials.load_more')
+        <div class="col-12 mt-4 mb-5 text-center">
+            @include('layouts.partials.load_more')
+        </div>
     </div>
 </div>
 @endsection
