@@ -424,7 +424,8 @@ header {
     height: 30px;
 }
 
-.user-area span {
+
+.user-area span, .user-area a{
     width: 100%;
     text-align: center;
     display: block;
@@ -2591,7 +2592,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .navbar-toggler {
         position: absolute;
-        top: -65px;
+        top: -52px;
         left: 15px;
     }
 
@@ -2626,6 +2627,16 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .user-area img {
       width: 20px;
       height: 20px;
+    }
+
+    .user-area .dropdown-toggle::after{
+       margin-left: 0; 
+    }
+
+    .user-area .dropdown-item span{
+        margin-left: 0; 
+        font-size: 10px;
+        color: #212529;
     }
 
     .item-in-cart {
@@ -3040,6 +3051,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 @media only screen and (max-width : 400px) {
     .logo img {
+        width: 120px;
         right: -50px;
     }
 
