@@ -73,8 +73,10 @@ $( document ).ready(function() {
             }
             retVal += '<span class="sale-mark">SALE</span>' + '</div>';
             retVal += '<div class="product-info">';
-            retVal += '<h5>' + typeof element.name !== 'undefined' ? element.name : 'Name of wine' + '</h5>';
-            retVal += '<h4>' + element.price + '</h4>';
+            retVal += '<h5>';
+            retVal += typeof element.name !== 'undefined' ? element.name : 'Name of wine';
+            retVal += '</h5>';
+            retVal += '<h4>$' + element.price + '</h4>';
             retVal += '<div class="star-rating">';
             retVal += '<div data-v-34cbeed1="" class="vue-star-rating">' + '<div data-v-34cbeed1="" class="vue-star-rating">';
             for(let i=0;i<element.rating;i++) retVal += selectedStar();
