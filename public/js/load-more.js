@@ -102,13 +102,13 @@ $( document ).ready(function() {
                     retVal += '<a href="' + '/wine/' + wine.slug + '">'+'<div class="image-container">';
                     retVal += '<img src="' + wine.photo + '">';
                     retVal += '<span class="pricing price">$' + wine.price.toFixed(2) + '</span>';
-                    retVal += '</a></div>';
+                    retVal += '</a></div></div>';
                 });
 
                 retVal += '</div>';
             }
 
-            retVal += '</div></div></div>';
+            retVal += '</div></div>';
             retValFinal += retVal;
         });
         return retValFinal;
