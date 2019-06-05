@@ -1843,6 +1843,7 @@ footer p {
     padding: 10px;
     margin-bottom: 20px;
     width: 100%;
+    position: relative;
 }
 
 
@@ -1869,7 +1870,7 @@ footer p {
 }
 
 .info-box table tr td {
-    padding: 10px 5px;
+    padding: 10px 5px 10px 20px;
     width: 50%;
 }
 
@@ -1878,12 +1879,37 @@ footer p {
 }
 
 .edit-button {
-    right: 5px;
     color:#9b1f3d;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     font-weight: 400;
-    top: 7px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.save-button{
+    right: 30px;
+}
+
+.shadow-box .button {
+    font-size: 14px;
+    padding: 6px 15px;
+}
+
+.info-box .address-table tr td {
+    padding: 10px 5px;
+    width: auto;
+}
+
+.info-box .address-table tr td:nth-child(2),
+.info-box .address-table tr th:nth-child(2) {
+    text-align: center;
+}
+
+.info-box .address-table tr td:last-child,
+.info-box .address-table tr th:last-child {
+    text-align: right;
 }
 
 
@@ -2827,7 +2853,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .edit-button {
-        top: 2px;
+        top: 18px;
     }
 
     .vine-box-style-1 {
@@ -2944,6 +2970,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .item-in-cart {
         right: -3px;
+    }
+
+    .address-table .btn {
+        padding: 4px;
+        margin-top: 2px;
+        font-size: 10px;
     }
 }
 

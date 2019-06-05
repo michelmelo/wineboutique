@@ -30797,7 +30797,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(143);
-module.exports = __webpack_require__(251);
+module.exports = __webpack_require__(254);
 
 
 /***/ }),
@@ -30848,7 +30848,7 @@ Vue.component('add-to-cart', __webpack_require__(239));
 Vue.component('buy-now', __webpack_require__(242));
 Vue.component('winery-edit-form', __webpack_require__(245));
 Vue.component('newsletter-form', __webpack_require__(248));
-Vue.component('my-favorites', __webpack_require__(276));
+Vue.component('my-favorites', __webpack_require__(251));
 
 var app = new Vue({
     el: '#app'
@@ -52873,123 +52873,123 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-				$(window).on('resize', function () {
-								var win = $(this); //this = window
-								if (win.width() <= 974) {
-												$(".main__scroller").removeClass("row");
-								} else {
-												$(".main__scroller").addClass("row");
-								}
+	$(window).on('resize', function () {
+		var win = $(this); //this = window
+		if (win.width() <= 974) {
+			$(".main__scroller").removeClass("row");
+		} else {
+			$(".main__scroller").addClass("row");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:first-child").addClass("col-4");
-								} else {
-												$(".my-wine div a>div:first-child").removeClass("col-4");
-								}
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:first-child").addClass("col-4");
+		} else {
+			$(".my-wine div a>div:first-child").removeClass("col-4");
+		}
 
-								if (win.width() <= 750) {
-												$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-								} else {
-												$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-								}
-				});
+		if (win.width() <= 750) {
+			$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+		} else {
+			$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+		}
+	});
 
-				if ($(window).width() < 960) {
-								$(".main__scroller").removeClass("row");
-				} else {
-								$(".main__scroller").addClass("row");
-				}
+	if ($(window).width() < 960) {
+		$(".main__scroller").removeClass("row");
+	} else {
+		$(".main__scroller").addClass("row");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:first-child").addClass("col-4");
-				} else {
-								$(".my-wine div a>div:first-child").removeClass("col-4");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:first-child").addClass("col-4");
+	} else {
+		$(".my-wine div a>div:first-child").removeClass("col-4");
+	}
 
-				if ($(window).width() < 768) {
-								$(".my-wine div a>div:nth-child(2)").addClass("col-8");
-				} else {
-								$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
-				}
+	if ($(window).width() < 768) {
+		$(".my-wine div a>div:nth-child(2)").addClass("col-8");
+	} else {
+		$(".my-wine div a>div:nth-child(2)").removeClass("col-8");
+	}
 
-				/*
-        $(window).scroll(function(){
-            if ($(window).scrollTop() > 0){
-                $('header').addClass('sticky');
-            } else {
-        		$('header').removeClass('sticky');
-    		}
-        });
-    */
+	/*
+     $(window).scroll(function(){
+         if ($(window).scrollTop() > 0){
+             $('header').addClass('sticky');
+         } else {
+     		$('header').removeClass('sticky');
+ 		}
+     });
+ */
 
-				//PROFILE EDIT
+	//PROFILE EDIT
 
-				$(".edit-personal").click(function () {
-								$('#personal .edit-text').empty();
-								$('#personal .edit-text').append("<input type='text'>");
-				});
+	$(".edit-personal").click(function () {
+		$('#personal .edit-text').empty();
+		$('#personal .edit-text').append("<input type='text'>");
+	});
 
-				$(".edit-password").click(function () {
-								$('#pass .edit-text').empty();
-								$('#pass .edit-text').append("<input type='password'>");
-				});
+	$(".edit-password").click(function () {
+		$('#pass .edit-text').empty();
+		$('#pass .edit-text').append("<input type='password'>");
+	});
 
-				$(".edit-preferance").click(function () {
-								$('#preferance .edit-text').empty();
-								$('#preferance .edit-text').append("<input type='text'>");
-				});
+	$(".edit-preferance").click(function () {
+		$('#preferance .edit-text').empty();
+		$('#preferance .edit-text').append("<input type='text'>");
+	});
 
-				$(".auto-submit").change(function () {
-								var el = $(this);
-								var form = void 0;
+	$(".auto-submit").change(function () {
+		var el = $(this);
+		var form = void 0;
 
-								if (el.is('form')) {
-												form = el;
-								} else {
-												form = el.closest('form');
-								}
+		if (el.is('form')) {
+			form = el;
+		} else {
+			form = el.closest('form');
+		}
 
-								form.submit();
-				});
+		form.submit();
+	});
 
-				$("#defaultCheck2").change(function () {
-								$("#over-21").toggleClass("d-none");
-				});
+	$("#defaultCheck2").change(function () {
+		$("#over-21").toggleClass("d-none");
+	});
 
-				(function () {
-								setTimeout(function () {
-												if (document.getElementById("msg") !== null) {
-																document.getElementById("msg").style.display = 'none';
-																$.post('/hideMsg');
-												}
-								}, 5000);
-				})();
+	(function () {
+		setTimeout(function () {
+			if (document.getElementById("msg") !== null) {
+				document.getElementById("msg").style.display = 'none';
+				$.post('/hideMsg');
+			}
+		}, 5000);
+	})();
 });
 
 // POPUP   
 
 $('#acceptTerms').on('click', function (event) {
-				console.log("click");
-				if ($(event.target).is('#acceptTerms')) {
-								console.log("click");
-								event.preventDefault();
-								$('.terms-popup').addClass('is-visible');
-								$('body').addClass('overflow-hidden');
-				}
+	console.log("click");
+	if ($(event.target).is('#acceptTerms')) {
+		console.log("click");
+		event.preventDefault();
+		$('.terms-popup').addClass('is-visible');
+		$('body').addClass('overflow-hidden');
+	}
 });
 //close popup
 $('.terms-popup').on('click', function (event) {
-				if ($(event.target).is('.popup-close') || $(event.target).is('.terms-popup')) {
-								event.preventDefault();
-								$(this).removeClass('is-visible');
-								$('body').removeClass('overflow-hidden');
-				}
+	if ($(event.target).is('.popup-close') || $(event.target).is('.terms-popup')) {
+		event.preventDefault();
+		$(this).removeClass('is-visible');
+		$('body').removeClass('overflow-hidden');
+	}
 });
 //close popup when clicking the esc keyboard button
 $(document).keyup(function (event) {
-				if (event.which == '27') {
-								$('.terms-popup').removeClass('is-visible');
-				}
+	if (event.which == '27') {
+		$('.terms-popup').removeClass('is-visible');
+	}
 });
 
 /***/ }),
@@ -71408,7 +71408,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
+var withParams = Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(185).withParams : __webpack_require__(17).withParams;
 var _default = withParams;
 exports.default = _default;
 
@@ -72532,7 +72532,7 @@ var render = function() {
                 attrs: { for: "defaultCheck1" }
               },
               [
-                _vm._v("\n                I agree to "),
+                _vm._v("\r\n                I agree to "),
                 _c(
                   "a",
                   {
@@ -72545,7 +72545,7 @@ var render = function() {
                   },
                   [_vm._v("Terms and Conditions.")]
                 ),
-                _vm._v(" of the Wine Boutique*\n            ")
+                _vm._v(" of the Wine Boutique*\r\n            ")
               ]
             )
           ]),
@@ -72609,7 +72609,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                I am at least 21 years of age.*\n            "
+                  "\r\n                I am at least 21 years of age.*\r\n            "
                 )
               ]
             )
@@ -72817,7 +72817,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever andwithout limitation, including but not limited to a breach of the Terms.\n\n                    If you wish to terminate your account, you may simply discontinue using the Service.\n\n                    All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability."
+                          "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever andwithout limitation, including but not limited to a breach of the Terms.\r\n\r\n                    If you wish to terminate your account, you may simply discontinue using the Service.\r\n\r\n                    All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability."
                         )
                       ]),
                       _vm._v(" "),
@@ -72847,7 +72847,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          'Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.\n\n                    Wine Boutique Technologies LLC its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.'
+                          'Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.\r\n\r\n                    Wine Boutique Technologies LLC its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.'
                         )
                       ]),
                       _vm._v(" "),
@@ -72867,7 +72867,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "These Terms shall be governed and construed in accordance with the laws of Florida, United States, withoutregard to its conflict of law provisions.\n\n                    Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have had between us regarding the Service."
+                          "These Terms shall be governed and construed in accordance with the laws of Florida, United States, withoutregard to its conflict of law provisions.\r\n\r\n                    Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have had between us regarding the Service."
                         )
                       ]),
                       _vm._v(" "),
@@ -73496,6 +73496,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+//
 //
 //
 //
@@ -75110,17 +75111,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "info-box shadow-box" }, [
-    _c("h2", [
-      _vm._v("PERSONAL INFORMATION "),
-      _c(
-        "div",
-        { staticClass: "edit-button", on: { click: _vm.toggleEditing } },
-        [
-          _c("i", { staticClass: "far fa-edit" }),
-          _vm._v(_vm._s(_vm.editing ? "Save" : "Edit"))
-        ]
-      )
-    ]),
+    _c("h2", [_vm._v("PERSONAL INFORMATION")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "edit-button", on: { click: _vm.toggleEditing } },
+      [
+        _c("i", { staticClass: "far fa-edit" }),
+        _vm._v(_vm._s(_vm.editing ? "Save" : "Edit"))
+      ]
+    ),
     _vm._v(" "),
     _c("table", [
       _c("tr", [
@@ -75323,6 +75323,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -75418,17 +75419,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "info-box shadow-box" }, [
-    _c("h2", [
-      _vm._v("PASSWORD "),
-      _c(
-        "div",
-        { staticClass: "edit-button", on: { click: _vm.toggleEditing } },
-        [
-          _c("i", { staticClass: "far fa-edit" }),
-          _vm._v(_vm._s(_vm.editing ? "Save" : "Edit"))
-        ]
-      )
-    ]),
+    _c("h2", [_vm._v("PASSWORD ")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "edit-button", on: { click: _vm.toggleEditing } },
+      [
+        _c("i", { staticClass: "far fa-edit" }),
+        _vm._v(_vm._s(_vm.editing ? "Save" : "Edit"))
+      ]
+    ),
     _vm._v(" "),
     _c("table", [
       !_vm.editing
@@ -77888,7 +77888,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -78106,11 +78105,13 @@ var render = function() {
   return _c("div", { staticClass: "info-box shadow-box" }, [
     _vm.selectedAddress === null
       ? _c("div", [
-          _c("button", { on: { click: _vm.addAddress } }, [
-            _vm._v("Add address")
-          ]),
+          _c(
+            "button",
+            { staticClass: "button red-button", on: { click: _vm.addAddress } },
+            [_vm._v("Add address")]
+          ),
           _vm._v(" "),
-          _c("table", [
+          _c("table", { staticClass: "address-table" }, [
             _vm._m(0),
             _vm._v(" "),
             _c(
@@ -78129,26 +78130,31 @@ var render = function() {
                     _c(
                       "button",
                       {
+                        staticClass: "btn btn-default d-inline-block",
                         on: {
                           click: function($event) {
                             _vm.selectAddress(address.id)
                           }
                         }
                       },
-                      [_vm._v("edit")]
+                      [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Edit")]
                     ),
                     _vm._v(" "),
                     !address.default
                       ? _c(
                           "button",
                           {
+                            staticClass: "btn btn-default d-inline-block",
                             on: {
                               click: function($event) {
                                 _vm.deleteAddress(address.id)
                               }
                             }
                           },
-                          [_vm._v("delete")]
+                          [
+                            _c("i", { staticClass: "fas fa-trash-alt" }),
+                            _vm._v(" Delete")
+                          ]
                         )
                       : _vm._e()
                   ])
@@ -78158,27 +78164,22 @@ var render = function() {
           ])
         ])
       : _c("div", [
-          _c("h2", [
-            _c("span", [_vm._v("MY ADDRESS")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "edit-button", on: { click: _vm.saveAddress } },
-              [
-                _c("i", { staticClass: "fas fa-save" }),
-                _vm._v("Save\n            ")
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "edit-button", on: { click: _vm.cancelEditing } },
-              [
-                _c("i", { staticClass: "fas fa-times" }),
-                _vm._v("Cancel\n            ")
-              ]
-            )
-          ]),
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "edit-button save-button",
+              on: { click: _vm.saveAddress }
+            },
+            [_c("i", { staticClass: "fas fa-save" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "edit-button", on: { click: _vm.cancelEditing } },
+            [_c("i", { staticClass: "fas fa-times" })]
+          ),
           _vm._v(" "),
           _c("table", [
             _c("tr", [
@@ -78537,13 +78538,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("td", [_vm._v("Address name")]),
+        _c("th", [_vm._v("Address name")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Default")]),
+        _c("th", [_vm._v("Default")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Actions")])
+        _c("th", [_vm._v("Actions")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [_c("span", [_vm._v("MY ADDRESS")])])
   }
 ]
 render._withStripped = true
@@ -79323,7 +79330,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: '',
-            publicPath: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BASE_URL,
+            publicPath: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BASE_URL,
             errors: {}
         };
     }, created: function created() {
@@ -79858,44 +79865,14 @@ if (false) {
 
 /***/ }),
 /* 251 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(277)
+var __vue_script__ = __webpack_require__(252)
 /* template */
-var __vue_template__ = __webpack_require__(278)
+var __vue_template__ = __webpack_require__(253)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79934,7 +79911,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 277 */
+/* 252 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79992,7 +79969,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 278 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80080,6 +80057,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-c3e94060", module.exports)
   }
 }
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

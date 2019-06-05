@@ -1,6 +1,7 @@
 <template>
     <div class="info-box shadow-box">
-        <h2>PASSWORD <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div></h2>
+        <h2>PASSWORD </h2>
+        <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div>
         <table>
             <tr v-if="!editing">
                 <td>Password:</td>
