@@ -96,7 +96,7 @@
                             @if(Auth::user())
                             <favorite
                                     :post="'{{ $wine['slug'] }}'"
-                                    :favorited="{{ $wine['favorited'] ? 'true' : 'false' }}"
+                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                                     :type="'wine'"
                             ></favorite>
                             @endif
@@ -107,7 +107,7 @@
                             <h4>${{$wine['price']}}</h4>
 
                             <div class="star-rating">
-                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine['rating']}}"></star-rating>
+                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                             </div>
                             <span class="order-q">{{ $wine['orders_count']}} Orders</span>
                         </div>
