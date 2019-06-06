@@ -164,11 +164,13 @@
                         <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
                         <img src="{{ $wine->photo }}" >
                         <div class="overlay"></div>
+                        @if(Auth::user())
                         <favorite
                                 :post="'{{ $wine->slug }}'"
                                 :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                                 :type="'wine'"
                         ></favorite>
+                        @endif
                     </div>
                     <div class="product-info">
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
