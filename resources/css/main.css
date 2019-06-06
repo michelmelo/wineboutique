@@ -2375,6 +2375,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     transition-duration: 0.3s;
 }
 
+.popup-test{
+    
+}
+
 .popup-head {
     margin: 100px 0 50px;
     padding: 30px;
