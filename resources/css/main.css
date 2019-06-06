@@ -210,14 +210,20 @@ select {
     font-weight: 700;
 }
 
-.forms input {
+.subscription-form {
+    max-width: 450px;
+    margin: 0px auto 30px;
+}
+
+.forms input, .subscription-form select {
     width: 100%;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #D8D8D8!important;
     padding: 15px 10px;
     margin-top: -1px;
 }
 
-.forms input:focus, .forms input:focus-within {
+.forms input:focus, .forms input:focus-within,
+.subscription-form select:focus, .subscription-form select:focus-within {
     outline: none;
 }
 
@@ -2331,18 +2337,27 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                                                                                  POPUP
 ==========================================================================================================================================================================================*/
 
-.terms-popup.is-visible {
+.terms-popup.is-visible, .newsletter-popup.is-visible {
     z-index: 10000;
 }
 
-.terms-popup {
+.terms-popup, .newsletter-popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2500;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(248, 238, 232, 0.6);
+    background-color: rgba(156, 25, 58, 0.9);
+}
+
+.newsletter-popup {
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: rgba(156, 25, 58, 0.9);
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -2356,11 +2371,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     position: relative;
     width: 100%;
     max-width: 900px;
+    min-height: 400px;
     max-height: 90vh;
     overflow-y: auto;
     margin: 4em auto;
     background-color: #FFF;
-    border: 3px solid #aec4ce;
+    border: 3px solid rgb(156, 25, 58);
     color: #303038;
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -2388,13 +2404,31 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     margin: 20px 0 50px;
 }
 
+.newsletter-popup .popup-head {
+    box-shadow: none;
+    margin: 30px 0px 10px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+
 .popup-body{
     padding: 0 4em;   
+}
+
+.newsletter-popup .popup-body{
+    padding: 0 20px;  
 }
 
 .popup-container h2 {
     margin: 0 1em 0.4em;
     font-weight: bold;
+}
+
+.newsletter-popup h2 {
+    font-size: 50px;
+    margin-bottom: 0px;
 }
 
 .popup-container .popup-close {
@@ -2403,6 +2437,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     right: 8px;
     width: 30px;
     height: 30px;
+}
+
+.newsletter-popup p {
+    line-height: 2em;
+    max-width: 400px;
 }
 
 .favorite-popup a {
@@ -2946,6 +2985,19 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: -moz-fit-content;
         max-width: fit-content;
     }
+
+    .newsletter-popup .popup-head{
+        padding: 30px 10px;
+    }
+
+    .newsletter-popup h2{
+        font-size: 40px;
+        margin: 0 20px;
+    }
+
+    .newsletter-popup p {
+        line-height: 1.5em;
+    }
 }
 
 
@@ -3087,6 +3139,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 370px) {
+
+    .newsletter-popup .popup-head{
+        padding: 30px 10px 20px;
+    }
+
+    .newsletter-popup h2{
+        font-size: 36px;
+    }
+
     .form-inline .input-width {
         max-width: 84%;
     }    
