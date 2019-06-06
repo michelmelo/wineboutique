@@ -36,6 +36,9 @@
                     <div class="google-login">
                         <a href="{{url('/redirect/google')}}">Login in with Google</a>
                     </div>
+                    <div class="google-login">
+                        <a href="{{route('register')}}">Create Account</a>
+                    </div>
                     {{--<div class="facebook-login">--}}
                         {{--<a href="{{url('/redirect/facebook')}}">Login in with Facebook</a>--}}
                     {{--</div>--}}
