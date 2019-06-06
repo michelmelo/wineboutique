@@ -23,6 +23,7 @@
             </p>
 
             <ul class="footer-nav">
+                <h4>SUBSCRIBE TO OUR NEWSLETTER</h4>
                 @if(Auth::guest())
                 <li><newsletter-form></newsletter-form></li>
                 <li><a href="">Sign Up</a></li>
