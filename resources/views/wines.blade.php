@@ -114,11 +114,18 @@
                     </a>
                 </div>
             @endforeach
+            @if(count($wines)===0)
+                <div class="no-wines">
+                    <p>Unfortunately, there are no wines matching the filters you have selected.</p>
+                </div>
+            @endif
             </div>
         </div>
-        <div class="col-12 mt-4 mb-5 text-center">
-            @include('layouts.partials.load_more')
-        </div>
+        @if(count($wines)>0)
+            <div class="col-12 mt-4 mb-5 text-center">
+                @include('layouts.partials.load_more')
+            </div>
+        @endif
     </div>
 </div>
 @endsection
