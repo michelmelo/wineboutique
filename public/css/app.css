@@ -13519,9 +13519,14 @@ select {
     font-weight: 700;
 }
 
-.forms input {
+.subscription-form{
+    max-width: 450px;
+    margin:0 auto 30px;
+}
+
+.forms input, .forms select {
     width: 100%;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #D8D8D8!important;
     padding: 15px 10px;
     margin-top: -1px;
 }
@@ -14171,7 +14176,6 @@ footer p {
     width: unset;
     height: 100%;
     max-height: 150px;
-    margin-left: -10%;
 }
 
 .vine-box-style-2 .col-md-6 {
@@ -15641,19 +15645,34 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                                                                                  POPUP
 ==========================================================================================================================================================================================*/
 
-.terms-popup.is-visible {
+.terms-popup.is-visible, .newsletter-popup.is-visible {
     z-index: 10000;
 }
 
-.terms-popup {
+.terms-popup, .newsletter-popup {
     z-index: 2500;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(248, 238, 232, 0.6);
+    background-color: rgba(156, 25, 58, 0.9);
 }
+
+.newsletter-popup{
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
 
 .fade-enter-active, .fade-leave-active {
   -webkit-transition: opacity .5s ease-out;
@@ -15667,11 +15686,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     position: relative;
     width: 100%;
     max-width: 900px;
+    min-height: 400px;
     max-height: 90vh;
     overflow-y: auto;
     margin: 4em auto;
     background-color: #FFF;
-    border: 3px solid #aec4ce;
+    border: 3px solid #9C193A;
     color: #303038;
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -15695,8 +15715,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
 }
 
-.terms-popup .popup-head {
+.terms-popup .popup-head{
     margin: 20px 0 50px;
+}
+
+.newsletter-popup .popup-head{
+    margin: 30px 0 10px;
+    border: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 .popup-body{
@@ -15708,12 +15735,22 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     font-weight: bold;
 }
 
+.newsletter-popup h2{
+    font-size: 50px;
+    margin: 0;
+}
+
 .popup-container .popup-close {
     position: absolute;
     top: 8px;
     right: 8px;
     width: 30px;
     height: 30px;
+}
+
+.newsletter-popup p{
+    line-height: 2em;
+    max-width: 550px;
 }
 
 .favorite-popup a {
@@ -16257,6 +16294,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: -moz-fit-content;
         max-width: fit-content;
     }
+
+    .newsletter-popup h2{
+        font-size: 40px;
+    }
+
+    .newsletter-popup .popup-body{
+        padding: 0 20px;
+    }
 }
 
 
@@ -16393,6 +16438,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .my-winery-head .button {
         padding: 5px 10px;
+    }
+
+    .newsletter-popup h2{
+        font-size: 36px;
+    }
+
+    .newsletter-popup .popup-body p{
+        line-height: 1.4em;
     }
 }
 

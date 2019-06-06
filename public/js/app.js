@@ -79657,6 +79657,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 var processing = false;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79752,7 +79757,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "subscription-form" },
+    { staticClass: "subscription-form forms" },
     [
       _vm.err.email
         ? _c("div", { staticClass: "error-block" }, [
@@ -79853,27 +79858,46 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.activePopup
-          ? _c("div", { staticClass: "is-visible", attrs: { role: "alert" } }, [
-              _c("div", { staticClass: "popup-body" }, [
-                _c("div", { staticClass: "thank-you" }, [
-                  _vm._v("Thank you for your subscription!")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "popup-close img-replace",
-                    attrs: { href: "#0" },
-                    on: {
-                      click: function($event) {
-                        _vm.activePopup = !_vm.activePopup
-                      }
-                    }
-                  },
-                  [_vm._v("Close")]
-                )
-              ])
-            ])
+          ? _c(
+              "div",
+              {
+                staticClass: "newsletter-popup is-visible",
+                attrs: { role: "alert" }
+              },
+              [
+                _c("div", { staticClass: "popup-container" }, [
+                  _c("div", { staticClass: "popup-head" }, [
+                    _c("h2", { staticClass: "text-center" }, [
+                      _c("strong", [_vm._v("THANK YOU!")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "popup-body text-center" }, [
+                    _c("p", { staticClass: "mb-5 h4 mx-auto" }, [
+                      _vm._v(
+                        "Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "button red-button mt-5",
+                        on: {
+                          click: function($event) {
+                            _vm.activePopup = !_vm.activePopup
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-times mr-2" }),
+                        _vm._v(" CLOSE")
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
           : _vm._e()
       ])
     ],
