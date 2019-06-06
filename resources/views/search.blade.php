@@ -12,13 +12,26 @@
                         <div class="image-container">
                             <img src=" {{ $result->photo }}">
                             <div class="overlay"></div>
+                            <h5>{{$result->name}}</h5>
+                            <small>{{$result->description}}</small>
+                            @if($result->type==='WINE')
+                                @if(Auth::user())
+                                    <favorite
+                                            :post="'{{ $result->slug }}'"
+                                            :favorited="{{ $result->favorited ? 'true' : 'false' }}"
+                                            :type="'wine'"
+                                    ></favorite>
+                                @endif
+                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating}}"></star-rating>
+                                <div class="wine-price">
+                                    ${{$result->price}}
+                                </div>
+                                <span class="order-q">{{$result->orders_count}} Orders</span>
+                            @endif
                         </div>
-                        <h5>{{$result->name}}</h5>
-                        <small>{{$result->description}}</small>
                     </a>
                 </div>
             @endforeach
-
             {{ $results->links() }}
         </div>
     </div>
