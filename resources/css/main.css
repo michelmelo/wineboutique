@@ -107,10 +107,12 @@ select {
     color: #9C193A;
 }
 
-.red-button {
+.red-button, .red-button:focus {
     background: #9C193A;
     color: #fff;
 }
+
+
 
 .pink-button {
     background: #D6879A;
@@ -324,8 +326,9 @@ nav {
     -webkit-box-shadow: 0px 9px 17px -8px #0000002b;
             box-shadow: 0px 9px 17px -8px #0000002b;
 }
-.navbar{
+header .navbar{
     border-top: 1px solid #CAC9C9 !important;
+    margin-bottom: 0;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
@@ -799,7 +802,10 @@ footer p {
 .image-container {
     position: relative;
     overflow: hidden;
-
+    padding-bottom: 100%;
+    width: 100%;
+    height: 0;
+    vertical-align: middle;  
 }
 
 .vine-box-style-1 .image-container{
@@ -1059,19 +1065,24 @@ footer p {
 /*=========================================================================================================================================================================================
                                                                                   VINE BOX 4
 ==========================================================================================================================================================================================*/
-
+/*
 .vine-box-style-4 .image-container {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
     padding: 10px 10px;
-}
+}*/
 
 .vine-box-style-4 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    -o-object-fit: cover;
+    object-fit: cover;
     margin: 0 auto;
-    display: block;
-    max-height: 200px!important;
-    max-width: 100%;
 }
 
 .vine-box-style-4 .price {
@@ -1467,12 +1478,9 @@ footer p {
     margin-bottom: 30px;
     background: #fff;
     padding: 10px;
-    padding-bottom: 20px;
-    -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
-            box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
-
-
 
 .wineries-brand {
     position: relative;
@@ -1492,12 +1500,18 @@ footer p {
             box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
     width: 88px;
     height: 88px;
+    object-fit: cover;
 }
 
 .wineries-box p {
     padding: 10px 0  10px 100px;
+    font-size: 16px;
     color: #363a44;
     font-weight: 500;
+}
+
+.wineries-box p a {
+    color: #363a44;
 }
 
 .wineries-box p span {
@@ -2800,10 +2814,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     h2.heading {
         font-size: 22px;
-    }
-
-    .vine-box-style-4 img {
-        max-height: 120px!important;
     }
 
     .vine-box-style-4 .price {

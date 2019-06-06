@@ -73,8 +73,10 @@ $( document ).ready(function() {
             }
             retVal += '<span class="sale-mark">SALE</span>' + '</div>';
             retVal += '<div class="product-info">';
-            retVal += '<h5>' + typeof element.name !== 'undefined' ? element.name : 'Name of wine' + '</h5>';
-            retVal += '<h4>' + element.price + '</h4>';
+            retVal += '<h5>';
+            retVal += typeof element.name !== 'undefined' ? element.name : 'Name of wine';
+            retVal += '</h5>';
+            retVal += '<h4>$' + element.price + '</h4>';
             retVal += '<div class="star-rating">';
             retVal += '<div data-v-34cbeed1="" class="vue-star-rating">' + '<div data-v-34cbeed1="" class="vue-star-rating">';
             for(let i=0;i<element.rating;i++) retVal += selectedStar();
@@ -89,25 +91,26 @@ $( document ).ready(function() {
         let retValFinal = '';
         data.forEach(function (element) {
             let retVal = '';
-            retVal += '<div class="col-lg-6 wineries-box"><div><div class="wineries-brand">';
+            retVal += '<div class="col-lg-6 wineries-box px-0 px-md-4"><div><div class="wineries-brand">';
             retVal += '<img class="winery-header" src="' + (element.cover===null ? 'img/winery-1.jpg' : '/images/winery/cover/' + element.cover) + '">';
             retVal += '<img class="winery-logo" src="' + (element.profile===null ? 'img/winery-1.jpg' : '/images/winery/profile/' + element.profile) + '">';
-            retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p></div>';
+            retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p>';
+
             if(element.wines.length>0) {
-                retVal += '<div class="latest-wines-list">';
+                retVal += '<div class="row latest-wines-list px-3 mt-4">';
+
                 element.wines.forEach(function (wine) {
-                    let wineHTML = '';
-                    wineHTML += '<div class="top-wine">';
-                    wineHTML += '<a href="' + '/wine/' + wine.slug + '">';
-                    wineHTML += '<img src="' + wine.photo + '">';
-                    wineHTML += '<div class="pricing">$' + wine.price.toFixed(2) + '</div>';
-                    wineHTML += '</a>';
-                    wineHTML += '</div>';
-                    retVal += wineHTML;
+                    retVal += '<div class="top-wine col-4 vine-box-style-4 px-2">';
+                    retVal += '<a href="' + '/wine/' + wine.slug + '">'+'<div class="image-container">';
+                    retVal += '<img src="' + wine.photo + '">';
+                    retVal += '<span class="pricing price">$' + wine.price.toFixed(2) + '</span>';
+                    retVal += '</a></div></div>';
                 });
+
                 retVal += '</div>';
             }
-            retVal+=   '</div>';
+
+            retVal += '</div></div>';
             retValFinal += retVal;
         });
         return retValFinal;

@@ -13416,10 +13416,12 @@ select {
     color: #9C193A;
 }
 
-.red-button {
+.red-button, .red-button:focus {
     background: #9C193A;
     color: #fff;
 }
+
+
 
 .pink-button {
     background: #D6879A;
@@ -13434,14 +13436,11 @@ select {
     color: #fff;
 }
 
-<<<<<<< HEAD
 .my-winery-head .button {
     font-size: 14px;
     padding: 6px 15px;
 }
 
-=======
->>>>>>> origin/WB-114
 .full-width {
     width: 100%;
 }
@@ -13527,22 +13526,12 @@ select {
     margin-top: -1px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .forms input:focus, .forms input:focus-within {
     outline: none;
 }
 
 .invalid {
     border: 3px solid darkred !important;
-=======
-.invalid {
-    border: 1px solid darkred !important;
->>>>>>> origin/WB-115
-=======
-.invalid {
-    border: 1px solid darkred !important;
->>>>>>> origin/WB-114
 }
 
 .forms .valid {
@@ -13646,8 +13635,9 @@ nav {
     -webkit-box-shadow: 0px 9px 17px -8px #0000002b;
             box-shadow: 0px 9px 17px -8px #0000002b;
 }
-.navbar{
+header .navbar{
     border-top: 1px solid #CAC9C9 !important;
+    margin-bottom: 0;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
@@ -13746,12 +13736,8 @@ header {
     height: 30px;
 }
 
-<<<<<<< HEAD
-.user-area span {
-=======
 
 .user-area span, .user-area a{
->>>>>>> origin/WB-114
     width: 100%;
     text-align: center;
     display: block;
@@ -13977,26 +13963,12 @@ footer p {
     top: 6px;
     position: relative;
     margin-left: 10px;
-<<<<<<< HEAD
-<<<<<<< HEAD
     white-space: normal;
 }
 
 #collapseOne .card-body,#collapseTwo .card-body{
     overflow-y: auto;
     max-height: 400px; 
-=======
-=======
->>>>>>> origin/WB-114
-}
-
-#collapseOne .card-body,#collapseTwo .card-body{
-    overflow-y: scroll;
-    max-height: 400px;  
-<<<<<<< HEAD
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 .card-header {
@@ -14139,7 +14111,10 @@ footer p {
 .image-container {
     position: relative;
     overflow: hidden;
-
+    padding-bottom: 100%;
+    width: 100%;
+    height: 0;
+    vertical-align: middle;  
 }
 
 .vine-box-style-1 .image-container{
@@ -14399,19 +14374,24 @@ footer p {
 /*=========================================================================================================================================================================================
                                                                                   VINE BOX 4
 ==========================================================================================================================================================================================*/
-
+/*
 .vine-box-style-4 .image-container {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
     padding: 10px 10px;
-}
+}*/
 
 .vine-box-style-4 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    -o-object-fit: cover;
+    object-fit: cover;
     margin: 0 auto;
-    display: block;
-    max-height: 200px!important;
-    max-width: 100%;
 }
 
 .vine-box-style-4 .price {
@@ -14445,9 +14425,6 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     max-height: 200px;
     overflow: hidden;
 }
@@ -14455,34 +14432,17 @@ footer p {
 .vine-box-style-5 .image-wrap{
     padding: 0;
     overflow: hidden;
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 .vine-box-style-5 img  {
     margin: 0 auto;
     display: block;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/WB-114
-    max-width: 100%;
-}
-
-.vine-box-style-5 .col-3, .vine-box-style-5 .col-9 {
-    padding: 10px;
-<<<<<<< HEAD
-=======
     width: 100%;
     height: 100%;
 }
 
 .vine-box-style-5 .col-9 {
     padding: 15px;
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 .vine-box-style-5 .col-3 {
@@ -14491,13 +14451,7 @@ footer p {
 
 .vine-box-style-5 h5 {
     font-size: 20px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     padding: 0 10px;
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 .vine-box-style-5 .name {
@@ -14511,22 +14465,10 @@ footer p {
 }
 
 .shipping {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    position: absolute;
-    bottom: 10px;
-    left: 10px
-=======
 /*    position: absolute;
     bottom: 10px;
     left: 10px*/
     padding: 10px;
->>>>>>> origin/WB-115
-=======
-    position: absolute;
-    bottom: 10px;
-    left: 10px
->>>>>>> origin/WB-114
 }
 
 .shipping  span {
@@ -14536,22 +14478,10 @@ footer p {
 
 
 .quantity {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    position: absolute;
-    bottom: 10px;
-    right: 30px;
-=======
 /*    position: absolute;
     bottom: 10px;
     right: 30px;*/
     padding: 10px 20px;
->>>>>>> origin/WB-115
-=======
-    position: absolute;
-    bottom: 10px;
-    right: 30px;
->>>>>>> origin/WB-114
     text-align: center;
 }
 
@@ -14857,12 +14787,9 @@ footer p {
     margin-bottom: 30px;
     background: #fff;
     padding: 10px;
-    padding-bottom: 20px;
-    -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
-            box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
-
-
 
 .wineries-brand {
     position: relative;
@@ -14882,12 +14809,19 @@ footer p {
             box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
     width: 88px;
     height: 88px;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 
 .wineries-box p {
     padding: 10px 0  10px 100px;
+    font-size: 16px;
     color: #363a44;
     font-weight: 500;
+}
+
+.wineries-box p a {
+    color: #363a44;
 }
 
 .wineries-box p span {
@@ -15033,7 +14967,6 @@ footer p {
     display: none;
 }
 
-<<<<<<< HEAD
 .my-winery-table .table>tbody>tr{
     border-top: 1px solid #ddd;
 }
@@ -15050,8 +14983,6 @@ footer p {
     margin-top: 2px
 }
 
-=======
->>>>>>> origin/WB-114
 
 /*=========================================================================================================================================================================================
                                                                                  LOCAL PICKUP
@@ -15269,13 +15200,7 @@ footer p {
     padding: 10px;
     margin-bottom: 20px;
     width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
     position: relative;
-=======
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 
@@ -15302,15 +15227,7 @@ footer p {
 }
 
 .info-box table tr td {
-<<<<<<< HEAD
-<<<<<<< HEAD
     padding: 10px 5px 10px 20px;
-=======
-    padding: 10px 5px;
->>>>>>> origin/WB-115
-=======
-    padding: 10px 5px;
->>>>>>> origin/WB-114
     width: 50%;
 }
 
@@ -15319,8 +15236,6 @@ footer p {
 }
 
 .edit-button {
-<<<<<<< HEAD
-<<<<<<< HEAD
     color:#9b1f3d;
     font-size: 16px;
     cursor: pointer;
@@ -15352,19 +15267,6 @@ footer p {
 .info-box .address-table tr td:last-child,
 .info-box .address-table tr th:last-child {
     text-align: right;
-=======
-=======
->>>>>>> origin/WB-114
-    right: 5px;
-    color:#9b1f3d;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: 400;
-    top: 7px;
-<<<<<<< HEAD
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 
@@ -15974,13 +15876,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding-right: 20px;
     }
 
-<<<<<<< HEAD
     .my-winery-table{
         overflow-x: auto;
     }
 
-=======
->>>>>>> origin/WB-114
 }
 
 @media only screen and (min-width : 998px){
@@ -16018,11 +15917,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .navbar-toggler {
         position: absolute;
-<<<<<<< HEAD
-        top: -65px;
-=======
         top: -52px;
->>>>>>> origin/WB-114
         left: 15px;
     }
 
@@ -16059,8 +15954,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
       height: 20px;
     }
 
-<<<<<<< HEAD
-=======
     .user-area .dropdown-toggle::after{
        margin-left: 0; 
     }
@@ -16071,7 +15964,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         color: #212529;
     }
 
->>>>>>> origin/WB-114
     .item-in-cart {
         right: -5px;
     }
@@ -16235,10 +16127,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 22px;
     }
 
-    .vine-box-style-4 img {
-        max-height: 120px!important;
-    }
-
     .vine-box-style-4 .price {
         font-size: 14px;
     }
@@ -16333,15 +16221,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .edit-button {
-<<<<<<< HEAD
-<<<<<<< HEAD
         top: 18px;
-=======
-        top: 2px;
->>>>>>> origin/WB-115
-=======
-        top: 2px;
->>>>>>> origin/WB-114
     }
 
     .vine-box-style-1 {
@@ -16381,15 +16261,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 
 @media only screen and (max-width : 580px) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     .main, .margin-row {
         margin-top: 150px!important;
     }
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
     .container {
         padding-right: 5px;
         padding-left: 5px;
@@ -16435,9 +16309,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 12px;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     .vine-box-style-5 h5, .vine-box-style-5 .name {
         font-size: 16px;
         margin-bottom: 0px;
@@ -16474,9 +16345,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 18px;
     }
 
->>>>>>> origin/WB-115
-=======
->>>>>>> origin/WB-114
 }
 
 @media only screen and (max-width : 450px) {
@@ -16504,36 +16372,28 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 @media only screen and (max-width : 400px) {
     .logo img {
-<<<<<<< HEAD
-=======
         width: 120px;
->>>>>>> origin/WB-114
         right: -50px;
     }
 
     .item-in-cart {
         right: -3px;
     }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     .address-table .btn {
         padding: 4px;
         margin-top: 2px;
         font-size: 10px;
-=======
+    }
+
     .quantity .amount {
         margin: 0 4px;
         font-size: 18px;
->>>>>>> origin/WB-115
-=======
+    }
+
     .my-winery-head .button {
         padding: 5px 10px;
->>>>>>> origin/WB-117
     }
-=======
->>>>>>> origin/WB-114
 }
 
 
