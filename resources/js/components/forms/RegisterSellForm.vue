@@ -46,7 +46,7 @@
             <strong>You must be 21 or older.</strong>
         </span>
         <div id="over-21" v-if="acceptAge">
-            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
+            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()" required/>
         </div>
         <input type="submit" name="submit" class="button red-button full-width" value="CREATE A WINERY">
     </form>
