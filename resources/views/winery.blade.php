@@ -25,8 +25,8 @@
     <div class="row padding-row">
         <div class="wine-description">
             <ul class="nav nav-tabs row">
-                <li class="cat-tab active col-6 center-text"><a data-toggle="tab" href="#description" class="active">CATEGORIES</a></li>
-                <li class="cat-tab col-6 center-text"><a data-toggle="tab" href="#info">WINES</a></li>
+             
+                <li class="cat-tab col-12 active center-text"><a data-toggle="tab" href="#info" class="active">WINES</a></li>
             </ul>
 
             <div class="tab-content">
