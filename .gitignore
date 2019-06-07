@@ -6,6 +6,8 @@
 /public/images/winery/profile
 /public/css/app.css
 /public/js/app.js
+public/css/app.css
+public/js/app.js
 /storage/*.key
 /vendor
 /.idea
