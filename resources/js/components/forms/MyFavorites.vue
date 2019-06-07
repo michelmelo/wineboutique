@@ -1,28 +1,30 @@
 <template>
-    <div class="col-lg-10 col-sm-12 row row-eq-height">
-        <div v-for="(favorite, counter) in favorites" class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2" v-if="displaying[counter]">
-            <a :href="'/wine/' + favorite.slug">
-                <div class="image-container">
-                    <img :src="favorite.photo">
-                    <div class="overlay"></div>
-                    <favorite
-                            :post="favorite.slug"
-                            :favorited="'true'"
-                            :type="'wine'"
-                            v-on:deleted="hide(counter)"
-                    ></favorite>
+        <div class="row">
+            <div v-for="(favorite, counter) in favorites" class="col-xs-5 vine-box-style-3 style-3-2" v-if="displaying[counter]">
+                <a :href="'/wine/' + favorite.slug">
+                    <div class="image-container">
+                        <img :src="favorite.photo">
+                        <div class="overlay"></div>
+                        <favorite
+                                :post="favorite.slug"
+                                :favorited="'true'"
+                                :type="'wine'"
+                                v-on:deleted="hide(counter)"
+                        ></favorite>
 
-                    <span class="sale-mark">SALE</span>
-                </div>
-                <h5>{{ favorite.name ? favorite.name: 'Name of wine'}}</h5>
-                <h4>${{favorite.price}}</h4>
+                        <span class="sale-mark">SALE</span>
+                    </div>
+                    <div class="product-info">
+                        <h5>{{ favorite.name ? favorite.name: 'Name of wine'}}</h5>
+                        <h4>${{favorite.price}}</h4>
 
-                <div class="star-rating">
-                    <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="favorite.rating"></star-rating>
-                </div>
-                <span class="order-q">{{ orders[favorite.id].orderNo }} orders</span>
-            </a>
-        </div>
+                        <div class="star-rating">
+                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="favorite.rating"></star-rating>
+                        </div>
+                        <span class="order-q">{{ orders[favorite.id].orderNo }} orders</span>
+                    </div>
+                </a>
+            </div>
     </div>
 </template>
 
