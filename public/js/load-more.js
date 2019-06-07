@@ -47,8 +47,9 @@ $( document ).ready(function() {
                 let html = type === 'wines' ? moreWine(data[type]) : moreWineries(data[type]);
                 $('.vine-boxes').append(html);
                 let newPageOffset = parseInt(loadedMoreCount) + parseInt(page_offset);
-                $('#loadMoreLink').attr('href', window.location.pathname + '?page_offset=' + newPageOffset +
-                    (window.location.search==='' ? '?' : (window.location.search+'&')) +'page_limit=' + page_offset);
+                $('#loadMoreLink').attr('href', window.location.pathname +
+                    (window.location.search==='' ? '?' : (window.location.search+'&')) +
+                    'page_offset=' + newPageOffset + '&page_limit=' + page_offset);
                 hideLoadMore();
                 if(data[type].length<4) hideLoadMore(true);
             } else {
