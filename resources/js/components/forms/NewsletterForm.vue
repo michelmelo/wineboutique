@@ -1,18 +1,23 @@
 <template>
-    <div class="subscription-form">
+    <div class="subscription-form forms mx-auto mb-5">
         <div class="error-block" v-if="err.email">{{err.email}}</div>
         <input type="email" v-model.trim="dat.email" :class="{ 'invalid': isInvalid('dat.email') }" name="email" placeholder="Email">
         <div class="error-block" v-if="err.state">{{err.state}}</div>
-        <select name="state" id="state" v-model="dat.state" class="w-100">
+        <select name="state" id="state" v-model="dat.state" class="w-100 mb-4">
             <option value="" selected disabled hidden>Select state</option>
             <option v-for="region in regions" v-bind:key="region.id" v-bind:value="region.id">{{region.name}}</option>
         </select>
         <button name="submit" class="button red-button full-width" v-on:click="onSubmit">SIGN UP</button>
         <transition name="fade">
-            <div class="is-visible" role="alert" v-if="activePopup">
-                <div class="popup-body">
-                    <div class="thank-you">Thank you for your subscription!</div>
-                    <a href="#0" class="popup-close img-replace" @click="activePopup = !activePopup">Close</a>
+            <div class="newsletter-popup is-visible" role="alert" v-if="activePopup">
+                <div class="popup-container">
+                    <div class="popup-head">
+                        <h2 class="thank-you">THANK YOU!</h2>
+                    </div>
+                    <div class="popup-body text-center">
+                        <p class="mb-5 h4 mx-auto">Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
+                        <span href="#0" class="button red-button" @click="activePopup = !activePopup"><i class="fas fa-times"></i> CLOSE</span>
+                    </div>
                 </div>
             </div>
         </transition>
