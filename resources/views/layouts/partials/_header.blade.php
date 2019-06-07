@@ -2,9 +2,11 @@
     <div class="top-header">
         <div class="container">
             <div class="row">
-                <a class="col-2 logo py-4" href="/">
-                    <img src="{{asset('img/logo.png')}}">
-                </a>
+                <div class="col-2 logo py-4">
+                    <a class="" href="/">
+                        <img src="{{asset('img/logo.png')}}">
+                    </a>
+                </div>
                 <div class="col-4 desktop-search pl-5 py-4">
                     <form class="form-inline v-align" method="get" action="{{route('search')}}" style="flex-wrap: nowrap;">
                         <input style="max-width:unset; width: 100%;" class="form-control mr-sm-2 input-width" type="search" placeholder="Search for wineries or wines" aria-label="Search" name="s" value="{{isset($searchstr)?$searchstr:''}}" required>

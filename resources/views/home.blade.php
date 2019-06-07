@@ -135,15 +135,15 @@
                     <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
                         <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
                             <div  class="row">
-                                <div class="col-6">
+                                <div class="col-6 px-0">
                                 <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
                                 
                                     <img src="{{ $latestWine->photo }}" >
                                 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 py-3">
                                     <h5 class="name">{{$latestWine->name}}</h5>
-                                    <h5 class="price">${{$latestWine->price}}</h5>
+                                    <h5 class="price"><span class="mr-2">$</span>{{$latestWine->price}}</h5>
                                 </div>
                             </div>
                         </a>
@@ -201,7 +201,7 @@
             <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
         </div>
         <div class="col-md-4">
-            <img src="{{asset('img/truck-icon.png')}}">
+            <img src="{{asset('img/pin-truck.png')}}">
             <h4>TRACKING</h4>
             <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
         </div>
