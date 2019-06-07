@@ -8,6 +8,12 @@ $( document ).ready(function() {
     switch (window.location.pathname) {
         case '/wines':
             type = 'wines';
+            if(window.location.search!=='') {
+                let els = document.getElementsByClassName('vine-boxes')[0].childNodes;
+                if((els.length+1)/2<page_offset) {
+                    hideLoadMore(true);
+                }
+            }
             $.post('/totalWines', function(count) {
                 total = count;
                 hideLoadMore();
@@ -22,12 +28,13 @@ $( document ).ready(function() {
             break;
     }
 
-    function hideLoadMore() {
-        if(loadedMoreCount + page_offset >= total) $("#loadMore").fadeOut('slow');
+    function hideLoadMore(force=false) {
+        if(loadedMoreCount + page_offset >= total||force) $("#loadMore").fadeOut('slow');
     }
 
 
-    $('#loadMoreLink').attr('href', window.location.pathname + '?page_offset=' + page_offset + '&page_limit=' + page_offset);
+    $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
+        +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
@@ -40,8 +47,12 @@ $( document ).ready(function() {
                 let html = type === 'wines' ? moreWine(data[type]) : moreWineries(data[type]);
                 $('.vine-boxes').append(html);
                 let newPageOffset = parseInt(loadedMoreCount) + parseInt(page_offset);
-                $('#loadMoreLink').attr('href', window.location.pathname + '?page_offset=' + newPageOffset + '&page_limit=' + page_offset)
+                $('#loadMoreLink').attr('href', window.location.pathname + '?page_offset=' + newPageOffset +
+                    (window.location.search==='' ? '?' : (window.location.search+'&')) +'page_limit=' + page_offset);
                 hideLoadMore();
+                if(data[type].length<4) hideLoadMore(true);
+            } else {
+                hideLoadMore(true);
             }
             $th.removeClass('processing');
         });
