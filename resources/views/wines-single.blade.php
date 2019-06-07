@@ -43,6 +43,8 @@
                 </div>
             </div>
 
+
+            @if(!Auth::user()||(Auth::user()&&Auth::user()->type!=='SELLER'))
             <div class="row single-wine-buttons">
                 @if(Auth::check())
                     <add-to-cart wine-id="{{$wine->id}}"></add-to-cart>
@@ -57,6 +59,7 @@
                 @endif
                
             </div>
+            @endif
         </div>
     </div>
 

@@ -47,16 +47,18 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="d-flex sign-in align-items-center py-4 cart-icon">
-                                    <a href="/cart" class="d-inline-block mx-3 mx-lg-4">
-                                        <div>
-                                            <img src="{{asset('img/cart.svg')}}">
-                                            <div class="item-in-cart">{{$cartCount}}</div>
-                                            <span>CART</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>                       
+                                @if(Auth::user()->type!=='SELLER')
+                                    <div class="d-flex sign-in align-items-center py-4 cart-icon">
+                                        <a href="/cart" class="d-inline-block mx-3 mx-lg-4">
+                                            <div>
+                                                <img src="{{asset('img/cart.svg')}}">
+                                                <div class="item-in-cart">{{$cartCount}}</div>
+                                                <span>CART</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
                         @else
                             <div class="col-12 d-flex justify-content-end h-100">
                                 <div class="d-flex sign-in align-items-center py-4">
@@ -67,15 +69,17 @@
                                         <span>PROFILE</span>
                                     </a>
                                 </div>
-                                <div class="d-flex sign-in align-items-center py-4 cart-icon">
-                                    <a href="/cart" class="d-inline-block mx-3 mx-lg-4">
-                                        <div>
-                                            <img src="{{asset('img/cart.svg')}}">
-                                            <div class="item-in-cart">{{$cartCount}}</div>
-                                            <span>CART</span>
-                                        </div>
-                                    </a>
-                                </div>
+                                @if(Auth::user()->type!=='SELLER')
+                                    <div class="d-flex sign-in align-items-center py-4 cart-icon">
+                                        <a href="/cart" class="d-inline-block mx-3 mx-lg-4">
+                                            <div>
+                                                <img src="{{asset('img/cart.svg')}}">
+                                                <div class="item-in-cart">{{$cartCount}}</div>
+                                                <span>CART</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
                                 <div class="d-flex sign-in align-items-center py-4">
                                     <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="d-inline-block mx-4">
                                         <div>
