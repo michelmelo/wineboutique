@@ -201,7 +201,7 @@
             <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
         </div>
         <div class="col-md-4">
-            <img src="{{asset('img/truck-icon.png')}}">
+            <img src="{{asset('img/pin-truck.png')}}">
             <h4>TRACKING</h4>
             <p>Our CEO said we have to tell you that this is the placeholder area for which you will need to give us content.</p>
         </div>

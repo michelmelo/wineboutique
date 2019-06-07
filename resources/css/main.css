@@ -15,6 +15,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
+.row:before, .row:after {display: none !important;}
+
 h2.heading {
     text-align: center;
     text-transform: uppercase;
