@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRegionAndDescriptionToWinesTable extends Migration
+class AddDescriptionToWinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,6 @@ class AddRegionAndDescriptionToWinesTable extends Migration
     {
         Schema::table('wines', function (Blueprint $table) {
             $table->text('description')->nullable();
-            $table->integer('region_id')->unsigned()->index()->nullable();
-
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
         });
     }
 

@@ -11,6 +11,11 @@ class RegionWineriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\WineRegion::class, 10)->create();
+        $wineries = App\Winery::all();
+        $region = App\Region::inRandomOrder()->first();
+
+        foreach ($wineries as $key => $winery){
+            $winery->regions()->attach($region);
+        }
     }
 }

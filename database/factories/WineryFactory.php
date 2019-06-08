@@ -19,11 +19,8 @@ $factory->define(App\Winery::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
-        'state' => $faker->state,
         'user_id' => $user->id, 
         'description' => $faker->text,
         'slug' => $faker->slug,
-        // 'profile' => ,
-        // 'cover' => ,
     ];
 });

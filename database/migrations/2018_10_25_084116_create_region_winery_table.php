@@ -19,8 +19,6 @@ class CreateRegionWineryTable extends Migration
 
             $table->integer('winery_id')->unsigned()->index();
             $table->foreign('winery_id')->references('id')->on('wineries')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 
