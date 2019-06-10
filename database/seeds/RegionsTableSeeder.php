@@ -64,6 +64,7 @@ class RegionsTableSeeder extends Seeder
             'WI' => 'Wisconsin',
             'WY' => 'Wyoming',
         );
+
         foreach($states as $code=>$state) {
             App\Region::firstOrCreate(array('name' => $state));
         }

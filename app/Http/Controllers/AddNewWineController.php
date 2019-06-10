@@ -77,8 +77,8 @@ class AddNewWineController extends Controller
             $data['photo'] = '/images/wine/' . $photo;
         }
         
-        // dd($data);
-        // dd($request->all());
+//         dd($data);
+//         dd($request->all());
         
         $wine = new Wine;
         $wine->fill($data);

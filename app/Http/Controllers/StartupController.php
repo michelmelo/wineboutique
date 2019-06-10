@@ -29,11 +29,10 @@ class StartupController extends Controller
         $winery = Auth::user()->winery;
 
         $winery->name = $request->wineryName;
-        $winery->state = $request->state;
         $winery->description = $request->description;
         $winery->save();
 
-        $winery->regions()->sync($request->regions);
+        $winery->regions()->attach($request->regions);
 
         return redirect()->route('my-winery');
     }
