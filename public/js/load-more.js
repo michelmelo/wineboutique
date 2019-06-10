@@ -103,10 +103,10 @@ $( document ).ready(function() {
         let retValFinal = '';
         data.forEach(function (element) {
             let retVal = '';
-            retVal += '<div class="col-lg-6 wineries-box px-0 px-md-4"><div><div class="wineries-brand">';
+            retVal += '<div class="col-lg-6 wineries-box px-0 px-md-4"><div><a href="' + '/winery/' +  element.slug + '"><div class="wineries-brand">';
             retVal += '<img class="winery-header" src="' + (element.cover===null ? 'img/winery-1.jpg' : '/images/winery/cover/' + element.cover) + '">';
             retVal += '<img class="winery-logo" src="' + (element.profile===null ? 'img/winery-1.jpg' : '/images/winery/profile/' + element.profile) + '">';
-            retVal += '</div><p><a href="' + '/winery/' +  element.slug + '">' + element.name + '</a></p>';
+            retVal += '</div><p>' + element.name + '</p></a>';
 
             if(element.wines.length>0) {
                 retVal += '<div class="row latest-wines-list px-3 mt-4">';
