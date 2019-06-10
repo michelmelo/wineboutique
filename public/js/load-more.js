@@ -6,6 +6,7 @@ $( document ).ready(function() {
     let type = '';
 
     switch (window.location.pathname) {
+        case '/search':
         case '/wines':
             type = 'wines';
             if(window.location.search!=='') {
