@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 body {
   font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
 }
 
 a {
@@ -13,6 +14,10 @@ a.underline {
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
+}
+
+h4{
+    font-size: 20px;
 }
 
 .row:before, .row:after {display: none !important;}
@@ -102,6 +107,10 @@ select {
 
 .button:hover {
     opacity: .8;
+}
+
+.button:not([href]):not([tabindex]) {
+    color: #fff;
 }
 
 .white-button {
@@ -530,6 +539,10 @@ footer .container {
 
 footer h4 {
     text-align: center;
+}
+
+footer p{
+    font-size: 14px;
 }
 
 .footer-banner {
@@ -1465,7 +1478,6 @@ footer p {
     border: 0px;
 }
 
-
 .wine-description ul li a {
     font-size: 24px;
     font-weight: 800;
@@ -1474,6 +1486,13 @@ footer p {
     position: relative;
     float: left;
     padding: 20px 5px;
+    border: none;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    border:none;
+    background-color: #fcfcfc;
+    border-bottom: 3px solid #fcfcfc;
 }
 
 .wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
@@ -2834,15 +2853,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .single-wine-buttons a {
-        width: 49%;
+        width: 100%;
         font-size: 12px;
         padding: 15px 5px;
     }
-
+/*
     .single-wine-buttons a:first-child {
         margin-right: 2%;
     }
-
+*/
     .single-wine-img img {
         max-height: 200px;
     }

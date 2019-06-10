@@ -67,8 +67,8 @@
     <div class="row padding-row">
         <div class="wine-description">
             <ul class="nav nav-tabs row">
-                <li class="cat-tab active col-6 center-text"><a data-toggle="tab" href="#description" class="active">DESCRIPTION</a></li>
-                <li class="cat-tab active col-6 center-text"><a data-toggle="tab" href="#info">WINERY INFO</a></li>
+                <li class="cat-tab active col-6 center-text pr-0"><a data-toggle="tab" href="#description" class="active">DESCRIPTION</a></li>
+                <li class="cat-tab active col-6 center-text pl-0"><a data-toggle="tab" href="#info">WINERY INFO</a></li>
             </ul>
 
             <div class="tab-content">
