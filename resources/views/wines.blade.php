@@ -116,7 +116,8 @@
             @endforeach
             @if(count($wines)===0)
                 <div class="no-wines">
-                    <p>Unfortunately, there are no wines matching the filters you have selected.</p>
+                    <h2 class="color-r"> <strong>Unfortunately</strong> </h2>
+                    <p>There are no wines matching the filters you have selected.</p>
                 </div>
             @endif
             </div>
