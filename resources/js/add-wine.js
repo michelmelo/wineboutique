@@ -22,6 +22,12 @@ $(document).ready(function() {
     $("#picture").change(function() {
         readURL(this, '#imagePreview');
     });
+
+    $(".add-more-images").click(function(e){
+        e.preventDefault();
+
+        $("#photos").click();
+    });
 });
 
 Dropzone.options.photos = {
@@ -37,7 +43,7 @@ Dropzone.options.photos = {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         }
-        else { document.getElementById('drop-more').style.visibility = "visible"; done(); }
+        else { document.getElementsByClassName('add-more-images')[0].style.visibility = "visible"; done(); }
     },
     sending: function(file, xhr, formData) {
         formData.append("_token", document.querySelector("input[name='_token']").value);
@@ -65,7 +71,7 @@ Dropzone.options.photos = {
             const thisDropzone = this;
 
             preloadedImages.forEach(preloadedImage => {
-                document.getElementById('drop-more').style.visibility = "visible";
+                document.getElementsByClassName('add-more-images')[0].style.visibility = "visible";
                 const mockFile = { 
                     name: preloadedImage.path.replace(/^.*[\\\/]/, ''), 
                     size: preloadedImage.size,

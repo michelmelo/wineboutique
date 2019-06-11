@@ -23,7 +23,7 @@
                     <p>Click into box to add more.</p>
                 </div>
             </div>
-            <div class="message" id="drop-more" style="visibility: hidden">Click on the box to add more.</div>
+            <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
         </div>
       
 

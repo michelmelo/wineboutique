@@ -22,7 +22,7 @@
         <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
             </div>
-            <div class="message" id="drop-more" style="visibility: hidden">Click on the box to add more.</div>
+            <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
             <script>
                 var preloadedImages = {!! $preloadedImages->toJson() !!};
             </script>
