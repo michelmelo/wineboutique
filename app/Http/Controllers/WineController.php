@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use App\Varietal;
+use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
@@ -80,7 +81,7 @@ class WineController extends Controller
         $wines = Wine::query();
 
         $varietals = Varietal::all();
-        $regions = Region::all();
+        $regions = WineRegion::all();
 
         $filter = $request->all();
 
@@ -89,7 +90,7 @@ class WineController extends Controller
         }
 
         if(array_key_exists('region', $filter)) {
-            $wines = $wines->whereIn('region_id', $filter['region']);
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
         }
 
         if(array_key_exists('price', $filter)) {
