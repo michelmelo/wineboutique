@@ -48,7 +48,7 @@
 
                 </div>
                 
-                <div id="description" class="tab-pane fade">
+                <div id="description" class="tab-pane fade wineries-box">
                     <div class="row winery-categories">
                         @foreach($winery->wines as $wine)
                             <div class="col-xs-5 vine-box-style-4">
