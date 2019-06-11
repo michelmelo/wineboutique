@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use App\Varietal;
+use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Wine;
@@ -80,7 +81,7 @@ class WineController extends Controller
         $wines = Wine::query();
 
         $varietals = Varietal::all();
-        $regions = Region::all();
+        $regions = WineRegion::all();
 
         $filter = $request->all();
 
@@ -89,7 +90,7 @@ class WineController extends Controller
         }
 
         if(array_key_exists('region', $filter)) {
-            $wines = $wines->whereIn('region_id', $filter['region']);
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
         }
 
         if(array_key_exists('price', $filter)) {
@@ -154,7 +155,18 @@ class WineController extends Controller
 
     public function topRated(Request $request)
     {
-        $wines = Wine::orderBy('average_rating', 'desc');
+        $page_offset = 0;
+        $page_limit = 4;
+        if ($request->get('page_offset')&&$request->get('page_limit')) {
+            $page_offset = $request->get('page_offset');
+            $page_limit = $request->get('page_limit');
+        }
+
+        $wines = Wine::leftJoin('orders', 'wines.id', '=', 'orders.id')
+            ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+            ->groupBy('wines.id')
+            ->where('average_rating', '>', 0)
+            ->orderBy('average_rating', 'desc');
         $varietals = Varietal::all();
         $regions = Region::all();
 
@@ -188,9 +200,12 @@ class WineController extends Controller
             });
         }
 
-        $wines = $wines->paginate(8);
+        $wines = $wines
+            ->skip($page_offset)
+            ->take($page_limit)
+            ->get();
 
-        return view('wines', [
+        return $request->ajax() ? ['wines' => $wines] : view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,

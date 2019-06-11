@@ -61,6 +61,9 @@
                         </tbody>
                     </table>
                 </div>
+                @if(count($wines) == 0)
+                    <a class="button float-right red-button" href="{{ route('add-new-wine.index') }}">Add New Wine</a>
+                @endif
             </div>
         </div>
     </div>
