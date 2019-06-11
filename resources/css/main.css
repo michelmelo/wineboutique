@@ -2580,9 +2580,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 
 .popup-container .popup-close {
-    position: absolute;
+    position: sticky;
     top: 8px;
     right: 8px;
+    float: right;
     width: 30px;
     height: 30px;
 }
@@ -3251,6 +3252,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .user-area span {
         font-size: 8px;
+    }
+
+    .popup-container {
+        margin: 5em auto 0;
+    }
+
+    .popup-body {
+        padding: 0 20px;
     }
 }
 
