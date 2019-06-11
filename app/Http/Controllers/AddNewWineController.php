@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\NewWineRequest;
 use App\Varietal;
 use App\Wine;
@@ -70,15 +69,11 @@ class AddNewWineController extends Controller
         {
             $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
             $path = public_path().'/images/wine/' . $photo;
-            #dd($path);
-            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
-                $c->upsize();
-            })->save();
+
+            Image::make($path)->encode('jpg')->resize(700, 460)->save();
+
             $data['photo'] = '/images/wine/' . $photo;
         }
-        
-//         dd($data);
-//         dd($request->all());
         
         $wine = new Wine;
         $wine->fill($data);
@@ -156,19 +151,14 @@ class AddNewWineController extends Controller
         if($request->hasFile('photo')) {
             $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
             $path = public_path().'/images/wine/' . $photo;
-            #dd($path);
-            Image::make($path)->encode('jpg')->fit(700, 460, function ($c) {
-                $c->upsize();
-            })->save();
+
+            Image::make($path)->encode('jpg')->resize(700, 460)->save();
+
             $data['photo'] = '/images/wine/' . $photo;
         }
 
-        // dd($request->all());
-
-        // $wine = new Wine;
         $wine->update($data);
         $wine->varietal()->associate($request->varietal);
-        // $wine->region()->associate($request->region);
         $wine->winery()->associate(Auth::user()->winery);
 
         foreach($request->get("shipping") as $shippingItem) {
