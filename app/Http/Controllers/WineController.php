@@ -155,7 +155,18 @@ class WineController extends Controller
 
     public function topRated(Request $request)
     {
-        $wines = Wine::orderBy('average_rating', 'desc');
+        $page_offset = 0;
+        $page_limit = 4;
+        if ($request->get('page_offset')&&$request->get('page_limit')) {
+            $page_offset = $request->get('page_offset');
+            $page_limit = $request->get('page_limit');
+        }
+
+        $wines = Wine::leftJoin('orders', 'wines.id', '=', 'orders.id')
+            ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+            ->groupBy('wines.id')
+            ->where('average_rating', '>', 0)
+            ->orderBy('average_rating', 'desc');
         $varietals = Varietal::all();
         $regions = Region::all();
 
@@ -189,9 +200,12 @@ class WineController extends Controller
             });
         }
 
-        $wines = $wines->paginate(8);
+        $wines = $wines
+            ->skip($page_offset)
+            ->take($page_limit)
+            ->get();
 
-        return view('wines', [
+        return $request->ajax() ? ['wines' => $wines] : view('wines', [
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,

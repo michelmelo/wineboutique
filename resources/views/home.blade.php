@@ -43,6 +43,7 @@
         </div>
     </div>
 
+    @if(count($topWineries)>0)
     <div class="row padding-row row-eq-height">
         <h2 class="heading mb-5">TOP RATED WINERIES</h2>
         <div class="main__clipper">
@@ -64,6 +65,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="row padding-row">
         <h2 class="heading mb-5">SHOP BY CATEGORY</h2>
