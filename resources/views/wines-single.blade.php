@@ -2,19 +2,85 @@
 
 @section('content')
 <div class="container">
+
     <div class="row padding-row">
-        <div class="col-lg-6 col-sm-12 preview">
-            <div class="preview-pic tab-content single-wine-img">
-                <div class="tab-pane active" id="pic-1"><img src="{{ $wine->photo }}" ></div>
-                <div class="tab-pane" id="pic-2"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
-                <div class="tab-pane" id="pic-3"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></div>
+        <div class="col-lg-6 col-sm-12 preview" id="slider">
+            <div id="wineCarousel" class="carousel slide wine-slider">
+                <!-- main slider carousel items -->
+                <div class="carousel-inner preview-pic">
                 @if(Auth::user())
                 <favorite
                         :post="'{{ $wine->slug }}'"
                         :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
                 ></favorite>
                 @endif
+                    <div class="active carousel-item" data-slide-number="0">
+                        <div class="carousel-image">
+                            <img src="{{ $wine->photo }}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-slide-number="1">
+                        <div class="carousel-image">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-slide-number="2">
+                        <div class="carousel-image">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </div>
+                    </div>
+                     <div class="carousel-item" data-slide-number="3">
+                        <div class="carousel-image">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-slide-number="4">
+                        <div class="carousel-image">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev" href="#wineCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#wineCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+                <!-- main slider carousel nav controls -->
+
+                <ul class="carousel-indicators list-inline mx-auto px-2 mt-3 w-100">
+                    <li class="list-inline-item active">
+                        <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#wineCarousel">
+                            <img src="{{ $wine->photo }}" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a id="carousel-selector-1" data-slide-to="1" data-target="#wineCarousel">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a id="carousel-selector-2" data-slide-to="2" data-target="#wineCarousel">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a id="carousel-selector-3" data-slide-to="3" data-target="#wineCarousel">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a id="carousel-selector-4" data-slide-to="4" data-target="#wineCarousel">
+                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        </a>
+                    </li>
+                </ul>
             </div>
+            <!--/main slider carousel-->
             <!-- <ul class="preview-thumbnail nav nav-tabs">
                 <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></a></li>
                 <li><a data-target="#pic-2" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
