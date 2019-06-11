@@ -27,6 +27,7 @@ Vue.directive('click-outside', {
 var StarRating = require('vue-star-rating');
 
 Vue.component('register-sell-form', require('./components/forms/RegisterSellForm.vue'));
+Vue.component('register-form', require('./components/forms/RegisterForm.vue'));
 Vue.component('startup-form', require('./components/forms/StartupForm.vue'));
 Vue.component('personal-information-form', require('./components/forms/PersonalInformationForm.vue'));
 Vue.component('password-update-form', require('./components/forms/PasswordUpdateForm.vue'));

@@ -38,7 +38,7 @@
         </span>
         <div class="form-check">
             <input class="form-check-input" v-model="acceptAge" type="checkbox" name="acceptAge" id="defaultCheck2">
-            <label class="form-check-label" :class="{ 'invalid': isInvalid('acceptAge') }" for="defaultCheck2">
+            <label class="form-check-label" :class="{ 'invalid': (isInvalid('acceptAge') || isInvalid('birthday')) }" for="defaultCheck2">
                 I am at least 21 years of age.*
             </label>
         </div>
@@ -46,7 +46,7 @@
             <strong>You must be 21 or older.</strong>
         </span>
         <div id="over-21" v-if="acceptAge">
-            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()" required/>
+            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
         </div>
         <input type="submit" name="submit" class="button red-button full-width" value="CREATE A WINERY">
     </form>
