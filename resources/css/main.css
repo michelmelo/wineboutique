@@ -627,30 +627,30 @@ footer p {
     margin-bottom: 20px;
 }
 
-.carousel-control-prev-icon {
+.home-slider  .carousel-control-prev-icon {
     background-image: url(/images/slide-left.svg?8e72404aa8ec0ac690b517b7b1e238c3);
 }
 
-.carousel-control-next-icon {
+.home-slider .carousel-control-next-icon {
     background-image: url(/images/slide-right.svg?cd120e7fc76d0d7ae738ad3bb17c5952);
 }
 
-.carousel-control-next-icon, .carousel-control-prev-icon {
+.home-slider  .carousel-control-next-icon, .home-slider .carousel-control-prev-icon {
     width: 50px;
     height: 50px;
 }
 
-.carousel-indicators .active {
+.home-slider  .carousel-indicators .active {
     background-color: #9b1f3d!important;
 }
 
-.carousel-indicators li {
+.home-slider  .carousel-indicators li {
     width: 15px;
     height: 15px;
     border-radius: 15px;
 }
 
-.slider-content {
+.home-slider  .slider-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -660,7 +660,7 @@ footer p {
     width: 90%;
 }
 
-.slider-content h1 {
+.home-slider  .slider-content h1 {
     color: #fff;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 36px;
@@ -1506,6 +1506,110 @@ footer p {
 .wine-description .tab-content {
     padding: 30px 10px;
 }
+
+
+/*=============================================================================================
+                                     HOME SLIDER
+==============================================================================================*/
+
+.wine-slider .carousel-control-prev-icon {
+    background-image: url(/images/slide-left.svg?8e72404aa8ec0ac690b517b7b1e238c3);
+    background-repeat: no-repeat;
+}
+
+.wine-slider .carousel-control-next-icon {
+    background-image: url(/images/slide-right.svg?cd120e7fc76d0d7ae738ad3bb17c5952);
+    background-repeat: no-repeat;
+}
+
+.wine-slider .carousel-control-next-icon, .wine-slider .carousel-control-prev-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.wine-slider .carousel-image{
+    position: relative;
+    overflow: hidden;
+    background: #F5F5F5;
+    padding-bottom: 80%;
+    width: 100%;
+    height: 0;
+    vertical-align: middle;
+}
+
+.wine-slider .carousel-image img{
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: contain;
+}
+
+.wine-slider .carousel-inner > span{
+    top: 0;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+
+.wine-slider  .slider-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+}
+
+.wine-slider .list-inline {
+    white-space:nowrap;
+    overflow-x:auto;
+}
+
+.wine-slider .list-inline-item{
+    margin-left: 3px!important;
+}
+
+.wine-slider .carousel-indicators {
+    position: static;
+    left: initial;
+    width: initial;
+    margin-left: initial;
+}
+
+.wine-slider .carousel-indicators > li {
+    width: initial;
+    height: initial;
+    text-indent: initial;
+    position: inherit;
+    padding: 0;
+    border: 2px solid rgba(155, 31, 61, 0.3);
+    border-radius: 0;
+    margin-bottom: 0;
+    max-height: 66px;
+    max-width: 66px;
+}
+
+.wine-slider .preview-pic{
+    padding: 0;
+}
+
+.wine-slider .carousel-indicators > li img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.wine-slider .carousel-indicators > li.active img {
+    opacity: 0.7;
+}
+
 
 /*=========================================================================================================================================================================================
                                                                                  WINERIES
