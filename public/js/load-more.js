@@ -8,6 +8,7 @@ $( document ).ready(function() {
     console.log(window.location.pathname);
 
     switch (window.location.pathname) {
+        case '/search':
         case '/wines':
         case '/wines/top-rated':
             type = 'wines';
