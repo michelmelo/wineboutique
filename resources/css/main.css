@@ -1689,6 +1689,10 @@ footer p {
     display: none;
 }
 
+#imagePreview{
+    cursor: pointer;
+}
+
 .my-wine a:hover h2 {
     color: #9A1D3E;
 }

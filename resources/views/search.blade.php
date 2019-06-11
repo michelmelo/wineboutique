@@ -7,20 +7,22 @@
         </div>
         <div class="row">
             @foreach ($results as $result)
+                @if($result->type==='WINE')
                 <div class="col-xs-5 vine-box-style-3 style-3-2">
                     <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('winery', ['winery' => $result->slug])}}">
                         <div class="image-container">
                             <img src=" {{ $result->photo }}">
                             <div class="overlay"></div>
-                            @if($result->type==='WINE')
+                            
                                 @if(Auth::user())
                                         <favorite
                                                 :post="'{{ $result->slug }}'"
                                                 :favorited="{{ $result->favorited ? 'true' : 'false' }}"
                                                 :type="'wine'"
                                         ></favorite>
-                                    </div>
+
                                 @endif
+                                </div>
                                 <div class="product-info">
                                     <h5>{{$result->name}}</h5>
                                     <h4 class="wine-price">
@@ -31,10 +33,10 @@
                                     </div>
                                     <span class="order-q">{{$result->orders_count}} Orders</span>
                                 </div>
-                            @endif
-                        </div>
+                            
                     </a>
                 </div>
+                @endif
             @endforeach
             {{ $results->links() }}
         </div>
