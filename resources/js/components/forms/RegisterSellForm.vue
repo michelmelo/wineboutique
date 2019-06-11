@@ -217,7 +217,7 @@
             },
             lastName: {
                 required,
-                minLength: minLength(4)
+                minLength: minLength(1)
             },
             wineryName: {
                 required,
