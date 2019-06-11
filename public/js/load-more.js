@@ -5,15 +5,18 @@ $( document ).ready(function() {
     let total = 0;
     let type = '';
 
+    console.log(window.location.pathname);
+
     switch (window.location.pathname) {
         case '/wines':
+        case '/wines/top-rated':
             type = 'wines';
-            if(window.location.search!=='') {
+            // if(window.location.search!=='') {
                 let els = document.getElementsByClassName('vine-boxes')[0].childNodes;
                 if((els.length+1)/2<page_offset) {
                     hideLoadMore(true);
                 }
-            }
+            // }
             $.post('/totalWines', function(count) {
                 total = count;
                 hideLoadMore();
