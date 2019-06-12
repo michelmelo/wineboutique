@@ -53,12 +53,13 @@
     <transition name="fade">
         <div class="terms-popup is-visible" role="alert" v-if="activePopup">
            <div class="popup-container">
+            <a href="#0" class="popup-close img-replace" @click="activePopup = !activePopup">Close</a>
             <div class="popup-head">
               <h2 class="text-center"><strong>Terms and Conditions</strong></h2>
               <p class="text-center">Last updated: January 14, 2019</p>
             </div>
             <div class="popup-body">
-                <div class="">
+                <div class="mb-4">
                     <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the https://wineboutique.com website (the "Service") operated by Wine Boutique Technologies LLC ("us", "we", or "our").Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service.By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you do not have permission to access the Service.</p>
 
                     <h3 class="text-center">Purchases</h3>
@@ -126,9 +127,11 @@
                     <h3 class="text-center">Contact Us</h3>
                     <p>If you have any questions about these Terms, please contact us.</p>
                 </div>
+                <div class="text-center py-4">
+                    <span href="#0" class="button red-button" @click="acceptTermsFn"><i class="fas fa-check"></i> ACCEPT</span>
+                    <span href="#0" class="button red-button" @click="activePopup = !activePopup"><i class="fas fa-times"></i> CLOSE</span>
+                </div>
             </div>
-
-              <a href="#0" class="popup-close img-replace" @click="activePopup = !activePopup">Close</a>
            </div>
         </div>
     </transition>
@@ -174,6 +177,10 @@
             'email': 'checkEmail'
         },
         methods: {
+            acceptTermsFn(){
+                this.acceptTerms = true;
+                this.activePopup = false;
+            },
             checkEmail() {
                 this.validEmail = null;
                 if(this.email.length > 0 && email(this.email)) {
