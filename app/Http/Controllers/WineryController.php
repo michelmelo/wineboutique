@@ -54,12 +54,7 @@ class WineryController extends Controller
             $page_limit = $request->get('page_limit');
         }
 
-        $wineries = Winery::skip($page_offset)
-            ->take($page_limit)
-            ->with(['wines'=>function($query) {
-                return $query->limit(3);
-            }])
-            ->get();
+        $wineries = Winery::skip($page_offset)->take($page_limit)->with("wines")->get();
 
         return  $request->ajax() ? ['wineries' => $wineries] : view('wineries', [
             'wineries' => $wineries

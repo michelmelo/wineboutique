@@ -20,7 +20,7 @@
                     </a>
                     @if(count($winery->wines)>0)
                         <div class="row latest-wines-list px-3 mt-4">
-                            @foreach($winery->wines as $topWine)
+                            @foreach($winery->wines->take(3)  as $topWine)
                                 <div class="top-wine col-4 vine-box-style-4 px-2">
                                     <a href="{{url('/wine/'.$topWine->slug)}}">
                                         <div class="image-container">
