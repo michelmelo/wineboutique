@@ -339,6 +339,19 @@ select {
   background-repeat: no-repeat;
 }
 
+.other-login{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.other-login div{
+    margin-bottom: 10px;
+}
+
 
 
 /*=========================================================================================================================================================================================
