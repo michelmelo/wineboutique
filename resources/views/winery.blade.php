@@ -29,7 +29,7 @@
             </ul>
 
             <div class="tab-content">
-                <div id="info" class="tab-pane fade in active show">
+                <div id="info" class="tab-pane fade in active show wineries-box">
                     @foreach($winery->wines->groupBy('varietal.name') as $wineGroupName => $wineGroup)
                         <div class="row winery-categories">
                             <h2 class="center-text">{{$wineGroupName}} Wine</h2>
@@ -48,7 +48,7 @@
 
                 </div>
                 
-                <div id="description" class="tab-pane fade">
+                <div id="description" class="tab-pane fade wineries-box">
                     <div class="row winery-categories">
                         @foreach($winery->wines as $wine)
                             <div class="col-xs-5 vine-box-style-4">
