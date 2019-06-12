@@ -107,19 +107,20 @@ $('#acceptTerms').on('click', function(event){
         $('body').addClass('overflow-hidden');
     }
 });
-    //close popup
-    $('.terms-popup').on('click', function(event){
-        if( $(event.target).is('.popup-close') || $(event.target).is('.terms-popup') ) {
-            event.preventDefault();
-            $(this).removeClass('is-visible');
-            $('body').removeClass('overflow-hidden');
-        }
-    });
-    //close popup when clicking the esc keyboard button
-    $(document).keyup(function(event){
-        if(event.which=='27'){
-            $('.terms-popup').removeClass('is-visible');
-        }
-    });
+
+//close popup
+$('.terms-popup').on('click', function(event){
+	if( $(event.target).is('.popup-close') || $(event.target).is('.terms-popup') ) {
+		event.preventDefault();
+		$(this).removeClass('is-visible');
+		$('body').removeClass('overflow-hidden');
+	}
+});
+//close popup when clicking the esc keyboard button
+$(document).keyup(function(event){
+	if(event.which=='27'){
+		$('.terms-popup').removeClass('is-visible');
+	}
+});
    
 
