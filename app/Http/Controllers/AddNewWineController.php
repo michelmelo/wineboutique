@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\C;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewWineRequest;
 use App\Varietal;
@@ -14,6 +15,7 @@ use App\CapacityUnit;
 use App\WineShipping;
 use Storage;
 use App\Tag;
+use Illuminate\Support\Str;
 
 class AddNewWineController extends Controller
 {
@@ -67,10 +69,19 @@ class AddNewWineController extends Controller
         
         if($request->hasFile('photo'))
         {
-            $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
+            $ext = $request->file('photo')->getClientOriginalExtension();
+            $request->file('photo')->move(public_path().'/images/wine/', $photo = Str::slug($data['name']) . '_' . uniqid(true) . '.' . $ext);
             $path = public_path().'/images/wine/' . $photo;
 
-            Image::make($path)->encode('jpg')->resize(700, 460)->save();
+//            Image::make($path)->encode($ext)->resize(C::$wineX, C::$wineY)->save();
+
+
+            Image::make($path)->resize(C::$wineX, C::$wineY,
+                function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($path);
+
 
             $data['photo'] = '/images/wine/' . $photo;
         }
@@ -149,10 +160,16 @@ class AddNewWineController extends Controller
         $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id']);
 
         if($request->hasFile('photo')) {
-            $request->file('photo')->move(public_path().'/images/wine/', $photo = $data['name']. '_' . uniqid(true) . '.jpg');
+            $ext = $request->file('photo')->getClientOriginalExtension();
+            $request->file('photo')->move(public_path().'/images/wine/', $photo = Str::slug($data['name']) . '_' . uniqid(true) . '.' . $ext);
             $path = public_path().'/images/wine/' . $photo;
 
-            Image::make($path)->encode('jpg')->resize(700, 460)->save();
+//            Image::make($path)->encode($ext)->resize(C::$wineX, C::$wineY)->save();
+            Image::make($path)->resize(C::$wineX, C::$wineY,
+                function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($path);
 
             $data['photo'] = '/images/wine/' . $photo;
         }
