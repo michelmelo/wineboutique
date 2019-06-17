@@ -32,14 +32,10 @@ class MyWineryController extends Controller
 
     public function edit(Request $request)
     {
-        $winery = Auth::user()->winery;
+        $winery = Auth::user()->winery->with("winery_shippings")->first();
 
         return view('my-winery-edit', [
-            'winery_id' => $winery->id,
-            'winery_name' => $winery->name,
-            'winery_desc' => $winery->description,
-            'winery_profile' => $winery->profile,
-            'winery_cover' => $winery->cover,
+            'winery' => $winery
         ]);
     }
 

@@ -143,7 +143,7 @@ class WineController extends Controller
             'orders_count' =>  DB::table('orders')
                 ->selectRaw('COUNT(id) as cnt')
                 ->where('id','=',$wine->id)
-                ->get()[0],
+                ->first(),
             'recommendations' => $wine->similarWines()
         ]);
     }
