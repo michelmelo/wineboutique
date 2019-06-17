@@ -14,7 +14,6 @@ use Illuminate\Http\Response;
 use Image;
 use Auth;
 use App\CapacityUnit;
-use App\WineShipping;
 use Storage;
 use App\Tag;
 use Illuminate\Support\Str;
@@ -53,8 +52,7 @@ class AddNewWineController extends Controller
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
             'wine_regions' => WineRegion::orderBy('name')->get(),
-            'tags' => Tag::all(),
-            'wine_shippings' => WineShipping::all(),
+            'tags' => Tag::all()
         ]);
     }
 

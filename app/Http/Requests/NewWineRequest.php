@@ -33,15 +33,6 @@ class NewWineRequest extends FormRequest
             'unit_id' => ['required', 'exists:capacity_units,id'],
             'photo' => ['image'],
             'varietal' => ['required', 'exists:varietals,id'],
-            // 'shipping' => ['array'],
-            // 'shipping.*.location' => ['required', 'exists:regions,id'],
-            // 'shipping.*.from' => ['required', 'numeric'],
-            // 'shipping.*.to' => ['required', 'numeric'],
-            // 'shipping.*.day_week' => ['required', 'boolean'],
-            // 'shipping.*.free' => ['boolean'],
-            // 'shipping.*.destination' => ['exists:regions,id'],
-            // 'shipping.*.price' => ['numeric'],
-            // 'shipping.*.additional' => ['numeric']
         ]; 
     }
 }
