@@ -7,7 +7,7 @@
                     <div>
                         <div  class="row">
                             <div class="col-4 image-wrap">
-                                <img :src="wine.photo" />
+                                <img :src="wine.photo" class="wine-cart-image" />
                             </div>
                             <div class="col-8 ">
                                 <div class="row">

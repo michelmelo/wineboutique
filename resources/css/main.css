@@ -510,6 +510,10 @@ header {
     float: none;
 }
 
+.wine-cart-image {
+    max-height: 165px;
+}
+
 .sticky {
     width: 100%;
     position: fixed;
