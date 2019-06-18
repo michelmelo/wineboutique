@@ -70,7 +70,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/wine/update/{id}', 'WineController@update')->name('wine.update');
     Route::delete('/wine/delete/{id}', 'WineController@delete')->name('wine.delete');
     Route::post('/wine/clone/{id}', 'WineController@clone')->name('wine.clone');
-    
+
+    Route::get('/cropImg', 'WineImageController@cropImage');
+
     Route::get('/profile', 'ProfileController@show')->name('profile.show');
     Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
     Route::post('/profile/password', 'ProfileController@password')->name('profile.password');

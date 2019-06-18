@@ -19,26 +19,29 @@
                             <img src="{{ $wine->photo }}" class="img-fluid">
                         </div>
                     </div>
-                    <div class="carousel-item" data-slide-number="1">
-                        <div class="carousel-image">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                    <?php $i = 1 ?>
+                    @foreach($images as $image)
+                        <div class="carousel-item" data-slide-number="{{ $i++ }}">
+                            <div class="carousel-image">
+                                <img src="{{ url('/'). '/images/wine/' .$image->source }}" class="img-fluid">
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item" data-slide-number="2">
-                        <div class="carousel-image">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </div>
-                    </div>
-                     <div class="carousel-item" data-slide-number="3">
-                        <div class="carousel-image">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="carousel-item" data-slide-number="4">
-                        <div class="carousel-image">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </div>
-                    </div>
+                    @endforeach
+                    {{--<div class="carousel-item" data-slide-number="2">--}}
+                        {{--<div class="carousel-image">--}}
+                            {{--<img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                     {{--<div class="carousel-item" data-slide-number="3">--}}
+                        {{--<div class="carousel-image">--}}
+                            {{--<img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="carousel-item" data-slide-number="4">--}}
+                        {{--<div class="carousel-image">--}}
+                            {{--<img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <a class="carousel-control-prev" href="#wineCarousel" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -58,26 +61,14 @@
                             <img src="{{ $wine->photo }}" class="img-fluid">
                         </a>
                     </li>
+                    <?php $i = 1 ?>
+                    @foreach($images as $image)
                     <li class="list-inline-item">
-                        <a id="carousel-selector-1" data-slide-to="1" data-target="#wineCarousel">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
+                        <a id="carousel-selector-1" data-slide-to="{{ $i++ }}" data-target="#wineCarousel">
+                            <img src="{{ url('/'). '/images/wine/' .$image->source }}" class="img-fluid">
                         </a>
                     </li>
-                    <li class="list-inline-item">
-                        <a id="carousel-selector-2" data-slide-to="2" data-target="#wineCarousel">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a id="carousel-selector-3" data-slide-to="3" data-target="#wineCarousel">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a id="carousel-selector-4" data-slide-to="4" data-target="#wineCarousel">
-                            <img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" class="img-fluid">
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
             <!--/main slider carousel-->

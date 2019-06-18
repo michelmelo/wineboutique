@@ -20,7 +20,13 @@ function readURL(input, selector) {
 
 $(document).ready(function() {
     $("#picture").change(function() {
+        readURL(this, '#croppable-image');
         readURL(this, '#imagePreview');
+        let d = $(this);
+        setTimeout(function () {
+            newCropper(d.data('ident'));
+            repaint();
+        }, 300);
     });
 
     $(".add-more-images").click(function(e){
@@ -43,14 +49,26 @@ Dropzone.options.photos = {
         if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
         }
-        else { document.getElementsByClassName('add-more-images')[0].style.visibility = "visible"; done(); }
+        else {
+            document.getElementsByClassName('add-more-images')[0].style.visibility = "visible";
+            console.log(this);
+            readURL(this, '#croppable-image');
+            let d = $(this);
+            setTimeout(function () {
+                newCropper(d.data('ident'));
+                repaint();
+            }, 300);
+            done();
+        }
     },
     sending: function(file, xhr, formData) {
         formData.append("_token", document.querySelector("input[name='_token']").value);
+        // formData.append("_dimensions", document.querySelector("input[name='_dimensions']").value);
     },
     success: function(file, response) {
         $(file.previewElement).attr("data-id", response.id);
         $(`<input type="hidden" name="images[]" value="${response.id}" />`).appendTo("#inputs");
+        // $(`<input type="hidden" name="dimensions[]" id="${response.id}" />`).appendTo("#inputs");
     },
     removedfile: async function(file) {
         const $filePreview = $(file.previewElement);

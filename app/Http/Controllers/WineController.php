@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use App\Varietal;
+use App\WineImage;
 use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -144,7 +145,8 @@ class WineController extends Controller
                 ->selectRaw('COUNT(id) as cnt')
                 ->where('id','=',$wine->id)
                 ->get()[0],
-            'recommendations' => $wine->similarWines()
+            'recommendations' => $wine->similarWines(),
+            'images' => WineImage::where('wine_id', '=', $wine->id)->get()
         ]);
     }
 

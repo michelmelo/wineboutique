@@ -114,7 +114,14 @@ class AddNewWineController extends Controller
         WineImage::whereIn("id", $images)->update(["wine_id" => $wine->id]);
         $wineImages = WineImage::whereIn("id", $images)->get();
 
+//        dd($wineImages);
+
         foreach($wineImages as $wineImage) {
+//            Image::make($wineImage)->resize(C::$wineX, C::$wineY,
+//                function ($constraint) {
+//                    $constraint->aspectRatio();
+//                })
+//                ->save($wineImage);
             $wineImage->update([]);
         }
 
@@ -135,13 +142,15 @@ class AddNewWineController extends Controller
     {
 
        # dd($wine);
+//        dd($wine->wineImages);
         $preloadedImages = $wine->wineImages->map(function($item, $key) {
             return [
-                'path' => route('images.wine', ['filename' => $item->slug . '.jpg']),
+                'path' => url('/') . '/images/wine/' . $item->source,
                 'id' => $item->id,
-                'size' => Storage::size('public/images/' . $item->source)
+//                'size' => \Intervention\Image\Image::make('/images/wine' . $item->source).filesize()//Storage::size('public/images/' . $item->source)
             ];
         });
+//        dd($preloadedImages);
         #dd($wine->name);
         return view('edit-wine', [
             'wine' => $wine,

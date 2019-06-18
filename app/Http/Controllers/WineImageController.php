@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\C;
 use App\WineImage;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\PhotoRequest;
 use Image;
+use Illuminate\Http\Request;
 
 class WineImageController extends Controller
 {
     public function store(PhotoRequest $request)
     {
-        $request->file('image')->move(storage_path() . '/app/public/images/', $picture = uniqid(true) . '.jpg');
+        $ext = $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move(public_path().'/images/wine/', $picture =  uniqid(true) . '.' . $ext);
+        $path = public_path().'/images/wine/' . $picture;
 
-        $path = storage_path() . '/app/public/images/' . $picture;
-        
-        Image::make($path)->encode('jpg')->resize(null, 1200, function ($c) {
-            $c->upsize();
-        })->save();
+        Image::make($path)->resize(C::$wineX, C::$wineY,
+            function ($constraint) {
+                $constraint->aspectRatio()->downsize();
+            })
+            ->save($path);
 
         $data = [
             'source' => $picture
@@ -35,5 +37,14 @@ class WineImageController extends Controller
         return [
             'success' => $wineImage->delete()
         ];
+    }
+
+    public function cropImage(Request $request) {
+        $path = public_path() . $request->get('imgPath');
+        $dimensions = $request->get('dimensions');
+
+        Image::make($path)->crop((int)$dimensions['w'], (int)$dimensions['h'],
+            (int)$dimensions['x'], (int)$dimensions['y'])
+            ->save($path);
     }
 }

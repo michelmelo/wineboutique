@@ -5,6 +5,7 @@
     <!-- @php
         var_dump($errors);
     @endphp -->
+        @include('layouts.partials.cropper_html')
     <form method="POST" action="{{ route('store-new-wine') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         <h1 class="headline-2">ADD A NEW WINE</h1>
@@ -14,7 +15,8 @@
             <div class="col-lg-4 col-sm-12">
                 <p>Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
-                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
+                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture" data-ident="main-crop"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
+                <input type="hidden" name="main-crop" id="main-crop">
             </div>
         </div>
         <div class="shadow-box row new-wine-photos">
@@ -361,6 +363,7 @@
 </div>
 @endsection
 @section('script')
+@include('layouts.partials.cropper_script')
 <script type="text/javascript">
     $(document).ready(function(){
         var maxField = 10; 
@@ -421,6 +424,11 @@
                 }
             );
         });
+
+        // $(document).on('change', '#picture', function (e) {
+        //     // console.log(this.files);
+        //     newCropper($('#imagePreview')[0]);
+        // });
 
         // $(".shipping-check").click(function () {
         //     console.log(this);
