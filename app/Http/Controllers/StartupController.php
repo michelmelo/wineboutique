@@ -31,7 +31,7 @@ class StartupController extends Controller
         $winery->regions()->attach($request->regions);
 
         foreach($request->shipping as $shippingItem) {
-            if(!isset($shippingItem['shipping_free'])){
+            if(isset($shippingItem['shipping_free'])){
                 $shippingItem['price'] = 0;
                 $shippingItem['additional'] = 0;
                 unset($shippingItem['shipping_free']);

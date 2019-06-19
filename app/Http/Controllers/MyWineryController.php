@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\WineryShipping;
 use Illuminate\Http\Request;
 use App\Varietal;
 use App\Region;
@@ -35,13 +36,25 @@ class MyWineryController extends Controller
         $winery = Auth::user()->winery->with("winery_shippings")->first();
 
         return view('my-winery-edit', [
-            'winery' => $winery
+            'winery' => $winery,
+            'regions' => Region::orderBy('name')->get()
         ]);
     }
 
     public function store(Request $request)
     {
         Auth::user()->winery->where('id', $request->wineryId)->update(['description' => $request->description]);
+
+        foreach($request->shipping as $shippingItem) {
+
+            if(isset($shippingItem['shipping_free'])){
+                $shippingItem['price'] = 0;
+                $shippingItem['additional'] = 0;
+                unset($shippingItem['shipping_free']);
+            }
+
+            WineryShipping::where('id', $shippingItem["id"])->update($shippingItem);
+        }
 
         return view('my-winery',[
             'varietals' => Varietal::all(),
