@@ -14,11 +14,7 @@ class StartupController extends Controller
         $winery = Auth::user()->winery;
 
         return view('startup', [
-            'wineryId' => $winery->id,
-            'wineryName' => $winery->name,
-            'winery_desc' => $winery->description,
-            'winery_profile' => $winery->profile,
-            'winery_cover' => $winery->cover,
+            'winery' => $winery,
             'winery_regions' => $this->onlyIDs($winery->regions),
             'regions' => Region::orderBy('name')->get()
         ]);
@@ -33,6 +29,17 @@ class StartupController extends Controller
         $winery->save();
 
         $winery->regions()->attach($request->regions);
+
+        foreach($request->shipping as $shippingItem) {
+            if(!isset($shippingItem['shipping_free'])){
+                $shippingItem['price'] = 0;
+                $shippingItem['additional'] = 0;
+                unset($shippingItem['shipping_free']);
+            }
+
+
+            $winery->winery_shippings()->create($shippingItem);
+        }
 
         return redirect()->route('my-winery');
     }
