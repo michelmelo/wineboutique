@@ -6,5 +6,5 @@
               Get Cropped Canvas
             </span>
     </button>
-    <span id="close-cropper">X</span>
+    {{--<span id="close-cropper">X</span>--}}
 </div>

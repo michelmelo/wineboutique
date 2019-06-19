@@ -19,6 +19,8 @@
                 retVal.y = event.detail.y;
                 retVal.h = event.detail.height;
                 retVal.w = event.detail.width;
+                let l = cropper.getCanvasData();
+                // console.log(l);
             },
             zoom: function (event) {
                 event.preventDefault();
@@ -36,6 +38,20 @@
         // current = current.split('?')[0]; //in case we attached a timestamp before
 
         document.getElementById(current).value = JSON.stringify(retVal);
+        $('#imagePreview').css({
+            'position' : 'absolute',
+            'overflow' : 'hidden',
+            // 'background-position' : retVal.w + 'px ' + retVal.h + 'px',
+            // 'background-position-y' : retVal.y + 'px',
+            'clip' : 'rect('+ retVal.x + ', ' + retVal.y + ', ' + retVal.w + ', ' + retVal.h + ')',
+        });
+        console.log('rect('+ retVal.x + ', ' + retVal.y + ', ' + retVal.w + ', ' + retVal.h + ')');
+
+        $('.wrapper').css({
+            // 'width' : retVal.x + 'px',
+            // 'height:' : retVal.y + 'px',
+        });
+
 
         /*
         $.get(addr, { 'dimensions': retVal, 'imgPath': current })
@@ -43,10 +59,12 @@
             cropper.replace(current+ '?' + (new Date()).getTime());
             }
         );*/
-    };
-
-    document.getElementById('close-cropper').onclick = function () {
         $('#cropper').hide();
         cropper.destroy();
-    }
+    };
+
+    // document.getElementById('close-cropper').onclick = function () {
+    //     $('#cropper').hide();
+    //     cropper.destroy();
+    // }
 </script>

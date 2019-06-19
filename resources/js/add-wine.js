@@ -40,8 +40,8 @@ Dropzone.options.photos = {
     url: "/wine-image",
     paramName: "image",
     maxFilesize: 10,
-    resizeWidth: 1200,
-    resizeMimeType: "image/jpeg",
+    // resizeWidth: 1200,
+    // resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,
     dictDefaultMessage: "Click here to add more images!",
@@ -51,19 +51,40 @@ Dropzone.options.photos = {
         }
         else {
             document.getElementsByClassName('add-more-images')[0].style.visibility = "visible";
-            console.log(this);
-            readURL(this, '#croppable-image');
-            let d = $(this);
-            setTimeout(function () {
-                newCropper(d.data('ident'));
-                repaint();
-            }, 300);
+            console.log('console.log(file);');
+            console.log(JSON.stringify(file));
+            console.log('console.log(file.dataURL);');
+            console.log(file.dataURL);
+            console.log('console.log(file[\'dataURL\']);');
+            console.log(file['dataURL']);
+            console.log('console.log(Object.keys(file));');
+            console.log(Object.keys(file));
+            console.log(done);
+            // readURL(file, "#croppable-image");
+            // let d = $(this);
+            // setTimeout(function () {
+            //     newCropper('whatever');
+            //     repaint();
+            // }, 300);
+
+            // console.log(done);
+            // readURL(this, '#croppable-image');
+            // let d = $(this);
+            // setTimeout(function () {
+            //     newCropper(d.data('ident'));
+            //     repaint();
+            // }, 300);
             done();
         }
     },
     sending: function(file, xhr, formData) {
         formData.append("_token", document.querySelector("input[name='_token']").value);
         // formData.append("_dimensions", document.querySelector("input[name='_dimensions']").value);
+        console.log(file.dataURL);
+        readURL(file, "#croppable-image");setTimeout(function () {
+                    newCropper('whatever');
+                    repaint();
+                }, 300);
     },
     success: function(file, response) {
         $(file.previewElement).attr("data-id", response.id);

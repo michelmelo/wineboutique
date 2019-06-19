@@ -15,7 +15,7 @@
             <div class="col-lg-4 col-sm-12">
                 <p>Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
-                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture" data-ident="main-crop"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
+                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture" data-ident="main-crop"><div class="wrapper"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></div></label>
                 <input type="hidden" name="main-crop" id="main-crop">
             </div>
         </div>
@@ -27,6 +27,13 @@
             </div>
             <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
         </div>
+        {{--<div class="shadow-box row new-wine-photos">--}}
+            {{--<div class="col-lg-4 col-sm-12">--}}
+                {{--<p>Additional pictures</p>--}}
+                {{--<label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture" data-ident="main-crop"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>--}}
+                {{--<input type="hidden" name="main-crop" id="main-crop">--}}
+            {{--</div>--}}
+        {{--</div>--}}
       
 
         <div class="shadow-box row details">
