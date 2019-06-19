@@ -13,7 +13,8 @@ class CartController extends Controller
     public function index()
     {
         return view('cart', [
-            'empty' => Auth::user()->cart->count() === 0
+            'empty' => Auth::user()->cart->count() === 0,
+            'user_address' => Auth::user()->addresses()->where("default", 1)->first()
         ]);
     }
 
@@ -37,8 +38,22 @@ class CartController extends Controller
 
     public function get()
     {
+        $wines = Auth::user()->cart;
+        $user_default_region = Auth::user()->addresses()->where("default", 1)->first()->region_id;
+
+        foreach ($wines as $wine){
+            foreach ($wine->winery->winery_shippings as $shipping){
+                if($user_default_region == $shipping->ship_to){
+                    $wine->shipping_price = $shipping->price;
+                    $wine->shipping_additional = $shipping->additional;
+
+                    break;
+                }
+            }
+        }
+
         return [
-            'wines' => Auth::user()->cart
+            'wines' => $wines
         ];
     }
 }

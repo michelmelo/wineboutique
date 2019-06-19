@@ -17,7 +17,11 @@
                                     </div>
                                     <div class="col-6 d-flex align-items-end">
                                         <div class="shipping">
-                                            <span>Free Shipping</span>
+                                            <span v-if="wine.shipping_price">{{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                            <span v-else>
+                                                Winery is not shipping to your state, please remove wine or
+                                                <a href="/my-address">change shipping state</a>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-6 d-flex justify-content-end align-items-end">
@@ -49,7 +53,7 @@
                     </tr>
                     <tr>
                         <td>Shipping:</td>
-                        <td>$0.00</td>
+                        <td>{{ (getShippingTotal() || 0) | currency }}</td>
                     </tr>
                     <tr>
                         <td>Sales Tax:</td>
@@ -63,7 +67,7 @@
                 <table class="cart-table-total">
                     <tr>
                         <td>Total:</td>
-                        <td>{{ (getTotal() || 0) | currency }}</td>
+                        <td>{{ (getTotal() || 0) + (getShippingTotal() || 0) | currency }}</td>
                     </tr>
                 </table>
                 <div class="row cart-buttons">
@@ -104,7 +108,6 @@
         </div>
         
     </div>
-    
     <div v-else>
         <p>Cart is empty.</p>
     </div>
@@ -112,23 +115,24 @@
 
 <script>
     export default {
-        props: {
-            showComplete: {
-                default: true
-            }
-        },
+        props: ['userAddress'],
         data: function() {
             return {
                 wines: [],
                 fetchedFirst: false,
-                photo: ''
+                photo: '',
+                showComplete: true,
+                userAddress_: null
             }
         },
+        created() {
+            this.userAddress_ = JSON.parse(this.userAddress);
 
+            console.log(this.userAddress_);
+        },
         mounted() {
             this.getCart();
         },
-
         methods: {
             getCart() {
                 axios.get('/cart/get')
@@ -164,6 +168,9 @@
                         this.wines = response.data.wines;
                     })
                     .catch(error => console.log(error));
+            },
+            getShippingTotal() {
+                return this.wines.reduce((acc, wine) => acc+wine.shipping_price + (wine.shipping_additional*(wine.pivot.quantity-1)), 0)
             },
             getTotal() {
                 return this.wines.reduce((acc, wine) => acc+wine.price*wine.pivot.quantity, 0)
