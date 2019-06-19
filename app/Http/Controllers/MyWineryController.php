@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\WineryShipping;
 use Illuminate\Http\Request;
 use App\Varietal;
 use App\Region;
 use App\CapacityUnit;
-use App\Wine;
-use App\Winery;
-use App\WineShipping;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MyWineryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
 
     public function __construct()
@@ -31,35 +27,40 @@ class MyWineryController extends Controller
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
-            'wines' => $request->user()->winery->wines,
-            'wine_shippings' => WineShipping::all(),            
+            'wines' => $request->user()->winery->wines
         ]);
     }
 
     public function edit(Request $request)
     {
-        $winery = Auth::user()->winery;
-        //dd($winery);
+        $winery = Auth::user()->winery->with("winery_shippings")->first();
+
         return view('my-winery-edit', [
-            'winery_id' => $winery->id,
-            'winery_name' => $winery->name,
-            'winery_desc' => $winery->description,
-            'winery_profile' => $winery->profile,
-            'winery_cover' => $winery->cover,
+            'winery' => $winery,
+            'regions' => Region::orderBy('name')->get()
         ]);
     }
 
     public function store(Request $request)
     {
-        //dd($request);
         Auth::user()->winery->where('id', $request->wineryId)->update(['description' => $request->description]);
+
+        foreach($request->shipping as $shippingItem) {
+
+            if(isset($shippingItem['shipping_free'])){
+                $shippingItem['price'] = 0;
+                $shippingItem['additional'] = 0;
+                unset($shippingItem['shipping_free']);
+            }
+
+            WineryShipping::where('id', $shippingItem["id"])->update($shippingItem);
+        }
 
         return view('my-winery',[
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
-            'wines' => $request->user()->winery->wines,
-            'wine_shippings' => WineShipping::all(),   
+            'wines' => $request->user()->winery->wines
         ]);
     }
 }

@@ -80,12 +80,6 @@
                     </li>
                 </ul>
             </div>
-            <!--/main slider carousel-->
-            <!-- <ul class="preview-thumbnail nav nav-tabs">
-                <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ route('images.wine', ['slug' => $wine->slug . '.jpg']) }}" ></a></li>
-                <li><a data-target="#pic-2" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
-                <li><a data-target="#pic-3" data-toggle="tab"><img src="{{asset('img/single-2.png')}}" /></a></li>
-            </ul> -->
         </div>
 
         <div class="col-lg-6 col-sm-12 single-wine-info">

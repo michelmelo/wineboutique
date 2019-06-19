@@ -510,6 +510,10 @@ header {
     float: none;
 }
 
+.wine-cart-image {
+    max-height: 165px;
+}
+
 .sticky {
     width: 100%;
     position: fixed;
@@ -1204,9 +1208,6 @@ footer p {
 }
 
 .shipping {
-/*    position: absolute;
-    bottom: 10px;
-    left: 10px*/
     padding: 10px;
 }
 
@@ -1217,9 +1218,6 @@ footer p {
 
 
 .quantity {
-/*    position: absolute;
-    bottom: 10px;
-    right: 30px;*/
     padding: 10px 20px;
     text-align: center;
 }

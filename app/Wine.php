@@ -23,11 +23,6 @@ class Wine extends Model
         'description'
     ];
 
-    public function wineShippings()
-    {
-        return $this->hasMany(WineShipping::class);
-    }
-
     public function capacityUnit()
     {
         return $this->belongsTo(CapacityUnit::class,'unit_id','id');
@@ -161,5 +156,4 @@ class Wine extends Model
             ->groupBy('wines.id')
             ->paginate(4);
     }
-    
 }

@@ -34,6 +34,11 @@ class Winery extends Model
         return $this->hasMany(Wine::class);
     }
 
+    public function winery_shippings()
+    {
+        return $this->hasMany(WineryShipping::class);
+    }
+
     public function sluggable()
     {
         return [
@@ -82,5 +87,4 @@ class Winery extends Model
     {
         return WineryRating::where('winery_id', $this->id)->count();
     }
-
 }

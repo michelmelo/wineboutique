@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container margin-row">
-    <cart></cart>
+    <cart user-address="{{json_encode($user_address)}}"></cart>
 </div>
 @endsection

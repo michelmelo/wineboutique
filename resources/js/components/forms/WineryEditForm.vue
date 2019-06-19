@@ -36,6 +36,68 @@
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
 
+            <div class="shadow-box row">
+                <h2>SHIPPING</h2>
+
+                <div class="row form-inputs shipping-item-wrapper">
+                    <div class="col-lg-4 col-sm-12">
+                        <p>Shipping origin *</p>
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <select id="location" name="shipping[0][ship_from]" class="location" v-model="existingShippings_.ship_from">
+                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <p>Processing time *</p>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <input type="number" min="0" name="shipping[0][days_from]" placeholder="From" class="from" v-model="existingShippings_.days_from">
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <input type="number" min="0" name="shipping[0][days_to]" placeholder="To" class="to" v-model="existingShippings_.days_to">
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <p>Fixed shipping costs *</p>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-12">
+                        <select name="shipping[0][ship_to]" class="destination" v-model="existingShippings_.ship_to">
+                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                {{ region.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-sm-12 show_hide">
+                        <div v-if="!is_free_shipping">
+                            <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  v-model="existingShippings_.price">
+                            <div class="usd">USD</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-12 show_hide">
+                        <div v-if="!is_free_shipping">
+                            <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" v-model="existingShippings_.additional">
+                            <div class="usd" >USD</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-lg-push-4 col-sm-12">
+                        <input type="checkbox" name="shipping[0][shipping_free]" id="shipping_free" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping"/>
+                        <label for="shipping_free" class="css-label lite-red-check">Free shipping</label>
+                    </div>
+
+                    <input type="hidden" name="shipping[0][id]" v-model="existingShippings_.id">
+                </div>
+            </div>
+
             <button type="submit" class="red-button button float-right">UPDATE</button>
         </form>
     </div>
@@ -43,20 +105,25 @@
 
 <script>
     export default {
-        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover'],
+        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
             profile: null,
+            fetchedRegions_: [],
+            existingShippings_: [],
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
             cover: null,
             defaultCoverPhoto: '/img/winery-1.jpg',
-            description: '',
+            description: null,
             publicPath: process.env.BASE_URL,
-            errors: {}
+            errors: {},
+            is_free_shipping: false
         }),created() {
             this.description = this.wineryDesc;
             this.profile = this.wineryProfile;
             this.cover = this.wineryCover;
+            this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
+            this.existingShippings_ = JSON.parse(this.existingShippings)[0];
         },
         methods: {
             handleFileChange(e) {
@@ -110,6 +177,9 @@
                             console.log("error", error);
                         });
                 }
+            },
+            toggle_free_shipping(){
+                this.is_free_shipping = !this.is_free_shipping;
             },
             onSubmit() {
                 this.errors = {};
