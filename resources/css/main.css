@@ -657,6 +657,10 @@ footer p {
     height: 50px;
 }
 
+.home-slider  .carousel-indicators {
+    margin: 0 auto 20px;
+}
+
 .home-slider  .carousel-indicators .active {
     background-color: #9b1f3d!important;
 }
