@@ -7,6 +7,7 @@ use App\Http\Requests\AddressStoreRequest;
 use App\Http\Resources\AddressResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AddressController extends Controller
@@ -38,5 +39,20 @@ class AddressController extends Controller
             if($address->default===1) return 1;
         }
         return 0;
+    }
+
+    public function changeDefault($id) {
+        foreach (Auth::user()->addresses as $address){
+            if($address->id == $id){
+                $address->default = 1;
+                $address->save();
+            }
+            else{
+                $address->default = 0;
+                $address->save();
+            }
+        }
+
+        return response()->json(['status' => true]);
     }
 }

@@ -115,7 +115,6 @@
 
 <script>
     export default {
-        props: ['userAddress'],
         data: function() {
             return {
                 wines: [],
@@ -126,9 +125,12 @@
             }
         },
         created() {
-            this.userAddress_ = JSON.parse(this.userAddress);
+            //
+        },
+        async asyncData() {
+            const addresses = await axios.get('addresses');
 
-            console.log(this.userAddress_);
+            this.userAddress_ = addresses.data.data;
         },
         mounted() {
             this.getCart();
