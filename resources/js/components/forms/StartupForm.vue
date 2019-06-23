@@ -72,8 +72,8 @@
                         <p>Shipping origin *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <select id="location" name="shipping[0][ship_from]" class="location" required>
-                            <option value="" disabled selected>Select location</option>
+                        <select id="location" name="shipping[0][ship_from]" class="location" v-model="shippings[0].ship_from">
+                            <option value="0" disabled selected>Select location</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -85,11 +85,11 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][days_from]" placeholder="From" class="from" required>
+                        <input type="number" min="0" name="shipping[0][days_from]" placeholder="From" class="from" v-model="shippings[0].days_from">
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][days_to]" placeholder="To" class="to" required>
+                        <input type="number" min="0" name="shipping[0][days_to]" placeholder="To" class="to" v-model="shippings[0].days_to">
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
@@ -97,8 +97,8 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select name="shipping[0][ship_to]" class="destination">
-                            <option disabled selected>Add a destination</option>
+                        <select name="shipping[0][ship_to]" class="destination" v-model="shippings[0].ship_to">
+                            <option value="0" disabled selected>Add a destination</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -107,14 +107,14 @@
 
                     <div class="col-lg-2 col-sm-12 show_hide">
                         <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  >
+                            <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item" v-model="shippings[0].price">
                             <div class="usd">USD</div>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
                         <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" >
+                            <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional">
                             <div class="usd" >USD</div>
                         </div>
                     </div>
@@ -138,6 +138,7 @@
             csrf: window.Laravel.csrfToken,
             fetchedRegions_: [],
             regions: [],
+            shippings: [],
             wines: [],
             currentlyEditing: 0,
             defaultProfilePhoto: '/img/winery-logo-1.jpg',
@@ -156,6 +157,13 @@
             this.cover = this.wineryCover;
             this.regions = JSON.parse(this.selectedRegions);
             this.name = this.wineryName;
+            this.shippings.push({
+                ship_from: 0,
+                days_from: "",
+                days_to: "",
+                ship_to: 0,
+                price: ""
+            });
         },
         methods: {
             setEditing(wineId) {
@@ -215,12 +223,16 @@
             toggle_free_shipping(){
                 this.is_free_shipping = !this.is_free_shipping;
             },
-            onSubmit() {
+            onSubmit(e) {
                 this.errors = {};
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
                 if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
-                if(Object.keys(this.errors).length > 0) return false;
+
+                if(Object.keys(this.errors).length > 0){
+                    e.preventDefault();
+                    return false;
+                }
             },
             isInvalid(name) {
                 return this.errors[name];

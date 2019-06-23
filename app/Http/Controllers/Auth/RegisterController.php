@@ -106,6 +106,9 @@ class RegisterController extends Controller
             $user->winery()->create([
                 'name' => $data['wineryName']
             ]);
+
+            Auth::login($user);
+
             $this->redirectTo = route('startup');
         }
 

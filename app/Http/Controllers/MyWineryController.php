@@ -33,27 +33,46 @@ class MyWineryController extends Controller
 
     public function edit(Request $request)
     {
-        $winery = Auth::user()->winery->with("winery_shippings")->first();
+        $winery = Auth::user()->winery;
 
         return view('my-winery-edit', [
             'winery' => $winery,
+            'shippings' => $winery->winery_shippings()->get(),
             'regions' => Region::orderBy('name')->get()
         ]);
     }
 
     public function store(Request $request)
     {
-        Auth::user()->winery->where('id', $request->wineryId)->update(['description' => $request->description]);
+        $winery = Auth::user()->winery;
+        $winery->description = $request->description;
+        $winery->save();
 
-        foreach($request->shipping as $shippingItem) {
+        foreach($request->shipping as $shippings) {
+            $do_save = true;
+            $do_edit = !is_null($shippings["id"]);
 
-            if(isset($shippingItem['shipping_free'])){
-                $shippingItem['price'] = 0;
-                $shippingItem['additional'] = 0;
-                unset($shippingItem['shipping_free']);
+            foreach ($shippings as $key => $shipping){
+                if((is_null($shipping) && $key != "id") || (is_null($shipping) && $do_edit)){
+                    $do_save = false;
+                }
             }
 
-            WineryShipping::where('id', $shippingItem["id"])->update($shippingItem);
+            if($do_save){
+                if(isset($shippings['shipping_free'])){
+                    $shippings['price'] = 0;
+                    $shippings['additional'] = 0;
+
+                    unset($shippings['shipping_free']);
+                }
+
+                if($do_edit){
+                    WineryShipping::where('id', $shippings["id"])->update($shippings);
+                }
+                else{
+                    $winery->winery_shippings()->create($shippings);
+                }
+            }
         }
 
         return view('my-winery',[
