@@ -13,8 +13,7 @@ class CartController extends Controller
     public function index()
     {
         return view('cart', [
-            'empty' => Auth::user()->cart->count() === 0,
-            'user_address' => Auth::user()->addresses()->where("default", 1)->first()
+            'empty' => Auth::user()->cart->count() === 0
         ]);
     }
 

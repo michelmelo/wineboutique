@@ -61,6 +61,7 @@ class CheckoutController extends Controller
         $this->amount = Auth::user()->cart->reduce(function($carry, $item) {
             return $carry + $item->price * $item->pivot->quantity;
         }, 0);
+
         return view('checkout', [
             'gateway' => config('payment.nuvei.gateway'),
             'terminalId' => config('payment.nuvei.terminalId'),

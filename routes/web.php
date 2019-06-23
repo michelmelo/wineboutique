@@ -48,6 +48,7 @@ Route::get('/varietals', 'WineController@varietals')->name('varietals');
 Route::get('/test', 'TestController@index')->name('test');
 
 Route::post('/addresses/default', 'AddressController@isDefaultSet');
+Route::get('/addresses/default/{id}', 'AddressController@changeDefault');
 
 Route::get('/images/wine/{slug}', 'ImageController@wineImage')->name('images.wine');
 

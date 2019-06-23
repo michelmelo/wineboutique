@@ -3,7 +3,7 @@
             <form action="https://testpayments.nuvei.com/merchant/paymentpage" method="post" v-on:submit="onSubmit">
         <div class="row padding-row check">
                 <h1 class="headline-2">CHECKOUT</h1>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <article class="card mb-2">
                         <div class="card-body p-2">
                             <h5 class="card-title">Ship to</h5>
@@ -222,6 +222,14 @@
             switchAddress(address) {
                 this.selectedAddress = address;
                 this.selecting = false;
+
+                if(!address.default){
+                    axios.get('/addresses/default/' + address.id)
+                        .then(response => {
+                            location.reload();
+                        })
+                        .catch(error => console.log(error));
+                }
             },
             addShipingAddress() {
                 this.showErrors = true;
@@ -232,7 +240,6 @@
                 axios.post('/addresses', this.newAddress)
                     .then(response => {
                         this.addresses.push(response.data.data);
-                        this.switchAddress(response.data.data);
                         this.showErrors = false;
                         this.creating = false;
                         this.newAddress = {
