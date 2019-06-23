@@ -45,6 +45,7 @@
                     </div>
                     <div class="col-lg-8 col-sm-12">
                         <select id="location" name="shipping[0][ship_from]" class="location" v-model="item.ship_from">
+                            <option value="0" disabled selected>Select location</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -69,6 +70,7 @@
 
                     <div class="col-lg-3 col-sm-12">
                         <select name="shipping[0][ship_to]" class="destination" v-model="item.ship_to">
+                            <option value="0" disabled selected>Add a destination</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -127,6 +129,16 @@
             this.cover = this.wineryCover;
             this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
             this.existingShippings_ = JSON.parse(this.existingShippings);
+
+            if(this.existingShippings_.length == 0){
+                this.existingShippings_.push({
+                    ship_from: 0,
+                    days_from: "",
+                    days_to: "",
+                    ship_to: 0,
+                    price: ""
+                });
+            }
         },
         methods: {
             handleFileChange(e) {

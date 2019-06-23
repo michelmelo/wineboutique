@@ -30,15 +30,24 @@ class StartupController extends Controller
 
         $winery->regions()->attach($request->regions);
 
-        foreach($request->shipping as $shippingItem) {
-            if(isset($shippingItem['shipping_free'])){
-                $shippingItem['price'] = 0;
-                $shippingItem['additional'] = 0;
-                unset($shippingItem['shipping_free']);
+        foreach($request->shipping as $shippings) {
+            $do_save = true;
+
+            foreach ($shippings as $shipping){
+                if(is_null($shipping)){
+                    $do_save = false;
+                }
             }
 
+            if($do_save){
+                if(isset($shippings['shipping_free'])){
+                    $shippings['price'] = 0;
+                    $shippings['additional'] = 0;
+                    unset($shippings['shipping_free']);
+                }
 
-            $winery->winery_shippings()->create($shippingItem);
+                $winery->winery_shippings()->create($shippings);
+            }
         }
 
         return redirect()->route('my-winery');
