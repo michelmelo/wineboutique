@@ -39,12 +39,12 @@
             <div class="shadow-box row">
                 <h2>SHIPPING</h2>
 
-                <div class="row form-inputs shipping-item-wrapper">
+                <div class="row form-inputs shipping-item-wrapper" v-for="item in existingShippings_">
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <select id="location" name="shipping[0][ship_from]" class="location" v-model="existingShippings_.ship_from">
+                        <select id="location" name="shipping[0][ship_from]" class="location" v-model="item.ship_from">
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -56,11 +56,11 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][days_from]" placeholder="From" class="from" v-model="existingShippings_.days_from">
+                        <input type="number" min="0" name="shipping[0][days_from]" placeholder="From" class="from" v-model="item.days_from">
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="shipping[0][days_to]" placeholder="To" class="to" v-model="existingShippings_.days_to">
+                        <input type="number" min="0" name="shipping[0][days_to]" placeholder="To" class="to" v-model="item.days_to">
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select name="shipping[0][ship_to]" class="destination" v-model="existingShippings_.ship_to">
+                        <select name="shipping[0][ship_to]" class="destination" v-model="item.ship_to">
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
@@ -77,14 +77,14 @@
 
                     <div class="col-lg-2 col-sm-12 show_hide">
                         <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  v-model="existingShippings_.price">
+                            <input type="number" min="0"  name="shipping[0][price]" class="usd-input price" placeholder="One item"  v-model="item.price">
                             <div class="usd">USD</div>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
                         <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" v-model="existingShippings_.additional">
+                            <input type="number" min="0"  name="shipping[0][additional]" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
                             <div class="usd" >USD</div>
                         </div>
                     </div>
@@ -94,7 +94,10 @@
                         <label for="shipping_free" class="css-label lite-red-check">Free shipping</label>
                     </div>
 
-                    <input type="hidden" name="shipping[0][id]" v-model="existingShippings_.id">
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="hidden" name="shipping[0][id]" v-model="item.id">
+                        <hr>
+                    </div>
                 </div>
             </div>
 
@@ -123,7 +126,7 @@
             this.profile = this.wineryProfile;
             this.cover = this.wineryCover;
             this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
-            this.existingShippings_ = JSON.parse(this.existingShippings)[0];
+            this.existingShippings_ = JSON.parse(this.existingShippings);
         },
         methods: {
             handleFileChange(e) {
