@@ -39,7 +39,7 @@
             <div class="shadow-box row">
                 <h2>SHIPPING</h2>
 
-                <div class="row form-inputs shipping-item-wrapper" v-for="(item, index) in existingShippings_">
+                <div class="row form-inputs shipping-item-wrapper" v-for="(item, index) in existingShippings_" v-bind:key="item.id">
                     <div class="col-lg-4 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
@@ -78,22 +78,18 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12 show_hide">
-                        <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price">
-                            <div class="usd">USD</div>
-                        </div>
+                        <input type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
+                        <div class="usd">USD</div>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <div v-if="!is_free_shipping">
-                            <input type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
-                            <div class="usd" >USD</div>
-                        </div>
+                        <input type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
+                        <div class="usd" >USD</div>
                     </div>
 
                     <div class="col-lg-8 col-lg-push-4 col-sm-12">
-                        <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" id="shipping_free" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping"/>
-                        <label for="shipping_free" class="css-label lite-red-check">Free shipping</label>
+                        <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
+                        <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
                     </div>
 
                     <div class="col-lg-12 col-sm-12">
@@ -122,8 +118,7 @@
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: null,
             publicPath: process.env.BASE_URL,
-            errors: {},
-            is_free_shipping: false
+            errors: {}
         }),created() {
             this.description = this.wineryDesc;
             this.profile = this.wineryProfile;
@@ -142,7 +137,8 @@
                     days_from: "",
                     days_to: "",
                     ship_to: 0,
-                    price: ""
+                    price: "",
+                    is_free_shipping: false
                 });
             },
             handleFileChange(e) {
@@ -197,8 +193,9 @@
                         });
                 }
             },
-            toggle_free_shipping(){
-                this.is_free_shipping = !this.is_free_shipping;
+            toggle_free_shipping(i){
+                i.price = 0;
+                i.additional = 0;
             },
             onSubmit() {
                 this.errors = {};
