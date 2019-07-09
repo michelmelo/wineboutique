@@ -182,6 +182,7 @@
             },
             onSubmit(event) {
                 this.showErrors = true;
+
                 if(this.$v.$invalid) {
                     event.preventDefault();
                     formFields.some(formField => {
@@ -191,6 +192,11 @@
                         }
                         return false;
                     });
+                }
+
+                if(!this.validEmail){
+                    event.preventDefault();
+                    return false;
                 }
             },
             isInvalid(name) {
