@@ -19,6 +19,9 @@
         <span class="help-block" v-if="isInvalid('email')">
             <strong>Email is invalid.</strong>
         </span>
+        <span class="help-block" v-if="validEmail == false">
+            <strong>Email already used.</strong>
+        </span>
         <input type="password" v-model="password" :class="{ 'invalid': isInvalid('password') }" name="password" placeholder="Password">
         <span class="help-block" v-if="isInvalid('password')">
             <strong>Password is invalid.</strong>
