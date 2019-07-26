@@ -63,7 +63,9 @@ Route::get('/states', 'Api\LocationsController@regions');
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/startup', 'StartupController@show')->name('startup');
     Route::post('/startup', 'StartupController@store');
-    
+    Route::get('/sub-merchant-setup', 'StartupController@show_payment')->name('sub-merchant-setup');
+    Route::post('/sub-merchant-setup', 'StartupController@store_payment');
+
     Route::post('/winery/profile', 'WineryController@profile');
     Route::post('/winery/cover', 'WineryController@cover');
     

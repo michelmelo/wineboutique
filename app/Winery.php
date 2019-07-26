@@ -52,29 +52,30 @@ class Winery extends Model
     {
         return 'slug';
     }
+
     public function rated()
     {
-        return (bool) WineryRating::where('user_id', Auth::id())
+        return (bool)WineryRating::where('user_id', Auth::id())
             ->where('winery_id', $this->id)
             ->first();
     }
 
     public function rating()
     {
-        if($this->rated()) {
+        if ($this->rated()) {
             return WineryRating::where('user_id', Auth::id())
                 ->where('winery_id', $this->id)
                 ->first()->rating;
         } else {
             $rating = WineryRating::where('winery_id', $this->id)
                 ->avg('rating');
-            return $rating?$rating:0;
+            return $rating ? $rating : 0;
         }
     }
 
     public function rate($rating)
     {
-        if($this->rated()) {
+        if ($this->rated()) {
             WineryRating::where('user_id', Auth::id())
                 ->where('winery_id', $this->id)
                 ->update(['rating' => $rating]);
