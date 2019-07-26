@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StartupRequest;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use App\Region;
 
@@ -48,6 +49,58 @@ class StartupController extends Controller
 
                 $winery->winery_shippings()->create($shippings);
             }
+        }
+
+        return redirect()->route('sub-merchant-setup');
+    }
+
+    public function show_payment()
+    {
+        $winery = Auth::user()->winery;
+
+        return view('payment_setup', [
+            'winery' => $winery
+        ]);
+    }
+
+    public function store_payment()
+    {
+        $client = new Client();
+        $res = $client->post(
+            'https://app.payfacconnect.com/wineboutique/api/v1/MerchantApplication/Template',
+            [
+                'json' => [
+                    'AuthenticationKeyId' => 'db1ca085-5bbb-4d12-8e2e-d78d21566b14',
+                    'AuthenticationKeyValue' => 'lAq.ydR8oZ6Lk7MHsUAkawcHmid8UhjgkImpESN^aQfqIhmFONn-h7z~2tX-Fruq'
+                ]
+            ]
+        );
+
+        if ($res->getStatusCode() == 200) {
+            $body = json_decode($res->getBody());
+
+            $res = $client->post(
+                'https://app.payfacconnect.com/wineboutique/api/v1/MerchantApplication/Submit',
+                [
+                    'json' => [
+                        'AuthenticationKeyId' => 'db1ca085-5bbb-4d12-8e2e-d78d21566b14',
+                        'AuthenticationKeyValue' => 'lAq.ydR8oZ6Lk7MHsUAkawcHmid8UhjgkImpESN^aQfqIhmFONn-h7z~2tX-Fruq',
+                        'MerchantApplicationSubmission' => $body->MerchantApplicationTemplate
+                    ]
+                ]
+            );
+
+            if ($res->getStatusCode() == 200) {
+                $body2 = json_decode($res->getBody());
+
+                if ($body2->Status == 30) {
+                    dd($body2);
+                }
+            } else {
+                dd("Submit: " . $res->getStatusCode());
+            }
+        } else {
+            dd("Temlate: " . $res->getStatusCode());
         }
 
         return redirect()->route('my-winery');
