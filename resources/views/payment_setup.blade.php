@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row padding-row startup">
             <div class="col-md-12 col-sm-12">
-                <form method="post" action="/payment-setup">
-                    <input type="hidden" name="_token" v-model="csrf">
+                <form method="post" action="/sub-merchant-setup">
+                    @csrf
 
                     <div class="shadow-box row">
                         <div class="col-xs-12">
