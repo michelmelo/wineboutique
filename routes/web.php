@@ -117,6 +117,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('/store-edited-wine/{wine}', 'AddNewWineController@update');
 
     Route::get('my_winery', 'MyWineryController@index')->name('my-winery');
+    Route::get('my_winery_stats', 'MyWineryController@stats')->name('my-winery-stats');
 
     Route::get('my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
     Route::post('my-winery-store', 'MyWineryController@store')->name('my-winery-store');
