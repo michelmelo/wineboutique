@@ -82,4 +82,9 @@ class MyWineryController extends Controller
             'wines' => $request->user()->winery->wines
         ]);
     }
+
+    public function stats()
+    {
+        return view('my-winery-stats',[]);
+    }
 }
