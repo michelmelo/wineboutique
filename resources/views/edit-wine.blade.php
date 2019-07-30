@@ -15,6 +15,14 @@
                     {{ $wine->photo === null ? '' : '(click to change)' }}
                 </div>
             </div>
+
+            <div class="col-lg-8 col-sm-12 crop-holder" style="display: none">
+                <canvas id="cropCanvas" width="450" height="450">
+                    Your browser does not support canvas.
+                </canvas>
+
+                <input type="button" id="crop-it" class="crop-options" value="Crop" />
+            </div>
         </div>
         <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
