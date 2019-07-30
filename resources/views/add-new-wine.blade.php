@@ -11,9 +11,16 @@
             <div class="col-lg-4 col-sm-12">
                 <p>Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
-                <label><input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
+                <label>
+                    <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
                 </label>
+
+                <input type="submit" id="crop-picture" value="Crop" style="display:none;">
+                <input type="hidden" name="cropx" id="cropx" value="226">
+                <input type="hidden" name="cropy" id="cropy" value="250">
+                <input type="hidden" name="cropwidth" id="cropwidth" value="0">
+                <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
         </div>
 

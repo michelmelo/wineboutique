@@ -1,7 +1,8 @@
 require('./bootstrap');
 require('./main');
-require('./cropper');
 require('./add-wine');
+require('./cropper/cropper');
+require('./cropper/jquery-cropper');
 require('jquery-ui');
 require('./vendor/jquery.cookie/jquery.cookie');
 window.Vue = require('vue');

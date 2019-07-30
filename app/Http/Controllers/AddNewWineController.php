@@ -64,7 +64,7 @@ class AddNewWineController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region']);
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight']);
         $data['price'] = number_format((float)$data['price'], 2, '.', '');
         
         if($request->hasFile('photo'))
@@ -73,10 +73,8 @@ class AddNewWineController extends Controller
             $request->file('photo')->move(public_path().'/images/wine/', $photo = Str::slug($data['name']) . '_' . uniqid(true) . '.' . $ext);
             $path = public_path().'/images/wine/' . $photo;
 
-            Image::make($path)->resize(C::$wineX, C::$wineY,
-                function ($constraint) {
-                    $constraint->aspectRatio();
-                })
+            Image::make($path)
+                ->crop($data["cropwidth"], $data["cropheight"], $data["cropx"], $data["cropy"])
                 ->save($path);
 
             $data['photo'] = '/images/wine/' . $photo;
@@ -133,17 +131,15 @@ class AddNewWineController extends Controller
 
     public function update(NewWineRequest $request, Wine $wine)
     {
-        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region']);
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight']);
 
         if($request->hasFile('photo')) {
             $ext = $request->file('photo')->getClientOriginalExtension();
             $request->file('photo')->move(public_path().'/images/wine/', $photo = Str::slug($data['name']) . '_' . uniqid(true) . '.' . $ext);
             $path = public_path().'/images/wine/' . $photo;
 
-            Image::make($path)->resize(C::$wineX, C::$wineY,
-                function ($constraint) {
-                    $constraint->aspectRatio();
-                })
+            Image::make($path)
+                ->crop($data["cropwidth"], $data["cropheight"], $data["cropx"], $data["cropy"])
                 ->save($path);
 
             $data['photo'] = '/images/wine/' . $photo;

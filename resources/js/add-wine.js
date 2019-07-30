@@ -9,18 +9,48 @@ $.ajaxSetup({
 function readURL(input, selector) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
+
         reader.onload = function(e) {
-            $(selector).attr('src', e.target.result);
-            $(selector).hide();
-            $(selector).fadeIn(650);
-        }
+            selector.attr('src', e.target.result);
+            selector.hide();
+            selector.fadeIn(650);
+        };
+
         reader.readAsDataURL(input.files[0]);
+
+        setTimeout(function () {
+            selector.cropper({
+                aspectRatio: 0.9,
+                rotatable: false,
+                scalable: false,
+                zoomable: false
+            });
+
+            $("#crop-picture").show();
+        },1000);
+
+        $("#picture").prop("disabled", "disabled");
     }
 }
 
 $(document).ready(function() {
     $("#picture").change(function() {
-        readURL(this, '#imagePreview');
+        readURL(this, $('#imagePreview'));
+    });
+
+    $("#crop-picture").click(function (e) {
+        e.preventDefault();
+
+        var cropdata = $('#imagePreview').data("cropper").getData(true);
+
+        $(this).hide();
+        $("#picture").prop("disabled", false);
+        $('#imagePreview').cropper('destroy');
+
+        $("#cropx").val(cropdata.x);
+        $("#cropy").val(cropdata.y);
+        $("#cropwidth").val(cropdata.width);
+        $("#cropheight").val(cropdata.height);
     });
 
     $(".add-more-images").click(function(e){

@@ -9,11 +9,17 @@
         
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
-            <div class="col-lg-2 col-4">
-                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview"></label>
-                <div class="help-message">
-                    {{ $wine->photo === null ? '' : '(click to change)' }}
-                </div>
+            <div class="col-lg-4 col-sm-12">
+                <label>
+                    <input name="photo" style="display: none; cursor: pointer;" type="file" id="picture">
+                    <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview">
+                </label>
+
+                <input type="submit" id="crop-picture" value="Crop" style="display:none;">
+                <input type="hidden" name="cropx" id="cropx" value="226">
+                <input type="hidden" name="cropy" id="cropy" value="250">
+                <input type="hidden" name="cropwidth" id="cropwidth" value="0">
+                <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
         </div>
         <div class="shadow-box row new-wine-photos">
