@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./main');
+require('./cropper');
 require('./add-wine');
 require('jquery-ui');
 require('./vendor/jquery.cookie/jquery.cookie');

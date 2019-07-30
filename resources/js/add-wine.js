@@ -19,8 +19,31 @@ function readURL(input, selector) {
 }
 
 $(document).ready(function() {
+    cropper.start(document.getElementById("cropCanvas"), 1);
+
     $("#picture").change(function() {
-        readURL(this, '#imagePreview');
+        // readURL(this, '#imagePreview');
+
+        // this function will be called when the file input below is changed
+        var file = document.getElementById("picture").files[0];  // get a reference to the selected file
+
+        var reader = new FileReader();
+
+        // set an onload function to show the image in cropper once it has been loaded
+        reader.onload = function(event) {
+            var data = event.target.result; // the "data url" of the image
+            cropper.showImage(data); // hand this to cropper, it will be displayed
+            cropper.startCropping();
+        };
+
+        // this loads the file as a data url calling the function above once done
+        reader.readAsDataURL(file);
+        $(".crop-holder").show();
+    });
+
+    $("#crop-it").click(function () {
+        $("#imagePreview").attr('src', cropper.getCroppedImageSrc());
+        $(".crop-holder").hide();
     });
 
     $(".add-more-images").click(function(e){
@@ -34,7 +57,6 @@ Dropzone.options.photos = {
     url: "/wine-image",
     paramName: "image",
     maxFilesize: 10,
-    resizeWidth: 1200,
     resizeMimeType: "image/jpeg",
     acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif,image/webp",
     addRemoveLinks: true,

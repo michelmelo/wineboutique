@@ -971,9 +971,7 @@ footer p {
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    width: auto;
     height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
@@ -1027,7 +1025,9 @@ footer p {
     position: relative;
     overflow: hidden;
     background: #F5F5F5;
-    padding-bottom: 115%;
+    padding-bottom: 0;
+    height: 100%;
+    max-height: 250px;
 }
 
 .vine-box-style-3 .image-container i {
@@ -3120,10 +3120,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .main__scroller .vine-box-style-2,
     .row-eq-height .vine-box-style-3{
         padding: 0 10px;
-    }
-
-    .vine-box-style-3 .image-container{
-        padding-bottom: 115%;
     }
 
     .vine-box-style-3 .product-info{

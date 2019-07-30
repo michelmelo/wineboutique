@@ -11,9 +11,20 @@
             <div class="col-lg-4 col-sm-12">
                 <p>Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
-                <label><input name="photo" style="display: none; cursor: pointer;" type="file" id="picture"><img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview"></label>
+                <label><input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
+                    <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
+                </label>
+            </div>
+
+            <div class="col-lg-8 col-sm-12 crop-holder" style="display: none">
+                <canvas id="cropCanvas" width="450" height="450">
+                    Your browser does not support canvas.
+                </canvas>
+
+                <input type="button" id="crop-it" class="crop-options" value="Crop" />
             </div>
         </div>
+
         <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
                 <div class="fallback">
