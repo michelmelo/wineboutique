@@ -138,6 +138,8 @@ class WineController extends Controller
 
     public function show(Wine $wine)
     {
+        $wine = $wine->with("wineImages")->first();
+
         return view('wines-single', [
             'wine' => $wine,
             'orders_count' =>  DB::table('orders')
