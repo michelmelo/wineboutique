@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use App\Varietal;
+use App\WineImage;
 use App\WineRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -138,10 +139,9 @@ class WineController extends Controller
 
     public function show(Wine $wine)
     {
-        $wine = $wine->with("wineImages")->first();
-
         return view('wines-single', [
             'wine' => $wine,
+            'wine_images' => WineImage::where('wine_id', $wine->id)->get(),
             'orders_count' =>  DB::table('orders')
                 ->selectRaw('COUNT(id) as cnt')
                 ->where('id','=',$wine->id)

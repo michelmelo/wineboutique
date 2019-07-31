@@ -20,7 +20,7 @@
                         </div>
                     </div>
 
-                    @foreach($wine->wineImages as $img)
+                    @foreach($wine_images as $img)
                         <div class="carousel-item" data-slide-number="{{$loop->iteration}}">
                             <div class="carousel-image">
                                 <img src="{{ route('images.wine', ['slug' => $img->slug . '.jpg']) }}" class="img-fluid">
@@ -45,7 +45,7 @@
                             <img src="{{ $wine->photo }}" class="img-fluid">
                         </a>
                     </li>
-                    @foreach($wine->wineImages as $img)
+                    @foreach($wine_images as $img)
                         <li class="list-inline-item">
                             <a id="carousel-selector-{{$loop->iteration}}" data-slide-to="{{$loop->iteration}}" data-target="#wineCarousel">
                                 <img src="{{ route('images.wine', ['slug' => $img->slug . '.jpg']) }}" class="img-fluid">
