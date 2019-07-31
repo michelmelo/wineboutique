@@ -11,12 +11,21 @@
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">Wines</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Ordered At</th>
+                                <th scope="col">Ordered Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- foreach orders --}}
+                            @foreach($orders as $key => $value)
+                                <tr class="text-center">
+                                    <td>{{$key}}</td>
+                                    <td>{{$value["address"]}}</td>
+                                    <td>{{$value["wines"]}}</td>
+                                    <td>{{$value["status"]}}</td>
+                                    <td>{{$value["order_date"]}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

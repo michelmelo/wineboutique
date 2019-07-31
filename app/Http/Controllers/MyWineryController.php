@@ -8,6 +8,7 @@ use App\Varietal;
 use App\Region;
 use App\CapacityUnit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MyWineryController extends Controller
 {
@@ -85,6 +86,32 @@ class MyWineryController extends Controller
 
     public function stats()
     {
-        return view('my-winery-stats',[]);
+        $tmp_orders = DB::table('orders')
+            ->leftJoin('order_wines', 'orders.id', '=', 'order_wines.order_id')
+            ->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id')
+            ->leftJoin('wines', 'order_wines.wine_id', '=', 'wines.id')
+            ->leftJoin('wineries', 'wines.winery_id', '=', 'wineries.id')
+            ->select('orders.id as order_id', 'orders.status as order_status', 'orders.created_at as order_date',
+                'wines.name as wine_name', 'wineries.name as winery_name', 'addresses.address_1', 'addresses.address_2',
+                'addresses.postal_code', 'addresses.city')
+            ->get();
+
+        $orders = array();
+
+        foreach ($tmp_orders as $order){
+            if(array_key_exists($order->order_id, $orders)){
+                $orders[$order->order_id]["wines"] .= ", " . $order->winery_name . " - " . $order->wine_name;
+            }
+            else{
+                $orders[$order->order_id] = [
+                    "address" =>  $order->address_1 . " " . $order->address_2 . ", " . $order->city . ", " . $order->postal_code,
+                    "wines" => $order->winery_name . " - " . $order->wine_name,
+                    "status" => $order->order_status,
+                    "order_date" => $order->order_date
+                ];
+            }
+        }
+
+        return view('my-winery-stats',["orders" => $orders]);
     }
 }
