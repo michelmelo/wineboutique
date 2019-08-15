@@ -61,6 +61,11 @@ class StartupController extends Controller
     public function show_payment()
     {
         $winery = Auth::user()->winery;
+
+        if(!is_null($winery->winery_payment)){
+            return redirect()->route('home');
+        }
+
         $client = new Client();
         $fields = array();
 
