@@ -54,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isSeller()
     {
-        return $this->type===self::$types['seller'];
+        return $this->type === self::$types['seller'];
     }
 
     public function favoriteWines()
@@ -85,13 +85,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Address::class);
     }
 
-      public function sendPasswordResetNotification($token)
-   {
-      $this->notify(new MailResetPasswordNotification($token));
-   }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
-      public function sendVarifyNotification()
-   {
-      $this->notify(new MailVarifyNotification());
-   }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordNotification($token));
+    }
+
+    public function sendVarifyNotification()
+    {
+        $this->notify(new MailVarifyNotification());
+    }
 }

@@ -8,13 +8,15 @@
             currency="{{$currency}}"
             secret="{{$secret}}"
             test-account="{{$testAccount}}"
-            receipt-page-url="{{$receiptPageURL}}"
             order-id="{{$orderId}}"
             amount="{{$amount}}"
             date-time="{{$requestDateTime}}"
             auth-hash="{{$authHash}}"
             request-url="{{$requestURL}}"
             validation-url="{{$validationURL}}"
+            receipturl="{{$receiptPageURL}}"
         ></checkout-form>
     </div>
+
+    <iframe name="hidden_iframe" width="800" height="600"></iframe>
 @endsection

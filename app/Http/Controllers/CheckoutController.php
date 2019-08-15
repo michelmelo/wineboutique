@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
+use App\Order;
+use App\OrderWine;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,11 +21,10 @@ class CheckoutController extends Controller
         $this->currency = config('payment.nuvei.currency');
         $this->secret = config('payment.nuvei.secret');
         $this->testAccount = config('payment.nuvei.testAccount');
-        $this->receiptPageURL = url("/checkout/complete");
         $this->orderId = $this->generateUniqueOrderId();
         $this->requestDateTime = $this->requestDateTime();
         $this->validationURL = url("/checkout/validate");
-        $this->authHash = $this->authRequestHash();
+        $this->receiptPageURL = url("/checkout/complete", ["order_id" => $this->orderId]);
     }
 
     private function generateUniqueOrderId() {
@@ -48,33 +51,33 @@ class CheckoutController extends Controller
         return $url;
     }
 
-    private function authRequestHash() {
-        return md5($this->terminalId . $this->orderId . $this->amount . $this->requestDateTime . $this->receiptPageURL . $this->validationURL . $this->secret);
+    private function authRequestHash($orderId, $amount, $dateTime, $receiptPageURL, $validationURL, $secret) {
+        return hash("sha512", $this->terminalId . ":" . $orderId . ":" .  $amount . ":" .  $dateTime . ":" . $receiptPageURL . ":" . $validationURL . ":" . $secret);
     }
 
     private function authResponseHashIsValid($orderId, $amount, $dateTime, $responseCode, $responseText, $responseHash) {
-        return (md5($this->terminalId . $orderId . $amount . $dateTime . $responseCode . $responseText . $this->secret)==$responseHash);
+        return (hash("sha512", $this->terminalId . ":" . $orderId . ":" . $amount . ":" . $dateTime . ":" . $responseCode . ":" . $responseText . ":" . $this->secret) == $responseHash);
     }
 
     public function get()
     {
         $this->amount = Auth::user()->cart->reduce(function($carry, $item) {
-            return $carry + $item->price * $item->pivot->quantity;
+            return number_format($carry + $item->price * $item->pivot->quantity, 2);
         }, 0);
 
         return view('checkout', [
-            'gateway' => config('payment.nuvei.gateway'),
-            'terminalId' => config('payment.nuvei.terminalId'),
-            'currency' => config('payment.nuvei.currency'),
-            'secret' => config('payment.nuvei.secret'),
-            'testAccount' => config('payment.nuvei.testAccount'),
-            'receiptPageURL' => config('payment.nuvei.receiptPageURL'),
-            'orderId' => $this->generateUniqueOrderId(),
-            'requestDateTime' => $this->requestDateTime(),
+            'gateway' => $this->gateway,
+            'terminalId' => $this->terminalId,
+            'currency' => $this->currency,
+            'secret' => $this->secret,
+            'testAccount' => $this->testAccount,
+            'orderId' => $this->orderId,
+            'requestDateTime' => $this->requestDateTime,
             'validationURL' => $this->validationURL,
-            'authHash' => $this->authRequestHash(),
+            'receiptPageURL' => $this->receiptPageURL,
             'requestURL' => $this->requestURL(),
-            'amount' => $this->amount
+            'amount' => $this->amount,
+            'authHash' => $this->authRequestHash($this->orderId, $this->amount, $this->requestDateTime, $this->receiptPageURL, $this->validationURL, $this->secret)
         ]);
     }
 
@@ -98,12 +101,32 @@ class CheckoutController extends Controller
         }
     }
 
-    public function complete()
+    public function complete($order_id)
     {
         $response = "";
+
         if($this->authResponseHashIsValid($_REQUEST["ORDERID"], $_REQUEST["AMOUNT"], $_REQUEST["DATETIME"], $_REQUEST["RESPONSECODE"], $_REQUEST["RESPONSETEXT"], $_REQUEST["HASH"])) {
             switch($_REQUEST["RESPONSECODE"]) {
                 case "A" :	# -- If using local database, update order as Paid/Successful
+                        $new_order = new Order();
+                        $new_order->order_id = $_REQUEST["ORDERID"];
+                        $new_order->user_id = Auth::user()->id;
+                        $new_order->address_id = Auth::user()->addresses->where("default", 1)->first()->id;
+                        $new_order->status = 1;
+
+                        if($new_order->save()){
+                            foreach (Auth::user()->cart()->get() as $item){
+                                $new_order_wine = new OrderWine();
+                                $new_order_wine->order_id = $new_order->id;
+                                $new_order_wine->wine_id = $item->pivot->wine_id;
+                                $new_order_wine->quantity = $item->pivot->quantity;
+
+                                if($new_order_wine->save()){
+                                    Auth::user()->cart()->detach($new_order_wine->wine_id);
+                                }
+                            }
+                        }
+
                         $response = 'Payment Processed successfully. Thanks you for your order.';
                         break;
                 case "R" :
@@ -116,5 +139,9 @@ class CheckoutController extends Controller
         } else {
             $response = 'PAYMENT FAILED.';
         }
+
+        return view('complete', [
+            'response' => $response
+        ]);
     }
 }
