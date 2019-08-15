@@ -34,6 +34,11 @@ class Winery extends Model
         return $this->hasMany(Wine::class);
     }
 
+    public function winery_payment()
+    {
+        return $this->hasOne(WineryPayment::class);
+    }
+
     public function winery_shippings()
     {
         return $this->hasMany(WineryShipping::class);

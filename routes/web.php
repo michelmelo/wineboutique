@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('/checkout', 'CheckoutController@get');
     Route::any('/checkout/validate', 'CheckoutController@validateHash');
-    Route::any('/checkout/complete', 'CheckoutController@complete');
+    Route::any('/checkout/complete/{order_id}', 'CheckoutController@complete');
     
     Route::get('my_favorites', 'UsersController@myFavorites');
     
