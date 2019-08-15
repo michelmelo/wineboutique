@@ -153,7 +153,7 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="btn btn-primary d-block w-100" type="submit">
+                            <button class="btn btn-primary d-block w-100 payment-submit" type="submit">
                                 Place order
                             </button>
                         </div>

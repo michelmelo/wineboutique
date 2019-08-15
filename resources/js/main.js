@@ -94,6 +94,10 @@ $( document ).ready(function() {
 			}
 		}, 5000);
 	})();
+
+	$(".payment-submit").click(function () {
+		$(".payment-toggle").toggle();
+	});
 });
 
 // POPUP   

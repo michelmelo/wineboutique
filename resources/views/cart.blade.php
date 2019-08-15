@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container margin-row">
-    <cart></cart>
+    <cart show-complete="true"></cart>
 </div>
 @endsection

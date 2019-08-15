@@ -1,7 +1,8 @@
 <template>
     <div v-if="fetchedFirst && wines.length>0">
-        <div class="row padding-row" v-if="showComplete">
-            <h1 class="headline-2">CART</h1>
+        <div class="row padding-row">
+            <h1 class="headline-2" v-if="showComplete">CART</h1>
+
             <div class="col-lg-8 col-md-12">
                 <div class="vine-box-style-5"  v-for="wine in wines">
                     <div>
@@ -28,9 +29,9 @@
                                         <div class="quantity">
                                             <p>Quantity</p>
                                             <p>
-                                                <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)">-</span>
+                                                <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">-</span>
                                                 <span class="amount">{{wine.pivot.quantity}}</span>
-                                                <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)">+</span>
+                                                <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">+</span>
                                             </p>
                                         </div>
                                     </div>
@@ -38,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <span class="close"  @click.prevent="removeWine(wine.slug)">X</span>
+                    <span class="close" @click.prevent="removeWine(wine.slug)" v-if="showComplete">X</span>
                 </div>
             </div>
 
@@ -59,10 +60,6 @@
                         <td>Sales Tax:</td>
                         <td>$0.00</td>
                     </tr>
-                    <tr>
-                        <td>State Tax:</td>
-                        <td>$0.00</td>
-                    </tr>
                 </table>
                 <table class="cart-table-total">
                     <tr>
@@ -71,42 +68,11 @@
                     </tr>
                 </table>
                 <div class="row cart-buttons">
-                    <a href="/checkout" class="button red-button full-width">CHECKOUT</a>
+                    <a href="/checkout" class="button red-button full-width" v-if="showComplete">CHECKOUT</a>
                     <a href="/wines" class="button pink-button full-width">CONTINUE SHOPPING</a>
                 </div>
             </div>
         </div>
-        <div v-else>
-            <div class="vine-box-style-5"  v-for="wine in wines">
-                <div>
-                    <div  class="row" style="margin: 0 !important;">
-                        <div class="col-3 teas">
-                            <img :src="wine.photo" />
-                        </div>
-                        <div class="col-9">
-                            <h5 class="name">{{wine.name}}</h5>
-                            <h5 class="price">{{ (wine.price || 0) | currency }}</h5>
-                            <div class="shipping">
-                                <span>Free Shipping</span>
-                            </div>
-                            <div class="quantity">
-                                <p>Quantity</p>
-                                <p>
-                                    <span class="amount">{{wine.pivot.quantity}}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <table class="cart-table-total">
-                <tr>
-                    <td>Total:</td>
-                    <td>{{ (getTotal() || 0) | currency }}</td>
-                </tr>
-            </table>
-        </div>
-        
     </div>
     <div v-else>
         <p>Cart is empty.</p>
@@ -115,12 +81,14 @@
 
 <script>
     export default {
+        props: [
+            'showComplete'
+        ],
         data: function() {
             return {
                 wines: [],
                 fetchedFirst: false,
                 photo: '',
-                showComplete: true,
                 userAddress_: null
             }
         },

@@ -7,13 +7,15 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <td>Order Id</td>
                         <td>Address</td>
                         <td>Status</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="order in orders" v-bind:key="order.id"> 
-                        <td>{{order.address.address_1}}</td>
+                        <td>{{order.order_id}}</td>
+                        <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
                         <td>{{order.status}}</td>
                     </tr>
                 </tbody>

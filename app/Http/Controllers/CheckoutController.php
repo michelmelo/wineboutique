@@ -61,8 +61,25 @@ class CheckoutController extends Controller
 
     public function get()
     {
-        $this->amount = Auth::user()->cart->reduce(function($carry, $item) {
-            return number_format($carry + $item->price * $item->pivot->quantity, 2);
+        $wines = Auth::user()->cart;
+        $user_default_region = Auth::user()->addresses()->where("default", 1)->first();
+
+        if($user_default_region){
+            foreach ($wines as $wine){
+                foreach ($wine->winery->winery_shippings as $shipping){
+                    if($user_default_region->region_id == $shipping->ship_to){
+                        $wine->shipping_price = $shipping->price;
+                        $wine->shipping_additional = $shipping->additional;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        $this->amount = $wines->reduce(function($carry, $item) {
+            return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
+                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2);
         }, 0);
 
         return view('checkout', [
