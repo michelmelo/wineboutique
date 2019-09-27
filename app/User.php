@@ -57,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->type === self::$types['seller'];
     }
 
+    public function payments()
+    {
+        return $this->hasMany("App\UserPayment");
+    }
+
     public function favoriteWines()
     {
         return $this->belongsToMany(Wine::class, 'favorite_wines', 'user_id', 'wine_id')->withTimeStamps();

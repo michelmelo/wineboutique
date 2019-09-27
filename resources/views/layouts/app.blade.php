@@ -15,9 +15,9 @@
 
 	<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
 
-    
+    <script src="https://js.stripe.com/v3/"></script>
+
     <!-- Scripts -->
 
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
@@ -40,7 +40,10 @@
 	</div>
 	
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @if(request()->route()->getName() !== 'my-payments.show')
+        <script src="{{ asset('js/app.js') }}"></script>
+    @endif
+
     <script src="{{ asset('js/load-more.js') }}"></script>
     @yield('script')
 </body>
