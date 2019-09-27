@@ -1,6 +1,9 @@
 <template>
     <div class="section">
-        <form action="https://testpayments.nuvei.com/merchant/paymentpage" method="post" target="hidden_iframe">
+        <form action="/checkout/complete" method="post">
+            <slot>
+
+            </slot>
             <div class="row padding-row check">
                 <h1 class="headline-2">CHECKOUT</h1>
                 <div class="col-md-12">
@@ -153,21 +156,13 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="btn btn-primary d-block w-100 payment-submit" type="submit">
+                            <button class="btn btn-primary d-block w-100 payment-submit" type="submit" v-if="hasPayment">
                                 Place order
                             </button>
+                            <a href="/my-payments" v-else>Add payment method please</a>
                         </div>
                     </article>
                 </div>
-                <input type="hidden" name="TERMINALID" v-model="terminalId"/>
-                <input type="hidden" name="ORDERID" v-model="orderId"/>
-                <input type="hidden" name="CURRENCY" v-model="currency"/>
-                <input type="hidden" name="AMOUNT" v-model="amount"/>
-                <input type="hidden" name="DATETIME" v-model="dateTime"/>
-                <input type="hidden" name="VALIDATIONURL" v-model="validationUrl"/>
-                <input type="hidden" name="RECEIPTPAGEURL" v-model="receipturl"/>
-                <input type="hidden" name="HASH" v-model="authHash"/>
-                <input type="hidden" name="INIFRAME" value="Y"/>
             </div>
         </form>
     </div>
@@ -185,7 +180,7 @@
             'secret',
             'testAccount',
             'authHash',
-            'orderId',
+            'hasPayment',
             'amount',
             'dateTime',
             'requestURL',

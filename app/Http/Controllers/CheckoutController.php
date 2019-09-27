@@ -88,7 +88,7 @@ class CheckoutController extends Controller
             'currency' => $this->currency,
             'secret' => $this->secret,
             'testAccount' => $this->testAccount,
-            'orderId' => $this->orderId,
+            'hasPayment' => Auth::user()->payments()->first(),
             'requestDateTime' => $this->requestDateTime,
             'validationURL' => $this->validationURL,
             'receiptPageURL' => $this->receiptPageURL,
@@ -98,67 +98,69 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function validateHash(Request $request)
+    public function complete()
     {
-        if($this->authResponseHashIsValid($request->input("ORDERID"), $request->input("AMOUNT"), $request->input("DATETIME"), $request->input("RESPONSECODE"), $request->input("RESPONSETEXT"), $request->input("HASH"))) {
-            if($request->has("ORDERID")) {
-                switch($request->input("RESPONSECODE")) {
-                    case "A" :	# -- Update order in database as paid/sucessful --
-                            echo 'OK';
-                            break;
-                    case "R" :
-                    case "D" :
-                    case "C" :
-                    default  :	# -- Update order in database as declined/failed --
-                            echo 'OK';
-                }
-            } else {
-                echo 'Order ID: ' . $request->input("ORDERID") . ' not found.';
-            }
-        }
-    }
+        $user = Auth::user();
+        $cart = $user->cart;
+        $user_default_region = Auth::user()->addresses()->where("default", 1)->first();
+        $payment = $user->payments()->where("is_default" ,"=", 1)->first();
 
-    public function complete($order_id)
-    {
-        $response = "";
+        if($user_default_region){
+            foreach ($cart as $wine){
+                foreach ($wine->winery->winery_shippings as $shipping){
+                    if($user_default_region->region_id == $shipping->ship_to){
+                        $wine->shipping_price = $shipping->price;
+                        $wine->shipping_additional = $shipping->additional;
 
-        if($this->authResponseHashIsValid($_REQUEST["ORDERID"], $_REQUEST["AMOUNT"], $_REQUEST["DATETIME"], $_REQUEST["RESPONSECODE"], $_REQUEST["RESPONSETEXT"], $_REQUEST["HASH"])) {
-            switch($_REQUEST["RESPONSECODE"]) {
-                case "A" :	# -- If using local database, update order as Paid/Successful
-                        $new_order = new Order();
-                        $new_order->order_id = $_REQUEST["ORDERID"];
-                        $new_order->user_id = Auth::user()->id;
-                        $new_order->address_id = Auth::user()->addresses->where("default", 1)->first()->id;
-                        $new_order->status = 1;
-
-                        if($new_order->save()){
-                            foreach (Auth::user()->cart()->get() as $item){
-                                $new_order_wine = new OrderWine();
-                                $new_order_wine->order_id = $new_order->id;
-                                $new_order_wine->wine_id = $item->pivot->wine_id;
-                                $new_order_wine->quantity = $item->pivot->quantity;
-
-                                if($new_order_wine->save()){
-                                    Auth::user()->cart()->detach($new_order_wine->wine_id);
-                                }
-                            }
-                        }
-
-                        $response = 'Payment Processed successfully. Thanks you for your order.';
                         break;
-                case "R" :
-                case "D" :
-                case "C" :
-                case "S" :
-                default  :	# -- If using local database, update order as declined/failed --
-                    $response = 'PAYMENT DECLINED! Please try again with another card. Bank response: ' . $_REQUEST["RESPONSETEXT"];
+                    }
+                }
             }
-        } else {
-            $response = 'PAYMENT FAILED.';
         }
 
-        return view('complete', [
-            'response' => $response
-        ]);
+        $sum = $cart->reduce(function($carry, $item) {
+            return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
+                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2);
+        }, 0);
+
+        try{
+            \Stripe\Stripe::setApiKey(env('STRIPE_PRIVATE_KEY'));
+
+            $charge = \Stripe\Charge::create([
+                "amount" => $sum * 100,
+                "currency" => "usd",
+                "source" => $payment->stripe_card_id,
+                "customer" => $payment->stripe_customer_id,
+                "metadata" =>[
+                    "order_id" => $this->orderId
+                ]
+            ]);
+        }
+        catch (\Exception $e){
+            return redirect()->back();
+        }
+
+        if($charge && $charge->status == "succeeded"){
+            $new_order = new Order();
+            $new_order->order_id = $this->orderId;
+            $new_order->user_id = $user->id;
+            $new_order->address_id = $user->addresses->where("default", 1)->first()->id;
+            $new_order->status = 1;
+
+            if($new_order->save()){
+                foreach (Auth::user()->cart()->get() as $item){
+                    $new_order_wine = new OrderWine();
+                    $new_order_wine->order_id = $new_order->id;
+                    $new_order_wine->wine_id = $item->pivot->wine_id;
+                    $new_order_wine->quantity = $item->pivot->quantity;
+
+                    if($new_order_wine->save()){
+                        Auth::user()->cart()->detach($new_order_wine->wine_id);
+                    }
+                }
+            }
+        }
+
+        return redirect("/my-orders");
     }
 }
