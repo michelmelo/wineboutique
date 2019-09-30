@@ -162,7 +162,7 @@ class CheckoutController extends Controller
             }
         }
 
-        Mail::send('email.order-confirmation', ['data' => ""],
+        Mail::send('email.order-confirmation', ['order' => $new_order->order_id],
             function ($message) use ($user)
             {
                 $message
@@ -170,6 +170,13 @@ class CheckoutController extends Controller
                     ->to($user->email)->subject('Order confirmation');
             });
 
-        return redirect("/thank-you");
+        return redirect("/checkout/done/" . $new_order->order_id);
+    }
+
+    public function done($order)
+    {
+        return view('thank-you', [
+            "order" => $order
+        ]);
     }
 }

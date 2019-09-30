@@ -18,7 +18,7 @@
                                     </div>
                                     <div class="col-6 d-flex align-items-end">
                                         <div class="shipping">
-                                            <span v-if="wine.shipping_price">{{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                            <span v-if="wine.shipping_price">Shipping: {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
                                             <span v-else>
                                                 Winery is not shipping to your state, please remove wine or
                                                 <a href="/my-address">change shipping state</a>

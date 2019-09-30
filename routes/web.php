@@ -98,7 +98,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/checkout', 'CheckoutController@get');
     Route::post('/checkout/complete', 'CheckoutController@complete');
-    
+    Route::get('/checkout/done/{order}', 'CheckoutController@done');
+
     Route::get('my_favorites', 'UsersController@myFavorites');
     
     Route::get('/my-orders', 'MyOrdersController@show')->name('my-order.show');
@@ -123,8 +124,4 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
     Route::post('my-winery-store', 'MyWineryController@store')->name('my-winery-store');
-
-    Route::get("/thank-you", function(){
-        return View::make("thank-you");
-    });
 });
