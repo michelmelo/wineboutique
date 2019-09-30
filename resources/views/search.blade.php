@@ -31,7 +31,7 @@
                             <div class="star-rating">
                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating}}"></star-rating>
                             </div>
-                            <span class="order-q">{{$result->orders_count}} Orders</span>
+                            <span class="order-q">{{$result->wine_orders()->sum("quantity")}} Orders</span>
                         </div>
                     </a>
                 </div>
