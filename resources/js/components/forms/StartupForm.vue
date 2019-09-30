@@ -48,7 +48,7 @@
                     <div class="col-lg-12 wineries-box">
                         <div>
                             <div class="wineries-brand">
-                                <label class="winery-header uploader" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
+                                <label class="winery-header uploader" v-model="cover" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
                             </div>
@@ -149,6 +149,7 @@
             cover: null,
             name: null,
             description: null,
+            cover: null,
             is_free_shipping: false
         }),
         created() {
@@ -233,6 +234,7 @@
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
                 if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
+                if(!this.cover) this.errors['cover'] = 'You must upload cover.';
 
                 if(Object.keys(this.errors).length > 0){
                     e.preventDefault();
@@ -246,7 +248,7 @@
                 return this.profile?`/images/winery/profile/${this.profile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.cover?`/images/winery/cover/${this.cover}`:this.defaultCoverPhoto;
+                return this.cover ? `/images/winery/cover/${this.cover}`: '';
             }
         }
     }

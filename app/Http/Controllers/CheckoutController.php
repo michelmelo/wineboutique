@@ -8,6 +8,7 @@ use App\OrderWine;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -161,6 +162,14 @@ class CheckoutController extends Controller
             }
         }
 
-        return redirect("/my-orders");
+        Mail::send('email.order-confirmation', ['data' => ""],
+            function ($message) use ($user)
+            {
+                $message
+                    ->from("no-reply@wineboutique.com")
+                    ->to($user->email)->subject('Order confirmation');
+            });
+
+        return redirect("/thank-you");
     }
 }
