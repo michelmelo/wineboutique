@@ -48,6 +48,11 @@ class Wine extends Model
         return $this->belongsTo(Region::class);
     }
 
+    public function wine_orders()
+    {
+        return $this->hasMany(OrderWine::class);
+    }
+
     public function getPhotoLink()
     {
         return $this->photo;
