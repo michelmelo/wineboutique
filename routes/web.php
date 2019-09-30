@@ -100,7 +100,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/checkout/complete', 'CheckoutController@complete');
     Route::get('/checkout/done/{order}', 'CheckoutController@done');
 
-    Route::get('my_favorites', 'UsersController@myFavorites');
+    Route::get('my-favorites', 'UsersController@myFavorites');
     
     Route::get('/my-orders', 'MyOrdersController@show')->name('my-order.show');
 

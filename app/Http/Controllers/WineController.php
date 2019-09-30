@@ -73,7 +73,8 @@ class WineController extends Controller
     public function list(Request $request)
     {
         $page_offset = 0;
-        $page_limit = 4;
+        $page_limit = 16;
+
         if ($request->get('page_offset')&&$request->get('page_limit')) {
             $page_offset = $request->get('page_offset');
             $page_limit = $request->get('page_limit');

@@ -16,7 +16,7 @@
                     <tr v-for="order in orders" v-bind:key="order.id"> 
                         <td>{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
-                        <td>{{order.status}}</td>
+                        <td>{{order.status == 1 ? "Proccesing" : order.status == 2 ? "shipped" : "Canceled"}}</td>
                     </tr>
                 </tbody>
             </table>
