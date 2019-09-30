@@ -7,7 +7,7 @@
             <h1>Thank you for placing an order!</h1>
         </div>
         <p style="margin-bottom: 30px;">
-            Order Number: {{ $order }} has been sent to the winery, please expect it within 5-7 days.
+            Order Number: {{ $order->order_id }} has been sent to the winery, please expect it within {{ $from_to->days_from }} - {{ $from_to->days_to }} days.
         </p>
     </div>
 @endsection

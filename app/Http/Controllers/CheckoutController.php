@@ -29,8 +29,7 @@ class CheckoutController extends Controller
     }
 
     private function generateUniqueOrderId() {
-        $seconds = date('H')*3600+date('i')*60+date('s');
-        return date('zy') . $seconds;
+        return rand(1,9) . time();
     }
 
     private function requestDateTime() {
@@ -162,7 +161,13 @@ class CheckoutController extends Controller
             }
         }
 
-        Mail::send('email.order-confirmation', ['order' => $new_order->order_id],
+        $address = Auth::user()->addresses()->where("default", 1)->first();
+        $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
+
+        Mail::send('email.order-confirmation', [
+            'order' => $new_order->order_id,
+            'from_to' => $from_to
+        ],
             function ($message) use ($user)
             {
                 $message
@@ -170,13 +175,17 @@ class CheckoutController extends Controller
                     ->to($user->email)->subject('Order confirmation');
             });
 
-        return redirect("/checkout/done/" . $new_order->order_id);
+        return redirect("/checkout/done/" . $new_order->id);
     }
 
-    public function done($order)
+    public function done(Order $order)
     {
+        $address = Auth::user()->addresses()->where("default", 1)->first();
+        $from_to = $order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
+
         return view('thank-you', [
-            "order" => $order
+            "order" => $order,
+            "from_to" => $from_to
         ]);
     }
 }

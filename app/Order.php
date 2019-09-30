@@ -20,7 +20,7 @@ class Order extends Model
         return $this->belongsTo(Address::class);
     }
 
-    public function order_images()
+    public function order_wines()
     {
         return $this->hasMany(OrderWine::class);
     }
