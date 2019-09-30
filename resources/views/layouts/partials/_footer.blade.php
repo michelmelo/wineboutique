@@ -24,10 +24,8 @@
 
             <ul class="footer-nav">
                 <h4 class="mb-4">SUBSCRIBE TO OUR NEWSLETTER</h4>
-                @if(Auth::guest())
                 <li><newsletter-form></newsletter-form></li>
                 <li><a href="">Sign Up</a></li>
-                @endif
                 <li><a href="/faq">FAQ</a></li>
                 <li><a href="">Order Status</a></li>
                 <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
