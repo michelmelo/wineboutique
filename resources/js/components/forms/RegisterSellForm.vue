@@ -51,7 +51,7 @@
         <div id="over-21" v-if="acceptAge">
             <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
         </div>
-        <input type="submit" name="submit" class="button red-button full-width" value="CREATE A WINERY">
+        <input type="submit" name="submit" class="button red-button full-width" value="SIGN UP">
     </form>
     <transition name="fade">
         <div class="terms-popup is-visible" role="alert" v-if="activePopup">

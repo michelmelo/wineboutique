@@ -52,8 +52,8 @@ class GeneralPagesController extends Controller
     {
         return view('hot-sellers', [
             'wines' => Wine::limit(10)
-            ->leftJoin('orders', 'wines.id', '=', 'orders.id')
-            ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+            ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
+            ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')
             ->orderBy('orders_count','desc')
             ->get()
