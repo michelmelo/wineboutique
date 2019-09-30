@@ -8,7 +8,7 @@
         <div class="row vine-boxes">
             @foreach ($results as $result)
                 <div class="col-xs-3 vine-box-style-3 style-3-2">
-                    <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('winery', ['winery' => $result->slug])}}">
+                    <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('wine.show', ['wine' => $result->slug])}}">
                         <div class="image-container">
                             <img src=" {{ $result->photo }}">
                             <div class="overlay"></div>
