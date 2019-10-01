@@ -15,7 +15,7 @@ class UserPayment extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'user_id', 'stripe_customer_id', 'stripe_card_id', 'is_default'
+        'user_id', 'stripe_customer_id', 'stripe_card_id', 'is_default', 'alias'
     ];
 
     public function user()

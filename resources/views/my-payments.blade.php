@@ -20,22 +20,27 @@
                     <!-- Used to display form errors. -->
                     <div id="card-errors" role="alert"></div>
                 </div>
-
-                <button>Submit Payment</button>
+                <br>
+                <div class="form-row">
+                    <input type="text" name="alias" class="StripeElement" placeholder="Card alias" required>
+                </div>
+                <br>
+                <div class="form-row">
+                    <button>Submit Payment</button>
+                </div>
             </form>
-
+            <br>
+            <br>
             <table style="width: 100%" class="stripe-table">
                 <tr>
                     <th>Card #</th>
-                    <th>Stripe Customer ID</th>
-                    <th>Stripe Card ID</th>
+                    <th>Card Alias</th>
                     <th>Is Default</th>
                 </tr>
                 @foreach($user->payments as $payment)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $payment->stripe_customer_id }}</td>
-                        <td>{{ $payment->stripe_card_id }}</td>
+                        <td>{{ $payment->alias }}</td>
                         <td>{{ $payment->is_default ? "Yes" : "No" }}</td>
                     </tr>
                 @endforeach
