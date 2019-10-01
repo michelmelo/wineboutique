@@ -100,7 +100,6 @@
                                     :type="'wine'"
                             ></favorite>
                             @endif
-                            <span class="sale-mark">SALE</span>
                         </div>
                         <div class="product-info">
                             <h5>{{$wine['name']?$wine['name']:'Name of wine'}}</h5>
