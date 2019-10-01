@@ -6,7 +6,7 @@
                 <h2>NAME YOUR WINERY</h2>
                 <div class="col-lg-3 col-sm-12"></div>
                 <div class="col-lg-6 col-sm-12 enter-name">
-                    <input type="text" placeholder="Enter your winery name" v-model.trim="name" name="wineryName" :class="{ 'invalid': isInvalid('name') }" min="4" required>
+                    <input type="text" placeholder="Enter your winery name" v-model.trim="name" name="wineryName" :class="{ 'invalid': isInvalid('name') }" min="4">
                     <div class="name-check"><i class="fas fa-check"></i></div>
                 </div>
                 <div class="col-lg-3 col-sm-12"></div>
@@ -20,7 +20,7 @@
                         <tr>
                             <td>Winery state *</td>
                             <td>
-                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple required>
+                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
                                     <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                         {{ region.name }}
@@ -37,7 +37,7 @@
                 <h2>WINERY DESCRIPTION</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
-                    <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" required></textarea>
+                    <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" :class="{ 'invalid': isInvalid('description') }"></textarea>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -46,7 +46,7 @@
                 <h2>WINERY OWNER LAST 4 SSN NUMBERS</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
-                    <input type="text" name="ssn" id="ssn" maxlength="4" v-model.trim="ssn" required>
+                    <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="col-lg-12 wineries-box">
                         <div>
-                            <div class="wineries-brand">
+                            <div class="wineries-brand"  :class="{ 'invalid': isInvalid('cover') }">
                                 <label class="winery-header uploader" v-model="cover" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
@@ -159,7 +159,6 @@
             cover: null,
             name: null,
             description: null,
-            cover: null,
             ssn: null,
             is_free_shipping: false
         }),
@@ -168,6 +167,7 @@
             this.description = this.wineryDesc;
             this.profile = this.wineryProfile;
             this.cover = this.wineryCover;
+            this.ssn = "";
             this.regions = JSON.parse(this.selectedRegions);
             this.name = this.wineryName;
             this.addMoreShippings();
@@ -241,14 +241,18 @@
                 i.additional = 0;
             },
             onSubmit(e) {
-                this.errors = {};
+                e.preventDefault();
+                this.errors = [];
+
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
                 if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
                 if(this.ssn.length < 4) this.errors['ssn'] = 'You must enter at least 4 digits.';
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
 
-                if(Object.keys(this.errors).length > 0){
+                console.log(this.errors);
+
+                if(this.errors.length > 0){
                     e.preventDefault();
                     return false;
                 }
