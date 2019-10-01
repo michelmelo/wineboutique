@@ -94,6 +94,7 @@ class MyWineryController extends Controller
             ->select('orders.id as order_id', 'orders.status as order_status', 'orders.created_at as order_date',
                 'wines.name as wine_name', 'wineries.name as winery_name', 'addresses.address_1', 'addresses.address_2',
                 'addresses.postal_code', 'addresses.city')
+            ->where("wines.winery_id", Auth::user()->winery->id)
             ->get();
 
         $orders = array();

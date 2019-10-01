@@ -46,6 +46,8 @@ class MyPaymentsController extends Controller
 
             $user_payment->save();
 
+            UserPayment::where("id", "!=", $user_payment->id)->update(["is_default" => 0]);
+
             return redirect("my-payments")->with('message', 'Success.');
         }
 

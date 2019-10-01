@@ -4,7 +4,7 @@
             <h2>
                 <span>MY ORDERS</span>
             </h2>
-            <table class="table table-striped">
+            <table class="table table-striped" v-if="orders.length">
                 <thead>
                     <tr>
                         <td>Order Id</td>
@@ -20,6 +20,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p v-else>You have no orders yet.</p>
         </div>
     </div>
 </template>
