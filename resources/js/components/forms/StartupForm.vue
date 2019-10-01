@@ -32,11 +32,21 @@
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
+
             <div class="shadow-box row">
                 <h2>WINERY DESCRIPTION</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
                     <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" required></textarea>
+                </div>
+                <div class="col-lg-2 col-sm-12"></div>
+            </div>
+
+            <div class="shadow-box row">
+                <h2>WINERY OWNER LAST 4 SSN NUMBERS</h2>
+                <div class="col-lg-2 col-sm-12"></div>
+                <div class="col-lg-8 col-sm-12 enter-name">
+                    <input type="text" name="ssn" id="ssn" maxlength="4" v-model.trim="ssn" required>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -150,6 +160,7 @@
             name: null,
             description: null,
             cover: null,
+            ssn: null,
             is_free_shipping: false
         }),
         created() {
@@ -234,6 +245,7 @@
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
                 if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
+                if(this.ssn.length < 4) this.errors['ssn'] = 'You must enter at least 4 digits.';
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
 
                 if(Object.keys(this.errors).length > 0){

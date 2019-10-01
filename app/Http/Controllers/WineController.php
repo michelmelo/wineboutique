@@ -75,9 +75,8 @@ class WineController extends Controller
         $page_offset = 0;
         $page_limit = 16;
 
-        if ($request->get('page_offset')&&$request->get('page_limit')) {
+        if ($request->get('page_offset')) {
             $page_offset = $request->get('page_offset');
-            $page_limit = $request->get('page_limit');
         }
 
         $wines = Wine::query();
