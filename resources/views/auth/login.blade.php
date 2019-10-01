@@ -12,15 +12,15 @@
         <div class="col-lg-6 col-md-12 forms">
             <form class="form-inline" method="post">
                 @csrf
-                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                <input type="email" name="email" placeholder="Email" class="{{ $errors->has('email') ? 'invalid' : '' }}" value="{{ old('email') }}">
                 @if ($errors->has('email'))
-                    <span class="help-block">
+                    <span class="help-block error-block">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" class="{{ $errors->has('password') ? 'invalid' : '' }}" placeholder="Password">
                 @if ($errors->has('password'))
-                    <span class="help-block">
+                    <span class="help-block error-block">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif

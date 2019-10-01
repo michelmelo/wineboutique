@@ -4,30 +4,30 @@
         <input type="hidden" name="_token" v-model="csrf">
         <input type="hidden" name="type" value="SELLER">
         <input type="text" v-model.trim="firstName" :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name">
-        <span class="help-block" v-if="isInvalid('firstName')">
+        <span class="help-block error-block" v-if="isInvalid('firstName')">
             <strong>First Name is required.</strong>
         </span>
         <input type="text" v-model.trim="lastName" :class="{ 'invalid': isInvalid('lastName') }" name="lastName" placeholder="Last Name">
-        <span class="help-block" v-if="isInvalid('lastName')">
+        <span class="help-block error-block" v-if="isInvalid('lastName')">
             <strong>Last Name is required.</strong>
         </span>
         <input type="text" v-model.trim="wineryName" :class="{ 'invalid': isInvalid('wineryName') }" name="wineryName" placeholder="Winery Name">
-        <span class="help-block" v-if="isInvalid('wineryName')">
+        <span class="help-block error-block" v-if="isInvalid('wineryName')">
             <strong>Winery Name is required.</strong>
         </span>
         <input type="email" v-model.trim="email" :class="{ 'invalid': isInvalid('email') || validEmail===false, 'valid': validEmail }" name="email" placeholder="Email">
-        <span class="help-block" v-if="isInvalid('email')">
+        <span class="help-block error-block" v-if="isInvalid('email')">
             <strong>Email is invalid.</strong>
         </span>
-        <span class="help-block" v-if="validEmail == false">
+        <span class="help-block error-block" v-if="validEmail == false">
             <strong>Email already used.</strong>
         </span>
         <input type="password" v-model="password" :class="{ 'invalid': isInvalid('password') }" name="password" placeholder="Password">
-        <span class="help-block" v-if="isInvalid('password')">
+        <span class="help-block error-block" v-if="isInvalid('password')">
             <strong>Password is invalid.</strong>
         </span>
         <input type="text" v-model.trim="phone" :class="{ 'invalid': isInvalid('phone') }" name="phone" placeholder="Phone">
-        <span class="help-block" v-if="isInvalid('phone')">
+        <span class="help-block error-block" v-if="isInvalid('phone')">
             <strong>Phone is invalid.</strong>
         </span>
         <div class="form-check">
@@ -36,7 +36,7 @@
                 I agree to <a href="#" @click="activePopup = !activePopup">Terms and Conditions.</a> of the Wine Boutique*
             </label>
         </div>
-        <span class="help-block" v-if="isInvalid('acceptTerms')">
+        <span class="help-block error-block" v-if="isInvalid('acceptTerms')">
             <strong>You must accept Terms and Conditions.</strong>
         </span>
         <div class="form-check">
@@ -45,7 +45,7 @@
                 I am at least 21 years of age.*
             </label>
         </div>
-        <span class="help-block" v-if="isInvalid('acceptAge')">
+        <span class="help-block error-block" v-if="isInvalid('acceptAge')">
             <strong>You must be 21 or older.</strong>
         </span>
         <div id="over-21" v-if="acceptAge">

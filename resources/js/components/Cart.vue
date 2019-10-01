@@ -1,38 +1,40 @@
 <template>
     <div v-if="fetchedFirst && wines.length>0">
-        <div class="row padding-row">
+        <div class="row padding-row cart">
             <h1 class="headline-2" v-if="showComplete">CART</h1>
 
             <div class="col-lg-8 col-md-12">
-                <div class="vine-box-style-5"  v-for="wine in wines">
+                <div class="vine-box-style-5 order-product"  v-for="wine in wines">
                     <div>
-                        <div  class="row">
+                        <div class="row">
                             <div class="col-4 image-wrap">
                                 <img :src="wine.photo" class="wine-cart-image" />
                             </div>
-                            <div class="col-8 ">
+                            <div class="col-8 py-3">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="product-name">
                                         <h5 class="name">{{wine.name}}</h5>
                                         <h5 class="price"><strong>{{ (wine.price || 0) | currency }}</strong></h5>
                                     </div>
-                                    <div class="col-6 d-flex align-items-end">
-                                        <div class="shipping">
-                                            <span v-if="wine.shipping_price">Shipping: {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
-                                            <span v-else>
-                                                Winery is not shipping to your state, please remove wine or
-                                                <a href="/my-address">change shipping state</a>
-                                            </span>
+                                    <div class="d-flex justify-content-end align-items-end">
+                                        <div class="product-shipping">
+                                            <div class="shipping">
+                                                <span v-if="wine.shipping_price">Shipping: {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                                <span v-else>
+                                                    Winery is not shipping to your state, please remove wine or
+                                                    <a href="/my-address">change shipping state</a>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6 d-flex justify-content-end align-items-end">
-                                        <div class="quantity">
-                                            <p>Quantity</p>
-                                            <p>
-                                                <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">-</span>
-                                                <span class="amount">{{wine.pivot.quantity}}</span>
-                                                <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">+</span>
-                                            </p>
+                                        <div class="order-quantity">
+                                            <div class="quantity">
+                                                <p>Quantity</p>
+                                                <p>
+                                                    <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">-</span>
+                                                    <span class="amount">{{wine.pivot.quantity}}</span>
+                                                    <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">+</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

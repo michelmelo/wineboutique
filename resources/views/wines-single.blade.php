@@ -123,9 +123,11 @@
         @foreach($recommendations as $recommendation)
             <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
                 <a href="{{route('wine.show', ['wine' => $recommendation->slug])}}">
-                    <div class="image-container">
-                        <img src="{{ $recommendation->photo }}">
-                        <div class="overlay"></div>
+                    <div class="image-wrap">
+                        <figure class="image-container">
+                            <img src="{{ $recommendation->photo }}">
+                            <div class="overlay"></div>
+                        </figure>
                     </div>
                     <div class="product-info">
                         <h5>{{ $recommendation->name }}</h5>
