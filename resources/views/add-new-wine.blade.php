@@ -8,22 +8,31 @@
         
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
-            <div class="col-lg-4 col-sm-12">
-                <p>Main picture *</p>
+            <p class="w-100">Main picture *</p>
+            <div class="col-lg-4 col-sm-12 mb-3">
+                
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label>
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
                 </label>
 
-                <input type="submit" id="crop-picture" value="Crop" style="display:none;">
+                <input type="submit" id="crop-picture" value="Crop" style="display:none;" class="red-button button ">
                 <input type="hidden" name="cropx" id="cropx" value="226">
                 <input type="hidden" name="cropy" id="cropy" value="250">
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
+            <div class="col-lg-8 col-sm-12">
+                <div id="photos" class="dropzone">
+                    <div class="fallback">
+                        <p>Click into box to add more.</p>
+                    </div>
+                </div>
+                <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; display: block; margin: 20px auto;">Add More</a>
+            </div>
         </div>
-
+<!--
         <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
                 <div class="fallback">
@@ -33,7 +42,7 @@
             <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
         </div>
       
-
+-->
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
             
