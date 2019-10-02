@@ -92,7 +92,7 @@
                     <a href="{{route('wine.show', ['wine' => $wine['slug']])}}">
                         <div class="image-wrap">
                             <figure class="image-container">
-                                <img src="{{ $wine['photo'] }}" >
+                                <img src="{{ $wine['photo'] ? $wine['photo'] : asset('img/no-image-icon.jpg') }}" >
                                 <div class="overlay"></div>
                                 @if(Auth::user())
                                 <favorite

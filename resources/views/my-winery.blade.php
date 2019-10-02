@@ -24,7 +24,6 @@
                                 <th scope="col">Photo</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Varietal</th>
-                            <!--     <th scope="col">Description</th> -->
                                 <th scope="col">Winery</th>
                                 <th scope="col">Year</th>
                                 <th scope="col">Capacity</th>
@@ -35,7 +34,9 @@
                             @foreach($wines as $wine)
                                 <tr>
                                     <td>{{ $wine->name }}</td>
-                                    <td><img src="{{ $wine->photo }}" style="max-width: 100px; width: 100%;"></td>
+                                    <td>
+                                        <img src="{{ $wine->photo ? $wine->photo : asset('img/no-image-icon.jpg') }}" style="max-width: 100px; width: 100%;">
+                                    </td>
                                     <td>${{ number_format($wine->price, 2) }}</td>
                                     <td>{{ $wine->varietal->name }}</td>
                                    <!-- <td>{{ $wine->description }}</td> -->

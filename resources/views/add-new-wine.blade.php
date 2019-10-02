@@ -33,17 +33,7 @@
                 <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; display: block; margin: 20px auto;">Add More</a>
             </div>
         </div>
-<!--
-        <div class="shadow-box row new-wine-photos">
-            <div id="photos" class="dropzone">
-                <div class="fallback">
-                    <p>Click into box to add more.</p>
-                </div>
-            </div>
-            <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
-        </div>
-      
--->
+
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
             
