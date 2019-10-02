@@ -67,6 +67,40 @@
     </div>
     @endif
 
+    <div class="row padding-row row-eq-height">
+        <h2 class="heading mb-5">TOP RATED WINES</h2>
+        @foreach($wines as $wine)
+            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
+                <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
+                    <div class="image-wrap">
+                        <figure class="image-container">
+                            <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
+                            <img src="{{ $wine->photo }}" >
+                            <div class="overlay"></div>
+                            @if(Auth::user())
+                            <favorite
+                                    :post="'{{ $wine->slug }}'"
+                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                                    :type="'wine'"
+                            ></favorite>
+                            @endif
+                        </figure>
+                    </div>
+                    <div class="product-info">
+                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
+                        <h4>${{$wine->price}}</h4>
+                        <div class="star-rating">
+                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                        </div>
+                        <span class="order-q">0 Orders</span>
+                    </div>
+                </a>
+            </div>
+        @endforeach
+
+        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+    </div>
+
     <div class="row padding-row">
         <h2 class="heading mb-5">SHOP BY CATEGORY</h2>
 
@@ -74,7 +108,7 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <img src="{{asset('img/varietal-icon.png')}}"><span class="accordion-name">VARIETAL</span>
                             <i class="fas fa-chevron-down"></i>
                             <i class="fas fa-chevron-up"></i>
@@ -82,7 +116,7 @@
                     </h5>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         @foreach($varietals as $varietal)
                             <a href="/wines?varietal[]={{$varietal->id}}" class="sub-cat">{{$varietal->name}}</a>
@@ -129,19 +163,17 @@
         </div>
     </div>
 
-    <div class="row padding-row row-eq-height">
+    <div class="row padding-row row-eq-height new-arrivals">
         <h2 class="heading mb-5">NEW ARRIVALS</h2>
-        <div class="main__clipper">
+        <div class="col-12 main__clipper">
             <div class="main__scroller row">
                 @foreach($latestWines as $latestWine)
                     <div class="col-lg-4 col-sm-6 col-xs-6 vine-box-style-2">
                         <a href="{{route('wine.show', ['wine' => $latestWine->slug])}}">
                             <div  class="row">
-                                <div class="col-6 px-0">
+                                <div class="col-6 px-0 img-wrap">
                                 <!-- <img src="{{asset('img\vine-style-2-img.PNG')}}"> -->
-                                
                                     <img src="{{ $latestWine->photo }}" >
-                                
                                 </div>
                                 <div class="col-6 py-3">
                                     <h5 class="name">{{$latestWine->name}}</h5>
@@ -174,6 +206,7 @@
                                     :type="'wine'"
                             ></favorite>
                             @endif
+                            <!--    <span class="sale-mark">SALE</span> -->
                         </figure>
                     </div>
                     <div class="product-info">
@@ -190,7 +223,7 @@
 
         <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
     </div>
-
+    
     <div class="row padding-row center-text secure-section">
         <h2 class="heading mb-5">YOU’RE SECURE WITH US</h2>
 

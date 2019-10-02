@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div class="col-md-12 col-sm-12">
         <form method="post" action="/startup" id="startup-form">
             <input type="hidden" name="_token" v-model="csrf">
@@ -26,6 +26,9 @@
                                         {{ region.name }}
                                     </option>
                                 </select>
+                                <span class="help-block error-block" v-if="isInvalid('regions')">
+                                    <strong>Winery state is required.</strong>
+                                </span>
                             </td>
                         </tr>
                     </table>
@@ -38,6 +41,9 @@
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
                     <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" :class="{ 'invalid': isInvalid('description') }"></textarea>
+                    <span class="help-block error-block" v-if="isInvalid('description')">
+                        <strong>Winery description is required.</strong>
+                    </span>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -47,6 +53,9 @@
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
+                    <span class="help-block error-block" v-if="isInvalid('ssn')">
+                        <strong>Winery ssn number is required.</strong>
+                    </span>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -81,6 +90,9 @@
                     <div class="col-lg-12 wineries-box">
                         <div>
                             <div class="wineries-brand"  :class="{ 'invalid': isInvalid('cover') }">
+                                <div class="cover-info">
+                                    <p>Chose cover image</p>
+                                </div>
                                 <label class="winery-header uploader" v-model="cover" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
@@ -91,6 +103,9 @@
                                 </label>
                             </div>
                             <p class="winery-title">{{wineryName}}</p>
+                            <span class="help-block error-block" v-if="isInvalid('cover')">
+                                <strong>Winery cover and logo are required.</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
