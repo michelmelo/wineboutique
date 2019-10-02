@@ -46,14 +46,16 @@
     @if(count($topWineries)>0)
     <div class="row padding-row row-eq-height">
         <h2 class="heading mb-5">TOP RATED WINERIES</h2>
-        <div class="main__clipper">
+        <div class="main__clipper col-12">
             <div class="main__scroller row">
                 @foreach($topWineries as $topWinery)
                     <div class="col-xs-5ths vine-box-style-1">
                         <a href="{{route('winery', ['winery' => $topWinery->slug])}}">
-                            <div class="image-container">
-                                <img src="{{ $topWinery->cover?'/images/winery/cover/'.$topWinery->cover:asset('img/vine-style-1-img.jpg') }}">
-                                <div class="overlay"></div>
+                            <div class="image-wrap">
+                                <figure class="image-container">
+                                    <img src="{{ $topWinery->cover?'/images/winery/cover/'.$topWinery->cover:asset('img/vine-style-1-img.jpg') }}">
+                                    <div class="overlay"></div>
+                                </figure>
                             </div>
                             <h5>{{$topWinery->name}}</h5>
                             <div class="star-rating">
@@ -66,40 +68,6 @@
         </div>
     </div>
     @endif
-
-    <div class="row padding-row row-eq-height">
-        <h2 class="heading mb-5">TOP RATED WINES</h2>
-        @foreach($wines as $wine)
-            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
-                <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
-                    <div class="image-wrap">
-                        <figure class="image-container">
-                            <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
-                            <img src="{{ $wine->photo }}" >
-                            <div class="overlay"></div>
-                            @if(Auth::user())
-                            <favorite
-                                    :post="'{{ $wine->slug }}'"
-                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
-                                    :type="'wine'"
-                            ></favorite>
-                            @endif
-                        </figure>
-                    </div>
-                    <div class="product-info">
-                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                        <h4>${{$wine->price}}</h4>
-                        <div class="star-rating">
-                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
-                        </div>
-                        <span class="order-q">0 Orders</span>
-                    </div>
-                </a>
-            </div>
-        @endforeach
-
-        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
-    </div>
 
     <div class="row padding-row">
         <h2 class="heading mb-5">SHOP BY CATEGORY</h2>

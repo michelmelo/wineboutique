@@ -125,7 +125,8 @@ function moreWine(data) {
             favText += ' fa-heart toggle-fav" data-winename="' + element.slug + '">' + '</i>' + '</span>' + '</span>';
             retVal += favText;
         }
-        retVal += '<!--    <span class="sale-mark">SALE</span> -->' + '</div>';
+        /*retVal += '<span class="sale-mark">SALE</span>';*/
+        retVal += '</div>';
         retVal += '</figure><div class="product-info">';
         retVal += '<h5>';
         retVal += typeof element.name !== 'undefined' ? element.name : 'Name of wine';
