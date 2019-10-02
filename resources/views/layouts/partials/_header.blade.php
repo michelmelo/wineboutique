@@ -1,6 +1,10 @@
 <header>
     <div class="top-header">
+        @if($agent->isTablet() || $agent->isMobile())
+        <div class="container-fluid">
+        @else
         <div class="container">
+        @endif
             <div class="row">
                 <div class="col-2 logo py-4">
                     <a class="" href="/">
