@@ -113,6 +113,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('/add-new-wine', 'AddNewWineController')->except(['show'])->parameters([
         'add-new-wine' => 'wine'
     ]);
+
     Route::post('/store-new-wine', 'AddNewWineController@store')->name('store-new-wine');
     Route::post('/hideMsg', 'AddNewWineController@hideMsg');
     Route::put('/store-edited-wine/{wine}', 'AddNewWineController@update');

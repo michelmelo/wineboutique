@@ -45,7 +45,10 @@ $(document).ready(function() {
 
         $(this).hide();
         $("#picture").prop("disabled", false);
-        $('#imagePreview').cropper('destroy');
+
+        var crop_image_preview = $('#imagePreview').cropper('getCroppedCanvas').toDataURL();
+
+        $('#imagePreview').cropper('destroy').attr('src', crop_image_preview);
 
         $("#cropx").val(cropdata.x);
         $("#cropy").val(cropdata.y);

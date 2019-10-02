@@ -15,6 +15,7 @@
                 <label>
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
+                    <img src="" id="pera">
                 </label>
 
                 <input type="submit" id="crop-picture" value="Crop" style="display:none;" class="red-button button ">
