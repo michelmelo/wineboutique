@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('/my-orders', 'MyOrdersController@show')->name('my-order.show');
 
+    Route::get('/my-payments/default/{payment}', 'MyPaymentsController@update')->name('my-payments.update');
     Route::get('/my-payments', 'MyPaymentsController@show')->name('my-payments.show');
     Route::post('/my-payments', 'MyPaymentsController@store')->name('my-payments.store');
 

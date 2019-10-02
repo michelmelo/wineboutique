@@ -54,4 +54,18 @@ class MyPaymentsController extends Controller
 
         return redirect("my-payments")->with('message', 'Failed.');
     }
+
+    public function update(UserPayment $payment)
+    {
+        if($payment->user_id != Auth::user()->id){
+            return redirect("/my-payments")->with("error", "Permission denied");
+        }
+
+        $payment->is_default = 1;
+        $payment->save();
+
+        UserPayment::where("id", "!=", $payment->id)->update(["is_default" => 0]);
+
+        return redirect("/my-payments");
+    }
 }
