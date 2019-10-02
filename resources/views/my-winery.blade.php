@@ -24,11 +24,10 @@
                                 <th scope="col">Photo</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Varietal</th>
-                                <th scope="col">Description</th>
+                            <!--     <th scope="col">Description</th> -->
                                 <th scope="col">Winery</th>
                                 <th scope="col">Year</th>
                                 <th scope="col">Capacity</th>
-                                <th scope="col">Unit</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -36,14 +35,13 @@
                             @foreach($wines as $wine)
                                 <tr>
                                     <td>{{ $wine->name }}</td>
-                                    <td><img src="{{ $wine->photo }}" style="max-width: 100px"></td>
+                                    <td><img src="{{ $wine->photo }}" style="max-width: 100px; width: 100%;"></td>
                                     <td>${{ number_format($wine->price, 2) }}</td>
                                     <td>{{ $wine->varietal->name }}</td>
-                                    <td>{{ $wine->description }}</td>
+                                   <!-- <td>{{ $wine->description }}</td> -->
                                     <td>{{ $wine->who_made_it }}</td>
                                     <td>{{ $wine->when_was_it_made }}</td>
-                                    <td>{{ $wine->capacity }}</td>
-                                    <td>{{ $wine->capacityUnit->name }}</td>
+                                    <td>{{ $wine->capacity }} {{ $wine->capacityUnit->name }}</td>
                                     <td>
                                         <a href="{{route('add-new-wine.edit', [$wine->slug])}}" class="btn btn-default"><i class="fas fa-pencil-alt"></i></a>
                                         <form method="POST" action="/add-new-wine/{{$wine->id}}">

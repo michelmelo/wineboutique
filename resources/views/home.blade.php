@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container home">
     <div class="home-slider row">
         <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -162,17 +162,19 @@
         @foreach($wines as $wine)
             <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
-                    <div class="image-container">
-                        <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
-                        <img src="{{ $wine->photo }}" >
-                        <div class="overlay"></div>
-                        @if(Auth::user())
-                        <favorite
-                                :post="'{{ $wine->slug }}'"
-                                :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
-                                :type="'wine'"
-                        ></favorite>
-                        @endif
+                    <div class="image-wrap">
+                        <figure class="image-container">
+                            <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
+                            <img src="{{ $wine->photo }}" >
+                            <div class="overlay"></div>
+                            @if(Auth::user())
+                            <favorite
+                                    :post="'{{ $wine->slug }}'"
+                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                                    :type="'wine'"
+                            ></favorite>
+                            @endif
+                        </figure>
                     </div>
                     <div class="product-info">
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
