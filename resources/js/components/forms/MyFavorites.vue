@@ -2,17 +2,19 @@
         <div class="row">
             <div v-for="(favorite, counter) in favorites" class="col-xs-5 vine-box-style-3 style-3-2" v-if="displaying[counter]">
                 <a :href="'/wine/' + favorite.slug">
-                    <div class="image-container">
-                        <img :src="favorite.photo">
-                        <div class="overlay"></div>
-                        <favorite
-                                :post="favorite.slug"
-                                :favorited="'true'"
-                                :type="'wine'"
-                                v-on:deleted="hide(counter)"
-                        ></favorite>
+                    <div class="image-wrap">
+                        <figure class="image-container">
+                            <img :src="favorite.photo">
+                            <div class="overlay"></div>
+                            <favorite
+                                    :post="favorite.slug"
+                                    :favorited="'true'"
+                                    :type="'wine'"
+                                    v-on:deleted="hide(counter)"
+                            ></favorite>
 
-                        <span class="sale-mark">SALE</span>
+                        <!--    <span class="sale-mark">SALE</span> -->
+                        </figure>
                     </div>
                     <div class="product-info">
                         <h5>{{ favorite.name ? favorite.name: 'Name of wine'}}</h5>
