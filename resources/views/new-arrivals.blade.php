@@ -11,16 +11,15 @@
             @foreach($wines as $wine)
                 @include('new-arrival')
             @endforeach
-
-        @if(count($wines)>0)
-            <div class="col-12 mt-4 mb-5 text-center">
-                <div id="loadMoreArrivals">
-                    <a id="loadMoreArrivalsLink" href="#"
-                       data-wine-count="{{ $wine_count }}"
-                       class="big-button button red-button margin-0-auto margin-t">Load More</a>
-                </div>
-            </div>
-        @endif
     </div>
+    @if(count($wines)>0)
+        <div class="col-12 mt-4 mb-5 text-center">
+            <div id="loadMoreArrivals">
+                <a id="loadMoreArrivalsLink" href="#"
+                   data-wine-count="{{ $wine_count }}"
+                   class="big-button button red-button margin-0-auto margin-t">Load More</a>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
