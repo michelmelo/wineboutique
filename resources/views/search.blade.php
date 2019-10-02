@@ -9,19 +9,21 @@
             @foreach ($results as $result)
                 <div class="col-xs-3 vine-box-style-3 style-3-2">
                     <a href="{{$result->type==='WINE'?route('wine.show', ['wine' => $result->slug]):route('wine.show', ['wine' => $result->slug])}}">
-                        <div class="image-container">
-                            <img src=" {{ $result->photo }}">
-                            <div class="overlay"></div>
+                        <div class="image-wrap">
+                            <figure class="image-container">
+                                <img src=" {{ $result->photo }}">
+                                <div class="overlay"></div>
 
-                            @if(Auth::user())
-                                <favorite
-                                        :post="'{{ $result->slug }}'"
-                                        :favorited="{{ $result->favorited() ? 'true' : 'false' }}"
-                                        :type="'wine'"
-                                ></favorite>
-                            @endif
+                                @if(Auth::user())
+                                    <favorite
+                                            :post="'{{ $result->slug }}'"
+                                            :favorited="{{ $result->favorited() ? 'true' : 'false' }}"
+                                            :type="'wine'"
+                                    ></favorite>
+                                @endif
 
-                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating()}}"></star-rating>
+                                <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating()}}"></star-rating>
+                            </figure>
                         </div>
                         <div class="product-info">
                             <h5>{{$result->name}}</h5>

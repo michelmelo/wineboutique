@@ -23,7 +23,7 @@
                                 :type="'wine'"
                         ></favorite>
                         @endif
-                        <span class="sale-mark">SALE</span>
+                    <!--    <span class="sale-mark">SALE</span> -->
                     </figure>
                 </div>
                 <div class="product-info">

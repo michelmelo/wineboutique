@@ -116,7 +116,7 @@ function moreWine(data) {
         let retVal = '';
         retVal += '<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">';
         retVal += '<a href="' + '/wine/' + element.slug + '">';
-        retVal += '<div class="image-container">';
+        retVal += '<div class="image-wrap"><figure class="image-container">';
         retVal += '<img src="' + element.photo + '">';
         retVal += '<div class="overlay"></div>';
         if(typeof element.favorited !== 'undefined') {
@@ -125,8 +125,8 @@ function moreWine(data) {
             favText += ' fa-heart toggle-fav" data-winename="' + element.slug + '">' + '</i>' + '</span>' + '</span>';
             retVal += favText;
         }
-        retVal += '<span class="sale-mark">SALE</span>' + '</div>';
-        retVal += '<div class="product-info">';
+        retVal += '<!--    <span class="sale-mark">SALE</span> -->' + '</div>';
+        retVal += '</figure><div class="product-info">';
         retVal += '<h5>';
         retVal += typeof element.name !== 'undefined' ? element.name : 'Name of wine';
         retVal += '</h5>';

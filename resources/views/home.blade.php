@@ -189,6 +189,41 @@
         <a href="/wines" class="button red-button margin-0-auto margin-t">SEE MORE</a>
     </div>
 
+    <div class="row padding-row row-eq-height">
+        <h2 class="heading mb-5">TOP RATED WINES</h2>
+        @foreach($wines as $wine)
+            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
+                <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
+                    <div class="image-wrap">
+                        <figure class="image-container">
+                            <!-- <img src="{{asset('img/vine-style-3-img.png')}}"> -->
+                            <img src="{{ $wine->photo }}" >
+                            <div class="overlay"></div>
+                            @if(Auth::user())
+                            <favorite
+                                    :post="'{{ $wine->slug }}'"
+                                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                                    :type="'wine'"
+                            ></favorite>
+                            @endif
+                            <!--    <span class="sale-mark">SALE</span> -->
+                        </figure>
+                    </div>
+                    <div class="product-info">
+                        <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
+                        <h4>${{$wine->price}}</h4>
+                        <div class="star-rating">
+                            <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
+                        </div>
+                        <span class="order-q">0 Orders</span>
+                    </div>
+                </a>
+            </div>
+        @endforeach
+
+        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+    </div>
+    
     <div class="row padding-row center-text secure-section">
         <h2 class="heading mb-5">YOU’RE SECURE WITH US</h2>
 
