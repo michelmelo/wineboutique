@@ -3388,6 +3388,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 
 @media only screen and (max-width : 450px) {
+    
+    .top-header .container-fluid{
+        padding-right: 0!important;
+    }
     .item-in-cart {
         right: -6px;
     }
@@ -3473,6 +3477,17 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
     .new-wine-photos .dropzone .dz-preview .dz-image{
         margin:auto;       
+    }
+    .vine-box-style-3 h5 {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+    .vine-box-style-3 h4 {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+    .vine-box-style-3 .order-q {
+        font-size: 10px;
     }
 
 }
