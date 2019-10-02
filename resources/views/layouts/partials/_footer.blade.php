@@ -33,5 +33,5 @@
             </ul>
         </div>
     </div>
-    <div class="copyright text-center">© 2018 - Wine Boutique | All Rights Reserved | <a href="https://executive-digital.com/" class="color-r">Web Development</a> by Executive Digital</div>
+    <div class="copyright text-center">© 2018 - Wine Boutique | All Rights Reserved | <a href="https://executive-digital.com/" class="color-r" target="_blank">Web Development</a> by Executive Digital</div>
 </footer>

@@ -127,7 +127,7 @@ select {
     margin-left: 10px;
 }
 
-.pink-button {
+.pink-button, .pink-button:focus {
     background: #D6879A;
     color: #fff;
 }
@@ -136,7 +136,8 @@ select {
     color: #9C193A;
 }
 
-.red-button:hover, .pink-button:hover {
+.red-button:hover, .pink-button:hover,
+.single-wine-info .single-wine-buttons .red-button:hover {
     color: #fff;
 }
 
@@ -249,7 +250,7 @@ select {
 }
 
 .invalid {
-    border: 3px solid darkred !important;
+    border: 2px solid darkred !important;
 }
 
 .forms .valid {
@@ -511,11 +512,11 @@ header {
     margin: 0 auto;
     float: none;
 }
-
+/*
 .wine-cart-image {
     max-height: 165px;
 }
-
+*/
 .sticky {
     width: 100%;
     position: fixed;
@@ -967,7 +968,7 @@ footer p {
     width: 100%;
     height: 100%;
 }
-
+/* DEJAN COMENTED THIS OUT - IF THERE IS A HUGE DESIGN ISUE WITH NEW ARRIWALS OR HOT SELLERS PAGE CONTACT HIM
 .vine-box-style-3 img {
     margin: 0 auto;
     display: block;
@@ -975,6 +976,18 @@ footer p {
     height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
+}
+*/
+
+.vine-box-style-3 img {
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    color: gray;
 }
 
 .vine-box-style-3 .product-info{
@@ -1019,8 +1032,8 @@ footer p {
     color: #282828;
     font-weight: 600;
     font-size: 16px;
-}
-
+} 
+/* DEJAN COMENTED THIS OUT - IF THERE IS A HUGE DESIGN ISUE WITH NEW ARRIWALS OR HOT SELLERS PAGE CONTACT HIM
 .vine-box-style-3 .image-container {
     position: relative;
     overflow: hidden;
@@ -1028,6 +1041,20 @@ footer p {
     padding-bottom: 0;
     height: 100%;
     max-height: 250px;
+}
+*/
+
+.vine-box-style-3 .image-container {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 116.75%;
+}
+
+.home .vine-box-style-3 .image-container{
+    padding-bottom: 105%;
 }
 
 .vine-box-style-3 .image-container i {
@@ -1174,10 +1201,10 @@ footer p {
     display: block;
     width: 100%;
     height: 100%;
-    max-height: 200px;
+/*    max-height: 200px;*/
     overflow: hidden;
 }
-
+/* DEJAN COMMENTED THIS OUT
 .vine-box-style-5 .image-wrap{
     padding: 0;
     overflow: hidden;
@@ -1189,7 +1216,25 @@ footer p {
     width: 100%;
     height: 100%;
 }
+*/
+.vine-box-style-5 .image-wrap{
+    position: relative;
+    max-width: 251px;
+    width: 100%;
+    padding-bottom: 225px;
+    overflow-y: hidden;
+}
 
+.vine-box-style-5 img  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: gray;
+}
 .vine-box-style-5 .col-9 {
     padding: 15px;
 }
@@ -1446,8 +1491,6 @@ footer p {
             transform: scale(1); } 
 }
 
-
-
 .single-wine-info h1 {
     color: #646464;
     font-weight: 300;
@@ -1511,6 +1554,7 @@ footer p {
     border:none;
     background-color: #fcfcfc;
     border-bottom: 3px solid #fcfcfc;
+    cursor: pointer;
 }
 
 .wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
@@ -1522,6 +1566,20 @@ footer p {
 
 .wine-description .tab-content {
     padding: 30px 10px;
+}
+
+.single-wine-info .popup{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFF;
+    border: 3px solid rgb(156, 25, 58);
+    color: #303038;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -1959,6 +2017,10 @@ footer p {
 /*=========================================================================================================================================================================================
                                                                                  CART
 ==========================================================================================================================================================================================*/
+
+.cart .order-quantity{
+    flex: 0 0 152px;
+}
 
 .cart-table, .cart-table-total {
     width: 100%;
@@ -2476,7 +2538,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 .error-block {
     display: block;
-    color: red;
+    color: #da8599;
 }
 
 .vue-star-rating {
@@ -3225,8 +3287,22 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         margin-bottom: 0px;
     }
 
+    .order-product .d-flex{
+        display: block!important;
+    }
+
+    .vine-box-style-5 .image-wrap {
+        padding-bottom: 197px;
+    }
+
+    .cart .order-quantity{
+        display: inline-block;
+        padding-left: 10px;
+    }
+
     .shipping {
         padding: 10px 0 10px 10px;
+        line-height: 1.1em;
     }
 
     .shipping span {

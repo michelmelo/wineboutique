@@ -1,16 +1,18 @@
 <div class="col-xs-5 vine-box-style-3 style-3-2">
     <a href="/wine/{{$wine->slug}}">
-        <div class="image-container">
-            <img src="{{$wine->photo}}">
-            <div class="overlay"></div>
-            @if(Auth::user())
-            <favorite
-                    :post="'{{ $wine->slug }}'"
-                    :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
-                    :type="'wine'"
-            ></favorite>
-            @endif
-            <span class="sale-mark">SALE</span>
+        <div class="image-wrap">
+            <figure class="image-container">
+                <img src="{{$wine->photo}}">
+                <div class="overlay"></div>
+                @if(Auth::user())
+                <favorite
+                        :post="'{{ $wine->slug }}'"
+                        :favorited="{{ $wine->favorited() ? 'true' : 'false' }}"
+                        :type="'wine'"
+                ></favorite>
+                @endif
+                <span class="sale-mark">SALE</span>
+            </figure>
         </div>
         <div class="product-info">
             <h5>{{$wine->name}}</h5>
@@ -21,4 +23,5 @@
             <span class="order-q">{{ $wine->orders_count }} Orders</span>
         </div>
     </a>
+    
 </div>
