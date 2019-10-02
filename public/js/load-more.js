@@ -35,6 +35,12 @@ $( document ).ready(function() {
             break;
     }
 
+    $('.send-wine').click(function (e) {
+        e.preventDefault();
+
+        console.log($(this).attr("href"));
+    });
+
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
         +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
