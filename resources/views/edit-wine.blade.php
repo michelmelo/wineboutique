@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content') 
 <div class="container">
     <form method="POST" action="{{url('/store-edited-wine').'/'.$wine->slug}}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
@@ -9,7 +9,8 @@
         
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
-            <div class="col-lg-4 col-sm-12">
+            <p class="w-100">Main picture *</p>
+            <div class="col-lg-4 col-sm-12 mb-3">
                 <label>
                     <input name="photo" style="display: none; cursor: pointer;" type="file" id="picture">
                     <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview">
@@ -21,7 +22,16 @@
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
+            <div class="col-lg-8 col-sm-12">
+                <div id="photos" class="dropzone">
+                </div>
+                <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; display: block; margin: 20px auto;">Add More</a>
+                <script>
+                    var preloadedImages = {!! $preloadedImages->toJson() !!};
+                </script>
+            </div>
         </div>
+<!--        
         <div class="shadow-box row new-wine-photos">
             <div id="photos" class="dropzone">
             </div>
@@ -30,7 +40,7 @@
                 var preloadedImages = {!! $preloadedImages->toJson() !!};
             </script>
         </div>
-
+-->
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
             <div>

@@ -798,6 +798,30 @@ footer p {
     color: #575758;
 }
 
+/*=============================================================================================
+                                        HOME NEW ARRIVALS
+==============================================================================================*/
+
+.new-arrivals .img-wrap{
+    position: relative;
+    max-width: 183px;
+    width: 100%;
+    padding-bottom: 150px;
+    overflow-y: hidden; 
+}
+
+.new-arrivals .img-wrap img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    color: gray;
+}
+
 
 /*=========================================================================================================================================================================================
                                                                                   STAR RATING
@@ -1704,6 +1728,8 @@ footer p {
 
 .wineries-brand {
     position: relative;
+    background:url(/img/my-wine-header.jpg) center -12px no-repeat;
+    background-size: cover;
 }
 
 .winery-header {
@@ -1721,6 +1747,7 @@ footer p {
     width: 88px;
     height: 88px;
     object-fit: cover;
+    z-index: 2;
 }
 
 .wineries-box p {
@@ -2218,6 +2245,22 @@ footer p {
      margin: 5px 0;
 }
 
+.startup .cover-info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+.startup .cover-info p{
+    padding: 0;
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 0 1px 1px #000;
+}
 
 .enter-name {
     position: relative;
@@ -2238,8 +2281,8 @@ footer p {
     color: #69B85D;
     font-size: 22px;
     top: 10px;
-    height: 48px;
-    width: 48px;
+    height: 46px;
+    width: 46px;
     border: 1px solid #bbbaba;
     text-align: center;
 }
@@ -2506,17 +2549,19 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 .uploader {
     background-position: center;
     background-size: cover;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .uploader:hover {
     opacity: 0.6;
     cursor: pointer;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
 }
 
 .winery-header.uploader {
     padding-bottom: 22.52%;
+    position: relative;
+    z-index: 1;
 }
 
 .winery-logo.uploader {
@@ -3212,6 +3257,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: -webkit-fit-content;
         max-width: -moz-fit-content;
         max-width: fit-content;
+    }
+
+    .new-arrivals .img-wrap {
+        padding-bottom: 130px;
+    }
+
+    .new-arrivals .img-wrap img{
+        max-width: 150px;
     }
 
     .newsletter-popup .popup-head{

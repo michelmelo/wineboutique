@@ -14,6 +14,7 @@
                                 <th scope="col">Wines</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Ordered Date</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,8 +23,15 @@
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
                                     <td>{{$value["wines"]}}</td>
-                                    <td>{{$value["status"]}}</td>
+                                    <td>{{$value["status"] == 1 ? "New order" : "Sent"}}</td>
                                     <td>{{$value["order_date"]}}</td>
+                                    @if($value["status"] == 1)
+                                        <td>
+                                            <a class="send-wine" href="/my-winery/order-update/{{$key}}/{{$value["wine_id"]}}">Send wine</a>
+                                        </td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

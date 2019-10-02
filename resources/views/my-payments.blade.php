@@ -41,7 +41,11 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $payment->alias }}</td>
-                        <td>{{ $payment->is_default ? "Yes" : "No" }}</td>
+                        @if($payment->is_default)
+                            <td>Yes</td>
+                        @else
+                            <td>No <a href="/my-payments/default/{{ $payment->id }}">Make default</a></td>
+                        @endif
                     </tr>
                 @endforeach
             </table>

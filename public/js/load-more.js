@@ -35,6 +35,12 @@ $( document ).ready(function() {
             break;
     }
 
+    $('.send-wine').click(function (e) {
+        e.preventDefault();
+
+        console.log($(this).attr("href"));
+    });
+
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
         +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
@@ -44,18 +50,27 @@ $( document ).ready(function() {
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
         let $th = $(this);
+
         if ($th.hasClass('processing')) return;
+
         $th.addClass('processing');
+
         $.get($(this).attr('href'), function (data) {
             if (data[type].length > 0) {
                 loadedMoreCount = loadedMoreCount + page_offset;
+
                 let html = type === 'wines' ? moreWine(data[type]) : moreWineries(data[type]);
+
                 $('.vine-boxes').append(html);
+
                 let newPageOffset = parseInt(loadedMoreCount) + parseInt(page_offset);
+
                 $('#loadMoreLink').attr('href', window.location.pathname +
                     (window.location.search==='' ? '?' : (window.location.search+'&')) +
                     'page_offset=' + newPageOffset + '&page_limit=' + page_offset);
+
                 hideLoadMore();
+
                 if(data[type].length<4) hideLoadMore(true);
             } else {
                 hideLoadMore(true);
@@ -138,7 +153,7 @@ function moreWineries(data) {
         if(element.wines.length>0) {
             retVal += '<div class="row latest-wines-list px-3 mt-4">';
 
-            element.wines.forEach(function (wine) {
+            element.wines.slice(-3).forEach(function (wine) {
                 retVal += '<div class="top-wine col-4 vine-box-style-4 px-2">';
                 retVal += '<a href="' + '/wine/' + wine.slug + '">'+'<div class="image-container">';
                 retVal += '<img src="' + wine.photo + '">';

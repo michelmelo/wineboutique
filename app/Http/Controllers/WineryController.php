@@ -49,6 +49,7 @@ class WineryController extends Controller
     {
         $page_offset = 0;
         $page_limit = 4;
+
         if ($request->get('page_offset')&&$request->get('page_limit')) {
             $page_offset = $request->get('page_offset');
             $page_limit = $request->get('page_limit');
