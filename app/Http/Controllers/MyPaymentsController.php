@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddressStoreRequest;
 use App\UserPayment;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Resources\AddressResource;
-use App\Address;
-use App\Region;
 
 class MyPaymentsController extends Controller
 {
@@ -34,7 +28,7 @@ class MyPaymentsController extends Controller
 
         $stripe = \Stripe\Customer::create([
             "email" => Auth::user()->email,
-            "source" => "$request->stripeToken"
+            "source" => $request->stripeToken
         ]);
 
         if($stripe){

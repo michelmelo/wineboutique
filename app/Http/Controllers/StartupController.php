@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StartupRequest;
-use App\WineryPayment;
-use GuzzleHttp\Client;
-use Illuminate\Http\Request;
+use App\UserPayment;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Region;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
 
 
 class StartupController extends Controller
@@ -93,9 +90,29 @@ class StartupController extends Controller
             ];
 
             $user->winery()->update($data);
+
         }
-        catch (\Exception $e){
+        catch (Exception $e){
             return redirect()->back()->with('message', 'Something went wrong.');
+        }
+
+        $stripe = \Stripe\Customer::create([
+            "email" => Auth::user()->email,
+            "source" => $request->stripeToken
+        ]);
+
+        if($stripe){
+            $user_payment = new UserPayment();
+            $user_payment->user_id = Auth::user()->id;
+            $user_payment->stripe_customer_id = $stripe->id;
+            $user_payment->stripe_card_id = $stripe->default_source;
+            $user_payment->alias = $request->alias;
+            $user_payment->is_default = true;
+
+            $user_payment->save();
+
+            UserPayment::where("id", "!=", $user_payment->id)->where("user_id", $user->id)->update(["is_default" => 0]);
+
         }
 
         return redirect()->route('my-winery')->with('message', 'Application sent.');
