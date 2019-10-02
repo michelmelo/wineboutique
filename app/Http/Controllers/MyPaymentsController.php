@@ -42,6 +42,7 @@ class MyPaymentsController extends Controller
             $user_payment->user_id = Auth::user()->id;
             $user_payment->stripe_customer_id = $stripe->id;
             $user_payment->stripe_card_id = $stripe->default_source;
+            $user_payment->alias = $request->alias;
             $user_payment->is_default = true;
 
             $user_payment->save();

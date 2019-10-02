@@ -3113,7 +3113,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .winery-info p {
         font-size: 12px;
-        margin-top: 0;
+      /*  margin-top: 0;*/
+    }
+
+    .winery-desc{
+        margin-top: 20px;
     }
 
     .winery-categories h2 {
@@ -3157,6 +3161,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .tracking {
         font-size: 14px;
+    }
+
+    .customer .form-inline, .seller .form-inline{
+        margin:0 auto;
     }
 
     .forms .form-inline label {
@@ -3351,6 +3359,16 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .popup-body {
         padding: 0 20px;
     }
+
+    .my-winery-head .button {
+        width: calc(50% - 10px);
+        float: left!important;
+        margin: 5px;
+    }
+
+    .my-winery-head .button:last-child {
+        width: calc(100% - 10px);
+    }
 }
 
 @media only screen and (max-width : 400px) {
@@ -3380,7 +3398,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 
 
-@media only screen and (max-width : 370px) {
+@media only screen and (max-width : 376px) {
+
     .newsletter-popup .popup-head{
         padding: 30px 10px 20px;
     }
@@ -3391,5 +3410,23 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
    
     .form-inline .input-width {
         max-width: 84%;
-    }    
+    } 
+    .new-wine-photos .dropzone .dz-preview {
+        margin: 10px auto;
+    }
+    .new-wine-photos .dropzone .dz-preview,
+    .new-wine-photos .dropzone .dz-preview .dz-image{
+        display: block;        
+    }
+    .new-wine-photos .dropzone .dz-preview .dz-image{
+        margin:auto;       
+    }
+
+}
+
+@media only screen and (max-width : 330px) {
+    .my-winery-head .button, .my-winery-head .button:last-child {
+        width: calc(100% - 4px);
+        margin: 2px;
+    }
 }

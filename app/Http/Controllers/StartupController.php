@@ -55,26 +55,13 @@ class StartupController extends Controller
             }
         }
 
-        return redirect()->route('sub-merchant-setup');
-    }
-
-    public function show_payment()
-    {
-        return view('payment_setup', []);
-    }
-
-    public function store_payment(Request $request)
-    {
         $user= Auth::user();
-
         $ssn = $request->ssn;
-        $webpage = $request->webpage;
+        $dob_obj = getdate(strtotime($user->birthday));
 
-        if(!$ssn || !$webpage){
+        if(!$ssn){
             return redirect("sellOnModa")->with('message', 'Missing data');
         }
-
-        $dob_obj = getdate(strtotime($user->birthday));
 
         try{
             \Stripe\Stripe::setApiKey(env('STRIPE_PRIVATE_KEY'));
@@ -94,9 +81,6 @@ class StartupController extends Controller
                         "month" => $dob_obj["mon"],
                         "year" => $dob_obj["year"],
                     ],
-                ],
-                "business_profile" => [
-                    "url" => $webpage
                 ],
                 "tos_acceptance" => [
                     "date" => time(),
