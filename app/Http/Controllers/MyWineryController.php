@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\OrderWine;
 use App\WineryShipping;
 use Illuminate\Http\Request;
@@ -93,8 +94,8 @@ class MyWineryController extends Controller
             ->leftJoin('wines', 'order_wines.wine_id', '=', 'wines.id')
             ->leftJoin('wineries', 'wines.winery_id', '=', 'wineries.id')
             ->select('orders.id as order_id', 'orders.status as order_status', 'orders.created_at as order_date',
-                'wines.name as wine_name', 'wines.id as wine_id', 'wineries.name as winery_name', 'addresses.address_1', 'addresses.address_2',
-                'addresses.postal_code', 'addresses.city')
+                'wines.name as wine_name', 'order_wines.status as wine_status', 'wines.id as wine_id', 'wineries.name as winery_name',
+                'addresses.address_1', 'addresses.address_2', 'addresses.postal_code', 'addresses.city')
             ->where("wines.winery_id", Auth::user()->winery->id)
             ->get();
 
@@ -102,15 +103,24 @@ class MyWineryController extends Controller
 
         foreach ($tmp_orders as $order){
             if(array_key_exists($order->order_id, $orders)){
-                $orders[$order->order_id]["wines"] .= ", " . $order->winery_name . " - " . $order->wine_name;
+                $orders[$order->order_id]["wines"][] = [
+                    "name" => $order->wine_name,
+                    "status" => $order->wine_status,
+                    "id" => $order->wine_id
+                ];
             }
             else{
                 $orders[$order->order_id] = [
                     "address" =>  $order->address_1 . " " . $order->address_2 . ", " . $order->city . ", " . $order->postal_code,
-                    "wines" => $order->winery_name . " - " . $order->wine_name,
+                    "wines" => [
+                        [
+                            "name" => $order->wine_name,
+                            "status" => $order->wine_status,
+                            "id" => $order->wine_id
+                        ]
+                    ],
                     "status" => $order->order_status,
                     "order_date" => $order->order_date,
-                    "wine_id" => $order->wine_id
                 ];
             }
         }
@@ -121,14 +131,21 @@ class MyWineryController extends Controller
     public function order_update($order_id, $wine_id)
     {
 
-        $wine = Auth::user()->winery->wines()->where("id", $wine_id)->first();
+        $user = Auth::user();
+        $wine = $user->winery->wines()->where("id", $wine_id)->first();
 
         if(!$wine){
-            return ['status' => false];
+            return redirect("my_winery_stats")->with("error", "Permission denied");
         }
 
-        return ["status" => true];
+        $order = Order::where("id", $order_id)->first();
 
-//        $order = OrderWine::where("order_id", $order_id)->
+        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2])){
+            if(!$order->order_wines()->where("status", 1)){
+                $order->update(["status" => 2]);
+            }
+        }
+
+        return redirect("my_winery_stats")->with("success", "Wine sent");
     }
 }

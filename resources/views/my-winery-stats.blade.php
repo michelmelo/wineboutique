@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-xs-12">
+            <h1 style="text-align: center;">{{ ucfirst(\Illuminate\Support\Facades\Auth::user()->winery->name) }}</h1>
+        </div>
         <div class="col-md-12 mt-5 pt-2">
             <div class="card">
                 <div class="card-body my-winery-table">
@@ -11,10 +14,8 @@
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Wines</th>
-                                <th scope="col">Status</th>
                                 <th scope="col">Ordered Date</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Wines</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,16 +23,20 @@
                                 <tr class="text-center">
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
-                                    <td>{{$value["wines"]}}</td>
-                                    <td>{{$value["status"] == 1 ? "New order" : "Sent"}}</td>
                                     <td>{{$value["order_date"]}}</td>
-                                    @if($value["status"] == 1)
-                                        <td>
-                                            <a class="send-wine" href="/my-winery/order-update/{{$key}}/{{$value["wine_id"]}}">Send wine</a>
-                                        </td>
-                                    @else
-                                        <td></td>
-                                    @endif
+                                    <td>
+                                        @foreach($value["wines"] as $wine)
+                                            @if($wine["status"] == 1)
+                                                <div>
+                                                    {{ $wine["name"] }} - <a class="send-wine" href="/my_winery/order-update/{{$key}}/{{$wine["id"]}}">Send wine</a>
+                                                </div>
+                                            @else
+                                                <div>
+                                                    {{ $wine["name"] }} - Wine sent
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
