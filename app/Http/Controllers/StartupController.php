@@ -105,7 +105,7 @@ class StartupController extends Controller
             $user_payment = new UserPayment();
             $user_payment->user_id = Auth::user()->id;
             $user_payment->stripe_customer_id = $stripe->id;
-            $user_payment->stripe_card_id = $stripe->default_source;
+            $user_payment->stripe_card_id = !is_null($stripe->default_source) ? $stripe->default_source : "";
             $user_payment->alias = $request->alias;
             $user_payment->is_default = true;
 
