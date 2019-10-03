@@ -40,10 +40,10 @@
                 <h2>SHIPPING</h2>
 
                 <div class="row form-inputs shipping-item-wrapper" v-for="(item, index) in existingShippings_" v-bind:key="item.id">
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <p>Shipping origin *</p>
                     </div>
-                    <div class="col-lg-8 col-sm-12">
+                    <div class="col-lg-9 col-sm-12">
                         <select id="location" :name="'shipping[' + index + '][ship_from]'" class="location" v-model="item.ship_from">
                             <option value="0" disabled selected>Select location</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
@@ -52,19 +52,19 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <p>Processing time *</p>
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-4 shipping-time col-sm-12">
                         <input type="number" min="0" :name="'shipping[' + index + '][days_from]'" placeholder="From" class="from" v-model="item.days_from">
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-4 shipping-time col-sm-12">
                         <input type="number" min="0" :name="'shipping[' + index + '][days_to]'" placeholder="To" class="to" v-model="item.days_to">
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <p>Fixed shipping costs *</p>
                     </div>
 
@@ -77,7 +77,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-sm-12 show_hide">
+                    <div class="col-lg-3 col-sm-12 show_hide">
                         <input type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
                         <div class="usd">USD</div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="usd" >USD</div>
                     </div>
 
-                    <div class="col-lg-8 col-lg-push-4 col-sm-12">
+                    <div class="col-lg-9 col-lg-push-3 col-sm-12">
                         <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
                     </div>
