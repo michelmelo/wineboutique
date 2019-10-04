@@ -16,16 +16,16 @@
                                     <tr v-for="address in addresses" :key="address.id">
                                         <td>
                                             <p :class="{'font-weight-bold': address.id === selectedAddress.id}">
-                                                {{address.name}}<br>
-                                                {{address.address_1}}<br>
-                                                {{address.address_2}}<br>
-                                                {{address.city}}<br>
-                                                {{address.postal_code}}<br>
+                                                {{address.name}}&nbsp; - &nbsp;
+                                                {{address.address_1}},&nbsp;
+                                                {{address.address_2}},&nbsp;
+                                                {{address.city}},&nbsp;
+                                                {{address.postal_code}},&nbsp;
                                                 {{address.region.name}}
                                             </p>
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary" @click.prevent="switchAddress(address)">Ship
+                                            <a href="#" class="button red-button button-small" @click.prevent="switchAddress(address)">Ship
                                                 here</a>
                                         </td>
                                     </tr>
@@ -124,10 +124,10 @@
                                     </p>
                                 </template>
 
-                                <button type="button" class="btn btn-primary" @click.prevent="selecting = true"
+                                <button type="button" class="button red-button button-small" @click.prevent="selecting = true"
                                         v-if="addresses.length>1">Change shipping address
                                 </button>
-                                <a href="/my-address" class="btn btn-primary">Add an address</a>
+                                <a href="/my-address" class="button red-button button-small">Add an address</a>
                             </template>
                         </div>
                     </article>
@@ -156,7 +156,7 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="btn btn-primary d-block w-100 payment-submit" type="submit" v-if="hasPayment">
+                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment">
                                 Place order
                             </button>
                             <a href="/my-payments" v-else>Add payment method please</a>
