@@ -49,6 +49,8 @@ $(document).ready(function() {
         var crop_image_preview = $('#imagePreview').cropper('getCroppedCanvas').toDataURL();
 
         $('#imagePreview').cropper('destroy').attr('src', crop_image_preview);
+        $(".add-new-wine button#submit").prop("disabled", false);
+        $("#crop-error").hide();
 
         $("#cropx").val(cropdata.x);
         $("#cropy").val(cropdata.y);
@@ -60,6 +62,11 @@ $(document).ready(function() {
         e.preventDefault();
 
         $("#photos").click();
+    });
+
+    $("#picture").change(function(){
+        $(".add-new-wine button#submit").prop("disabled", "disabled");
+        $("#crop-error").show();
     });
 });
 

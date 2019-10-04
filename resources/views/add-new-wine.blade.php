@@ -198,7 +198,8 @@
             <div class="col-lg-3 col-sm-12"></div>
         </div>
         <div id="inputs" style="display: none;"></div>
-        <div class="col-lg-12 col-sm-12" style="padding: 0;">
+        <div class="col-lg-4 col-lg-push-8 col-sm-12" style="padding: 0;">
+            <p id="crop-error" style="float: right; color: red; display: none;">Please crop the image</p>
             <button type="submit" id="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
     </form>

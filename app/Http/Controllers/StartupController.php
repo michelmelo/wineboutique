@@ -15,6 +15,10 @@ class StartupController extends Controller
     {
         $winery = Auth::user()->winery;
 
+        if(!$winery){
+            return redirect("/");
+        }
+
         return view('startup', [
             'winery' => $winery,
             'winery_regions' => $this->onlyIDs($winery->regions),
