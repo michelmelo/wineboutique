@@ -35,6 +35,10 @@ select {
     border: thin solid darkgrey!important;
 }
 
+input, textarea, select{
+    margin: 3px;
+}
+
 .center-text {
     text-align: center;
 }
@@ -118,8 +122,9 @@ select {
 }
 
 .button-small{
-    font-size: 12px;
+    font-size: 12px!important;
     padding: 5px 10px;
+    border-bottom: 1px solid #fff;
 }
 
 .white-button {
@@ -2207,7 +2212,6 @@ footer p {
 .info-box table tr td {
     padding: 10px 5px 10px 20px;
     width: 50%;
-    white-space: nowrap;
 }
 
 .info-box table tr td:first-child {
@@ -3319,6 +3323,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .newsletter-popup p {
         line-height: 1.5em;
     }
+
+    .add-new-wine .button{
+        display: block;
+        margin: 0 auto;
+        float: none!important;
+    }
 }
 
 
@@ -3530,11 +3540,21 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
+    .info-box table tr td {
+        padding: 10px 5px 10px 0;
+        max-width: 130px;
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width : 330px) {
     .my-winery-head .button, .my-winery-head .button:last-child {
         width: calc(100% - 4px);
         margin: 2px;
+    }
+    .button {
+        font-size: 16px;
+        padding: 8px 20px;
     }
 }
