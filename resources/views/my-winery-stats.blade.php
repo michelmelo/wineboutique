@@ -14,6 +14,7 @@
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">Shipping</th>
                                 <th scope="col">Ordered Date</th>
                                 <th scope="col">Wines</th>
                             </tr>
@@ -23,6 +24,7 @@
                                 <tr class="text-center">
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
+                                    <td>Royal Mail 1st Class</td>
                                     <td>{{$value["order_date"]}}</td>
                                     <td>
                                         @foreach($value["wines"] as $wine)

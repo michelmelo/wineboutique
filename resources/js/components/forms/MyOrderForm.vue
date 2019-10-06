@@ -4,11 +4,12 @@
             <h2>
                 <span>MY ORDERS</span>
             </h2>
-            <table class="table table-striped" v-if="orders.length">
+            <table class="table table-striped exception" v-if="orders.length">
                 <thead>
                     <tr>
                         <td>Order Id</td>
                         <td>Address</td>
+                        <td>Shipping</td>
                         <td>Status</td>
                     </tr>
                 </thead>
@@ -16,6 +17,7 @@
                     <tr v-for="order in orders" v-bind:key="order.id"> 
                         <td>{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
+                        <td>Royal Mail 1st Class</td>
                         <td>{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                     </tr>
                 </tbody>

@@ -2199,6 +2199,10 @@ footer p {
     width: 50%;
 }
 
+.info-box table.exception tr td {
+    width: 25%;
+}
+
 .info-box table tr td:first-child {
      color:#9b1f3d;
 }
