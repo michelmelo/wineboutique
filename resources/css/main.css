@@ -2445,6 +2445,7 @@ footer p {
 
 .new-wine-photos img {
     width: 100%;
+    max-width: 150px;
 }
 
 .form-inputs>div {
