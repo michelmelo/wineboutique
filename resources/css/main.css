@@ -109,8 +109,17 @@ select {
     opacity: .8;
 }
 
+.button:focus, .button:active {
+    outline: none;
+}
+
 .button:not([href]):not([tabindex]) {
     color: #fff;
+}
+
+.button-small{
+    font-size: 12px;
+    padding: 5px 10px;
 }
 
 .white-button {
@@ -2169,6 +2178,7 @@ footer p {
     margin-bottom: 20px;
     width: 100%;
     position: relative;
+    overflow-x: auto;
 }
 
 
@@ -2197,6 +2207,7 @@ footer p {
 .info-box table tr td {
     padding: 10px 5px 10px 20px;
     width: 50%;
+    white-space: nowrap;
 }
 
 .info-box table.exception tr td {
@@ -2397,6 +2408,12 @@ footer p {
     position: relative;
     float: left;
     color: #363636;
+}
+
+.startup .col-lg-4.shipping-time{
+    -ms-flex: 0 0 37.5%;
+    flex: 0 0 37.5%;
+    max-width: 37.5%;
 }
 
 

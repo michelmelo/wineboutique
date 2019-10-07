@@ -26,7 +26,7 @@
                 </div>
                 <br>
                 <div class="form-row">
-                    <button>Submit Payment</button>
+                    <button class="button red-button">Submit Payment</button>
                 </div>
             </form>
             <br>
@@ -44,7 +44,7 @@
                         @if($payment->is_default)
                             <td>Yes</td>
                         @else
-                            <td>No <a href="/my-payments/default/{{ $payment->id }}">Make default</a></td>
+                            <td>No <a class="float-right button red-button button-small" href="/my-payments/default/{{ $payment->id }}">Make default</a></td>
                         @endif
                     </tr>
                 @endforeach
