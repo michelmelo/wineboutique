@@ -14,9 +14,13 @@ class WineImageController extends Controller
     {
         $request->file('image')->move(storage_path() . '/app/public/images/', $picture = uniqid(true) . '.jpg');
 
+        $data = $request->only(['cropx', 'cropy', 'cropwidth', 'cropheight']);
+
         $path = storage_path() . '/app/public/images/' . $picture;
         
-        Image::make($path)->encode('jpg')->resize(null, 1200, function ($c) {
+        Image::make($path)
+            ->crop($data["cropwidth"], $data["cropheight"], $data["cropx"], $data["cropy"])
+            ->encode('jpg')->resize(null, 1200, function ($c) {
             $c->upsize();
         })->save();
 

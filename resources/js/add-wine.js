@@ -6,36 +6,19 @@ $.ajaxSetup({
     }
 });
 
-function readURL(input, selector) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            selector.attr('src', e.target.result);
-            selector.hide();
-            selector.fadeIn(650);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-
-        setTimeout(function () {
-            selector.cropper({
-                aspectRatio: 0.9,
-                rotatable: false,
-                scalable: false,
-                zoomable: false
-            });
-
-            $("#crop-picture").show();
-        },1000);
-
-        $("#picture").prop("disabled", "disabled");
-    }
-}
-
 $(document).ready(function() {
     $("#picture").change(function() {
         readURL(this, $('#imagePreview'));
+
+        $(".add-new-wine button#submit").prop("disabled", "disabled");
+        $("#crop-error").show();
+    });
+
+    $("#other_image").change(function(event){
+        readURL(this, $('#otherImagePreview'));
+
+        $(".add-new-wine button#submit").prop("disabled", "disabled");
+        $("#crop-error").show();
     });
 
     $("#crop-picture").click(function (e) {
@@ -58,20 +41,24 @@ $(document).ready(function() {
         $("#cropheight").val(cropdata.height);
     });
 
-    $(".add-more-images").click(function(e){
+    $("#crop-other-picture").click(function(e){
         e.preventDefault();
 
-        $("#photos").click();
-    });
+        var cropdata = $('#otherImagePreview').data("cropper").getData(true);
+        var crop_image_preview = $('#otherImagePreview').cropper('getCroppedCanvas').toDataURL();
 
-    $("#picture").change(function(){
-        $(".add-new-wine button#submit").prop("disabled", "disabled");
-        $("#crop-error").show();
-    });
+        $(this).hide();
+        $("#other_image").prop("disabled", false);
+        $(".add-new-wine button#submit").prop("disabled", false);
+        $('#otherImagePreview').cropper('destroy').attr('src', '/img/primary-photo.jpg');
+        $("#crop-error").hide();
 
-    $(".other_image").change(function(event){
         var formData = new FormData();
-        formData.append('image', $(this)[0].files[0]);
+        formData.append('image', $("#other_image")[0].files[0]);
+        formData.append('cropx', cropdata.x);
+        formData.append('cropy', cropdata.y);
+        formData.append('cropwidth', cropdata.width);
+        formData.append('cropheight', cropdata.height);
 
         $.ajax({
             url : "/wine-image",
@@ -81,8 +68,41 @@ $(document).ready(function() {
             contentType: false,
             success : function(response) {
                 $(`<input type="hidden" name="images[]" value="${response.id}" />`).appendTo("#inputs");
-                $(".other_images_preview").append('<img src="' + URL.createObjectURL(event.target.files[0]) + '">');
+                $(".other_images_preview").append('<img src="' + crop_image_preview + '">');
             }
         });
     });
 });
+
+function readURL(input, selector) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            selector.attr('src', e.target.result);
+            selector.hide();
+            selector.fadeIn(650);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+        setTimeout(function () {
+            selector.cropper({
+                aspectRatio: 0.9,
+                rotatable: false,
+                scalable: false,
+                zoomable: false
+            });
+
+            if(selector.is("#otherImagePreview")){
+                $("#crop-other-picture").show();
+            }
+            else{
+                $("#crop-picture").show();
+            }
+        },1000);
+
+        $("#picture").prop("disabled", "disabled");
+        $("#other_image").prop("disabled", "disabled");
+    }
+}

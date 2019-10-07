@@ -25,9 +25,11 @@
             </div>
             <div class="col-lg-8 col-sm-12">
                 <p class="w-100">Other pictures</p>
-                <label class="other_images_preview">
-                    <input type="file" class="other_image" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/primary-photo.jpg')}}">
+                <label>
+                    <input type="file" id="other_image" style="display: none; cursor: pointer;" >
+                    <img src="{{asset('img/primary-photo.jpg')}}" id="otherImagePreview">
+                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none;" class="red-button button ">
+                    <div class="other_images_preview"></div>
                 </label>
             </div>
         </div>
