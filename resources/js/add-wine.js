@@ -88,7 +88,7 @@ function readURL(input, selector) {
 
         setTimeout(function () {
             selector.cropper({
-                aspectRatio: 0.9,
+                aspectRatio: 0.85,
                 rotatable: false,
                 scalable: false,
                 zoomable: false
