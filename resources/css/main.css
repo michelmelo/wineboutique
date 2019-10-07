@@ -2626,6 +2626,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     position: relative !important;
 }
 
+.vdp-datepicker__calendar .cell {
+    float: left;
+}
+
 .error-block {
     display: block;
     color: #da8599;
