@@ -27,7 +27,7 @@
                 <p class="w-100">Other pictures</p>
                 <label>
                     <input type="file" id="other_image" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/primary-photo.jpg')}}" id="otherImagePreview">
+                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview">
                     <input type="submit" id="crop-other-picture" value="Crop" style="display:none;" class="red-button button ">
                     <div class="other_images_preview"></div>
                 </label>
