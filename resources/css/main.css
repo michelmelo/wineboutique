@@ -1048,7 +1048,7 @@ footer p {
 
 .vine-box-style-3 .product-info{
     padding: 10px;
-    min-height: 100px;
+    min-height: 120px;
 }
 
 .vine-box-style-3 h5 {
@@ -1106,12 +1106,12 @@ footer p {
     overflow: hidden;
     width: 100%;
     height: 100%;
-    padding-bottom: 116.75%;
+    padding-bottom: 144%;
 }
-
+/*
 .home .vine-box-style-3 .image-container{
     padding-bottom: 105%;
-}
+}*/
 
 .vine-box-style-3 .image-container i {
     position: absolute;
@@ -3042,6 +3042,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 16px;
     }
 
+    .add-new-wine .button{
+        margin: 0 auto;
+        display: block;
+        float: none!important;
+    }
+
     .carousel-control-next-icon, .carousel-control-prev-icon {
         width: 30px;
         height: 30px;
@@ -3539,11 +3545,23 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
+    .info-box table tr td {
+        padding: 10px 5px 10px 5px;
+        font-size: 12px;
+    }
+
+    .info-box table tr td input {
+        max-width: 140px;
+    }
+
 }
 
 @media only screen and (max-width : 330px) {
     .my-winery-head .button, .my-winery-head .button:last-child {
         width: calc(100% - 4px);
         margin: 2px;
+    }
+    .info-box table tr td input {
+        max-width: 120px;
     }
 }

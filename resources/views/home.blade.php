@@ -160,7 +160,7 @@
     <div class="row padding-row row-eq-height">
         <h2 class="heading mb-5">TOP RATED WINES</h2>
         @foreach($wines as $wine)
-            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
+            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-wrap">
                         <figure class="image-container">
@@ -188,8 +188,9 @@
                 </a>
             </div>
         @endforeach
-
-        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+        <div class="col-12 text-center mt-5">
+            <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+        </div>
     </div>
     
     <div class="row padding-row center-text secure-section">
