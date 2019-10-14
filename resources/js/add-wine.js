@@ -34,6 +34,8 @@ $(document).ready(function() {
         $('#imagePreview').cropper('destroy').attr('src', crop_image_preview);
         $(".add-new-wine button#submit").prop("disabled", false);
         $("#crop-error").hide();
+        $("#other_image").prop("disabled", false);
+        $("#picture").prop("disabled", false);
 
         $("#cropx").val(cropdata.x);
         $("#cropy").val(cropdata.y);
@@ -49,6 +51,7 @@ $(document).ready(function() {
 
         $(this).hide();
         $("#other_image").prop("disabled", false);
+        $("#picture").prop("disabled", false);
         $(".add-new-wine button#submit").prop("disabled", false);
         $('#otherImagePreview').cropper('destroy').attr('src', '/img/primary-photo.jpg');
         $("#crop-error").hide();
