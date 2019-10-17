@@ -4,6 +4,7 @@ let page_offset_counter = 1;
 
 let total = 0;
 let type = '';
+let timer = 0;
 
 $( document ).ready(function() {
     switch (window.location.pathname) {
@@ -140,6 +141,30 @@ $("#delete-wine-confirm").click(function (e) {
     e.preventDefault();
 
     $("#delete-wine-" + $(this).data("id")).submit();
+});
+
+$("#main-search").keyup(function () {
+    let that = $(this);
+
+    if (timer) {
+        clearTimeout(timer);
+    }
+
+    timer = setTimeout(function () {
+        if(that.val().length == 0){
+            $(".search-results").hide();
+        }
+        else{
+            $.get(that.closest("form").attr("action") + "?s=" + that.val(), function(response){
+                $(".search-results").empty();
+
+                response.wines.forEach(function(element){
+                    $(".search-results").append('<a href="/wine/' + element.id + '">' + element.name + '</a>').show();
+                });
+
+            }, "json");
+        }
+    }, 400);
 });
 
 function moreWine(data) {

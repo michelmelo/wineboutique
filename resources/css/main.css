@@ -389,6 +389,28 @@ select {
     background-color: #fefde5 !important;
 }
 
+.desktop-search {
+    position: relative;
+}
+
+.search-results {
+    position: absolute;
+    top: 80px;
+    z-index: 9999;
+    background: #ffffff;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    display: none;
+}
+
+.search-results a {
+    margin: 0;
+    padding: 5px 15px;
+    border-bottom: 1px solid #ced4da;
+    display: block;
+}
+
 /*=========================================================================================================================================================================================
                                                                            NAVIGATION
 ==========================================================================================================================================================================================*/
