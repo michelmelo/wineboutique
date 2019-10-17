@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="col-4 center-text">
-                    <p>ORDERS</p>
+                    <p>WE SOLD</p>
                     <span>{{ $wine->wine_orders()->sum("quantity") }}</span>
                 </div>
 
