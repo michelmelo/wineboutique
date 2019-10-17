@@ -57,6 +57,7 @@
     @endif
 
     <script src="{{ asset('js/load-more.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     @yield('script')
 </body>
 </html>
