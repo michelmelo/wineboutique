@@ -125,10 +125,22 @@ $("#confirm-ship-wine").click(function (e) {
 $("#close-popup").click(function (e) {
     e.preventDefault();
 
-    $("#ship-wine-confirm").fadeOut();
+    $(".popup-holder").fadeOut();
 });
 
+$(".delete-wine").click(function (e) {
+    e.preventDefault();
 
+    $(".default-popup").fadeIn();
+    $("#wine-name-holder").text($(this).data("name"));
+    $("#delete-wine-confirm").data("id", $(this).data("id"));
+});
+
+$("#delete-wine-confirm").click(function (e) {
+    e.preventDefault();
+
+    $("#delete-wine-" + $(this).data("id")).submit();
+});
 
 function moreWine(data) {
     let retValFinal = '';

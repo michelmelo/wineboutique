@@ -2654,11 +2654,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                                                                                  POPUP
 ==========================================================================================================================================================================================*/
 
-.terms-popup.is-visible, .newsletter-popup.is-visible {
+.terms-popup.is-visible, .newsletter-popup.is-visible, .default-popup.is-visible {
     z-index: 10000;
 }
 
-.terms-popup, .newsletter-popup {
+.terms-popup, .newsletter-popup, .default-popup {
     display: flex;
     align-items: center;
     justify-content: center;
