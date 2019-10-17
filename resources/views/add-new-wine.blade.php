@@ -7,7 +7,8 @@
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
-            <h2>PHOTOS</h2>
+            <h2 >PHOTOS <i class="fas fa-info-circle" ></i></h2>
+              <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
 
             <div class="col-lg-4 col-sm-12 mb-3">
                 <p class="w-100">Main picture *</p>
