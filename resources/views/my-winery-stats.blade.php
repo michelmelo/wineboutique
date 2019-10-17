@@ -48,4 +48,26 @@
         </div>
     </div>
 </div>
+
+<div id="ship-wine-confirm" class="newsletter-popup is-visible" role="alert" style="display:none;">
+    <div class="popup-container">
+        <div class="popup-head text-center">
+            <h2 class="thank-you">Ship wine!</h2>
+        </div>
+        <div class="popup-body text-center">
+            <div class="col-xs-8 col-xs-push-2">
+                <div class="form-inputs">
+                    <input type="text" name="tracking_id" id="tracking_id" placeholder="Tracking ID" required>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <a id="confirm-ship-wine" class="button red-button">Submit</a>
+            <span href="#" id="close-popup" class="button red-button">
+                <i class="fas fa-times"></i> CLOSE
+            </span>
+        </div>
+    </div>
+</div>
 @endsection

@@ -104,6 +104,32 @@ $( document ).ready(function() {
     });
 });
 
+$(".send-wine").click(function (e) {
+    e.preventDefault();
+
+    $("#ship-wine-confirm").fadeIn();
+    $("#confirm-ship-wine").attr("href", $(this).attr("href"));
+});
+
+$("#confirm-ship-wine").click(function (e) {
+    e.preventDefault();
+
+    if($("#tracking_id").val()){
+        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val();
+    }
+    else{
+        $("#tracking_id").css("border", "1px solid red");
+    }
+});
+
+$("#close-popup").click(function (e) {
+    e.preventDefault();
+
+    $("#ship-wine-confirm").fadeOut();
+});
+
+
+
 function moreWine(data) {
     let retValFinal = '';
     data.forEach(function (element) {

@@ -18,7 +18,7 @@ class MyOrdersController extends Controller
     public function show(Request $request)
     {
         return view('my-orders', [
-            'orders' => Auth::user()->orders()->with('address')->get()
+            'orders' => Auth::user()->orders()->with('address', 'order_wines', 'order_wines.wine')->get()
         ]);
     }
 

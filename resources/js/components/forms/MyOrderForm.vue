@@ -10,6 +10,7 @@
                         <td>Order Id</td>
                         <td>Address</td>
                         <td>Shipping</td>
+                        <td>Tracking</td>
                         <td>Status</td>
                     </tr>
                 </thead>
@@ -18,6 +19,11 @@
                         <td>{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
                         <td>Royal Mail 1st Class</td>
+                        <td>
+                            <span v-for="ow in order.order_wines" v-bind:key="ow.id">
+                                {{ow.wine.name}} - {{ow.status == 1 ? "Proccesing" : ow.tracking}} <br>
+                            </span>
+                        </td>
                         <td>{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                     </tr>
                 </tbody>
@@ -45,6 +51,7 @@
         }),
         created: function() {
             const orders = JSON.parse(this.userOrders);
+            console.log(orders);
             this.orders = orders;
         },
         methods: {
