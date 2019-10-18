@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid p-0">
     <div class="row padding-row">
         <h1 class="headline-2">TRACK YOUR ORDER</h1>
     </div>
+</div>
+<div class="container">
+    
 
     <div class="row padding-row tracking">
         <div class="col-lg-12 col-sm-12 col-xs-12 order-info">

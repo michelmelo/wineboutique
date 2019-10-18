@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="page-header">
+<div class="container-fluid p-0">
+      <div class="page-header">
         <img src="{{asset('img/my-wine-header.jpg')}}">
         <h1>MY WINE</h1>
     </div>
+</div>
+<div class="container">  
+   
 
     <div class="row center-text my-wine">
         <div class="col-md-4">

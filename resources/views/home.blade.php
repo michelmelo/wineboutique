@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container home">
+<div class="container-fluid p-0 home">
     <div class="home-slider row">
         <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -42,6 +42,9 @@
             </a>
         </div>
     </div>
+
+</div>
+<div class="container home">    
 
     @if(count($topWineries)>0)
     <div class="row padding-row row-eq-height">
@@ -183,7 +186,7 @@
                         <div class="star-rating">
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
-                        <span class="order-q">0 Orders</span>
+                        <span class="order-q">0 Sold</span>
                     </div>
                 </a>
             </div>

@@ -1,4 +1,5 @@
 <footer class="justify-content-center">
+<p href="#top-icons" id="back-to-top" class="d-none"><i class="fas fa-angle-double-up"></i></p>
     @if(Auth::guest())
         @if(Request::url() !== url('/register/sell'))
             <div class="footer-banner">
