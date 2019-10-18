@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -7,7 +9,7 @@
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
-            <h2 >PHOTOS <i class="fas fa-info-circle" ></i></h2>
+            <h2 >PHOTOS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
               <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
 
             <div class="col-lg-4 col-sm-12 mb-3">
@@ -36,8 +38,8 @@
         </div>
 
         <div class="shadow-box row details">
-            <h2>DETAILS</h2>
-            
+            <h2>DETAILS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+            <span class="popup-info d-none">Here you are required to provide as much detail as possible in regards to your wine. Make it sound delicious and great! </span>
             <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
@@ -175,7 +177,8 @@
         </div>
 
         <div class="shadow-box row pricing">
-            <h2>PRICING</h2>
+            <h2>PRICING <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+            <span class="popup-info d-none">Please set the pricing of your wine bottle.</span>
 
             <div class="col-lg-3 col-sm-12"></div>
             <div class="col-lg-6 col-sm-12">

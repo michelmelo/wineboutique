@@ -140,7 +140,7 @@
                                 <span class="fa fa-star"></span>
                             @endfor
                         </div>
-                        <span class="order-q">{{ $recommendation->orders_count }} Orders</span>
+                        <span class="order-q">{{ $recommendation->orders_count }} Sold</span>
                     </div>
                 </a>
 

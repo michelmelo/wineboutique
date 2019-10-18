@@ -3,7 +3,8 @@
         <form method="post" action="/startup" id="startup-form">
             <input type="hidden" name="_token" v-model="csrf">
             <div class="shadow-box row">
-                <h2>NAME YOUR WINERY</h2>
+                <h2>NAME YOUR WINERY <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">This is your brand name that will be visible to all users on Wine Boutique.</span>
                 <div class="col-lg-3 col-sm-12"></div>
                 <div class="col-lg-6 col-sm-12 enter-name">
                     <input type="text" placeholder="Enter your winery name" v-model.trim="name" name="wineryName" :class="{ 'invalid': isInvalid('name') }" min="4">
@@ -13,7 +14,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY PREFERENCES</h2>
+                <h2>WINERY PREFERENCES <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">Please select your winery state where your winery is located.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 winery-preferences">
                     <table>
@@ -37,7 +39,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY DESCRIPTION</h2>
+                <h2>WINERY DESCRIPTION <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none"> Please provide a detailed description of your winery. This description will be visible on your wine pages, your winery page and anywhere that has information regarding your winery.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
                     <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" :class="{ 'invalid': isInvalid('description') }"></textarea>
@@ -49,7 +52,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY OWNER LAST 4 SSN NUMBERS</h2>
+                <h2>WINERY OWNER LAST 4 SSN NUMBERS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span> 
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
@@ -61,7 +65,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY OWNER CREDIT CARD</h2>
+                <h2>WINERY OWNER CREDIT CARD <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">This is the credit card that will receive payments and purchases from customers. Please ensure that you provide the correct credit card number as Wine Boutique will not be responsible for incorrect details.</span> 
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <label for="card-element">
@@ -84,7 +89,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY APPEARANCE</h2>
+                <h2>WINERY APPEARANCE <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">Please upload a cover photo and a profil picture for your winery. This will be visible anywhere where a user can see your winery.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
                     <div class="col-lg-12 wineries-box">
@@ -113,7 +119,8 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>SHIPPING</h2>
+                <h2>SHIPPING  <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">Please select the states that you wish to ship your wine products to. You have the availability to set specific shipping prices depending on what states you are shipping to.</span>
 
                 <div class="row form-inputs shipping-item-wrapper" v-for="(item, index) in shippings">
                     <div class="col-lg-3 col-sm-12">

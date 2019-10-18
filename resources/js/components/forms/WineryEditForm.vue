@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD SHIPPING</button>
+            <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD STATES</button>
             <button type="submit" class="red-button button float-right">UPDATE</button>
         </form>
     </div>

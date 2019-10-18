@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid p-0">
     <div class="page-header">
         <img src="{{asset('img/new-arrivals-header.jpg')}}">
         <h1>NEW ARRIVALS</h1>
     </div>
+</div>
+<div class="container">
+    
 
     <div class="row" id="printMoreArrivals">
             @foreach($wines as $wine)

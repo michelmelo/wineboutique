@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container"> 
+<div class="container-fluid p-0">
     <div class="page-header">
         <img src="{{asset('img/hot-sellers-header.jpg')}}">
         <h1>HOT SELLERS</h1>
     </div>
+
+</div>
+<div class="container"> 
+   
 
     <div class="row">
 
@@ -32,7 +36,7 @@
                     <div class="star-rating">
                         <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                     </div>
-                    <span class="order-q">{{ $wine->orders_count }} Orders</span>
+                    <span class="order-q">{{ $wine->orders_count }} Sold</span>
                 </div>
             </a>
         </div>

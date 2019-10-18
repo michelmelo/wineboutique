@@ -77,7 +77,7 @@ select {
 }
 
 .main {
-  margin-top:180px; 
+  margin-top: 163px; 
   padding: 0;
 }
 
@@ -213,6 +213,7 @@ select {
     padding-bottom: 0;
     margin-bottom: 40px;
     position: relative;
+    margin-top: 0px;
 }
 
 .page-header img {
@@ -689,6 +690,14 @@ footer p {
     padding: 30px 0;
     color: #aaaaaa;
 }
+#back-to-top {
+    color: #9A1E3E;
+    font-size: 42px;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    cursor: pointer;
+    }
 
 /*=========================================================================================================================================================================================
                                                                                HOME
@@ -2526,9 +2535,11 @@ footer p {
     background: #fff;
     z-index: 999;
     padding: 10px 25px;
-    top: 57px;
+    top: 45px;
     left: 55%;
     display: none;
+    font-size: 12px;
+    line-height: 14px;
 }
 
 
@@ -2857,6 +2868,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-1 {
       min-height: 275px;
   }
+  .main {
+    margin-top: 150px;
+  }
 }
 
 
@@ -2907,9 +2921,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                 flex: 0 0 20%;
     }
 
-    .main {
-        margin-top:157px;
-    }
+   
 
     .col-xs-5ths, .main__scroller .col-xs-6 {
         -webkit-box-flex: 0;
@@ -2962,6 +2974,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .my-winery-table{
         overflow-x: auto;
     }
+    .popup-info {   
+      left: 58%;   
+      }
 
 }
 
@@ -2982,6 +2997,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
       width: 100%!important;
       max-width: 350px;
     }
+
 }
 
 @media only screen and (max-width : 768px) {
@@ -3052,7 +3068,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .main {
-        margin-top:165px;
+        margin-top: 136px;
     }
 
     .main .page-header{
@@ -3070,6 +3086,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     footer .container {
         padding: 30px 0;
     }
+
+
 
     .slider-content h1 {
         display: none;
@@ -3371,12 +3389,16 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .newsletter-popup p {
         line-height: 1.5em;
     }
+    .popup-info{
+        left: 50%;
+        margin-left: -125px;
+    } 
 }
 
 
 @media only screen and (max-width : 580px) {
     .main, .margin-row {
-        margin-top: 150px!important;
+        margin-top: 130px!important;
     }
     .container {
         padding-right: 5px;

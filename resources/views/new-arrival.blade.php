@@ -20,7 +20,7 @@
             <div class="star-rating">
                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
             </div>
-            <span class="order-q">{{ $wine->orders_count }} Orders</span>
+            <span class="order-q">{{ $wine->orders_count }} Sold</span>
         </div>
     </a>
     
