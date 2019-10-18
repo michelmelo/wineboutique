@@ -1,36 +1,38 @@
 <template>
     <div class="info-box shadow-box">
-        <h2>PERSONAL INFORMATION</h2>
-        <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div>
-        <table>
-            <tr>
-                <td>First Name:</td>
-                <td class="edit-text">
-                    <input name="firstName" v-model="firstName" v-if="editing" />
-                    <span v-else>{{firstName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td class="edit-text">
-                    <input name="lastName" v-model="lastName" v-if="editing" />
-                    <span v-else>{{lastName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Date of birth:</td>
-                <td class="edit-text">
-                    <datepicker id="datepicker" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
-                    <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Email address:</td>
-                <td class="edit-text">
-                    <span>{{email}}</span>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <h2>PERSONAL INFORMATION</h2>
+            <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div>
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td class="edit-text">
+                        <input name="firstName" class="w-100" v-model="firstName" v-if="editing" />
+                        <span v-else>{{firstName}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td class="edit-text">
+                        <input name="lastName" class="w-100" v-model="lastName" v-if="editing" />
+                        <span v-else>{{lastName}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date of birth:</td>
+                    <td class="edit-text">
+                        <datepicker id="datepicker" class="w-100" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
+                        <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email address:</td>
+                    <td class="edit-text">
+                        <span>{{email}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
