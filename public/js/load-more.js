@@ -78,6 +78,7 @@ $( document ).ready(function() {
         e.preventDefault();
         var that = $(this);
         let method = that.hasClass('far') ? '/favorite/' : '/unfavorite/';
+
         $.post(method + that.data("winename"), function (response) {
             that.toggleClass("fas far");
         });
