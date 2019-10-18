@@ -9,7 +9,7 @@
 
         <div class="col-md-8 col-sm-12">
             <div>
-            <my-order-form user-orders="{{json_encode($orders)}}"/>
+                <my-order-form user-orders="{{json_encode($orders)}}"/>
             </div>
         </div>
 
