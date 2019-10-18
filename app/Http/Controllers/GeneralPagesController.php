@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Varietal;
 use App\Wine;
+use App\WineRegion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,6 +12,11 @@ class GeneralPagesController extends Controller
 {
     public function new_arrivals(Request $request)
     {
+        $varietals = Varietal::all();
+        $regions = WineRegion::all();
+
+        $filter = $request->all();
+
         if($request->ajax()){
             $page_offset = 0;
             $page_limit = 10;
@@ -21,7 +28,7 @@ class GeneralPagesController extends Controller
 
             $return_wines = "";
 
-            $wines = Wine::limit(10)
+            $wines = Wine::limit(16)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -44,19 +51,30 @@ class GeneralPagesController extends Controller
                 ->groupBy('wines.id')
                 ->orderBy('wines.created_at', 'desc')
                 ->get(),
-            'wine_count' => Wine::count()
+            'wine_count' => Wine::count(),
+            'varietals' => $varietals,
+            'regions' => $regions,
+            'filter' => $filter
         ]);
     }
 
-    public function hot_sellers()
+    public function hot_sellers(Request $request)
     {
+        $varietals = Varietal::all();
+        $regions = WineRegion::all();
+
+        $filter = $request->all();
+
         return view('hot-sellers', [
             'wines' => Wine::limit(10)
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')
             ->orderBy('orders_count','desc')
-            ->get()
+            ->get(),
+            'varietals' => $varietals,
+            'regions' => $regions,
+            'filter' => $filter
         ]);
     }
 

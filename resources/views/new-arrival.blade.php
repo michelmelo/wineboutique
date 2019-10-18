@@ -1,4 +1,4 @@
-<div class="col-xs-5 vine-box-style-3 style-3-2">
+<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
     <a href="/wine/{{$wine->slug}}">
         <div class="image-wrap">
             <figure class="image-container">
