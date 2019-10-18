@@ -6,6 +6,7 @@ use App\Varietal;
 use App\Wine;
 use App\WineRegion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GeneralPagesController extends Controller
@@ -16,6 +17,36 @@ class GeneralPagesController extends Controller
         $regions = WineRegion::all();
 
         $filter = $request->all();
+
+        $wines = Wine::query();
+
+        if(array_key_exists('varietal', $filter)) {
+            $wines = $wines->whereIn('varietal_id', $filter['varietal']);
+        }
+
+        if(array_key_exists('region', $filter)) {
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
+        }
+
+        if(array_key_exists('price', $filter)) {
+            $prices = $filter['price'];
+            $wines = $wines->where(function($q) use ($prices) {
+                $useOr = false;
+                if(in_array(1, $prices)) {
+                    $q->whereBetween('price', [1, 50]);
+                    $useOr = true;
+                }
+
+                if(in_array(2, $prices)) {
+                    $useOr?$q->orWhereBetween('price', [51, 100]):$q->whereBetween('price', [51, 100]);
+                    $useOr = true;
+                }
+
+                if(in_array(3, $prices)) {
+                    $useOr?$q->orWhere('price', '>', 100):$q->where('price', '>', 100);
+                }
+            });
+        }
 
         if($request->ajax()){
             $page_offset = 0;
@@ -28,7 +59,7 @@ class GeneralPagesController extends Controller
 
             $return_wines = "";
 
-            $wines = Wine::limit(16)
+            $wines = $wines->limit(16)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -45,7 +76,7 @@ class GeneralPagesController extends Controller
         }
 
         return view('new-arrivals', [
-            'wines' => Wine::limit(10)
+            'wines' => $wines->limit(10)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -65,13 +96,54 @@ class GeneralPagesController extends Controller
 
         $filter = $request->all();
 
-        return view('hot-sellers', [
-            'wines' => Wine::limit(10)
+        $wines = Wine::query();
+
+        if(array_key_exists('varietal', $filter)) {
+            $wines = $wines->whereIn('varietal_id', $filter['varietal']);
+        }
+
+        if(array_key_exists('region', $filter)) {
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
+        }
+
+        if(array_key_exists('price', $filter)) {
+            $prices = $filter['price'];
+
+            $wines = $wines->where(function($q) use ($prices) {
+                $useOr = false;
+
+                if(in_array(1, $prices)) {
+                    $q->whereBetween('price', [1, 50]);
+                    $useOr = true;
+                }
+
+                if(in_array(2, $prices)) {
+                    $useOr?$q->orWhereBetween('price', [51, 100]):$q->whereBetween('price', [51, 100]);
+                    $useOr = true;
+                }
+
+                if(in_array(3, $prices)) {
+                    $useOr?$q->orWhere('price', '>', 100):$q->where('price', '>', 100);
+                }
+            });
+        }
+
+        $wines = $wines->limit(16)
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')
             ->orderBy('orders_count','desc')
-            ->get(),
+            ->get();
+
+        foreach ($wines as $wine) {
+            if (Auth::user()) {
+                $wine->favorited = $wine->favorited();
+            }
+            $wine->rating = $wine->rating();
+        }
+
+        return view('hot-sellers', [
+            'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
             'filter' => $filter
