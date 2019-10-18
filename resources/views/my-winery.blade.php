@@ -45,12 +45,12 @@
                                     <td>{{ $wine->capacity }} {{ $wine->capacityUnit->name }}</td>
                                     <td>
                                         <a href="{{route('add-new-wine.edit', [$wine->slug])}}" class="btn btn-default"><i class="fas fa-pencil-alt"></i></a>
-                                        <form method="POST" action="/add-new-wine/{{$wine->id}}">
+                                        <form method="POST" action="/add-new-wine/{{$wine->id}}" id="delete-wine-{{ $wine->id }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-default delete-user" value="Delete">
+                                                <button type="submit" class="btn btn-default delete-wine" data-name="{{ $wine->name }}" data-id="{{ $wine->id }}" value="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>

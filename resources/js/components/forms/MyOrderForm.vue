@@ -4,23 +4,37 @@
             <h2>
                 <span>MY ORDERS</span>
             </h2>
-            <table class="table table-striped" v-if="orders.length">
+            <table class="table table-striped exception" v-if="orders.length">
                 <thead>
                     <tr>
                         <td>Order Id</td>
                         <td>Address</td>
+                        <td>Shipping</td>
                         <td>Status</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="order in orders" v-bind:key="order.id"> 
-                        <td>{{order.order_id}}</td>
+                        <td v-on:click="showDetails(order.order_id)">{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
+                        <td>Royal Mail 1st Class</td>
                         <td>{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                     </tr>
                 </tbody>
             </table>
             <p v-else>You have no orders yet.</p>
+
+            <div v-if="order.order_id == order_to_show" v-for="order in orders" v-bind:key="order.id">
+                Order ID: {{ order.order_id }}
+                <br>
+                Delivery Address: {{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}
+                <br>
+                Delivery Company: Royal Mail 1st Class
+                <br>
+                <span v-for="ow in order.order_wines" v-bind:key="ow.id">
+                    Order Wine: {{ow.wine.name}} - {{ow.status == 1 ? "Proccesing" : "Tracking number: " + ow.tracking}} <br>
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -39,10 +53,12 @@
         props: ['userOrders'],
         data: () => ({
             selectedOrders: null,
-            orders: []
+            orders: [],
+            order_to_show: null
         }),
         created: function() {
             const orders = JSON.parse(this.userOrders);
+            console.log(orders);
             this.orders = orders;
         },
         methods: {
@@ -53,6 +69,9 @@
 
                 this.selectedOrders = {...selectedOrders};
             },
+            showDetails(orderId) {
+                this.order_to_show = orderId;
+            }
         }
     }
 </script>

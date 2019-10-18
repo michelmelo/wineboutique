@@ -4,6 +4,7 @@ let page_offset_counter = 1;
 
 let total = 0;
 let type = '';
+let timer = 0;
 
 $( document ).ready(function() {
     switch (window.location.pathname) {
@@ -77,6 +78,7 @@ $( document ).ready(function() {
         e.preventDefault();
         var that = $(this);
         let method = that.hasClass('far') ? '/favorite/' : '/unfavorite/';
+
         $.post(method + that.data("winename"), function (response) {
             that.toggleClass("fas far");
         });
@@ -102,6 +104,68 @@ $( document ).ready(function() {
             }
         });
     });
+});
+
+$(".send-wine").click(function (e) {
+    e.preventDefault();
+
+    $("#ship-wine-confirm").fadeIn();
+    $("#confirm-ship-wine").attr("href", $(this).attr("href"));
+});
+
+$("#confirm-ship-wine").click(function (e) {
+    e.preventDefault();
+
+    if($("#tracking_id").val()){
+        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val();
+    }
+    else{
+        $("#tracking_id").css("border", "1px solid red");
+    }
+});
+
+$("#close-popup").click(function (e) {
+    e.preventDefault();
+
+    $(".popup-holder").fadeOut();
+});
+
+$(".delete-wine").click(function (e) {
+    e.preventDefault();
+
+    $(".default-popup").fadeIn();
+    $("#wine-name-holder").text($(this).data("name"));
+    $("#delete-wine-confirm").data("id", $(this).data("id"));
+});
+
+$("#delete-wine-confirm").click(function (e) {
+    e.preventDefault();
+
+    $("#delete-wine-" + $(this).data("id")).submit();
+});
+
+$("#main-search").keyup(function () {
+    let that = $(this);
+
+    if (timer) {
+        clearTimeout(timer);
+    }
+
+    timer = setTimeout(function () {
+        if(that.val().length == 0){
+            $(".search-results").hide();
+        }
+        else{
+            $.get(that.closest("form").attr("action") + "?s=" + that.val(), function(response){
+                $(".search-results").empty();
+
+                response.wines.forEach(function(element){
+                    $(".search-results").append('<a href="/wine/' + element.id + '">' + element.name + '</a>').show();
+                });
+
+            }, "json");
+        }
+    }, 400);
 });
 
 function moreWine(data) {

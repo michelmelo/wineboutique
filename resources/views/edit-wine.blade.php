@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" value="{{ old('capacity') ? old('capacity') : $wine->capacity }}" required>
+                        <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" value="{{ old('capacity') ? old('capacity') : $wine->capacity }}" step="0.01" min=0 required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>

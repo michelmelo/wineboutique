@@ -16,11 +16,15 @@ class CapacityUnitsTableSeeder extends Seeder
         ]);
 
         \App\CapacityUnit::insert([
-            'name' => 'Gallon'
+            'name' => 'Deciliter'
         ]);
 
         \App\CapacityUnit::insert([
-            'name' => 'Deciliter'
+            'name' => 'Millilitre'
+        ]);
+
+        \App\CapacityUnit::insert([
+            'name' => 'Gallon'
         ]);
 
         \App\CapacityUnit::insert([

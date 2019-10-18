@@ -81,7 +81,7 @@ input, textarea, select{
 }
 
 .main {
-  margin-top:180px; 
+  margin-top: 163px; 
   padding: 0;
 }
 
@@ -218,6 +218,7 @@ input, textarea, select{
     padding-bottom: 0;
     margin-bottom: 40px;
     position: relative;
+    margin-top: 0px;
 }
 
 .page-header img {
@@ -394,6 +395,32 @@ select {
     background-color: #fefde5 !important;
 }
 
+.desktop-search {
+    position: relative;
+}
+
+.search-results {
+    position: absolute;
+    top: 80px;
+    z-index: 9999;
+    background: #ffffff;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    display: none;
+}
+
+.search-results a {
+    margin: 0;
+    padding: 5px 15px;
+    border-bottom: 1px solid #ced4da;
+    display: block;
+}
+
+.order_details {
+    position: absolute;
+}
+
 /*=========================================================================================================================================================================================
                                                                            NAVIGATION
 ==========================================================================================================================================================================================*/
@@ -411,6 +438,10 @@ header .navbar{
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: rgb(155, 31, 61);
+}
+
+.navbar-collapse .nav-link{
+   text-transform: uppercase;
 }
 
 .navbar-nav {
@@ -668,6 +699,14 @@ footer p {
     padding: 30px 0;
     color: #aaaaaa;
 }
+#back-to-top {
+    color: #9A1E3E;
+    font-size: 42px;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    cursor: pointer;
+    }
 
 /*=========================================================================================================================================================================================
                                                                                HOME
@@ -1053,7 +1092,7 @@ footer p {
 
 .vine-box-style-3 .product-info{
     padding: 10px;
-    min-height: 100px;
+    min-height: 120px;
 }
 
 .vine-box-style-3 h5 {
@@ -1111,12 +1150,12 @@ footer p {
     overflow: hidden;
     width: 100%;
     height: 100%;
-    padding-bottom: 116.75%;
+    padding-bottom: 144%;
 }
-
+/*
 .home .vine-box-style-3 .image-container{
     padding-bottom: 105%;
-}
+}*/
 
 .vine-box-style-3 .image-container i {
     position: absolute;
@@ -2147,6 +2186,7 @@ footer p {
     padding: 10px;
     display: block;
     border: 1px solid #f6f6f6;
+    text-transform: uppercase;
 }
 
 .profile-menu li a i {
@@ -2212,6 +2252,10 @@ footer p {
 .info-box table tr td {
     padding: 10px 5px 10px 20px;
     width: 50%;
+}
+
+.info-box table.exception tr td {
+    width: 25%;
 }
 
 .info-box table tr td:first-child {
@@ -2462,6 +2506,7 @@ footer p {
 
 .new-wine-photos img {
     width: 100%;
+    max-width: 150px;
 }
 
 .form-inputs>div {
@@ -2491,7 +2536,19 @@ footer p {
     text-align: center;
     line-height: 48px;
 }
-
+.popup-info{
+    position: absolute;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    width: 250px;
+    background: #fff;
+    z-index: 999;
+    padding: 10px 25px;
+    top: 45px;
+    left: 55%;
+    display: none;
+    font-size: 12px;
+    line-height: 14px;
+}
 
 
 
@@ -2625,6 +2682,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     position: relative !important;
 }
 
+.vdp-datepicker__calendar .cell {
+    float: left;
+}
+
 .error-block {
     display: block;
     color: #da8599;
@@ -2649,11 +2710,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                                                                                  POPUP
 ==========================================================================================================================================================================================*/
 
-.terms-popup.is-visible, .newsletter-popup.is-visible {
+.terms-popup.is-visible, .newsletter-popup.is-visible, .default-popup.is-visible {
     z-index: 10000;
 }
 
-.terms-popup, .newsletter-popup {
+.terms-popup, .newsletter-popup, .default-popup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2815,6 +2876,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-1 {
       min-height: 275px;
   }
+  .main {
+    margin-top: 150px;
+  }
 }
 
 
@@ -2865,9 +2929,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                 flex: 0 0 20%;
     }
 
-    .main {
-        margin-top:157px;
-    }
+   
 
     .col-xs-5ths, .main__scroller .col-xs-6 {
         -webkit-box-flex: 0;
@@ -2920,6 +2982,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .my-winery-table{
         overflow-x: auto;
     }
+    .popup-info {   
+      left: 58%;   
+      }
 
 }
 
@@ -2940,6 +3005,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
       width: 100%!important;
       max-width: 350px;
     }
+
 }
 
 @media only screen and (max-width : 768px) {
@@ -3010,7 +3076,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .main {
-        margin-top:165px;
+        margin-top: 136px;
     }
 
     .main .page-header{
@@ -3029,12 +3095,20 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding: 30px 0;
     }
 
+
+
     .slider-content h1 {
         display: none;
     }
 
     .button {
         font-size: 16px;
+    }
+
+    .add-new-wine .button{
+        margin: 0 auto;
+        display: block;
+        float: none!important;
     }
 
     .carousel-control-next-icon, .carousel-control-prev-icon {
@@ -3323,18 +3397,21 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .newsletter-popup p {
         line-height: 1.5em;
     }
-
     .add-new-wine .button{
         display: block;
         margin: 0 auto;
         float: none!important;
     }
+    .popup-info{
+        left: 50%;
+        margin-left: -125px;
+    } 
 }
 
 
 @media only screen and (max-width : 580px) {
     .main, .margin-row {
-        margin-top: 150px!important;
+        margin-top: 130px!important;
     }
     .container {
         padding-right: 5px;
@@ -3544,6 +3621,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding: 10px 5px 10px 0;
         max-width: 130px;
         width: 100%;
+        padding: 10px 5px 10px 5px;
+        font-size: 12px;
+    }
+
+    .info-box table tr td input {
+        max-width: 140px;
     }
 
 }
@@ -3556,5 +3639,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .button {
         font-size: 16px;
         padding: 8px 20px;
+    .info-box table tr td input {
+        max-width: 120px;
     }
 }

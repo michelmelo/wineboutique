@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -7,15 +9,15 @@
         <h1 class="headline-2">ADD A NEW WINE</h1>
         
         <div class="shadow-box row new-wine-photos">
-            <h2>PHOTOS</h2>
-            <p class="w-100">Main picture *</p>
+            <h2 >PHOTOS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+              <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
+
             <div class="col-lg-4 col-sm-12 mb-3">
-                
+                <p class="w-100">Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label>
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
-                    <img src="" id="pera">
                 </label>
 
                 <input type="submit" id="crop-picture" value="Crop" style="display:none;" class="red-button button ">
@@ -25,18 +27,19 @@
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
             <div class="col-lg-8 col-sm-12">
-                <div id="photos" class="dropzone">
-                    <div class="fallback">
-                        <p>Click into box to add more.</p>
-                    </div>
-                </div>
-                <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; display: block; margin: 20px auto;">Add More</a>
+                <p class="w-100">Other pictures</p>
+                <label>
+                    <input type="file" id="other_image" style="display: none; cursor: pointer;" >
+                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview">
+                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none;" class="red-button button ">
+                    <div class="other_images_preview"></div>
+                </label>
             </div>
         </div>
 
         <div class="shadow-box row details">
-            <h2>DETAILS</h2>
-            
+            <h2>DETAILS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+            <span class="popup-info d-none">Here you are required to provide as much detail as possible in regards to your wine. Make it sound delicious and great! </span>
             <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
@@ -123,7 +126,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" required>
+                        <input type="number" min="1" name="capacity" id="capacity" placeholder="Enter a number" step="0.01" min=0 required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -174,7 +177,8 @@
         </div>
 
         <div class="shadow-box row pricing">
-            <h2>PRICING</h2>
+            <h2>PRICING <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+            <span class="popup-info d-none">Please set the pricing of your wine bottle.</span>
 
             <div class="col-lg-3 col-sm-12"></div>
             <div class="col-lg-6 col-sm-12">

@@ -1,4 +1,4 @@
-<div class="col-xs-5 vine-box-style-3 style-3-2">
+<div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3 style-3-2">
     <a href="/wine/{{$wine->slug}}">
         <div class="image-wrap">
             <figure class="image-container">
@@ -20,7 +20,7 @@
             <div class="star-rating">
                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
             </div>
-            <span class="order-q">{{ $wine->orders_count }} Orders</span>
+            <span class="order-q">{{ $wine->orders_count }} Sold</span>
         </div>
     </a>
     

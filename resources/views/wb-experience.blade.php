@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid p-0">
     <div class="page-header">
         <img src="{{asset('img/wb-experience-header.jpg')}}">
-        <h1>WB EXPERIENCE</h1>
+        <h1>WB EXPERIENCE</h1> 
     </div>
+</div>
+<div class="container">
+    
 
     <div class="row">
 

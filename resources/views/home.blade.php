@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container home">
+<div class="container-fluid p-0 home">
     <div class="home-slider row">
         <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -42,6 +42,9 @@
             </a>
         </div>
     </div>
+
+</div>
+<div class="container home">    
 
     @if(count($topWineries)>0)
     <div class="row padding-row row-eq-height">
@@ -160,7 +163,7 @@
     <div class="row padding-row row-eq-height">
         <h2 class="heading mb-5">TOP RATED WINES</h2>
         @foreach($wines as $wine)
-            <div class="col-md-4 col-sm-6 col-xs-6 vine-box-style-3">
+            <div class="col-md-3 col-sm-6 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-wrap">
                         <figure class="image-container">
@@ -183,13 +186,14 @@
                         <div class="star-rating">
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
-                        <span class="order-q">0 Orders</span>
+                        <span class="order-q">0 Sold</span>
                     </div>
                 </a>
             </div>
         @endforeach
-
-        <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+        <div class="col-12 text-center mt-5">
+            <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
+        </div>
     </div>
     
     <div class="row padding-row center-text secure-section">

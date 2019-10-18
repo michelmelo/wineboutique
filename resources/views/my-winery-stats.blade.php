@@ -14,6 +14,7 @@
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">Shipping</th>
                                 <th scope="col">Ordered Date</th>
                                 <th scope="col">Wines</th>
                             </tr>
@@ -23,6 +24,7 @@
                                 <tr class="text-center">
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
+                                    <td>Royal Mail 1st Class</td>
                                     <td>{{$value["order_date"]}}</td>
                                     <td>
                                         @foreach($value["wines"] as $wine)
@@ -43,6 +45,28 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="ship-wine-confirm" class="newsletter-popup is-visible" role="alert" style="display:none;">
+    <div class="popup-container">
+        <div class="popup-head text-center">
+            <h2 class="thank-you">Ship wine!</h2>
+        </div>
+        <div class="popup-body text-center">
+            <div class="col-xs-8 col-xs-push-2">
+                <div class="form-inputs">
+                    <input type="text" name="tracking_id" id="tracking_id" placeholder="Tracking ID" required>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <a id="confirm-ship-wine" class="button red-button">Submit</a>
+            <span href="#" id="close-popup" class="button red-button">
+                <i class="fas fa-times"></i> CLOSE
+            </span>
         </div>
     </div>
 </div>

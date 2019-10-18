@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="col-4 center-text">
-                    <p>ORDERS</p>
+                    <p>WE SOLD</p>
                     <span>{{ $wine->wine_orders()->sum("quantity") }}</span>
                 </div>
 
@@ -140,7 +140,7 @@
                                 <span class="fa fa-star"></span>
                             @endfor
                         </div>
-                        <span class="order-q">{{ $recommendation->orders_count }} Orders</span>
+                        <span class="order-q">{{ $recommendation->orders_count }} Sold</span>
                     </div>
                 </a>
 

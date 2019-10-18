@@ -38,6 +38,18 @@
         @yield('content')
         @include('layouts.partials._footer')
 	</div>
+
+    <div class="default-popup is-visible popup-holder" role="alert" style="display:none;">
+        <div class="popup-container">
+            <div class="popup-head text-center">
+                <h2 class="thank-you">Are you sure you wish to delete <span id="wine-name-holder"></span>?</h2>
+            </div>
+            <div class="popup-body text-center">
+                <span href="#" id="delete-wine-confirm" class="button red-button"><i class="fas fa-times"></i> Yes</span>
+                <span href="#" id="close-popup" class="button red-button"><i class="fas fa-times"></i> No</span>
+            </div>
+        </div>
+    </div>
 	
     <!-- Scripts -->
     @if(request()->route()->getName() !== 'my-payments.show')
@@ -45,6 +57,7 @@
     @endif
 
     <script src="{{ asset('js/load-more.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     @yield('script')
 </body>
 </html>
