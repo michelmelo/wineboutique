@@ -700,12 +700,17 @@ footer p {
     color: #aaaaaa;
 }
 #back-to-top {
-    color: #9A1E3E;
-    font-size: 42px;
+    color: #fff;
+    font-size: 32px;
     position: fixed;
     right: 20px;
-    top: 50%;
+    bottom: 20px;
+    background: #9A1E3E;
     cursor: pointer;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
 
 /*=========================================================================================================================================================================================
@@ -3513,7 +3518,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
 }
+@media only screen and (min-width : 1600px) {
+  .home-slider, .carousel-inner{
+    height: calc(100vh - 163px);
+  }
 
+}
 @media only screen and (max-width : 450px) {
     
     .top-header .container-fluid{
