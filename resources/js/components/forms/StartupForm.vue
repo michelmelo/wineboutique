@@ -182,7 +182,7 @@
             </div>
 
             <input type="hidden" name="stripeToken" v-model="stripe">
-            <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD SHIPPING</button>
+            <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD STATES</button>
             <button type="submit" v-on:click.prevent="onSubmit" class="red-button button float-right">FINISH</button>
         </form>
     </div>

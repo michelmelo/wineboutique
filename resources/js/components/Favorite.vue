@@ -6,18 +6,19 @@
         <a href="#" v-else @click.prevent="favorite(post)">
             <i  class="far fa-heart"></i>
         </a>
-
-        <div class="default-popup is-visible popup-holder" role="alert" v-if="do_show">
-            <div class="popup-container">
-                <div class="popup-head text-center">
-                    <h2 class="thank-you">Are you sure you wish to unfavourite wine?</h2>
+         
+         <transition name="slide">
+            <div class="favorite-popup-container"  v-if="do_show">
+                <i class="fas fa-times" @click.prevent="do_show = false"></i>
+                <div class="">
+                    <h2 class="thank-you text-center">Are you sure you wish to unfavourite wine?</h2>
                 </div>
-                <div class="popup-body text-center">
-                    <span href="#" class="button red-button" @click.prevent="unFavorite(post)" ><i class="fas fa-times"></i> Yes</span>
-                    <span href="#" class="button red-button" @click.prevent="do_show = false" ><i class="fas fa-times"></i> No</span>
-                </div>
-            </div>
-        </div>
+                <div class="">
+                    <span href="#" class="button red-button" @click.prevent="unFavorite(post)" > Yes</span>
+                    <span href="#" class="button red-button" @click.prevent="do_show = false" > No</span>
+                </div>           
+           </div>
+        </transition> 
     </span>
 </template>
 
