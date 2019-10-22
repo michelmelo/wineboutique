@@ -7,10 +7,10 @@
             <h1>Thank you for placing an order!</h1>
         </div>
     </div>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         
-        <p style="margin-bottom: 30px;">
-            Order Number: {{ $order->order_id }} has been sent to the winery, please expect it within {{ $from_to->days_from }} - {{ $from_to->days_to }} days.
+        <p class="text-center" style="margin-bottom: 30px;">
+            Order Number:<b class="mx-2">{{ $order->order_id }}</b>  has been sent to the winery, please expect it within {{ $from_to->days_from }} - {{ $from_to->days_to }} days.
         </p>
     </div>
 @endsection
