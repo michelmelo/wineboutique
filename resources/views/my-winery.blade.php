@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header my-winery-head">
                     <a class="button float-left red-button" href="{{ route('my-winery-edit') }}">Edit Winery Info</a>
-                    <a class="button float-left red-button ml-10" href="{{ route('my-winery-stats') }}">Winery Stats</a>
+                    <a class="button float-left red-button ml-10" href="{{ route('my-winery-stats') }}">Winery Orders & Stats</a>
                     <a class="button float-right red-button" href="{{ route('add-new-wine.index') }}">Add New Wine</a>
                 </div>
 

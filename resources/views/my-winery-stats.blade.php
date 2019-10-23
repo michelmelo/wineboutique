@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-xs-12">
-            <h1 style="text-align: center;">{{ ucfirst(\Illuminate\Support\Facades\Auth::user()->winery->name) }}</h1>
+            <h1 style="text-align: center;">{{ ucfirst(\Illuminate\Support\Facades\Auth::user()->winery->name) }} Orders</h1>
         </div>
         <div class="col-md-12 mt-5 pt-2">
             <div class="card">
@@ -41,6 +41,43 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 mt-5">
+            <h1 style="text-align: center;">{{ ucfirst(\Illuminate\Support\Facades\Auth::user()->winery->name) }} Stats</h1>
+        </div>
+        <div class="col-md-12 mt-5 pt-2">
+            <div class="card">
+                <div class="card-body my-winery-table">
+                    <table class="table table-striped ">
+                        <tbody>
+                            <tr>
+                                <td>Number of orders</td>
+                                <td>{{ $stats["order_count"] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Number of bottles sold</td>
+                                <td>{{ $stats["bottle_count"] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Best selling wine</td>
+                                <td>{{ $stats["best_selling_wine"] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Most purchased state</td>
+                                <td>{{ $stats["best_selling_state"] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Revenue</td>
+                                <td>${{ $stats["order_money_sum"] }}</td>
+                            </tr>
+                            <tr>
+                                <td>X Active Wines</td>
+                                <td>-</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

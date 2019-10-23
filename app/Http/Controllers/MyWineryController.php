@@ -91,15 +91,25 @@ class MyWineryController extends Controller
         $tmp_orders = DB::table('orders')
             ->leftJoin('order_wines', 'orders.id', '=', 'order_wines.order_id')
             ->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id')
+            ->leftJoin('regions', 'addresses.region_id', '=', 'regions.id')
             ->leftJoin('wines', 'order_wines.wine_id', '=', 'wines.id')
             ->leftJoin('wineries', 'wines.winery_id', '=', 'wineries.id')
             ->select('orders.id as order_id', 'orders.status as order_status', 'orders.created_at as order_date',
-                'wines.name as wine_name', 'order_wines.status as wine_status', 'wines.id as wine_id', 'wineries.name as winery_name',
-                'addresses.address_1', 'addresses.address_2', 'addresses.postal_code', 'addresses.city')
+                'wines.name as wine_name', 'order_wines.status as wine_status', 'order_wines.quantity as order_wine_quantity',
+                'wines.id as wine_id', 'wineries.name as winery_name', 'wines.price as wine_price', 'addresses.address_1', 'addresses.address_2',
+                'addresses.postal_code', 'addresses.city', 'regions.name as region_name')
             ->where("wines.winery_id", Auth::user()->winery->id)
             ->get();
 
         $orders = array();
+
+        $status = [
+            "order_count" => count($tmp_orders),
+            "bottle_count" => 0,
+            "best_selling_wine" => "",
+            "best_selling_state" => "",
+            "order_money_sum" => 0
+        ];
 
         foreach ($tmp_orders as $order){
             if(array_key_exists($order->order_id, $orders)){
@@ -123,9 +133,17 @@ class MyWineryController extends Controller
                     "order_date" => $order->order_date,
                 ];
             }
+
+            $status["bottle_count"] += $order->order_wine_quantity;
+            $status["order_money_sum"] += ($order->order_wine_quantity * $order->wine_price);
+            $status["best_selling_wine"] = $order->wine_name;
+            $status["best_selling_state"] = $order->region_name;
         }
 
-        return view('my-winery-stats',["orders" => $orders]);
+        return view('my-winery-stats',[
+            "orders" => $orders,
+            "stats" => $status
+        ]);
     }
 
     public function order_update($order_id, $wine_id, $tracking_id)
