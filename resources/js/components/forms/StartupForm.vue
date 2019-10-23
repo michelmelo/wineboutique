@@ -127,7 +127,7 @@
                         <p>Shipping origin *</p>
                     </div>
                     <div class="col-lg-9 col-sm-12">
-                        <select id="location" :name="'shipping[' + index + '][ship_from]'" class="location" v-model="item.ship_from">
+                        <select id="location" :name="'shipping[' + index + '][ship_from][]'" class="location custom-select" multiple="true" v-model="item.ship_from">
                             <option value="0" disabled selected>Select location</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
@@ -152,7 +152,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select :name="'shipping[' + index + '][ship_to]'" class="destination" v-model="item.ship_to">
+                        <select :name="'shipping[' + index + '][ship_to][]'" class="destination custom-select" multiple="true" v-model="item.ship_to">
                             <option value="0" disabled selected>Add a destination</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
@@ -231,10 +231,10 @@
         methods: {
             addMoreShippings(){
                 this.shippings.push({
-                    ship_from: 0,
+                    ship_from: [],
                     days_from: "",
                     days_to: "",
-                    ship_to: 0,
+                    ship_to: [],
                     price: ""
                 });
             },

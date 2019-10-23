@@ -52,7 +52,18 @@ class StartupController extends Controller
                     unset($shippings['shipping_free']);
                 }
 
-                $winery->winery_shippings()->create($shippings);
+                foreach ($shippings['ship_from'] as $from){
+                    foreach ($shippings['ship_to'] as $to){
+                        $winery->winery_shippings()->create([
+                            "ship_from" => $from,
+                            "ship_to" => $to,
+                            "price" => $shippings['price'],
+                            "additional" => $shippings['additional'],
+                            "days_from" => $shippings['days_from'],
+                            "days_to" => $shippings['days_to']
+                        ]);
+                    }
+                }
             }
         }
 
@@ -61,7 +72,7 @@ class StartupController extends Controller
         $dob_obj = getdate(strtotime($user->birthday));
 
         if(!$ssn){
-            return redirect("sellOnModa")->with('message', 'Missing data');
+            return redirect("startup")->with('message', 'Missing data');
         }
 
         try{
