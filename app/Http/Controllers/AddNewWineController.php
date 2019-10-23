@@ -64,7 +64,7 @@ class AddNewWineController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight']);
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight', 'quantity']);
         $data['price'] = number_format((float)$data['price'], 2, '.', '');
         
         if($request->hasFile('photo'))
@@ -131,7 +131,7 @@ class AddNewWineController extends Controller
 
     public function update(NewWineRequest $request, Wine $wine)
     {
-        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight']);
+        $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight', 'quantity']);
 
         if($request->hasFile('photo')) {
             $ext = $request->file('photo')->getClientOriginalExtension();

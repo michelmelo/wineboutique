@@ -160,12 +160,25 @@ $("#main-search").keyup(function () {
                 $(".search-results").empty();
 
                 response.wines.forEach(function(element){
-                    $(".search-results").append('<a href="/wine/' + element.id + '">' + element.name + '</a>').show();
+                    $(".search-results").append('<a href="/wine/' + element.slug + '">' + element.name + '</a>').show();
                 });
+
+                if(response.wines.length == 0){
+                    $(".search-results").append('<p>No results found</p>');
+                }
+                else{
+                    $(".search-results").append('<a href="#" id="trigger-main-search">See all results</a>');
+                }
 
             }, "json");
         }
     }, 400);
+});
+
+$(document).on("click", "#trigger-main-search", function(e){
+    e.preventDefault();
+
+    $("#main-search-form").submit();
 });
 
 function moreWine(data) {

@@ -12,10 +12,10 @@
                     </a>
                 </div>
                 <div class="col-4 desktop-search pl-5 py-4">
-                    <form class="form-inline v-align" method="get" action="{{route('search')}}" style="flex-wrap: nowrap;">
+                    <form id="main-search-form" class="form-inline v-align" method="get" action="{{route('search')}}" style="flex-wrap: nowrap;">
                         <input id="main-search" class="form-control mr-sm-2 input-width" type="search"
                                placeholder="Search for wineries or wines" aria-label="Search" name="s"
-                               value="{{isset($searchstr)?$searchstr:''}}" style="max-width:unset; width: 100%;" required>
+                               value="{{isset($searchstr)?$searchstr:''}}" style="max-width:unset; width: 100%;" required autocomplete="off">
                         <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                     <div class="search-results"></div>

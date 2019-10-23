@@ -127,7 +127,16 @@
                         <p>Capacity *</p>
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
+                        <input type="number" name="quantity" id="quantity" placeholder="Quantity" value="{{ old('quantity') ? old('quantity') : $wine->quantity }}" min="1" required>
+                        @if($errors->has('quantity'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('quantity') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="col-lg-3 col-sm-12">
                         <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" value="{{ old('capacity') ? old('capacity') : $wine->capacity }}" step="0.01" min=0 required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
@@ -136,7 +145,7 @@
                         @endif
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-2 col-sm-12">
                         @php
                             $unit_id = old('unit_id', $wine->unit_id);
                         @endphp
