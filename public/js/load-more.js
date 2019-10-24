@@ -160,14 +160,14 @@ $("#main-search").keyup(function () {
                 $(".search-results").empty();
 
                 response.wines.forEach(function(element){
-                    $(".search-results").append('<a href="/wine/' + element.slug + '">' + element.name + '</a>').show();
+                    $(".search-results").append('<a class="text-red" href="/wine/' + element.slug + '">' + element.name + '</a>').show();
                 });
 
                 if(response.wines.length == 0){
                     $(".search-results").append('<p>No results found</p>');
                 }
                 else{
-                    $(".search-results").append('<a href="#" id="trigger-main-search">See all results</a>');
+                    $(".search-results").append('<a class="text-red" href="#" id="trigger-main-search">See all results</a>');
                 }
 
             }, "json");
