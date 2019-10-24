@@ -81,6 +81,8 @@ class WineController extends Controller
 
         $wines = Wine::query();
 
+        $wines = $wines->where("wines.quantity", ">", 0);
+
         $varietals = Varietal::all();
         $regions = WineRegion::all();
 
@@ -168,7 +170,7 @@ class WineController extends Controller
             ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
             ->groupBy('wines.id')
             ->where('average_rating', '>', 0)
-            ->where('quantity', '>', 0)
+            ->where('wines.quantity', '>', 0)
             ->orderBy('average_rating', 'desc');
         $varietals = Varietal::all();
         $regions = Region::all();

@@ -100,7 +100,7 @@ class GeneralPagesController extends Controller
 
         $wines = Wine::query();
 
-        $wines = $wines->where("quantity", ">", 0);
+        $wines = $wines->where("wines.quantity", ">", 0);
 
         if(array_key_exists('varietal', $filter)) {
             $wines = $wines->whereIn('varietal_id', $filter['varietal']);
