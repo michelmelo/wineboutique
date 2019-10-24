@@ -30,9 +30,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $topWineries = DB::select('SELECT *, IFNULL((SELECT AVG(`winery_ratings`.`rating`) FROM `winery_ratings` WHERE `winery_ratings`.`winery_id`=`wineries`.`id`), 0) AS `rating` FROM `wineries` HAVING `rating` > 0 ORDER BY `rating` DESC LIMIT 10');
-        $latestWines = Wine::latest()->limit(6)->get();
+        $latestWines = Wine::latest()->where("quantity", ">", 0)->limit(6)->get();
         
-        $wines = Wine::orderBy('average_rating', 'desc');
+        $wines = Wine::orderBy('average_rating', 'desc')->where("quantity", "<", 0);
         $varietals = Varietal::all();
         $regions = Region::orderBy('name')->get();
 
