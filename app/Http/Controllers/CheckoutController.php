@@ -6,6 +6,7 @@ use App\Cart;
 use App\Order;
 use App\OrderWine;
 use App\User;
+use App\Wine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -156,6 +157,8 @@ class CheckoutController extends Controller
 
                     if($new_order_wine->save()){
                         Auth::user()->cart()->detach($new_order_wine->wine_id);
+                        $temp_wine = Wine::where("id", $item->pivot->wine_id)->first();
+                        $temp_wine->update(["quantity" => $temp_wine->quantity - 1]);
                     }
                 }
             }

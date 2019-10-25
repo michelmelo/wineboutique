@@ -127,7 +127,7 @@
                         <p>Shipping origin *</p>
                     </div>
                     <div class="col-lg-9 col-sm-12">
-                        <select id="location" :name="'shipping[' + index + '][ship_from][]'" class="location custom-select" multiple="true" v-model="item.ship_from">
+                        <select id="location" :name="'shipping[' + index + '][ship_from]'" class="location" v-model="item.ship_from">
                             <option value="0" disabled selected>Select location</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
@@ -152,12 +152,17 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <select :name="'shipping[' + index + '][ship_to][]'" class="destination custom-select" multiple="true" v-model="item.ship_to">
-                            <option value="0" disabled selected>Add a destination</option>
-                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
-                                {{ region.name }}
-                            </option>
-                        </select>
+                        <multiselect v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                                     label="text"
+                                     :hideSelected="true"
+                                     :multiple="true"
+                                     :close-on-select="false"
+                                     :clear-on-select="false"
+                                     :preserve-search="true"
+                                     @input="refineValues"
+                        ></multiselect>
+
+                        <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
@@ -189,15 +194,21 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect'
+
+    Vue.component('multiselect', Multiselect)
+
     let stripe = Stripe(`pk_test_bWZc4BcEaCNAKbJbhv6u91ZJ00zZEQ2RIQ`),
         elements = stripe.elements(),
         card = undefined;
 
     export default {
+        components: { Multiselect },
         props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "selectedRegions", "fetchedRegions"],
         data: () => ({
             csrf: window.Laravel.csrfToken,
             fetchedRegions_: [],
+            ship_to_values: [],
             regions: [],
             shippings: [],
             wines: [],
@@ -229,9 +240,18 @@
             card.mount("#card-element");
         },
         methods: {
+            refineValues(value){
+                var that = this;
+
+                that.ship_to_values = [];
+
+                value.forEach(function(item, index){
+                    that.ship_to_values.push(item.value);
+                });
+            },
             addMoreShippings(){
                 this.shippings.push({
-                    ship_from: [],
+                    ship_from: 0,
                     days_from: "",
                     days_to: "",
                     ship_to: [],

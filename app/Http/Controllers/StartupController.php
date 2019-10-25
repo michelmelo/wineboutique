@@ -15,9 +15,9 @@ class StartupController extends Controller
     {
         $winery = Auth::user()->winery;
 
-        if(!$winery){
-            return redirect("/");
-        }
+//        if(!$winery){
+//            return redirect("/");
+//        }
 
         return view('startup', [
             'winery' => $winery,
@@ -52,17 +52,15 @@ class StartupController extends Controller
                     unset($shippings['shipping_free']);
                 }
 
-                foreach ($shippings['ship_from'] as $from){
-                    foreach ($shippings['ship_to'] as $to){
-                        $winery->winery_shippings()->create([
-                            "ship_from" => $from,
-                            "ship_to" => $to,
-                            "price" => $shippings['price'],
-                            "additional" => $shippings['additional'],
-                            "days_from" => $shippings['days_from'],
-                            "days_to" => $shippings['days_to']
-                        ]);
-                    }
+                foreach ($shippings['ship_to'] as $to){
+                    $winery->winery_shippings()->create([
+                        "ship_from" => $shippings['ship_from'],
+                        "ship_to" => $to,
+                        "price" => $shippings['price'],
+                        "additional" => $shippings['additional'],
+                        "days_from" => $shippings['days_from'],
+                        "days_to" => $shippings['days_to']
+                    ]);
                 }
             }
         }

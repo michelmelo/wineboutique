@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="order in orders" v-bind:key="order.id"> 
-                        <td v-on:click="showDetails(order.order_id)" class="pointer">{{order.order_id}}</td>
+                        <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
                         <td>Royal Mail 1st Class</td>
                         <td>{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
@@ -24,7 +24,7 @@
             </table>
             <p v-else>You have no orders yet.</p>
 
-            <div v-if="order.order_id == order_to_show" v-for="order in orders" v-bind:key="order.id">
+            <div v-if="order.id == order_to_show" v-for="order in orders" v-bind:key="order.id">
                 <b class="mr-2">Order ID:</b> {{ order.order_id }}
                 <br>
                 <b class="mr-2">Delivery Address:</b> {{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}

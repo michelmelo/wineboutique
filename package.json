@@ -26,6 +26,7 @@
         "cropperjs": "^1.5.4",
         "jquery-cropper": "^1.0.0",
         "moment": "^2.22.2",
+        "vue-multiselect": "^2.1.6",
         "vue-star-rating": "^1.6.1",
         "vue2-filters": "^0.3.0",
         "vuejs-datepicker": "^1.5.3"
