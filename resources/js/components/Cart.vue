@@ -77,7 +77,7 @@
         </div>
     </div>
     <div v-else>
-        <p>Cart is empty.</p>
+        <p class="empty-cart">Cart is empty.</p>
     </div>
 </template>
 

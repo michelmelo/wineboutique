@@ -26,7 +26,7 @@
                 </div>
                 <br>
                 <div class="form-row">
-                    <button class="button red-button">Submit Payment</button>
+                    <button class="sbmt-new-payment-mtd button red-button">Submit New Payment Method</button>
                 </div>
             </form>
             <br>

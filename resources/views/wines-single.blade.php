@@ -118,6 +118,7 @@
         </div>
     </div>
 
+    @if(count($recommendations) > 0)
     <div class="col-lg-12 col-sm-12 row row-eq-height padding-row">
         <h2 class="heading">RECOMMENDATIONS</h2>
         @foreach($recommendations as $recommendation)
@@ -148,6 +149,7 @@
         @endforeach
         {{ $recommendations->links() }}
     </div>
+    @endif
 
 </div>
 @endsection

@@ -566,6 +566,11 @@ header {
     background-color: #f8f9fa;  
 }
 
+.empty-cart {
+    text-align: center;
+    padding-top: 10px;
+}
+
 .item-in-cart {
     position: absolute;
     color: #fff;
@@ -3053,6 +3058,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 
 @media only screen and (max-width : 768px) {
+    .sbmt-new-payment-mtd {
+        width: 100%;
+    }
     .mobile-display {
         display: none;
     }
@@ -3205,6 +3213,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .accordion-name {
         font-size: 18px;
+    }
+
+    .card-body {
+        text-align: center;
     }
 
     .card-body .sub-cat {
