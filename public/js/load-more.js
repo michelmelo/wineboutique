@@ -144,7 +144,7 @@ $("#delete-wine-confirm").click(function (e) {
     $("#delete-wine-" + $(this).data("id")).submit();
 });
 
-$("#main-search").keyup(function () {
+$("#main-search").on('keyup input', function () {
     let that = $(this);
 
     if (timer) {

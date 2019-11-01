@@ -37,34 +37,34 @@
                     <td>Name:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.name">{{errors.name}}</div>
-                        <input name="name" id="name" v-model="selectedAddress.name" class="w-100" required/>
+                        <input name="name" id="name" v-model="selectedAddress.name"  required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address1:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.address_1">{{errors.address_1}}</div>
-                        <input name="address_1" id="address_1" v-model="selectedAddress.address_1" class="w-100" required/>
+                        <input name="address_1" id="address_1" v-model="selectedAddress.address_1"  required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address2:</td>
                     <td class="edit-text">
-                        <input name="address_2" id="address_2" v-model="selectedAddress.address_2" class="w-100"/>
+                        <input name="address_2" id="address_2" v-model="selectedAddress.address_2"/>
                     </td>
                 </tr>
                 <tr>
                     <td>City:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.city">{{errors.city}}</div>
-                        <input name="city" id="city" v-model="selectedAddress.city" class="w-100" required/>
+                        <input name="city" id="city" v-model="selectedAddress.city"  required/>
                     </td>
                 </tr>
                 <tr>
                     <td>Postal Code:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.postal">{{errors.postal}}</div>
-                        <input type="number" id="postal-code" name="postal_code" v-model="selectedAddress.postal_code" class="w-100" required/>
+                        <input type="number" id="postal-code" name="postal_code" v-model="selectedAddress.postal_code"  required/>
                     </td>
                 </tr>
                 <tr>

@@ -7,22 +7,22 @@
                 <tr>
                     <td>First Name:</td>
                     <td class="edit-text">
-                        <input name="firstName" class="w-100" v-model="firstName" v-if="editing" />
+                        <input name="firstName" v-model="firstName" v-if="editing" />
                         <span v-else>{{firstName}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Last Name:</td>
                     <td class="edit-text">
-                        <input name="lastName" class="w-100" v-model="lastName" v-if="editing" />
+                        <input name="lastName" v-model="lastName" v-if="editing" />
                         <span v-else>{{lastName}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Date of birth:</td>
                     <td class="edit-text">
-                        <datepicker id="datepicker" class="w-100" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="selectedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
-                        <span v-else>{{ birthday ? getFormattedDate(birthday) : 'No birthday selected.' }}</span>
+                        <datepicker id="datepicker" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
+                        <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
                     </td>
                 </tr>
                 <tr>

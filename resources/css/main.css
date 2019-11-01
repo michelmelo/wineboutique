@@ -24,10 +24,10 @@ h4{
     font-size: 20px;
 }
 .text-red{
-   color: #9C193A;
+   color: #da8599;
 }
 .text-red:hover{
-   color: #9C193A;
+   color: #da8599;
 }
 .row:before, .row:after {display: none !important;}
 
@@ -45,7 +45,7 @@ select {
 }
 
 input, textarea, select{
-    margin: 3px;
+    margin: 3px 0;
 }
 
 .center-text {
@@ -430,6 +430,10 @@ select {
 
 .order_details {
     position: absolute;
+}
+
+.forms label.birthday{
+    display: none;
 }
 
 /*=========================================================================================================================================================================================
@@ -2320,6 +2324,10 @@ footer p {
     text-align: right;
 }
 
+.info-box table tr td select{
+    max-width: 214px;
+}
+
 
 
 /*=========================================================================================================================================================================================
@@ -2531,6 +2539,10 @@ footer p {
 .new-wine-photos img {
     width: 100%;
     max-width: 150px;
+}
+
+.other_images_preview img{
+    margin:10px 5px;
 }
 
 .form-inputs>div {
@@ -3033,7 +3045,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
     .popup-info {   
       left: 58%;   
-      }
+    }
+
+    .startup .col-6.shipping-time{
+        -ms-flex: 1 0 37.5%;
+        -webkit-box-flex: 0;
+        flex: 1 0 37.5%;
+        max-width: 50%;
+    }
 
 }
 
@@ -3134,11 +3153,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .main .page-header{
       margin: 0px 0 20px;
     }
-
-    .page-header h1 {
-      top: 35%;
-    }
-    
+ 
     .footer-nav {
         margin-top: 35px;
     }
@@ -3390,6 +3405,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
+    .forms label.birthday{
+        display: block;
+    }
+
     .info-box h2 {
         text-align: left;
         font-size: 16px;
@@ -3613,13 +3632,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .my-winery-head .button {
-        width: calc(50% - 10px);
-        float: left!important;
-        margin: 5px;
-    }
-
-    .my-winery-head .button:last-child {
         width: calc(100% - 10px);
+        margin: 3px 5px;
     }
 }
 
@@ -3686,8 +3700,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
     .info-box table tr td {
-        padding: 10px 5px 10px 0;
-        max-width: 130px;
+     /*   max-width: 130px;*/
         width: 100%;
         padding: 10px 5px 10px 5px;
         font-size: 12px;

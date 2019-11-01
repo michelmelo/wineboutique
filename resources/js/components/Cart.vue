@@ -22,7 +22,7 @@
                                                 <span v-if="wine.shipping_price">Shipping: {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
                                                 <span v-else>
                                                     Winery is not shipping to your state, please remove wine or
-                                                    <a href="/my-address">change shipping state</a>
+                                                    <a href="/my-address" class="text-red font-weight-bold">change shipping state</a>
                                                 </span>
                                             </div>
                                         </div>
