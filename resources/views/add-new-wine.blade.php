@@ -17,10 +17,11 @@
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label>
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview">
+                    <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview" data-default="{{asset('img/primary-photo.jpg')}}">
                 </label>
 
-                <input type="submit" id="crop-picture" value="Crop" style="display:none;" class="red-button button ">
+                <input type="submit" id="crop-picture" value="Crop" style="display:none; width: 200px;" class="red-button button ">
+                <input type="submit" id="cancel-crop-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
                 <input type="hidden" name="cropx" id="cropx" value="226">
                 <input type="hidden" name="cropy" id="cropy" value="250">
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
@@ -30,8 +31,9 @@
                 <p class="w-100">Other pictures</p>
                 <label>
                     <input type="file" id="other_image" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview">
-                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none;" class="red-button button ">
+                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
+                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button">
+                    <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
                     <div class="other_images_preview"></div>
                 </label>
             </div>

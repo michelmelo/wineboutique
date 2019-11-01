@@ -27,7 +27,6 @@ $(document).ready(function() {
         var cropdata = $('#imagePreview').data("cropper").getData(true);
 
         $(this).hide();
-        $("#picture").prop("disabled", false);
 
         var crop_image_preview = $('#imagePreview').cropper('getCroppedCanvas').toDataURL();
 
@@ -36,11 +35,36 @@ $(document).ready(function() {
         $("#crop-error").hide();
         $("#other_image").prop("disabled", false);
         $("#picture").prop("disabled", false);
+        $("#cancel-crop-picture").hide();
 
         $("#cropx").val(cropdata.x);
         $("#cropy").val(cropdata.y);
         $("#cropwidth").val(cropdata.width);
         $("#cropheight").val(cropdata.height);
+    });
+
+    $("#cancel-crop-picture").click(function (e) {
+        e.preventDefault();
+
+        $('#imagePreview').cropper('destroy').attr('src', $('#imagePreview').data("default"));
+        $(".add-new-wine button#submit").prop("disabled", false);
+        $("#crop-error").hide();
+        $("#other_image").prop("disabled", false);
+        $("#picture").prop("disabled", false).val("");
+        $("#crop-picture").hide();
+        $(this).hide();
+    });
+
+    $("#cancel-crop-other-picture").click(function(e){
+        e.preventDefault();
+
+        $("#other_image").prop("disabled", false).val("");
+        $("#picture").prop("disabled", false);
+        $(".add-new-wine button#submit").prop("disabled", false);
+        $('#otherImagePreview').cropper('destroy').attr('src', $('#otherImagePreview').data("default"));
+        $("#crop-error").hide();
+        $("#crop-other-picture").hide();
+        $(this).hide();
     });
 
     $("#crop-other-picture").click(function(e){
@@ -55,6 +79,7 @@ $(document).ready(function() {
         $(".add-new-wine button#submit").prop("disabled", false);
         $('#otherImagePreview').cropper('destroy').attr('src', '/img/primary-photo.jpg');
         $("#crop-error").hide();
+        $("#cancel-crop-other-picture").hide();
 
         var formData = new FormData();
         formData.append('image', $("#other_image")[0].files[0]);
@@ -99,9 +124,11 @@ function readURL(input, selector) {
 
             if(selector.is("#otherImagePreview")){
                 $("#crop-other-picture").show();
+                $("#cancel-crop-other-picture").show();
             }
             else{
                 $("#crop-picture").show();
+                $("#cancel-crop-picture").show();
             }
         },1000);
 
