@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-4 center-text">
                     <p>SHIPPING</p>
-                    <span class="color-r">$5.26</span>
+                    <span class="color-r">{{$wine->winery->winery_shippings->min('price')}} - {{$wine->winery->winery_shippings->max('price')}} $</span>
                 </div>
 
                 <div class="col-4 center-text">
