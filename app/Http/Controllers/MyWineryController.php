@@ -160,7 +160,7 @@ class MyWineryController extends Controller
         $order = Order::where("id", $order_id)->first();
 
         if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id])){
-            if(!$order->order_wines()->where("status", 1)){
+            if(count($order->order_wines()->where("status", 1)->get()) == 0){
                 $order->update(["status" => 2]);
             }
         }
