@@ -167,4 +167,17 @@ class MyWineryController extends Controller
 
         return redirect("my_winery_stats")->with("success", "Wine sent");
     }
+
+    public function shipping_delete($id){
+        $user = Auth::user();
+        $shipping = $user->winery->winery_shippings()->where("id", $id)->first();
+
+        if(!$shipping){
+            return redirect()->route('my-winery-edit');
+        }
+
+        $shipping->delete();
+
+        return redirect()->route('my-winery-edit');
+    }
 }

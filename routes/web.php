@@ -122,7 +122,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/my_winery/order-update/{order}/{wine}/{tracking}', 'MyWineryController@order_update')->name('my-winery-order-update');
     Route::get('/my_winery', 'MyWineryController@index')->name('my-winery');
     Route::get('/my_winery_stats', 'MyWineryController@stats')->name('my-winery-stats');
-
+    Route::get('/my-winery-shipping/delete/{id}', 'MyWineryController@shipping_delete')->name('shipping-delete');
     Route::get('/my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
     Route::post('/my-winery-store', 'MyWineryController@store')->name('my-winery-store');
 });
