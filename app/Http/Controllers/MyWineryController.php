@@ -30,7 +30,10 @@ class MyWineryController extends Controller
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
-            'wines' => $request->user()->winery->wines
+            'wines' => $request->user()->winery->wines,
+            'seo' => [
+                'title' => 'My Winery | Wine Boutique',
+            ]
         ]);
     }
 

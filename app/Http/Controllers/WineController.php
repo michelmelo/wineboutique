@@ -148,7 +148,12 @@ class WineController extends Controller
                 ->selectRaw('COUNT(id) as cnt')
                 ->where('id','=',$wine->id)
                 ->first(),
-            'recommendations' => $wine->similarWines()
+            'recommendations' => $wine->similarWines(),
+            'seo' => [
+                'title' => $wine->name . ' | Wine Boutique',
+                'description' => $wine->name . ' | Wine Boutique',
+                'image' => url('') . $wine->photo
+            ]
         ]);
     }
 
