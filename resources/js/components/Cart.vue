@@ -70,7 +70,7 @@
                     </tr>
                 </table>
                 <div class="row cart-buttons">
-                    <a href="/checkout" class="button red-button full-width" v-if="showComplete">CHECKOUT</a>
+                    <a href="/checkout" class="button red-button full-width" v-if="showComplete && hasShippingAddress()">CHECKOUT</a>
                     <a href="/wines" class="button pink-button full-width">CONTINUE SHOPPING</a>
                 </div>
             </div>
@@ -106,6 +106,18 @@
             this.getCart();
         },
         methods: {
+            hasShippingAddress() {
+                var status = true;
+
+                this.wines.forEach(function(item, index){
+                    if(!item.shipping_price){
+                        status = false;
+                        return false;
+                    }
+                });
+
+                return status;
+            },
             getCart() {
                 axios.get('/cart/get')
                     .then(response => {
