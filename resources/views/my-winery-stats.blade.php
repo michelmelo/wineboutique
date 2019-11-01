@@ -30,11 +30,11 @@
                                         @foreach($value["wines"] as $wine)
                                             @if($wine["status"] == 1)
                                                 <div>
-                                                    {{ $wine["name"] }} - <a class="send-wine" href="/my_winery/order-update/{{$key}}/{{$wine["id"]}}">Send wine</a>
+                                                    {{ $wine["name"] }} ({{$wine["quantity"]}}) - <a class="send-wine" href="/my_winery/order-update/{{$key}}/{{$wine["id"]}}">Send</a>
                                                 </div>
                                             @else
                                                 <div>
-                                                    {{ $wine["name"] }} - Wine sent
+                                                    {{ $wine["name"] }} ({{$wine["quantity"]}}) - Wine sent
                                                 </div>
                                             @endif
                                         @endforeach

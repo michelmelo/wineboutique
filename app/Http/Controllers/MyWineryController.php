@@ -116,6 +116,7 @@ class MyWineryController extends Controller
                 $orders[$order->order_id]["wines"][] = [
                     "name" => $order->wine_name,
                     "status" => $order->wine_status,
+                    "quantity" => $order->order_wine_quantity,
                     "id" => $order->wine_id
                 ];
             }
@@ -126,6 +127,7 @@ class MyWineryController extends Controller
                         [
                             "name" => $order->wine_name,
                             "status" => $order->wine_status,
+                            "quantity" => $order->order_wine_quantity,
                             "id" => $order->wine_id
                         ]
                     ],
