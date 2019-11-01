@@ -30,7 +30,10 @@ class MyWineryController extends Controller
             'varietals' => Varietal::all(),
             'regions' => Region::orderBy('name')->get(),
             'capacity_units' => CapacityUnit::all(),
-            'wines' => $request->user()->winery->wines
+            'wines' => $request->user()->winery->wines,
+            'seo' => [
+                'title' => 'My Winery | Wine Boutique',
+            ]
         ]);
     }
 
@@ -160,11 +163,24 @@ class MyWineryController extends Controller
         $order = Order::where("id", $order_id)->first();
 
         if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id])){
-            if(!$order->order_wines()->where("status", 1)){
+            if(count($order->order_wines()->where("status", 1)->get()) == 0){
                 $order->update(["status" => 2]);
             }
         }
 
         return redirect("my_winery_stats")->with("success", "Wine sent");
+    }
+
+    public function shipping_delete($id){
+        $user = Auth::user();
+        $shipping = $user->winery->winery_shippings()->where("id", $id)->first();
+
+        if(!$shipping){
+            return redirect()->route('my-winery-edit');
+        }
+
+        $shipping->delete();
+
+        return redirect()->route('my-winery-edit');
     }
 }

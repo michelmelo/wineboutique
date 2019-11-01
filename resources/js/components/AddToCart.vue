@@ -2,7 +2,7 @@
     <div class="full-width add-to-cart">
       <div class="row align-items-center px-0">
          <div class="col-3 pl-0">
-            <select v-model="qnty" name="quantity" id="quantity" style="width: 100%; margin-top: 10px; padding: 5px 10px;">
+            <select v-model="qnty" @change="qntyChanged" name="quantity" id="quantity" style="width: 100%; margin-top: 10px; padding: 5px 10px;">
                 <option :value="i" v-for="i in 10">{{i}}</option>
             </select>
          </div> 
@@ -32,6 +32,9 @@
             }
         },
         methods: {
+            qntyChanged: function() {
+                window.qnty = this.qnty;
+            },
             addToCart() {
                 axios.post('/cart', {
                     wines: [{

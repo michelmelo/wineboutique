@@ -90,6 +90,10 @@
                     <div class="col-lg-9 col-lg-push-3 col-sm-12">
                         <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
+
+                        <a :href="'/my-winery-shipping/delete/' + item.id" style="float: right">
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </div>
 
                     <div class="col-lg-12 col-sm-12">

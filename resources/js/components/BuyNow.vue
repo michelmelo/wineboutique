@@ -10,7 +10,7 @@
                 axios.post('/cart', {
                     wines: [{
                         id: this.wineId,
-                        quantity: 1
+                        quantity: window.qnty !== undefined ? window.qnty : 1
                     }]
                 })
                 .then(response => {
