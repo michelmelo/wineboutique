@@ -21,8 +21,8 @@
                 <tr>
                     <td>Date of birth:</td>
                     <td class="edit-text">
-                        <datepicker id="datepicker" class="w-100" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="seletedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
-                        <span v-else>{{birthday?getFormattedDate(birthday):'No birthday selected.'}}</span>
+                        <datepicker id="datepicker" class="w-100" name="birthday" v-if="editing" minimum-view="day" :disabled-dates="disabledDates" :value="birthday" @selected="selectedBirthday" :typeable="true" :open-date="focusedDate"></datepicker>
+                        <span v-else>{{ birthday ? getFormattedDate(birthday) : 'No birthday selected.' }}</span>
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
             this.firstName = user.firstName;
             this.lastName = user.lastName;
             this.email = user.email;
-            if(user.birthday) this.birthday = new Date(user.birthday);
+            if(user.birthday) this.birthday = user.birthday;
             let d = new Date();
             d.setFullYear(d.getFullYear()-22);
             this.focusedDate = d;
@@ -103,7 +103,7 @@
             getFormattedDate(date) {
                 return moment(date).format('MM/DD/Y');
             },
-            seletedBirthday(date) {
+            selectedBirthday(date) {
                 this.birthday = date;
             }
         },
