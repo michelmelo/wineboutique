@@ -53,9 +53,9 @@
     </div>
 	
     <!-- Scripts -->
-    @if(request()->route()->getName() !== 'my-payments.show')
+{{--    @if(request()->route()->getName() !== 'my-payments.show')--}}
         <script src="{{ asset('js/app.js') }}"></script>
-    @endif
+    {{--@endif--}}
 
     <script src="{{ asset('js/load-more.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
