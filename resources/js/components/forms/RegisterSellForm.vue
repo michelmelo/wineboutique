@@ -49,6 +49,7 @@
             <strong>You must be 21 or older.</strong>
         </span>
         <div id="over-21" v-if="acceptAge">
+            <label class="form-check-label birthday" for="birthday">Enter your date of birth</label>
             <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
         </div>
         <input type="submit" name="submit" class="button red-button full-width" value="SIGN UP">

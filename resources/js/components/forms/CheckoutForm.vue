@@ -159,7 +159,7 @@
                             <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment">
                                 Place order
                             </button>
-                            <a href="/my-payments" v-else>Add payment method please</a>
+                            <a href="/my-payments" class="text-red font-weight-bold" v-else>Add payment method please</a>
                         </div>
                     </article>
                 </div>

@@ -139,11 +139,11 @@
                         <p>Processing time *</p>
                     </div>
 
-                    <div class="col-lg-4 shipping-time col-sm-12">
+                    <div class="col-6 col-lg-4 shipping-time col-sm-12">
                         <input type="number" min="0" :name="'shipping[' + index + '][days_from]'" placeholder="From" class="from" v-model="item.days_from">
                     </div>
 
-                    <div class="col-lg-4 shipping-time col-sm-12">
+                    <div class="col-6 col-lg-4 shipping-time col-sm-12">
                         <input type="number" min="0" :name="'shipping[' + index + '][days_to]'" placeholder="To" class="to" v-model="item.days_to">
                     </div>
 
