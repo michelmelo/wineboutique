@@ -66,7 +66,7 @@
             this.firstName = user.firstName;
             this.lastName = user.lastName;
             this.email = user.email;
-            if(user.birthday) this.birthday = new Date(user.birthday);
+            if(user.birthday) this.birthday = user.birthday;
             let d = new Date();
             d.setFullYear(d.getFullYear()-22);
             this.focusedDate = d;
@@ -103,7 +103,7 @@
             getFormattedDate(date) {
                 return moment(date).format('MM/DD/Y');
             },
-            seletedBirthday(date) {
+            selectedBirthday(date) {
                 this.birthday = date;
             }
         },

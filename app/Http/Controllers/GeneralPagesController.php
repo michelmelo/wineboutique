@@ -87,7 +87,10 @@ class GeneralPagesController extends Controller
             'wine_count' => Wine::count(),
             'varietals' => $varietals,
             'regions' => $regions,
-            'filter' => $filter
+            'filter' => $filter,
+            'seo' => [
+                'title' => 'New Arrivals | Wine Boutique',
+            ]
         ]);
     }
 
@@ -150,7 +153,10 @@ class GeneralPagesController extends Controller
             'wines' => $wines,
             'varietals' => $varietals,
             'regions' => $regions,
-            'filter' => $filter
+            'filter' => $filter,
+            'seo' => [
+                'title' => 'Hot Sellers | Wine Boutique',
+            ]
         ]);
     }
 

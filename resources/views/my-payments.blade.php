@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-
+@section('script')
 <script>
     var stripe = Stripe('pk_test_bWZc4BcEaCNAKbJbhv6u91ZJ00zZEQ2RIQ');
     var elements = stripe.elements();
@@ -110,7 +110,7 @@
 
     // Submit the form with the token ID.
     function stripeTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
+        // Ins  ert the token ID into the form so it gets submitted to the server
         var form = document.getElementById('payment-form');
         var hiddenInput = document.createElement('input');
         hiddenInput.setAttribute('type', 'hidden');
@@ -122,4 +122,5 @@
         form.submit();
     }
 </script>
+@endsection
 @endsection
