@@ -58,14 +58,22 @@ class WineryController extends Controller
         $wineries = Winery::skip($page_offset)->take($page_limit)->with("wines")->get();
 
         return  $request->ajax() ? ['wineries' => $wineries] : view('wineries', [
-            'wineries' => $wineries
+            'wineries' => $wineries,
+            'seo' => [
+                'title' => 'Wineries | Wine Boutique',
+            ]
         ]);
     }
 
     public function show(Winery $winery)
     {
         return view('winery', [
-            'winery' => $winery
+            'winery' => $winery,
+            'seo' => [
+                'title' => $winery->name . ' | Wine Boutique',
+                'description' => $winery->name . ' | Wine Boutique',
+                'image' => url('') . '/images/winery/profile/' . $winery->profile
+            ]
         ]);
     }
 

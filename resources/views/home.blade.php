@@ -13,21 +13,21 @@
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="First slide">
                     <div class="slider-content">
-                        <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
+                        <h1 class="color-w">Curated Online Wine Shop</h1>
                         <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="Second slide">
                     <div class="slider-content">
-                        <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
+                        <h1 class="color-w">Curated Online Wine Shop</h1>
                         <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{asset('img/home-slider/slide-1.jpg')}}" alt="Third slide">
                     <div class="slider-content">
-                        <h1 class="color-w">WELCOME TO WINE BOUTIQUE</h1>
+                        <h1 class="color-w">Curated Online Wine Shop</h1>
                         <a href="{{route('wine.list')}}" class="button red-button">SHOP NOW</a>
                     </div>
                 </div>

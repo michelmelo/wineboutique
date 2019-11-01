@@ -74,7 +74,11 @@ class HomeController extends Controller
             'topWineries' => $topWineries,
             'latestWines' => $latestWines,
             'wines' => $wines,
-            'filter' => $filter
+            'filter' => $filter,
+            'seo' => [
+                'title' => 'Online Wine Store - Buy Fine Wine Online | Wine Boutique',
+                'description' => 'Wine Boutique is an exclusive online platform where wineries can directly sell their wine to the wine lovers. Shop the finest wine from top rated wineries!'
+            ]
         ]);
     }
 }

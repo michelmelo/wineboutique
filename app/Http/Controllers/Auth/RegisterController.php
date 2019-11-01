@@ -40,7 +40,12 @@ class RegisterController extends Controller
      */
     public function showRegistrationSellForm()
     {
-        return view('auth.register-sell');
+        return view('auth.register-sell', [
+            'seo' => [
+                'title' => 'Sell on WB | Wine Boutique',
+                'noindex' => true
+            ]
+        ]);
     }
 
     /**
@@ -50,7 +55,12 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'seo' => [
+                'title' => 'Create an Account | Wine Boutique',
+                'noindex' => true
+            ]
+        ]);
     }
 
     /**
