@@ -179,7 +179,7 @@
                                 <strong>{{ $errors->first('tags') }}</strong>
                             </span>
                         @endif
-                        <span style="font-size: 14px; color: #afafaf">What words might someone use to search for your wine?</span>
+                        <span style="display: block;font-size: 14px; color: #afafaf">What words might someone use to search for your wine?</span>
                     </div>
                 </div>
             </div>
