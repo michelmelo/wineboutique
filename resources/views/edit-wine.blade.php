@@ -22,25 +22,22 @@
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
+
             <div class="col-lg-8 col-sm-12">
-                <div id="photos" class="dropzone">
-                </div>
-                <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; display: block; margin: 20px auto;">Add More</a>
-                <script>
-                    var preloadedImages = {!! $preloadedImages->toJson() !!};
-                </script>
+                <p class="w-100">Other pictures</p>
+                <label>
+                    <input type="file" id="other_image" style="display: none; cursor: pointer;" >
+                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
+                    @foreach($preloadedImages as $img)
+                        <img src="{{ $img['path'] }}" id="imagePreview">
+                    @endforeach
+                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button">
+                    <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                    <div class="other_images_preview"></div>
+                </label>
             </div>
         </div>
-<!--        
-        <div class="shadow-box row new-wine-photos">
-            <div id="photos" class="dropzone">
-            </div>
-            <a href="#" class="add-more-images red-button button" style="visibility: hidden; max-height: 34px; margin: auto 20px;">Add More</a>
-            <script>
-                var preloadedImages = {!! $preloadedImages->toJson() !!};
-            </script>
-        </div>
--->
+
         <div class="shadow-box row details">
             <h2>DETAILS</h2>
             <div>
