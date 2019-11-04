@@ -84,7 +84,8 @@ class LoginController extends Controller
     }
 
     public function FacebookCallback($service) {
-        $user = Socialite::with ( $service )->user ();
+        $user = Socialite::with ( $service )->user();
+        dd($user);
         return view ( 'home' )->withDetails ( $user )->withService ( $service );
     }
 }

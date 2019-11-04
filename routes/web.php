@@ -18,7 +18,7 @@ Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')-
 
 Route::get('/redirect/{service}', 'Auth\LoginController@redirectProvider');
 Route::get('/callback', 'Auth\LoginController@handleGoogleProviderCallback');
-//Route::get ( '/callback/{service}', 'Auth\LoginController@FacebookCallback' );
+Route::get ( '/callbackFB', 'Auth\LoginController@FacebookCallback' );
 
 Route::view('/get-paid', 'get-paid')->name('get-paid');
 Route::view('/local-pickup', 'local-pickup')->name('local-pickup');
