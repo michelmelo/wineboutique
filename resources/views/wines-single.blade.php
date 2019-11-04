@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-4 center-text">
                     <p>SHIPPING</p>
-                    <span class="color-r">{{$wine->winery->winery_shippings->min('price')}} - {{$wine->winery->winery_shippings->max('price')}} $</span>
+                    <span class="color-r">{{$wine->winery->winery_shippings->min('price')}} $</span>
                 </div>
 
                 <div class="col-4 center-text">
@@ -85,13 +85,13 @@
                 @else
                     <a href="{{route('login')}}" class="button pink-button full-width">ADD TO CART</a>
                 @endif
-                
+
                 @if(Auth::check())
                     <buy-now wine-id="{{$wine->id}}"></buy-now>
                 @else
                     <a href="{{route('login')}}" class="button red-button full-width">BUY NOW</a>
                 @endif
-               
+
             </div>
             @endif
         </div>
@@ -109,7 +109,7 @@
                 <div id="description" class="tab-pane fade in active show">
                     <p>{{$wine->description}}</p>
                 </div>
-                
+
                 <div id="info" class="tab-pane fade in">
                     <p class="winery-name">{{$wine->winery->name}}</p>
                     <p class="winery-description">{{$wine->winery->description}}</p>
@@ -147,7 +147,7 @@
 
             </div>
         @endforeach
-        {{ $recommendations->links() }}
+{{--        {{ $recommendations->links() }}--}}
     </div>
     @endif
 

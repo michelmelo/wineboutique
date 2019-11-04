@@ -8,8 +8,8 @@
     </div>
 
 </div>
-<div class="container"> 
-   
+<div class="container">
+
 
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
@@ -112,7 +112,7 @@
                             <div class="star-rating">
                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                             </div>
-                            <span class="order-q">{{ $wine->orders_count }} Sold</span>
+                            <span class="order-q">{{ $wine->orders_count ? $wine->orders_count : 0 }} Sold</span>
                         </div>
                     </a>
                 </div>
