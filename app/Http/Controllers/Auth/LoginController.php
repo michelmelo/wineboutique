@@ -61,9 +61,11 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             return redirect('/login');
         }
+
         // check if they're an existing user
         $fullName = explode(' ', $user->name);
         $existingUser = User::where('email', $user->email)->first();
+
         if($existingUser){
             // log them in
             auth()->login($existingUser, true);
@@ -80,13 +82,37 @@ class LoginController extends Controller
             $newUser->save();
             auth()->login($newUser, true);
         }
+
         return redirect()->to('/');
     }
 
     public function FacebookCallback() {
-        $user = Socialite::with ('facebook')->user();
-        dd($user);
+        try {
+            $user = Socialite::with ('facebook')->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
 
-        return view ( 'home' )->withDetails ( $user )->withService ('facebook');
+        $fullName = explode(' ', $user->name);
+        $existingUser = User::where('email', $user->email)->first();
+
+        if($existingUser){
+            auth()->login($existingUser, true);
+        } else {
+            $newUser                  = new User;
+            $newUser->firstName       = $fullName[0];
+            $newUser->lastName        = count($fullName) > 1 ? $fullName[1] : ' ';
+            $newUser->google_id       = $user->id;
+            $newUser->avatar          = $user->avatar;
+            $newUser->avatar_original = $user->avatar_original;
+            $newUser->email           = $user->email;
+            $newUser->type            = "CUSTOMER";
+
+            $newUser->save();
+
+            auth()->login($newUser, true);
+        }
+
+        return redirect()->to('/');
     }
 }
