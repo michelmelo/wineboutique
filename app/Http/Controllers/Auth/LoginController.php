@@ -83,9 +83,10 @@ class LoginController extends Controller
         return redirect()->to('/');
     }
 
-    public function FacebookCallback($service) {
-        $user = Socialite::with ( $service )->user();
+    public function FacebookCallback() {
+        $user = Socialite::with ('facebook')->user();
         dd($user);
-        return view ( 'home' )->withDetails ( $user )->withService ( $service );
+
+        return view ( 'home' )->withDetails ( $user )->withService ('facebook');
     }
 }
