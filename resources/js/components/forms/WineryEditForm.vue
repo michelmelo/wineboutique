@@ -4,6 +4,43 @@
         <form v-on:submit="onSubmit" method="post" action="my-winery-store">
             <input type="hidden" name="_token" v-model="csrf">
             <input type="hidden" name="wineryId" :value="wineryId">
+
+            <div class="shadow-box row">
+                <h2>NAME YOUR WINERY <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">This is your brand name that will be visible to all users on Wine Boutique.</span>
+                <div class="col-lg-3 col-sm-12"></div>
+                <div class="col-lg-6 col-sm-12 enter-name">
+                    <input type="text" placeholder="Enter your winery name" v-model.trim="name" name="wineryName" :class="{ 'invalid': isInvalid('name') }" min="4">
+                    <div class="name-check"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="col-lg-3 col-sm-12"></div>
+            </div>
+
+            <div class="shadow-box row">
+                <h2>WINERY PREFERENCES <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <span class="popup-info d-none">Please select your winery state where your winery is located.</span>
+                <div class="col-lg-2 col-sm-12"></div>
+                <div class="col-lg-8 col-sm-12 winery-preferences">
+                    <table>
+                        <tr>
+                            <td>Winery state *</td>
+                            <td>
+                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
+                                    <option disabled hidden value="">Select</option>
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                        {{ region.name }}
+                                    </option>
+                                </select>
+                                <span class="help-block error-block" v-if="isInvalid('regions')">
+                                    <strong>Winery state is required.</strong>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 col-sm-12"></div>
+            </div>
+
             <div class="shadow-box row">
                 <h2>WINERY DESCRIPTION</h2>
                 <div class="col-lg-2 col-sm-12"></div>
@@ -130,7 +167,7 @@
 
     export default {
         components: { Multiselect },
-        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings'],
+        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
             profile: null,
@@ -142,6 +179,8 @@
             description: null,
             publicPath: process.env.BASE_URL,
             errors: {},
+            name: null,
+            regions: [],
             ship_to_values: []
         }),created() {
             this.description = this.wineryDesc;
@@ -149,6 +188,8 @@
             this.cover = this.wineryCover;
             this.fetchedRegions_ = JSON.parse(this.fetchedRegions);
             this.existingShippings_ = JSON.parse(this.existingShippings);
+            this.regions = JSON.parse(this.selectedRegions);
+            this.name = this.wineryName;
 
             if(this.existingShippings_.length == 0){
                 this.addMoreShippings();

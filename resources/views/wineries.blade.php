@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="container">
-   
+
 
     <div class="row padding-row vine-boxes">
         @foreach ($wineries as $winery)

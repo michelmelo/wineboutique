@@ -44,15 +44,19 @@ class MyWineryController extends Controller
         return view('my-winery-edit', [
             'winery' => $winery,
             'shippings' => $winery->winery_shippings()->get(),
-            'regions' => Region::orderBy('name')->get()
+            'regions' => Region::orderBy('name')->get(),
+            'winery_regions' => $this->onlyIDs($winery->regions),
         ]);
     }
 
     public function store(Request $request)
     {
         $winery = Auth::user()->winery;
+        $winery->name = $request->wineryName;
         $winery->description = $request->description;
         $winery->save();
+
+        $winery->regions()->attach($request->regions);
 
         foreach($request->shipping as $shippings) {
             $do_save = true;
@@ -191,5 +195,14 @@ class MyWineryController extends Controller
         $shipping->delete();
 
         return redirect()->route('my-winery-edit');
+    }
+
+    private function onlyIDs($obj)
+    {
+        $retVal = array();
+        foreach ($obj as $item) {
+            array_push($retVal,$item->id);
+        }
+        return $retVal;
     }
 }
