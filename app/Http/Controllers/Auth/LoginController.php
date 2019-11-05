@@ -102,7 +102,7 @@ class LoginController extends Controller
             $newUser                  = new User;
             $newUser->firstName       = $fullName[0];
             $newUser->lastName        = count($fullName) > 1 ? $fullName[1] : ' ';
-            $newUser->google_id       = $user->id;
+            $newUser->facebook_id     = $user->id;
             $newUser->avatar          = $user->avatar;
             $newUser->avatar_original = $user->avatar_original;
             $newUser->email           = $user->email;
