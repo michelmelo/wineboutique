@@ -68,13 +68,27 @@
                         <p>Fixed shipping costs *</p>
                     </div>
 
-                    <div class="col-lg-3 col-sm-12">
+                    <div class="col-lg-3 col-sm-12" v-if="!item.is_template">
                         <select :name="'shipping[' + index + '][ship_to]'" class="destination" v-model="item.ship_to">
                             <option value="0" disabled selected>Add a destination</option>
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                 {{ region.name }}
                             </option>
                         </select>
+                    </div>
+                    <div class="col-lg-3 col-sm-12" v-else>
+                        <multiselect v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                                     label="text"
+                                     track-by="value"
+                                     :hideSelected="true"
+                                     :multiple="true"
+                                     :close-on-select="false"
+                                     :clear-on-select="false"
+                                     :preserve-search="true"
+                                     @input="refineValues"
+                        ></multiselect>
+
+                        <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
@@ -91,7 +105,7 @@
                         <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
 
-                        <a :href="'/my-winery-shipping/delete/' + item.id" style="float: right">
+                        <a :href="'/my-winery-shipping/delete/' + item.id" v-if="!item.is_template" style="float: right">
                             <i class="fa fa-trash"></i>
                         </a>
                     </div>
@@ -110,7 +124,12 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect'
+
+    Vue.component('multiselect', Multiselect);
+
     export default {
+        components: { Multiselect },
         props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings'],
         data: () => ({
             csrf: window.Laravel.csrfToken,
@@ -122,7 +141,8 @@
             defaultCoverPhoto: '/img/winery-1.jpg',
             description: null,
             publicPath: process.env.BASE_URL,
-            errors: {}
+            errors: {},
+            ship_to_values: []
         }),created() {
             this.description = this.wineryDesc;
             this.profile = this.wineryProfile;
@@ -135,14 +155,24 @@
             }
         },
         methods: {
+            refineValues(value){
+                var that = this;
+
+                that.ship_to_values = [];
+
+                value.forEach(function(item, index){
+                    that.ship_to_values.push(item.value);
+                });
+            },
             addMoreShippings(){
                 this.existingShippings_.push({
                     ship_from: 0,
                     days_from: "",
                     days_to: "",
-                    ship_to: 0,
+                    ship_to: [],
                     price: "",
-                    is_free_shipping: false
+                    is_free_shipping: false,
+                    is_template: true
                 });
             },
             handleFileChange(e) {

@@ -154,6 +154,7 @@
                     <div class="col-lg-3 col-sm-12">
                         <multiselect v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
                                      label="text"
+                                     track-by="value"
                                      :hideSelected="true"
                                      :multiple="true"
                                      :close-on-select="false"

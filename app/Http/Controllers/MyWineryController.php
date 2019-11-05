@@ -76,7 +76,16 @@ class MyWineryController extends Controller
                     WineryShipping::where('id', $shippings["id"])->update($shippings);
                 }
                 else{
-                    $winery->winery_shippings()->create($shippings);
+                    foreach ($shippings['ship_to'] as $to){
+                        $winery->winery_shippings()->create([
+                            "ship_from" => $shippings['ship_from'],
+                            "ship_to" => $to,
+                            "price" => $shippings['price'],
+                            "additional" => $shippings['additional'],
+                            "days_from" => $shippings['days_from'],
+                            "days_to" => $shippings['days_to']
+                        ]);
+                    }
                 }
             }
         }
