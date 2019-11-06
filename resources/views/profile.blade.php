@@ -13,7 +13,9 @@
             </div>
 
             <div>
-                <password-update-form />
+                @if(!$user->google_id && !$user->facebook_id)
+                    <password-update-form />
+                @endif
             </div>
         </div>
 
