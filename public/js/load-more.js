@@ -202,8 +202,8 @@ function moreWine(data) {
         retVal += '<h5>';
         retVal += typeof element.name !== 'undefined' ? element.name : 'Name of wine';
         retVal += '</h5>';
-        retVal += '<h4>$' + element.price + '</h4>';
-        retVal += '<div class="star-rating">';
+        retVal += '<div class="star-rating price">';
+        retVal += '<h4 class="m-0 p-0">$' + element.price + '</h4>';
         retVal += '<div data-v-34cbeed1="" class="vue-star-rating">' + '<div data-v-34cbeed1="" class="vue-star-rating">';
         for(let i=0;i<element.rating;i++) retVal += selectedStar();
         for(let i=element.rating;i<5;i++) retVal += unselectedStar();
