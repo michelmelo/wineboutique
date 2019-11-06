@@ -33,7 +33,7 @@
         ]) !!};
     </script>
 </head>
-<body>
+<body data-loadmorewines="{{ \App\Wine::DISPLAYING }}" data-loadmorewineries="{{ \App\Winery::DISPLAYING }}">
     @include('layouts.partials._header')
 	<div class="main" id="app">
         @yield('content')
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-	
+
     <!-- Scripts -->
 {{--    @if(request()->route()->getName() !== 'my-payments.show')--}}
         <script src="{{ asset('js/app.js') }}"></script>

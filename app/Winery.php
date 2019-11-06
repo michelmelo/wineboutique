@@ -10,6 +10,8 @@ class Winery extends Model
 {
     use Sluggable, FullTextSearch;
 
+    const DISPLAYING = 8;
+
     protected $fillable = [
         "name"
     ];

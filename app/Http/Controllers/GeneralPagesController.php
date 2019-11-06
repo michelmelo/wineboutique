@@ -52,7 +52,7 @@ class GeneralPagesController extends Controller
 
         if($request->ajax()){
             $page_offset = 0;
-            $page_limit = 12;
+            $page_limit = Wine::DISPLAYING;
 
             if ($request->get('page_offset')&&$request->get('page_limit')) {
                 $page_offset = $request->get('page_offset');
@@ -61,7 +61,7 @@ class GeneralPagesController extends Controller
 
             $return_wines = "";
 
-            $wines = $wines->limit(12)
+            $wines = $wines->limit(Wine::DISPLAYING)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -78,7 +78,7 @@ class GeneralPagesController extends Controller
         }
 
         return view('new-arrivals', [
-            'wines' => $wines->limit(12)
+            'wines' => $wines->limit(Wine::DISPLAYING)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -135,7 +135,7 @@ class GeneralPagesController extends Controller
             });
         }
 
-        $wines = $wines->limit(16)
+        $wines = $wines->limit(Wine::DISPLAYING)
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')

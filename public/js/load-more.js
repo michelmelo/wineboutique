@@ -1,5 +1,5 @@
 let loadedMoreCount = 0;
-const page_offset = 4;
+let page_offset = 4;
 let page_offset_counter = 1;
 
 let total = 0;
@@ -10,7 +10,8 @@ $( document ).ready(function() {
     switch (window.location.pathname) {
         case '/search':
         case '/wines':
-        case '/wines/top-rated':
+        case '/wines/hot-sellers':
+        case '/new-arrivals':
             type = 'wines';
 
             let els = document.getElementsByClassName('vine-boxes')[0].childNodes;
@@ -24,6 +25,9 @@ $( document ).ready(function() {
                 hideLoadMore();
             });
 
+            page_offset = $('body').data('loadmorewines');
+            console.log(page_offset);
+
             break;
         case '/wineries':
             type = 'wineries';
@@ -33,14 +37,16 @@ $( document ).ready(function() {
                 hideLoadMore();
             });
 
+            page_offset = $('body').data('loadmorewineries');
+
             break;
     }
 
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset*2 + '&page_limit=' + page_offset*2);
+        +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
     $('#loadMoreArrivalsLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset*3 + '&page_limit=' + page_offset*3);
+        +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
@@ -52,7 +58,7 @@ $( document ).ready(function() {
 
         $.get($(this).attr('href'), function (data) {
             if (Object.keys(data[type]).length > 0) {
-                loadedMoreCount = loadedMoreCount + page_offset*2;
+                loadedMoreCount = loadedMoreCount + page_offset;
 
                 let html = type === 'wines' ? moreWine(data[type]) : moreWineries(Object.values(data[type]));
 
@@ -100,7 +106,7 @@ $( document ).ready(function() {
             else{
                 $('#loadMoreArrivalsLink').attr('href', window.location.pathname +
                     (window.location.search==='' ? '?' : (window.location.search+'&')) +
-                    'page_offset=' + page_offset*page_offset_counter*3 + '&page_limit=' + page_offset*3);
+                    'page_offset=' + page_offset*page_offset_counter*3 + '&page_limit=' + page_offset);
             }
         });
     });

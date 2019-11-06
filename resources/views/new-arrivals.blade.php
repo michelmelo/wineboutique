@@ -95,7 +95,7 @@
     @if(count($wines) > 0 && $wine_count > count($wines))
         <div class="col-12 mt-4 mb-5 text-center">
             <div id="loadMoreArrivals">
-                <a id="loadMoreArrivalsLink" href="#"
+                <a id="loadMoreLink" href="#"
                    data-wine-count="{{ $wine_count }}"
                    class="big-button button red-button margin-0-auto margin-t">Load More</a>
             </div>

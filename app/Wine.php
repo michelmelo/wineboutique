@@ -14,6 +14,8 @@ class Wine extends Model
 
     use Sluggable, FullTextSearch, Taggable;
 
+    const DISPLAYING = 12;
+
     protected $fillable = [
         'name', 'price', 'photo', 'quantity', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'average_rating'
     ];
