@@ -52,7 +52,7 @@ class GeneralPagesController extends Controller
 
         if($request->ajax()){
             $page_offset = 0;
-            $page_limit = 12;
+            $page_limit = 4;
 
             if ($request->get('page_offset')&&$request->get('page_limit')) {
                 $page_offset = $request->get('page_offset');
@@ -60,9 +60,9 @@ class GeneralPagesController extends Controller
             }
 
             $return_wines = "";
-
-            $wines = $wines->limit(12)
-                ->leftJoin('orders', 'wines.id', '=', 'orders.id')
+            //$wines->limit(4)
+            $wines =
+                $wines->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
                 ->orderBy('wines.created_at', 'desc')
@@ -78,7 +78,7 @@ class GeneralPagesController extends Controller
         }
 
         return view('new-arrivals', [
-            'wines' => $wines->limit(12)
+            'wines' => $wines->limit(4)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
@@ -135,7 +135,41 @@ class GeneralPagesController extends Controller
             });
         }
 
-        $wines = $wines->limit(16)
+        if($request->ajax()){
+            $page_offset = 0;
+            $page_limit = 4;
+
+            if ($request->get('page_offset')&&$request->get('page_limit')) {
+                $page_offset = $request->get('page_offset');
+                $page_limit = $request->get('page_limit');
+            }
+
+//            $wines = $wines->limit(4)
+            $wines = $wines->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
+                ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
+                ->groupBy('wines.id')
+                ->orderBy('orders_count','desc')
+                ->skip($page_offset)
+                ->take($page_limit)
+                ->get();
+
+            foreach ($wines as $wine) {
+                if (Auth::user()) {
+                    $wine->favorited = $wine->favorited();
+                }
+                $wine->rating = $wine->rating();
+            }
+
+            $return_wines = "";
+
+            foreach ($wines as $wine){
+                $return_wines .= view('hot-seller', compact('wine'))->render();
+            }
+
+            return $return_wines;
+        }
+
+        $wines = $wines->limit(4)
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')
@@ -151,6 +185,7 @@ class GeneralPagesController extends Controller
 
         return view('hot-sellers', [
             'wines' => $wines,
+            'wine_count' => Wine::count(),
             'varietals' => $varietals,
             'regions' => $regions,
             'filter' => $filter,

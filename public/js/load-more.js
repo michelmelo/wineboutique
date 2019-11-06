@@ -1,5 +1,6 @@
 let loadedMoreCount = 0;
-const page_offset = 4;
+let page_offset = 4; // use this to adjust number of load more items
+let page_limit = page_offset;
 let page_offset_counter = 1;
 
 let total = 0;
@@ -27,6 +28,8 @@ $( document ).ready(function() {
             break;
         case '/wineries':
             type = 'wineries';
+            page_offset = 8; // use this to adjust number of load more items
+            age_limit = page_offset;
 
             $.post('/totalWineries', function(count) {
                 total = count;
@@ -37,10 +40,10 @@ $( document ).ready(function() {
     }
 
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset*2 + '&page_limit=' + page_offset*2);
+        +'page_offset=' + page_offset + '&page_limit=' + page_limit);
 
     $('#loadMoreArrivalsLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset*3 + '&page_limit=' + page_offset*3);
+        +'page_offset=' + page_offset + '&page_limit=' + page_limit);
 
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
@@ -58,11 +61,13 @@ $( document ).ready(function() {
 
                 $('.vine-boxes').append(html);
 
-                let newPageOffset = parseInt(loadedMoreCount) + parseInt(page_offset);
+                // let newPageOffset = parseInt(loadedMoreCount) + parseInt(page_offset);
+
+                page_offset = page_offset * 2;
 
                 $('#loadMoreLink').attr('href', window.location.pathname +
                     (window.location.search==='' ? '?' : (window.location.search+'&')) +
-                    'page_offset=' + newPageOffset + '&page_limit=' + page_offset);
+                    'page_offset=' + page_offset + '&page_limit=' + page_limit);
 
                 hideLoadMore();
 
@@ -94,13 +99,15 @@ $( document ).ready(function() {
 
             page_offset_counter++;
 
-            if(that.data("wine-count") <= page_offset*page_offset_counter*2.5){
+            page_offset = page_offset * 2;
+            // if(that.data("wine-count") <= page_offset*page_offset_counter*2.5){
+            if(that.data("wine-count") <= page_offset){
                 $("#loadMoreArrivals").fadeOut('slow');
             }
             else{
                 $('#loadMoreArrivalsLink').attr('href', window.location.pathname +
                     (window.location.search==='' ? '?' : (window.location.search+'&')) +
-                    'page_offset=' + page_offset*page_offset_counter*3 + '&page_limit=' + page_offset*3);
+                    'page_offset=' + page_offset + '&page_limit=' + page_limit);
             }
         });
     });
@@ -251,7 +258,7 @@ function unselectedStar() {
 }
 
 function hideLoadMore(force=false) {
-    if(loadedMoreCount + page_offset >= total||force){
+    if(page_offset >= total||force){
         $("#loadMore").fadeOut('slow');
     }
 }
