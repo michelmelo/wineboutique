@@ -1,5 +1,5 @@
 <template>
-    <div class="info-box shadow-box">
+    <div class="info-box shadow-box address">
         <div v-if="selectedAddress === null">
             <button v-on:click="addAddress" class="button red-button">Add address</button>
             <table class="address-table">
