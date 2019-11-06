@@ -37,7 +37,7 @@ $( document ).ready(function() {
     }
 
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset + '&page_limit=' + page_offset);
+        +'page_offset=' + page_offset*2 + '&page_limit=' + page_offset*2);
 
     $('#loadMoreArrivalsLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
         +'page_offset=' + page_offset*3 + '&page_limit=' + page_offset*3);
@@ -51,10 +51,10 @@ $( document ).ready(function() {
         $th.addClass('processing');
 
         $.get($(this).attr('href'), function (data) {
-            if (data[type].length > 0) {
-                loadedMoreCount = loadedMoreCount + page_offset;
+            if (Object.keys(data[type]).length > 0) {
+                loadedMoreCount = loadedMoreCount + page_offset*2;
 
-                let html = type === 'wines' ? moreWine(data[type]) : moreWineries(data[type]);
+                let html = type === 'wines' ? moreWine(data[type]) : moreWineries(Object.values(data[type]));
 
                 $('.vine-boxes').append(html);
 
