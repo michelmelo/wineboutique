@@ -182,8 +182,9 @@
                     </div>
                     <div class="product-info">
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                        <h4>${{$wine->price}}</h4>
+                        
                         <div class="star-rating">
+                            <h4 class="m-0 p-0">${{$wine->price}}</h4>
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
                         <span class="order-q">0 Sold</span>
