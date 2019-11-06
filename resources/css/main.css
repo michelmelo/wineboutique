@@ -785,7 +785,7 @@ footer p {
     width: 90%;
 }
 
-.home-slider  .slider-content h1 {
+.home-slider .slider-content h1, .home-slider .slider-content h2{
     color: #fff;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 36px;
@@ -907,8 +907,8 @@ footer p {
     position: relative;
     max-width: 183px;
     width: 100%;
-    padding-bottom: 150px;
-    overflow-y: hidden; 
+    padding-bottom: 260px;
+    overflow-y: hidden;
 }
 
 .new-arrivals .img-wrap img{
@@ -1022,11 +1022,11 @@ footer p {
 .vine-box-style-2 {
     margin-bottom: 20px;
 }
-
+/*
 .vine-box-style-2 .row {
     height: 150px;
 }
-
+*/
 .vine-box-style-2 .row .col-6{
     overflow: hidden;
 }
@@ -1036,7 +1036,7 @@ footer p {
             box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     display: block;
     width: 100%;
-    height: 100%;
+/*    height: 100%;*/
     margin-top: 2px;
     overflow: hidden;
 }
@@ -1045,7 +1045,7 @@ footer p {
     display: block;
     width: unset;
     height: 100%;
-    max-height: 150px;
+/*    max-height: 150px;*/
     margin:0 auto;
 }
 
@@ -1829,7 +1829,7 @@ footer p {
 
 .wineries-brand {
     position: relative;
-    background:url(/img/my-wine-header.jpg) center -12px no-repeat;
+    background:url(/img/my-wine-header.jpg) center no-repeat;
     background-size: cover;
 }
 
@@ -2251,7 +2251,7 @@ footer p {
     margin-bottom: 20px;
     width: 100%;
     position: relative;
-    overflow-x: auto;
+/*    overflow-x: auto;*/
 }
 
 
@@ -2278,7 +2278,7 @@ footer p {
 }
 
 .info-box table tr td {
-    padding: 10px 5px 10px 20px;
+    padding: 13px 5px 10px 20px;
     width: 50%;
 }
 
@@ -2324,8 +2324,14 @@ footer p {
     text-align: right;
 }
 
+.address.info-box tr td input:not([type=checkbox]){
+    max-width: 234px;
+    width: 100%;
+}
+
 .info-box table tr td select{
-    max-width: 214px;
+    max-width: 234px;   
+    padding: 2px;
 }
 
 
@@ -3054,6 +3060,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: 50%;
     }
 
+    .vdp-datepicker__calendar {
+        right:0;
+    }
+
 }
 
 @media only screen and (min-width : 998px){
@@ -3252,9 +3262,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 */
     .vine-box-style-3 {
         -webkit-box-flex: 0;
-            -ms-flex: 0 0 50%;
-                flex: 0 0 50%;
-        max-width: 50%;
+            -ms-flex: 0 0 33.333333%;
+                flex: 0 0 33.333333%;
+        max-width: 33.333333%;
     }
 
     .sale-mark {
@@ -3439,21 +3449,21 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         height: 12px!important;
         width: 12px!important;
     }
-    
+/*    
     .vine-box-style-2 .row {
         height: 128px;
     }
-
+*/
     .vine-box-style-2 img{
         height: 100%;
-        max-height: 130px;
+    /*    max-height: 130px;*/
         max-width: -webkit-fit-content;
         max-width: -moz-fit-content;
         max-width: fit-content;
     }
 
     .new-arrivals .img-wrap {
-        padding-bottom: 130px;
+        padding-bottom: 180px;
     }
 
     .new-arrivals .img-wrap img{
@@ -3594,6 +3604,13 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .favorite-popup-container h2{
         font-size: 18px;
     }
+
+    .vine-box-style-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
 }
 @media only screen and (min-width : 1600px) {
   .home-slider, .home-slider .carousel-inner{
@@ -3634,6 +3651,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .my-winery-head .button {
         width: calc(100% - 10px);
         margin: 3px 5px;
+    }
+
+    .vdp-datepicker__calendar {
+        right:-20px;
     }
 }
 
@@ -3701,7 +3722,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .info-box table tr td {
      /*   max-width: 130px;*/
-        width: 100%;
+     /*   width: 100%;*/
         padding: 10px 5px 10px 5px;
         font-size: 12px;
     }

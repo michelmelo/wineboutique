@@ -24,7 +24,9 @@
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
-                <span><a href="{{ route('password.request') }}">Forgot your password?</a></span>
+                <div class="d-block w-100 mt-1">
+                    <span><a href="{{ route('password.request') }}">Forgot your password?</a></span>
+                </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label" for="defaultCheck1">

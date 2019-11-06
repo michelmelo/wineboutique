@@ -24,7 +24,7 @@
                                 <th scope="col">Photo</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Varietal</th>
-                                <th scope="col">Winery</th>
+{{--                                <th scope="col">Winery</th>--}}
                                 <th scope="col">Year</th>
                                 <th scope="col">Capacity</th>
                                 <th scope="col">Actions</th>
@@ -39,8 +39,7 @@
                                     </td>
                                     <td>${{ number_format($wine->price, 2) }}</td>
                                     <td>{{ $wine->varietal->name }}</td>
-                                   <!-- <td>{{ $wine->description }}</td> -->
-                                    <td>{{ $wine->who_made_it }}</td>
+{{--                                    <td>{{ $wine->who_made_it }}</td>--}}
                                     <td>{{ $wine->when_was_it_made }}</td>
                                     <td>{{ $wine->capacity }} {{ $wine->capacityUnit->name }}</td>
                                     <td>

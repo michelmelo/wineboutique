@@ -55,7 +55,12 @@ class WineryController extends Controller
             $page_limit = $request->get('page_limit');
         }
 
-        $wineries = Winery::skip($page_offset)->take($page_limit)->with("wines")->get();
+        $wineries = Winery::with('wines')->get();
+        $wineries = $wineries->sortByDesc(function ($winery) {
+            return $winery->rating();
+        });
+
+        $wineries = $wineries->slice($page_offset, $page_limit);
 
         return  $request->ajax() ? ['wineries' => $wineries] : view('wineries', [
             'wineries' => $wineries,
