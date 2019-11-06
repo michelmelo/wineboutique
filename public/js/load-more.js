@@ -40,7 +40,7 @@ $( document ).ready(function() {
         +'page_offset=' + page_offset + '&page_limit=' + page_offset);
 
     $('#loadMoreArrivalsLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
-        +'page_offset=' + page_offset*2.5 + '&page_limit=' + page_offset*2.5);
+        +'page_offset=' + page_offset*3 + '&page_limit=' + page_offset*3);
 
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
@@ -100,7 +100,7 @@ $( document ).ready(function() {
             else{
                 $('#loadMoreArrivalsLink').attr('href', window.location.pathname +
                     (window.location.search==='' ? '?' : (window.location.search+'&')) +
-                    'page_offset=' + page_offset*page_offset_counter*2.5 + '&page_limit=' + page_offset*2.5);
+                    'page_offset=' + page_offset*page_offset_counter*3 + '&page_limit=' + page_offset*3);
             }
         });
     });

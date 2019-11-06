@@ -9,7 +9,6 @@
 </div>
 <div class="container">
 
-
     <div class="row padding-row vine-boxes">
         @foreach ($wineries as $winery)
             <div class="col-lg-6 wineries-box px-0 px-md-4">

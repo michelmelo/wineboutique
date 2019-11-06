@@ -8,7 +8,6 @@
     </div>
 </div>
 <div class="container">
-    
 
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
@@ -93,7 +92,7 @@
             @endforeach
         </div>
     </div>
-    @if(count($wines)>0)
+    @if(count($wines) > 0 && $wine_count > count($wines))
         <div class="col-12 mt-4 mb-5 text-center">
             <div id="loadMoreArrivals">
                 <a id="loadMoreArrivalsLink" href="#"

@@ -124,10 +124,10 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <p>Capacity *</p>
+                        <p>Capacity (ml) *</p>
                     </div>
 
-                    <div class="col-lg-3 col-sm-12">
+                    <div class="col-lg-4 col-sm-12">
                         <input type="number" name="quantity" id="quantity" placeholder="Quantity" min="1" required>
                         @if($errors->has('quantity'))
                             <span class="help-block">
@@ -136,8 +136,8 @@
                         @endif
                     </div>
 
-                    <div class="col-lg-3 col-sm-12">
-                        <input type="number" name="capacity" id="capacity" placeholder="Capacity" step="0.01" min="0" required>
+                    <div class="col-lg-4 col-sm-12">
+                        <input type="number" name="capacity" id="capacity" placeholder="Capacity" min="0" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('capacity') }}</strong>
@@ -145,19 +145,21 @@
                         @endif
                     </div>
 
-                    <div class="col-lg-2 col-sm-12">
-                        <select name="unit_id" id="unit_id" required>
-                            <option value="" disabled selected>Choose a unit</option>
-                            @foreach($capacity_units as $capacity_unit) 
-                                <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('capacity_unit'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('capacity_unit') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    <input type="hidden" name="unit_id" value="5">
+
+{{--                    <div class="col-lg-2 col-sm-12">--}}
+{{--                        <select name="unit_id" id="unit_id" required>--}}
+{{--                            <option value="" disabled selected>Choose a unit</option>--}}
+{{--                            @foreach($capacity_units as $capacity_unit) --}}
+{{--                                <option value="{{$capacity_unit->id}}">{{$capacity_unit->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                        @if($errors->has('capacity_unit'))--}}
+{{--                            <span class="help-block">--}}
+{{--                                <strong>{{ $errors->first('capacity_unit') }}</strong>--}}
+{{--                            </span>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
 
                     <div class="col-lg-4 col-sm-12">
                         <p>Description *</p>

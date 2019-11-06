@@ -66,7 +66,13 @@ class HomeController extends Controller
             });
         }
 
-        $wines = $wines->paginate(6);
+        if($wines->count() >= 8){
+            $wines = $wines->paginate(8);
+        }
+        else{
+            $wines = $wines->paginate(4);
+        }
+
 
         return view('home', [
             'varietals' => $varietals,
