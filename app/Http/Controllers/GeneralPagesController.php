@@ -52,7 +52,7 @@ class GeneralPagesController extends Controller
 
         if($request->ajax()){
             $page_offset = 0;
-            $page_limit = 4;
+            $page_limit = 12;
 
             if ($request->get('page_offset')&&$request->get('page_limit')) {
                 $page_offset = $request->get('page_offset');
@@ -137,7 +137,7 @@ class GeneralPagesController extends Controller
 
         if($request->ajax()){
             $page_offset = 0;
-            $page_limit = 4;
+            $page_limit = 12;
 
             if ($request->get('page_offset')&&$request->get('page_limit')) {
                 $page_offset = $request->get('page_offset');
@@ -169,7 +169,7 @@ class GeneralPagesController extends Controller
             return $return_wines;
         }
 
-        $wines = $wines->limit(4)
+        $wines = $wines->limit(12)
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')

@@ -1,5 +1,5 @@
 let loadedMoreCount = 0;
-let page_offset = 4; // use this to adjust number of load more items
+let page_offset = 12; // use this to adjust number of load more items
 let page_limit = page_offset;
 let page_offset_counter = 1;
 
