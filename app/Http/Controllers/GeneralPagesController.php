@@ -78,7 +78,7 @@ class GeneralPagesController extends Controller
         }
 
         return view('new-arrivals', [
-            'wines' => $wines->limit(4)
+            'wines' => $wines->limit(12)
                 ->leftJoin('orders', 'wines.id', '=', 'orders.id')
                 ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
                 ->groupBy('wines.id')
