@@ -30,7 +30,7 @@ class CheckoutController extends Controller
     }
 
     private function generateUniqueOrderId() {
-        return rand(1,9) . time();
+        return time();
     }
 
     private function requestDateTime() {
@@ -38,7 +38,7 @@ class CheckoutController extends Controller
     }
 
     private function requestURL() {
-        $gateway =  config('payment.nuvei.gateway'); 
+        $gateway =  config('payment.nuvei.gateway');
         $testAccount = config('payment.nuvei.testAccount');
         $url = 'https://';
         if($testAccount) $url .= 'test';
@@ -141,12 +141,16 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
+        $price = 0;
+        $quantity = 0;
+
         if($charge && $charge->status == "succeeded"){
             $new_order = new Order();
-            $new_order->order_id = $this->orderId;
+            $new_order->order_id = (int)$this->orderId;
             $new_order->user_id = $user->id;
             $new_order->address_id = $user->addresses->where("default", 1)->first()->id;
-            $new_order->status = 1;
+            $new_order->status = "1";
+            $new_order->price = 0;
 
             if($new_order->save()){
                 foreach (Auth::user()->cart()->get() as $item){
@@ -154,6 +158,9 @@ class CheckoutController extends Controller
                     $new_order_wine->order_id = $new_order->id;
                     $new_order_wine->wine_id = $item->pivot->wine_id;
                     $new_order_wine->quantity = $item->pivot->quantity;
+
+                    $price += $item->pivot->quantity * $item->pivot->price;
+                    $quantity += $item->pivot->quantity;
 
                     if($new_order_wine->save()){
                         Auth::user()->cart()->detach($new_order_wine->wine_id);
@@ -167,6 +174,11 @@ class CheckoutController extends Controller
         $address = Auth::user()->addresses()->where("default", 1)->first();
         $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
 
+        if($quantity>0) {
+            $price += $from_to->price + ($quantity - 1) * $from_to->additional;
+            $new_order->update(['price' => $price]);
+        }
+
         Mail::send('email.order-confirmation', [
             'order' => $new_order->order_id,
             'from_to' => $from_to
@@ -177,6 +189,7 @@ class CheckoutController extends Controller
                     ->from("no-reply@wineboutique.com")
                     ->to($user->email)->subject('Order confirmation');
             });
+
 
         return redirect("/checkout/done/" . $new_order->id);
     }
