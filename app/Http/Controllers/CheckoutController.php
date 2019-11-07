@@ -150,7 +150,6 @@ class CheckoutController extends Controller
             $new_order->user_id = $user->id;
             $new_order->address_id = $user->addresses->where("default", 1)->first()->id;
             $new_order->status = "1";
-            $new_order->price = 0;
 
             if($new_order->save()){
                 foreach (Auth::user()->cart()->get() as $item){
@@ -166,6 +165,18 @@ class CheckoutController extends Controller
                         Auth::user()->cart()->detach($new_order_wine->wine_id);
                         $temp_wine = Wine::where("id", $item->pivot->wine_id)->first();
                         $temp_wine->update(["quantity" => $temp_wine->quantity - 1]);
+
+                        Mail::send('email.order-created', [
+                            'order' => $new_order->order_id,
+                            'wine' => $item->name,
+                            'quantity' => $item->pivot->quantity,
+                        ],
+                            function ($message) use ($item)
+                            {
+                                $message
+                                    ->from("no-reply@wineboutique.com")
+                                    ->to($item->winery->user->email)->subject('New Order submited');
+                            });
                     }
                 }
             }
@@ -174,22 +185,16 @@ class CheckoutController extends Controller
         $address = Auth::user()->addresses()->where("default", 1)->first();
         $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
 
-        if($quantity>0) {
-            $price += $from_to->price + ($quantity - 1) * $from_to->additional;
-            $new_order->update(['price' => $price]);
-        }
-
         Mail::send('email.order-confirmation', [
             'order' => $new_order->order_id,
             'from_to' => $from_to
         ],
-            function ($message) use ($user)
-            {
-                $message
-                    ->from("no-reply@wineboutique.com")
-                    ->to($user->email)->subject('Order confirmation');
-            });
-
+        function ($message) use ($user)
+        {
+            $message
+                ->from("no-reply@wineboutique.com")
+                ->to($user->email)->subject('Order confirmation');
+        });
 
         return redirect("/checkout/done/" . $new_order->id);
     }

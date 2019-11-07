@@ -11,6 +11,7 @@ use App\Region;
 use App\CapacityUnit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MyWineryController extends Controller
 {
@@ -178,6 +179,16 @@ class MyWineryController extends Controller
         if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id])){
             if(count($order->order_wines()->where("status", 1)->get()) == 0){
                 $order->update(["status" => 2]);
+
+                Mail::send('email.order-completed', [
+                    'order' => $order->order_id,
+                ],
+                    function ($message) use ($user)
+                    {
+                        $message
+                            ->from("no-reply@wineboutique.com")
+                            ->to($user->email)->subject('Order completed');
+                    });
             }
         }
 
