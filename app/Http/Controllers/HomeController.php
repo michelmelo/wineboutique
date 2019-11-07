@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Region;
 use App\Varietal;
 use App\Wine;
+use App\WineRegion;
 use App\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class HomeController extends Controller
         
         $wines = Wine::orderBy('average_rating', 'desc')->where("quantity", ">", 0);
         $varietals = Varietal::all();
-        $regions = Region::orderBy('name')->get();
+        $regions = WineRegion::all();
 
         $filter = $request->all();
 

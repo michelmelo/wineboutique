@@ -132,8 +132,8 @@
                     </div>
                     <div class="product-info">
                         <h5>{{ $recommendation->name }}</h5>
-                        <h4>${{ $recommendation->price }}</h4>
-                        <div class="star-rating">
+                        <div class="star-rating price">
+                            <h4 class="m-0 p-0">${{ $recommendation->price }}</h4>
                             @for($i = 0; $i<intval($recommendation->avg_rating);$i++)
                                 <span class="fa fa-star checked"></span>
                             @endfor
