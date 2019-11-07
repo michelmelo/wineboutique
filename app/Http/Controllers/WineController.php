@@ -139,8 +139,10 @@ class WineController extends Controller
         ]);
     }
 
-    public function show(Wine $wine)
+    public function show($wine)
     {
+        $wine = Wine::withTrashed()->where("slug", $wine)->first();
+
         return view('wines-single', [
             'wine' => $wine,
             'wine_images' => WineImage::where('wine_id', $wine->id)->get(),
