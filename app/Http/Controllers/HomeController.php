@@ -32,8 +32,12 @@ class HomeController extends Controller
     {
         $topWineries = DB::select('SELECT *, IFNULL((SELECT AVG(`winery_ratings`.`rating`) FROM `winery_ratings` WHERE `winery_ratings`.`winery_id`=`wineries`.`id`), 0) AS `rating` FROM `wineries` HAVING `rating` > 0 ORDER BY `rating` DESC LIMIT 10');
         $latestWines = Wine::latest()->where("quantity", ">", 0)->limit(6)->get();
-        
         $wines = Wine::orderBy('average_rating', 'desc')->where("quantity", ">", 0);
+
+        $topRatedWines = Wine::where('average_rating', '>', 0)
+        ->where('wines.quantity', '>', 0)
+        ->orderBy('average_rating', 'desc');
+
         $varietals = Varietal::all();
         $regions = WineRegion::all();
 
@@ -67,11 +71,11 @@ class HomeController extends Controller
             });
         }
 
-        if($wines->count() >= 8){
-            $wines = $wines->paginate(8);
+        if($topRatedWines->count() >= 8){
+            $topRatedWines = $topRatedWines->paginate(8);
         }
         else{
-            $wines = $wines->paginate(4);
+            $topRatedWines = $topRatedWines->paginate(4);
         }
 
 
@@ -81,6 +85,7 @@ class HomeController extends Controller
             'topWineries' => $topWineries,
             'latestWines' => $latestWines,
             'wines' => $wines,
+            'topRatedWines' => $topRatedWines,
             'filter' => $filter,
             'seo' => [
                 'title' => 'Online Wine Store - Buy Fine Wine Online | Wine Boutique',
