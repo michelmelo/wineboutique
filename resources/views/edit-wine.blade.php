@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('content') 
+@section('content')
 <div class="container">
     <form method="POST" action="{{url('/store-edited-wine').'/'.$wine->slug}}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <h1 class="headline-2">EDIT WINE</h1>
-        
+
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
             <p class="w-100">Main picture *</p>
@@ -85,7 +85,7 @@
                             <span class="help-block">
                                 <strong>{{ $errors->first('when_was_it_made') }}</strong>
                             </span>
-                        @endif                  
+                        @endif
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
@@ -97,7 +97,7 @@
                             $varietal_id = old('varietal', $wine->varietal_id);
                         @endphp
                         <select name="varietal" id="varietal">
-                            @foreach($varietals as $varietal) 
+                            @foreach($varietals as $varietal)
                                 <option value="{{$varietal->id}}" {{$varietal->id==$varietal_id?"selected":""}}>{{ $varietal->name }}</option>
                             @endforeach
                         </select>
@@ -121,10 +121,10 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <p>Capacity (ml) *</p>
+                        <p>Quantity and Capacity (ml) *</p>
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <input type="number" name="quantity" id="quantity" placeholder="Quantity" value="{{ old('quantity') ? old('quantity') : $wine->quantity }}" min="1" required>
                         @if($errors->has('quantity'))
                             <span class="help-block">
@@ -132,8 +132,11 @@
                             </span>
                         @endif
                     </div>
+                    <div class="col-lg-1 col-sm-12 align-self-center">
+                        <span>BOTTLE(S)</span>
+                    </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <input type="number" min="0" name="capacity" id="capacity" placeholder="Enter a number" value="{{ old('capacity') ? old('capacity') : $wine->capacity }}" min=0 required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
@@ -141,8 +144,11 @@
                             </span>
                         @endif
                     </div>
+                    <div class="col-lg-1 col-sm-12 align-self-center">
+                        <span>ML</span>
+                    </div>
 
-                    <input type="hidden" name="unit_id" value="5">
+                    <input type="hidden" name="unit_id" value="3">
 
 {{--                    <div class="col-lg-2 col-sm-12">--}}
 {{--                        @php--}}
@@ -178,7 +184,7 @@
                     </div>
                     <div class="col-lg-8 col-sm-12">
                         <input data-role="tagsinput" id="tags" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." value="{{ $wine->tags->pluck('name')->implode(',') }}">
-                       
+
                         @if($errors->has('tags'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('tags') }}</strong>

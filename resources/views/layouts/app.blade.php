@@ -23,7 +23,8 @@
 
     <!-- Scripts -->
 
-    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+{{--    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 
     <script>
@@ -53,7 +54,7 @@
             </div>
         </div>
     </div>
-	
+
     <!-- Scripts -->
 {{--    @if(request()->route()->getName() !== 'my-payments.show')--}}
         <script src="{{ asset('js/app.js') }}"></script>

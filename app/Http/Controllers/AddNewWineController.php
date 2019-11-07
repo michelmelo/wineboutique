@@ -62,11 +62,11 @@ class AddNewWineController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(NewWineRequest $request)
     {
         $data = $request->only(['name', 'price', 'description', 'who_made_it', 'when_was_it_made', 'capacity', 'unit_id', 'wine_region', 'cropx', 'cropy', 'cropwidth', 'cropheight', 'quantity']);
         $data['price'] = number_format((float)$data['price'], 2, '.', '');
-        
+
         if($request->hasFile('photo'))
         {
             $ext = $request->file('photo')->getClientOriginalExtension();
@@ -79,12 +79,12 @@ class AddNewWineController extends Controller
 
             $data['photo'] = '/images/wine/' . $photo;
         }
-        
+
         $wine = new Wine;
         $wine->fill($data);
         $wine->varietal()->associate($request->varietal);
         $wine->winery()->associate(Auth::user()->winery);
-        
+
         $wine->save();
 
         $images = [];
@@ -172,7 +172,7 @@ class AddNewWineController extends Controller
             $tags = explode(",", $request->tags);
             $wine->retag($tags);
         }
-        
+
         return redirect('my_winery');
     }
 

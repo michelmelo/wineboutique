@@ -1,20 +1,20 @@
 $( document ).ready(function() {
     $(window).on('resize', function(){
 	      var win = $(this); //this = window
-	      if (win.width() <= 974) { 
+	      if (win.width() <= 974) {
 	      		$( ".main__scroller" ).removeClass( "row" );
 	      } else {
 	      		$( ".main__scroller" ).addClass( "row" );
 	      }
 
 
-	      if (win.width() <= 750) { 
+	      if (win.width() <= 750) {
 	      		$( ".my-wine div a>div:first-child" ).addClass( "col-4" );
 	      } else {
 	      		$( ".my-wine div a>div:first-child" ).removeClass( "col-4" );
 	      }
 
-	      if (win.width() <= 750) { 
+	      if (win.width() <= 750) {
 	      		$( ".my-wine div a>div:nth-child(2)" ).addClass( "col-8" );
 	      } else {
 	      		$( ".my-wine div a>div:nth-child(2)" ).removeClass( "col-8" );
@@ -82,9 +82,9 @@ $( document ).ready(function() {
         form.submit();
 	});
 
-	$("#defaultCheck2").change(function(){
-		$("#over-21").toggleClass("d-none");
-	});
+	// $("#defaultCheck2").change(function(){
+	// 	$("#over-21").toggleClass("d-none");
+	// });
 
 	(function() {
 		setTimeout(function () {
@@ -100,7 +100,7 @@ $( document ).ready(function() {
 	});
 });
 
-// POPUP   
+// POPUP
 
 $('#acceptTerms').on('click', function(event){
 	console.log("click");
@@ -126,5 +126,5 @@ $(document).keyup(function(event){
 		$('.terms-popup').removeClass('is-visible');
 	}
 });
-   
+
 

@@ -29,10 +29,11 @@ class NewWineRequest extends FormRequest
             'description' => ['required'],
             'who_made_it' => ['required'],
             'when_was_it_made' => ['required'],
-            'capacity' => ['required', 'numeric'],
+            'capacity' => ['required', 'numeric', 'min:0'],
+            'quantity' => ['required', 'numeric', 'min:0'],
             'unit_id' => ['required', 'exists:capacity_units,id'],
             'photo' => ['image'],
             'varietal' => ['required', 'exists:varietals,id'],
-        ]; 
+        ];
     }
 }

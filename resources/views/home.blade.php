@@ -44,7 +44,7 @@
     </div>
 
 </div>
-<div class="container home">    
+<div class="container home">
 
     @if(count($topWineries)>0)
     <div class="row padding-row row-eq-height">
@@ -162,7 +162,7 @@
 
     <div class="row padding-row row-eq-height">
         <h2 class="heading mb-5">TOP RATED WINES</h2>
-        @foreach($wines as $wine)
+        @foreach($topRatedWines as $wine)
             <div class="col-md-3 col-sm-4 col-xs-6 vine-box-style-3">
                 <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                     <div class="image-wrap">
@@ -182,7 +182,7 @@
                     </div>
                     <div class="product-info">
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
-                        
+
                         <div class="star-rating price">
                             <h4 class="m-0 p-0">${{$wine->price}}</h4>
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
@@ -196,7 +196,7 @@
             <a href="/wines/top-rated" class="button red-button margin-0-auto">SEE MORE</a>
         </div>
     </div>
-    
+
     <div class="row padding-row center-text secure-section">
         <h2 class="heading mb-5">YOU’RE SECURE WITH US</h2>
 
