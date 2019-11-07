@@ -92,7 +92,7 @@
                                 <div class="d-flex sign-in align-items-center py-4">
                                     <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="d-inline-block mx-4">
                                         <div>
-                                            <img src="{{asset('img/user.svg')}}">
+                                            <img src="{{asset('img/logout-icon.png')}}">
                                         </div>
                                         <span>LOGOUT</span>
                                     </a>

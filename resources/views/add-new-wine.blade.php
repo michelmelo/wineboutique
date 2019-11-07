@@ -7,7 +7,7 @@
     <form method="POST" action="{{ route('store-new-wine') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
         <h1 class="headline-2">ADD A NEW WINE</h1>
-        
+
         <div class="shadow-box row new-wine-photos">
             <h2 >PHOTOS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
               <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
@@ -83,7 +83,7 @@
                             <span class="help-block">
                                 <strong>{{ $errors->first('when_was_it_made') }}</strong>
                             </span>
-                        @endif                  
+                        @endif
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
@@ -93,7 +93,7 @@
                     <div class="col-lg-8 col-sm-12">
                         <select name="varietal" id="varietal" required>
                             <option value="" disabled selected>Varietal</option>
-                            @foreach($varietals as $varietal) 
+                            @foreach($varietals as $varietal)
                                 <option value="{{$varietal->id}}">{{$varietal->name}}</option>
                             @endforeach
                         </select>
@@ -124,10 +124,11 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <p>Capacity (ml) *</p>
+                        <p>Quantity and Capacity (ml) *</p>
                     </div>
 
-                    <div class="col-lg-4 col-sm-12">
+
+                    <div class="col-lg-3 col-sm-12">
                         <input type="number" name="quantity" id="quantity" placeholder="Quantity" min="1" required>
                         @if($errors->has('quantity'))
                             <span class="help-block">
@@ -135,8 +136,11 @@
                             </span>
                         @endif
                     </div>
+                    <div class="col-lg-1 col-sm-12 align-self-center">
+                        <span>BOTTLE(S)</span>
+                    </div>
 
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <input type="number" name="capacity" id="capacity" placeholder="Capacity" min="0" required>
                         @if($errors->has('capacity'))
                             <span class="help-block">
@@ -145,7 +149,11 @@
                         @endif
                     </div>
 
-                    <input type="hidden" name="unit_id" value="5">
+                    <div class="col-lg-1 col-sm-12 align-self-center">
+                        <span>ML</span>
+                    </div>
+
+                    <input type="hidden" name="unit_id" value="3">
 
 {{--                    <div class="col-lg-2 col-sm-12">--}}
 {{--                        <select name="unit_id" id="unit_id" required>--}}
