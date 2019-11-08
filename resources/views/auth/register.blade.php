@@ -11,6 +11,15 @@
         <div class="col-lg-6 col-md-12 forms">
             <register-form />
         </div>
+
+        <div class="other-login col-md-6 col-md-push-6">
+            <div class="google-login">
+                <a href="{{url('/redirect/google')}}">Register with Google</a>
+            </div>
+            <div class="facebook-login">
+                <a href="{{url('/redirect/facebook')}}">Register with Facebook</a>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
