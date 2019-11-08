@@ -284,7 +284,14 @@ input, textarea, select{
 }
 
 .forms a {
+    color: #da8599;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.forms a:hover {
     color: #9C193A;
+    transition: all 0.3s;
 }
 
 .forms input[type="submit"] {
@@ -1679,7 +1686,6 @@ footer p {
     border:none;
     background-color: #fcfcfc;
     border-bottom: 3px solid #fcfcfc;
-    cursor: pointer;
 }
 
 .wine-description .nav-tabs>li.active>.show, .wine-description .nav-tabs>li.active>.show:focus, 
