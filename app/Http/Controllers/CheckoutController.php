@@ -158,7 +158,7 @@ class CheckoutController extends Controller
                     $new_order_wine->wine_id = $item->pivot->wine_id;
                     $new_order_wine->quantity = $item->pivot->quantity;
 
-                    $price += $item->pivot->quantity * $item->pivot->price;
+                    $price += $item->pivot->quantity * $new_order_wine->wine()->first()->price;
                     $quantity += $item->pivot->quantity;
 
                     if($new_order_wine->save()){
@@ -183,6 +183,21 @@ class CheckoutController extends Controller
         }
 
         $address = Auth::user()->addresses()->where("default", 1)->first();
+
+        $charged_shippings = [];
+        foreach($new_order->order_wines as $order_wine) {
+            $shipping = $order_wine->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
+            if(!in_array($shipping->id, $charged_shippings)) {
+                $charged_shippings[] = $shipping->id;
+                $price += $shipping->price;
+                $price += ($order_wine->quantity - 1) * $shipping->additional;
+            } else {
+                $price += $order_wine->quantity * $shipping->additional;
+            }
+        }
+
+        $new_order->update(['price' => $price]);
+
         $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
 
         Mail::send('email.order-confirmation', [

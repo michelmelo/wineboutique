@@ -24,7 +24,7 @@
                         <td v-for="wine_order in order.order_wines">
                             <span>{{ wine_order.quantity }}x </span>
                             <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
-                            <span>(${{ wine_order.wine.price }}) from </span>
+                            <span> from </span>
                             <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
                         </td>
                         <td>${{ order.price }}</td>
