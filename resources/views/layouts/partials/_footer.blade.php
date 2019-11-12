@@ -27,8 +27,7 @@
                 <h4 class="mb-4">SUBSCRIBE TO OUR NEWSLETTER</h4>
                 <li><newsletter-form></newsletter-form></li>
                 <li><a href="">Sign Up</a></li>
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="">Order Status</a></li>
+                <li><a href="/faq">FAQ</a></li>              
                 <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
                 <li><a href="/privacy-policy">Privacy Policy</a></li>
             </ul>

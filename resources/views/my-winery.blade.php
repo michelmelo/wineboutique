@@ -22,11 +22,11 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Photo</th>
-                                <th scope="col">Price</th>
+                                <th scope="col">Price per Bottle</th>
                                 <th scope="col">Varietal</th>
 {{--                                <th scope="col">Winery</th>--}}
-                                <th scope="col">Year</th>
-                                <th scope="col">Capacity</th>
+                                <th scope="col">Vintage</th>
+                                <th scope="col">Total Capacity</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
