@@ -32,7 +32,7 @@
                                                 <p>
                                                     <span class="minus" @click.prevent="decreaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">-</span>
                                                     <span class="amount">{{wine.pivot.quantity}}</span>
-                                                    <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity)" v-if="showComplete">+</span>
+                                                    <span class="plus" @click.prevent="increaseQuantity(wine.slug, wine.pivot.quantity, wine.quantity)" v-if="showComplete">+</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -134,14 +134,16 @@
                     })
                     .catch(error => console.log(error));
             },
-            increaseQuantity(wineSlug, quantity) {
-                axios.patch('/cart/'+wineSlug, {
+            increaseQuantity(wineSlug, quantity, maxQ) {
+                if(quantity<maxQ) {
+                    axios.patch('/cart/' + wineSlug, {
                         quantity: quantity + 1
                     })
-                    .then(response => {
-                        this.wines = response.data.wines;
-                    })
-                    .catch(error => console.log(error));
+                        .then(response => {
+                            this.wines = response.data.wines;
+                        })
+                        .catch(error => console.log(error));
+                }
             },
             decreaseQuantity(wineSlug, quantity) {
                 if(quantity===1) return;

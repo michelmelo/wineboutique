@@ -81,7 +81,7 @@
             @if(!Auth::user()||(Auth::user()&&Auth::user()->type!=='SELLER'))
             <div class="row single-wine-buttons">
                 @if(Auth::check())
-                    <add-to-cart wine-id="{{$wine->id}}"></add-to-cart>
+                    <add-to-cart wine-id="{{$wine->id}}" quantity="{{ $wine->quantity }}"></add-to-cart>
                 @else
                     <a href="{{route('login')}}" class="button pink-button full-width">ADD TO CART</a>
                 @endif
