@@ -106,7 +106,7 @@ class AddNewWineController extends Controller
         }
 
         $request->session()->put('msg', 'Wine successfully added!');
-        return redirect('my_winery');
+        return redirect('my-winery');
     }
 
     public function edit(Wine $wine)
@@ -173,7 +173,7 @@ class AddNewWineController extends Controller
             $wine->retag($tags);
         }
 
-        return redirect('my_winery');
+        return redirect('my-winery');
     }
 
     public function destroy($id)
@@ -181,7 +181,7 @@ class AddNewWineController extends Controller
         $wine = Wine::find($id);
         $wine->delete();
 
-        return redirect('my_winery');
+        return redirect('my-winery');
     }
 
     public function hideMsg(Request $request) {

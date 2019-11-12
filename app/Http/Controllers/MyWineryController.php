@@ -171,7 +171,7 @@ class MyWineryController extends Controller
         $wine = $user->winery->wines()->where("id", $wine_id)->first();
 
         if(!$wine){
-            return redirect("my_winery_stats")->with("error", "Permission denied");
+            return redirect("my-winery-stats")->with("error", "Permission denied");
         }
 
         $order = Order::where("id", $order_id)->first();
@@ -192,7 +192,7 @@ class MyWineryController extends Controller
             }
         }
 
-        return redirect("my_winery_stats")->with("success", "Wine sent");
+        return redirect("my-winery-stats")->with("success", "Wine sent");
     }
 
     public function shipping_delete($id){
