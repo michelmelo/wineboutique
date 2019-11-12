@@ -38,10 +38,17 @@ class ProfileController extends Controller
         $current_password = Auth::user()->getAuthPassword();
 
         if(Hash::check($request->current_password, $current_password)) {
-            Auth::user()->update([
-                'password' => Hash::make($request->password)
-            ]);
-            return "ok";
+            if($request->current_password != $request->password){
+                Auth::user()->update([
+                    'password' => Hash::make($request->password)
+                ]);
+
+                return "ok";
+            }
+            else{
+                $error = ['current_password' => ['New password must be different from current password']];
+                return response()->json(['errors' => $error], 400);
+            }
         } else {
             $error = ['current_password' => ['Please enter correct current password']];
             return response()->json(['errors' => $error], 400);

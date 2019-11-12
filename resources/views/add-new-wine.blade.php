@@ -16,7 +16,7 @@
                 <p class="w-100">Main picture *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label>
-                    <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
+                    <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" required>
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview" data-default="{{asset('img/primary-photo.jpg')}}">
                 </label>
 
@@ -185,7 +185,7 @@
                         <p>Tags <span>Optional</span></p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <input data-role="tagsinput" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc.">
+                        <input data-role="tagsinput" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." required>
                         @if($errors->has('tags'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('tags') }}</strong>
