@@ -89,14 +89,12 @@
             </div>
         </div>
         <div class="col-lg-10 col-sm-12 ">
-            <div class="vine-boxes">
-                <div class="col-lg-10 col-sm-12" id="printMoreArrivals">
+           
                     @foreach($wines as $wine)
                         @include('hot-seller')
                     @endforeach
                 </div>
-            </div>
-        </div>
+     
         @if(count($wines) > 0 && $wine_count > count($wines))
             <div class="col-12 mt-4 mb-5 text-center">
                 <div id="loadMoreArrivals">

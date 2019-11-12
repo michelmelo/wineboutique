@@ -1481,6 +1481,7 @@ footer p {
     padding: 5px 5px 5px 7%;
     margin-bottom: 3px;
     display: block;
+    text-transform: capitalize;
 }
 
 .sidebar .card-header .btn {
@@ -2022,8 +2023,11 @@ footer p {
 .my-winery-table .table>tbody>tr>td{
     border-top: none;
     vertical-align: middle;
+    max-width: 150px;
 }
-
+.my-winery-table  .table>thead>tr>th {
+    max-width: 150px;
+}
 .my-winery-table .btn-default, .my-winery-table form{
     display: inline-block;
     max-height: 38px;
@@ -2554,7 +2558,7 @@ footer p {
 }
 
 .other_images_preview img{
-    margin:10px 5px;
+    margin: 10px 5px 10px 0px;
 }
 
 .form-inputs>div {
@@ -3244,16 +3248,18 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .accordion-name {
         font-size: 18px;
+        
     }
-
+   
     .card-body {
         text-align: center;
     }
 
     .card-body .sub-cat {
         font-size: 16px;
+        
     }
-
+ 
     .accordion button i {
         top: 25px;
     }

@@ -13,7 +13,7 @@
               <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
 
             <div class="col-lg-4 col-sm-12 mb-3">
-                <p class="w-100">Main picture *</p>
+                <p class="w-100">Front bottle image *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label>
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" >
@@ -45,11 +45,11 @@
             <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
-                        <p>Wine title *</p>
+                        <p>Wine Name *</p>
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" required>
+                        <input type="text" name="name" id="name" placeholder="Wine Name" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" required>
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Wine Maker" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -73,7 +73,7 @@
 
                     <div class="col-lg-4 col-sm-12">
                         <select id="when_was_it_made" name="when_was_it_made" required>
-                        <option value="" disabled selected hidden>When was it made?</option>
+                        <option value="" disabled selected hidden>Year Vintage</option>
                         <?php $now = date('Y'); ?>
                             @for ($i = $now; $i >= 1900; $i--)
                                 <option value="{{ $i }}">{{ $i }}</option>
@@ -124,12 +124,12 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <p>Quantity and Capacity (ml) *</p>
+                        <p>Quantity of Bottles *</p>
                     </div>
 
 
                     <div class="col-lg-3 col-sm-12">
-                        <input type="number" name="quantity" id="quantity" placeholder="Quantity" min="1" required>
+                        <input type="number" name="quantity" id="quantity" placeholder="Quantity of Bottles" min="1" required>
                         @if($errors->has('quantity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('quantity') }}</strong>
@@ -137,7 +137,7 @@
                         @endif
                     </div>
                     <div class="col-lg-1 col-sm-12 align-self-center">
-                        <span>BOTTLE(S)</span>
+                        <span>Capacity</span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12">

@@ -8,9 +8,9 @@
         <h1 class="headline-2">EDIT WINE</h1>
 
         <div class="shadow-box row new-wine-photos">
-            <h2>PHOTOS</h2>
-            <p class="w-100">Main picture *</p>
+            <h2>PHOTOS</h2>           
             <div class="col-lg-4 col-sm-12 mb-3">
+               <p class="w-100">Front bottle image *</p>
                 <label>
                     <input name="photo" style="display: none; cursor: pointer;" type="file" id="picture">
                     <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview">
@@ -43,12 +43,12 @@
             <div>
                 <div class="row form-inputs">
                     <div class="col-lg-4 col-sm-12">
-                        <p>Wine title *</p>
+                        <p>Wine Name *</p>
                     </div>
                     <input type="hidden" name="id" value="{{ old('id') ? old('id') : $wine->id }}" />
 
                     <div class="col-lg-8 col-sm-12">
-                        <input type="text" name="name" id="name" placeholder="Title name" value="{{ old('name') ? old('name') : $wine->name }}" required>
+                        <input type="text" name="name" id="name" placeholder="Wine Name" value="{{ old('name') ? old('name') : $wine->name }}" required>
                         @if($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Who made it?" value="{{ old('who_made_it') ? old('who_made_it') : $wine->who_made_it }}" required>
+                        <input type="text" id="who_made_it" name="who_made_it" placeholder="Wine Maker" value="{{ old('who_made_it') ? old('who_made_it') : $wine->who_made_it }}" required>
                         @if($errors->has('who_made_it'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('who_made_it') }}</strong>
@@ -75,7 +75,7 @@
                             $when_was_it_made = old('when_was_it_made', $wine->when_was_it_made);
                         @endphp
                         <select id="when_was_it_made" name="when_was_it_made">
-                            <option hidden>When was it made?</option>
+                            <option hidden>Year Vintage</option>
                             <?php $now = date('Y'); ?>
                                 @for ($i = $now; $i >= 1900; $i--)
                                     <option value="{{ $i }}" {{$i==$when_was_it_made?"selected":""}}>{{ $i }}</option>
@@ -121,11 +121,11 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <p>Quantity and Capacity (ml) *</p>
+                        <p>Quantity of Bottles *</p>
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <input type="number" name="quantity" id="quantity" placeholder="Quantity" value="{{ old('quantity') ? old('quantity') : $wine->quantity }}" min="1" required>
+                        <input type="number" name="quantity" id="quantity" placeholder="Quantity of Bottles" value="{{ old('quantity') ? old('quantity') : $wine->quantity }}" min="1" required>
                         @if($errors->has('quantity'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('quantity') }}</strong>
@@ -133,7 +133,7 @@
                         @endif
                     </div>
                     <div class="col-lg-1 col-sm-12 align-self-center">
-                        <span>BOTTLE(S)</span>
+                        <span>Capacity</span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12">

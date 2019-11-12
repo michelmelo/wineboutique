@@ -61,14 +61,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Postal Code:</td>
+                    <td>Zip Code:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.postal">{{errors.postal}}</div>
                         <input type="number" id="postal-code" name="postal_code" v-model="selectedAddress.postal_code"  required/>
                     </td>
                 </tr>
                 <tr>
-                    <td>Region:</td>
+                    <td>State:</td>
                     <td class="edit-text">
                         <div class="error-block" v-model="errors.region">{{errors.region}}</div>
                         <select name="region_id" id="region" v-model="selectedAddress.region_id" class="w-100" required>
