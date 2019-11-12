@@ -26,7 +26,7 @@
                 </div>
                 <br>
                 <div class="form-row">
-                    <button class="sbmt-new-payment-mtd button red-button">Submit New Payment Method</button>
+                    <button id="sbmt-new-payment-mtd" class="sbmt-new-payment-mtd button red-button">Submit New Payment Method</button>
                 </div>
             </form>
             <br>
@@ -93,8 +93,11 @@
 
     // Handle form submission.
     var form = document.getElementById('payment-form');
+
     form.addEventListener('submit', function(event) {
         event.preventDefault();
+
+        document.getElementById('sbmt-new-payment-mtd').disabled = true;
 
         stripe.createToken(card).then(function(result) {
             if (result.error) {
