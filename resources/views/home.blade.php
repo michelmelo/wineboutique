@@ -125,7 +125,7 @@
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <a href="/wines?price[]=1" class="sub-cat">0-50</a>
+                        <a href="/wines?price[]=1" class="sub-cat">5-50</a>
                         <a href="/wines?price[]=2" class="sub-cat">51-100</a>
                         <a href="/wines?price[]=3" class="sub-cat">100+</a>
                     </div>

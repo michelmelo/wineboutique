@@ -73,7 +73,7 @@
                                 @php
                                     $checked = in_array(1, array_key_exists ('price', $filter)?$filter['price']:[]);
                                 @endphp
-                                <label class="sub-cat{{$checked?' checked':''}}"><input name="price[]" value="1" type="checkbox" class="d-none" {{$checked?'checked':''}}/>0-50</label>
+                                <label class="sub-cat{{$checked?' checked':''}}"><input name="price[]" value="1" type="checkbox" class="d-none" {{$checked?'checked':''}}/>5-50</label>
                                 @php
                                     $checked = in_array(2, array_key_exists ('price', $filter)?$filter['price']:[]);
                                 @endphp

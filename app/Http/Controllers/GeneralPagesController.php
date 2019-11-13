@@ -35,7 +35,7 @@ class GeneralPagesController extends Controller
             $wines = $wines->where(function($q) use ($prices) {
                 $useOr = false;
                 if(in_array(1, $prices)) {
-                    $q->whereBetween('price', [1, 50]);
+                    $q->whereBetween('price', [5, 50]);
                     $useOr = true;
                 }
 
@@ -120,7 +120,7 @@ class GeneralPagesController extends Controller
                 $useOr = false;
 
                 if(in_array(1, $prices)) {
-                    $q->whereBetween('price', [1, 50]);
+                    $q->whereBetween('price', [5, 50]);
                     $useOr = true;
                 }
 
