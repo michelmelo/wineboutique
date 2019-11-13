@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
           <div class="row padding-row">
-            <h1 class="headline-2">Search for "{{$searchstr}}"</h1>
+            <h1 class="headline-2">Wines for "{{$searchstr}}"</h1>
         </div>
     </div>
     <div class="container">
@@ -45,5 +45,54 @@
                 @include('layouts.partials.load_more')
             </div>
         @endif
+  </div>
+<!-------------------------------WINERIES----------------------->
+
+<!--
+
+    <div class="container-fluid">
+          <div class="row padding-row">
+            <h2 class="headline-2 m-0">Winearise Results for "{{$searchstr}}"</h2>
+        </div>
+    </div>
+ <div class="container">
+     <div class="row padding-row vine-boxes">
+
+
+
+
+            <div class="col-lg-6 wineries-box px-0 ">
+                <div>
+                    <a href="#">
+                        <div class="wineries-brand">
+                            <img class="winery-header" src="{{asset('img/winery-1.jpg')}}" height="165px">
+                            <img class="winery-logo" src="{{asset('img/winery-logo-1.jpg')}}">
+                        </div>
+                        <p>test</p>
+                    </a>                   
+                </div>
+            </div>
+      
+    
+
+            <div class="col-lg-6 wineries-box px-0 ">
+                <div>
+                    <a href="#">
+                        <div class="wineries-brand">
+                            <img class="winery-header" src="{{asset('img/winery-1.jpg')}}" height="165px">
+                            <img class="winery-logo" src="{{asset('img/winery-logo-1.jpg')}}">
+                        </div>
+                        <p>test</p>
+                    </a>             
+                </div>
+            </div>
+
+
+
+
+      
+    </div> -->
+    <!-------------------------------WINERIES----------------------->
+
     </div>
 @endsection
