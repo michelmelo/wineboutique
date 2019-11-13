@@ -225,14 +225,5 @@
             <button type="submit" id="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
     </form>
-
-    <form method="POST" action="/add-new-wine/{{$wine->id}}" id="delete-wine-{{ $wine->id }}">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-
-        <button type="submit" class="red-button button float-right" data-name="{{ $wine->name }}" data-id="{{ $wine->id }}" value="Delete">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    </form>
 </div>
 @endsection
