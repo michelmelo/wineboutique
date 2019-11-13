@@ -24,7 +24,7 @@
                                 <tr class="text-center">
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
-                                    <td>Royal Mail 1st Class</td>
+                                    <td>FedEx</td>
                                     <td>{{$value["order_date"]}}</td>
                                     <td>
                                         @foreach($value["wines"] as $wine)

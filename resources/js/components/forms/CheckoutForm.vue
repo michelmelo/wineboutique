@@ -139,7 +139,7 @@
                             </h5>
                             <select class="form-control">
                                 <option>
-                                    Royal Mail 1st Class
+                                    FedEx
                                 </option>
                             </select>
                         </div>

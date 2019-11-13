@@ -141,7 +141,9 @@
                                 <span class="fa fa-star"></span>
                             @endfor
                         </div>
-                        <span class="order-q">{{ $recommendation->orders_count }} Sold</span>
+                        @if($recommendation->orders_count > 0)
+                            <span class="order-q">{{ $recommendation->orders_count }} Sold</span>
+                        @endif
                     </div>
                 </a>
 

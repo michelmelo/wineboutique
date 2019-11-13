@@ -34,7 +34,9 @@
                                 <h4 class="m-0 p-0">${{$result->price}}</h4>
                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating}}"></star-rating>
                             </div>
-                            <span class="order-q">{{$result->wine_orders()->sum("quantity")}} Sold</span>
+                            @if($result->wine_orders()->sum("quantity") > 0)
+                                <span class="order-q">{{$result->wine_orders()->sum("quantity")}} Sold</span>
+                            @endif
                         </div>
                     </a>
                 </div>

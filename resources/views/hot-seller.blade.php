@@ -21,7 +21,9 @@
                 <h4 class="m-0 p-0">${{$wine->price}}</h4>
                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
             </div>
-            <span class="order-q">{{ $wine->orders_count ? $wine->orders_count : 0 }} Sold</span>
+            @if($wine->orders_count && $wine->orders_count > 0)
+                <span class="order-q">{{ $wine->orders_count ? $wine->orders_count : 0 }} Sold</span>
+            @endif
         </div>
     </a>
 </div>
