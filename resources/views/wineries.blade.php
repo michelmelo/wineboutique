@@ -15,7 +15,7 @@
                 <div>
                     <a href="{{route('winery', $winery->slug)}}">
                         <div class="wineries-brand">
-                            <img class="winery-header" src="{{ $winery->cover==null ? asset('img/winery-1.jpg') : '/images/winery/cover/'.$winery->cover }}" height="165px">
+                            <img class="winery-header" src="{{ $winery->cover==null ? asset('img/winery-1.jpg') : '/images/winery/cover/'.$winery->cover }}">
                             <img class="winery-logo" src="{{ $winery->profile==null ? asset('img/winery-logo-1.jpg') : '/images/winery/profile/'.$winery->profile }}">
                         </div>
                         <p>{{$winery->name}}</p>
