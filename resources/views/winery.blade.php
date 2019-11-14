@@ -32,7 +32,7 @@
                 <div id="info" class="tab-pane fade in active show wineries-box">
                     @foreach($winery->wines->groupBy('varietal.name') as $wineGroupName => $wineGroup)
                         <div class="row winery-categories">
-                            <h2 class="center-text">{{$wineGroupName}} Wine</h2>
+                            <h2 class="center-text">{{$wineGroupName}} Wines</h2>
                             @foreach($wineGroup as $wine)
                                 <div class="col-xs-5 vine-box-style-3 style-3-2">
                                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">

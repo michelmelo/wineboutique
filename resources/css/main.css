@@ -780,9 +780,10 @@ footer p {
     width: 15px;
     height: 15px;
     border-radius: 15px;
+    border: 1px solid #fff;
 }
 
-.home-slider  .slider-content {
+.home-slider .slider-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -790,14 +791,26 @@ footer p {
             transform: translate(-50%, -50%);
     text-align: center;
     width: 90%;
+    z-index: 2;
 }
 
-.home-slider .slider-content h1, .home-slider .slider-content h2{
+.home-slider .slide-title{
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.home-slider .slider-content h1, .home-slider .slider-content h2,
+.home-slider .slide-title h1{
     color: #fff;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 36px;
     font-weight: 700;
-    margin-bottom: 2rem;
 }
 
 
@@ -845,6 +858,7 @@ footer p {
     margin-bottom: 3px;
     display: block;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .card-body .sub-cat:last-child {
@@ -1093,12 +1107,17 @@ footer p {
     max-height: 530px;
 }
 
+.latest-wines-list .vine-box-style-3{
+    min-height: unset;
+    max-height: unset;
+}
+
 .vine-box-style-3 a {
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
             box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 /* DEJAN COMENTED THIS OUT - IF THERE IS A HUGE DESIGN ISUE WITH NEW ARRIWALS OR HOT SELLERS PAGE CONTACT HIM
 .vine-box-style-3 img {
@@ -1181,7 +1200,7 @@ footer p {
     display: block;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    height: 0;
     padding-bottom: 144%;
 }
 /*
@@ -1235,6 +1254,17 @@ footer p {
     position: absolute;
     right: 30px;
     bottom: 5px;
+}
+
+.vine-box-style-3 .price {
+    font-size: 18px;
+    background: rgba(154,29,62, 0.75);
+    color: #fff;
+    font-weight: 500;
+    padding: 3px 5px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
 }
 
 
@@ -1300,17 +1330,6 @@ footer p {
     -o-object-fit: cover;
     object-fit: cover;
     margin: 0 auto;
-}
-
-.vine-box-style-4 .price {
-    font-size: 18px;
-    background: rgba(154,29,62, 0.75);
-    color: #fff;
-    font-weight: 500;
-    padding: 3px 5px;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
 }
 
 
@@ -1842,6 +1861,7 @@ footer p {
 
 .winery-header {
     width: 100%;
+    height: 165px;
 }
 
 .winery-logo {
@@ -2293,7 +2313,8 @@ footer p {
 }
 
 .info-box table.exception tr td {
-    width: 25%;
+    padding: 13px 5px 10px 10px;
+    width: 15%;
 }
 
 .info-box table tr td:first-child {
@@ -2934,7 +2955,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
                                                                                  MEDIA QUERY
 ==========================================================================================================================================================================================*/
 
-@media only screen and (max-width : 1650px) {
+@media only screen and (max-width : 1750px) {
+
+    .home-slider  .slider-content {
+        top: calc(50% + 55px);
+    }
     
 }
 
@@ -2956,6 +2981,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   .main {
     margin-top: 150px;
   }
+  .winery-header {
+    height: 120px;
+  }
+
 }
 
 
@@ -3074,6 +3103,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         right:0;
     }
 
+    .winery-header {
+        height: 165px;
+    }
+
 }
 
 @media only screen and (min-width : 998px){
@@ -3182,10 +3215,27 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         padding: 30px 0;
     }
 
+    .home-slider .slide-title {
+        top: calc(50% - 40px);
+        -webkit-box-align: flex-start;
+        -ms-flex-align: flex-start;
+        align-items: flex-start;
+    }
 
+    .slider-content h1, .home-slider .slide-title h1 {
+        font-size: 20px;
+    }
 
-    .slider-content h1 {
+    .carousel-control-prev, .carousel-control-next {
         display: none;
+    }
+
+    .home-slider .carousel-indicators {
+        margin: 0 auto 10px;
+    }
+
+    .home-slider  .slider-content {
+        top: calc(50% + 20px);
     }
 
     .button {
@@ -3503,6 +3553,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         left: 50%;
         margin-left: -125px;
     } 
+
+    .winery-header {
+        height: 140px;
+    }
 }
 
 
@@ -3623,6 +3677,13 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         flex: 0 0 50%;
         max-width: 50%;
     }
+
+    .latest-wines-list .vine-box-style-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 0 0 33.333333%;
+    }
 }
 @media only screen and (min-width : 1600px) {
   .home-slider, .home-slider .carousel-inner{
@@ -3667,6 +3728,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .vdp-datepicker__calendar {
         right:-20px;
+    }
+
+    .winery-header {
+        height: 120px;
     }
 }
 
@@ -3743,6 +3808,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: 140px;
     }
 
+    .winery-header {
+        height: 100px;
+    }
+
 }
 
 @media only screen and (max-width : 330px) {
@@ -3757,6 +3826,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .info-box table tr td input {
         max-width: 120px;
     }
+
 }
 
 /*****************VUE TRANSITONS*************************/

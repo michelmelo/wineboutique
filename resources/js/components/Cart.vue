@@ -16,10 +16,10 @@
                                         <h5 class="name">{{wine.name}}</h5>
                                         <h5 class="price"><strong>{{ (wine.price || 0) | currency }}</strong></h5>
                                     </div>
-                                    <div class="d-flex justify-content-end align-items-end">
+                                    <div class="d-flex justify-content-between align-items-end w-100">
                                         <div class="product-shipping">
                                             <div class="shipping">
-                                                <span v-if="wine.shipping_price">Shipping: {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                                <span v-if="wine.shipping_price">Shipping:<br> {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
                                                 <span v-else>
                                                     Winery is not shipping to your state, please remove wine or
                                                     <a href="/my-address" class="text-red font-weight-bold">change shipping state</a>

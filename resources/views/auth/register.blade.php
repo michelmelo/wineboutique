@@ -12,7 +12,7 @@
             <register-form />
         </div>
 
-        <div class="other-login col-md-6 col-md-push-6">
+        <div class="other-login col-md-6 col-md-push-6 forms">
             <div class="google-login">
                 <a href="{{url('/redirect/google')}}">Register with Google</a>
             </div>

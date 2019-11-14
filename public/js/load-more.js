@@ -151,7 +151,7 @@ $("#delete-wine-confirm").click(function (e) {
     $("#delete-wine-" + $(this).data("id")).submit();
 });
 
-$("#main-search").on('keyup input', function () {
+$("#main-search").on('keyup input touchend', function () {
     let that = $(this);
 
     if (timer) {
@@ -233,11 +233,11 @@ function moreWineries(data) {
             retVal += '<div class="row latest-wines-list px-3 mt-4">';
 
             element.wines.slice(-3).forEach(function (wine) {
-                retVal += '<div class="top-wine col-4 vine-box-style-4 px-2">';
-                retVal += '<a href="' + '/wine/' + wine.slug + '">'+'<div class="image-container">';
+                retVal += '<div class="top-wine col-4 vine-box-style-3 px-2">';
+                retVal += '<a href="/wine/' + wine.slug + '"><div class="image-container">';
                 retVal += '<img src="' + wine.photo + '">';
                 retVal += '<span class="pricing price">$' + wine.price.toFixed(2) + '</span>';
-                retVal += '</a></div></div>';
+                retVal += '</div></a></div>';
             });
 
             retVal += '</div>';
