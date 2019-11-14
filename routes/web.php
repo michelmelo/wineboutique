@@ -111,6 +111,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/my-address/{address}', 'MyAddressController@update')->name('my-address.update');
     Route::delete('/my-address/{address}', 'MyAddressController@destroy')->name('my-address.delete');
 
+    Route::get('/my-wine/image/{id}/delete', 'AddNewWineController@image_destroy')->name('wine-image-destroy');
+
     Route::resource('/add-new-wine', 'AddNewWineController')->except(['show'])->parameters([
         'add-new-wine' => 'wine'
     ]);

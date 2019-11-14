@@ -184,6 +184,14 @@ class AddNewWineController extends Controller
         return redirect('my-winery');
     }
 
+    public function image_destroy($id)
+    {
+        $wine = WineImage::find($id);
+        $wine->delete();
+
+        return redirect()->back();
+    }
+
     public function hideMsg(Request $request) {
         $request->session()->forget('msg');
     }

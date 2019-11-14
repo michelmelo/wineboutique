@@ -29,7 +29,12 @@
                     <input type="file" id="other_image" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
                     @foreach($preloadedImages as $img)
-                        <img src="{{ $img['path'] }}" id="imagePreview">
+                        <div class="image-delete-holder">
+                            <img src="{{ $img['path'] }}" id="imagePreview">
+                            <a href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
+                                X
+                            </a>
+                        </div>
                     @endforeach
                     <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button">
                     <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">

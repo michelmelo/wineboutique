@@ -3842,3 +3842,27 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   transform: translateY(100px);
   opacity: 0;
 }
+
+/* OTHER */
+
+.image-delete-holder {
+    display: inline-block;
+    position: relative;
+}
+
+.image-delete-holder a {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    border: 1px solid red;
+    border-radius: 100%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 20px;
+    color: red;
+}

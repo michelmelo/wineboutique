@@ -50,7 +50,6 @@
   </div>
 <!-------------------------------WINERIES----------------------->
 
-<!--
 
     <div class="container-fluid">
           <div class="row padding-row">
@@ -59,41 +58,20 @@
     </div>
  <div class="container">
      <div class="row padding-row vine-boxes">
-
-
-
-
+         @foreach ($winery_results as $result)
             <div class="col-lg-6 wineries-box px-0 ">
                 <div>
-                    <a href="#">
+                    <a href="{{ route("winery", ["winery" => $result->slug]) }}">
                         <div class="wineries-brand">
-                            <img class="winery-header" src="{{asset('img/winery-1.jpg')}}" height="165px">
-                            <img class="winery-logo" src="{{asset('img/winery-logo-1.jpg')}}">
+                            <img class="winery-header" src="{{ $result->cover ? asset('/images/winery/cover/'.$result->cover) : asset('img/winery-1.jpg')}}" height="165px">
+                            <img class="winery-logo" src="{{ $result->profile ? asset('/images/winery/cover/'.$result->profile) : asset('img/winery-1.jpg')}}">
                         </div>
-                        <p>test</p>
-                    </a>                   
+                        <p>{{$result->name}}</p>
+                    </a>
                 </div>
             </div>
-      
-    
-
-            <div class="col-lg-6 wineries-box px-0 ">
-                <div>
-                    <a href="#">
-                        <div class="wineries-brand">
-                            <img class="winery-header" src="{{asset('img/winery-1.jpg')}}" height="165px">
-                            <img class="winery-logo" src="{{asset('img/winery-logo-1.jpg')}}">
-                        </div>
-                        <p>test</p>
-                    </a>             
-                </div>
-            </div>
-
-
-
-
-      
-    </div> -->
+         @endforeach
+    </div>
     <!-------------------------------WINERIES----------------------->
 
     </div>

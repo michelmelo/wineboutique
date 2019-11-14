@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Wine;
+use App\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -51,21 +52,23 @@ class SearchController extends Controller
         $results = Wine::leftJoin('orders', 'wines.id', '=', 'orders.id')
             ->select(DB::raw('wines.*, count(orders.id) as orders_count, \'wines\' as type'))
             ->where('name', 'like', '%' . $searchstr . '%')
-            ->orWhere('description', 'like', '%' . $searchstr . '%')
-            ->orWhere('who_made_it', 'like', '%' . $searchstr . '%')
             ->groupBy('wines.id')
             ->skip($offset)
             ->take($limit)
             ->get();
 
         foreach ($results as $result) {
-            if(Auth::user()) $result->favorited = $result->favorited();
+            if(Auth::user()){
+                 $result->favorited = $result->favorited();
+            }
+
             $result->rating = $result->rating();
         }
 
         return $request->ajax() ? ['wines' => $results] : view('search', [
             'searchstr' => $searchstr,
-            'results' => $results
+            'results' => $results,
+            'winery_results' => Winery::where("name", "like", "%" . $searchstr . "%")->get()
         ]);
     }
 }
