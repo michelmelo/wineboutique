@@ -57,6 +57,7 @@
                 if(this.editing) {
                     this.showErrors = true;
                     this.errors = {};
+
                     if(this.$v.$invalid) {
                         formFields.some(formField => {
                             if(this.$v[formField].$invalid) {
@@ -74,6 +75,9 @@
                         .then(response => {
                             this.showErrors = false;
                             this.editing = false;
+                            this.current_password = '';
+                            this.password = '';
+                            this.password_confirmation = '';
                         })
                         .catch(error => {
                             if(error.response && error.response.data && error.response.data.errors) {

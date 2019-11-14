@@ -93,22 +93,26 @@
 
     // Handle form submission.
     var form = document.getElementById('payment-form');
+    var wasSubmitted = false;
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        document.getElementById('sbmt-new-payment-mtd').disabled = true;
+        if(!wasSubmitted) {
+            wasSubmitted = true;
+            document.getElementById('sbmt-new-payment-mtd').disabled = true;
 
-        stripe.createToken(card).then(function(result) {
-            if (result.error) {
-                // Inform the user if there was an error.
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                // Send the token to your server.
-                stripeTokenHandler(result.token);
-            }
-        });
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        }
     });
 
     // Submit the form with the token ID.

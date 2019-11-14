@@ -83,7 +83,7 @@
                     <div class="col-lg-9 col-sm-12">
                         <select id="location" :name="'shipping[' + index + '][ship_from]'" class="location" v-model="item.ship_from">
                             <option value="0" disabled selected>Select location</option>
-                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name == 'California'">
                                 {{ region.name }}
                             </option>
                         </select>
