@@ -53,7 +53,7 @@
 
     <div class="container-fluid">
           <div class="row padding-row">
-            <h2 class="headline-2 m-0">Winearise Results for "{{$searchstr}}"</h2>
+            <h2 class="headline-2 m-0">Wineries Results for "{{$searchstr}}"</h2>
         </div>
     </div>
  <div class="container">
