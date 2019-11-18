@@ -74,6 +74,7 @@ class AddNewWineController extends Controller
             $path = public_path().'/images/wine/' . $photo;
 
             Image::make($path)
+                ->save(public_path() . '/images/wine/original/' . $photo)
                 ->crop($data["cropwidth"], $data["cropheight"], $data["cropx"], $data["cropy"])
                 ->save($path);
 
@@ -139,6 +140,7 @@ class AddNewWineController extends Controller
             $path = public_path().'/images/wine/' . $photo;
 
             Image::make($path)
+                ->save(public_path() . '/images/wine/original/' . $photo)
                 ->crop($data["cropwidth"], $data["cropheight"], $data["cropx"], $data["cropy"])
                 ->save($path);
 
