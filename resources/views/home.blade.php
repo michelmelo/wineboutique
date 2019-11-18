@@ -187,7 +187,10 @@
                             <h4 class="m-0 p-0">${{$wine->price}}</h4>
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
-                        <span class="order-q">0 Sold</span>
+
+                        @if($wine->wine_orders()->sum("quantity") > 0)
+                            <span class="order-q">{{$wine->wine_orders()->sum("quantity")}} Sold</span>
+                        @endif
                     </div>
                 </a>
             </div>
