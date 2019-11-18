@@ -152,11 +152,15 @@ class CheckoutController extends Controller
             $new_order->status = "1";
 
             if($new_order->save()){
-                foreach (Auth::user()->cart()->get() as $item){
+                foreach ($cart as $item){
                     $new_order_wine = new OrderWine();
                     $new_order_wine->order_id = $new_order->id;
                     $new_order_wine->wine_id = $item->pivot->wine_id;
                     $new_order_wine->quantity = $item->pivot->quantity;
+                    $new_order_wine->wine_name = $item->name;
+                    $new_order_wine->price = $item->price;
+                    $new_order_wine->shipping_price = $item->shipping_price;
+                    $new_order_wine->additional_shipping_price = $item->shipping_additional;
 
                     $price += $item->pivot->quantity * $new_order_wine->wine()->first()->price;
                     $quantity += $item->pivot->quantity;
@@ -183,20 +187,6 @@ class CheckoutController extends Controller
         }
 
         $address = Auth::user()->addresses()->where("default", 1)->first();
-
-        $charged_shippings = [];
-        foreach($new_order->order_wines as $order_wine) {
-            $shipping = $order_wine->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
-            if(!in_array($shipping->id, $charged_shippings)) {
-                $charged_shippings[] = $shipping->id;
-                $price += $shipping->price;
-                $price += ($order_wine->quantity - 1) * $shipping->additional;
-            } else {
-                $price += $order_wine->quantity * $shipping->additional;
-            }
-        }
-
-        $new_order->update(['price' => $price]);
 
         $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
 
