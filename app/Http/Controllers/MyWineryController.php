@@ -174,7 +174,7 @@ class MyWineryController extends Controller
             return redirect("my-winery-stats")->with("error", "Permission denied");
         }
 
-        $order = Order::where("id", $order_id)->first();
+        $order = Order::where("order_id", $order_id)->first();
 
         if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id])){
             if(count($order->order_wines()->where("status", 1)->get()) == 0){

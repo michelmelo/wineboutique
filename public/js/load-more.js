@@ -135,6 +135,7 @@ $("#close-popup").click(function (e) {
     e.preventDefault();
 
     $(".popup-holder").fadeOut();
+    $("#ship-wine-confirm").fadeOut();
 });
 
 $(".delete-wine").click(function (e) {
