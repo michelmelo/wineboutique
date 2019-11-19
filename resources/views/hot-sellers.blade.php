@@ -88,17 +88,16 @@
                 </form>
             </div>
         </div>
-        <div class="col-lg-10 col-sm-12 ">
-           
-                    @foreach($wines as $wine)
-                        @include('hot-seller')
-                    @endforeach
-                </div>
-     
+        <div class="col-lg-10 col-sm-12 vine-boxes">
+            @foreach($wines as $wine)
+                @include('hot-seller')
+            @endforeach
+        </div>
+
         @if(count($wines) > 0 && $wine_count > count($wines))
             <div class="col-12 mt-4 mb-5 text-center">
                 <div id="loadMoreArrivals">
-                    <a id="loadMoreArrivalsLink" href="#"
+                    <a id="loadMoreLinkA" href="#"
                        data-wine-count="{{ $wine_count }}"
                        class="big-button button red-button margin-0-auto margin-t">Load More</a>
                 </div>

@@ -83,8 +83,8 @@ class WineController extends Controller
 
         $wines = $wines->where("wines.quantity", ">", 0);
 
-        $varietals = Varietal::all();
-        $regions = WineRegion::all();
+        $varietals = Varietal::orderBy('name')->get();
+        $regions = WineRegion::orderBy('name')->get();
 
         $filter = $request->all();
 

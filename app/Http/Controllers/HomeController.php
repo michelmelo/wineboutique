@@ -38,8 +38,8 @@ class HomeController extends Controller
         ->where('wines.quantity', '>', 0)
         ->orderBy('average_rating', 'desc');
 
-        $varietals = Varietal::all();
-        $regions = WineRegion::all();
+        $varietals = Varietal::orderBy('name')->get();
+        $regions = WineRegion::orderBy('name')->get();
 
         $filter = $request->all();
 

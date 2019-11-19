@@ -12,6 +12,7 @@ $( document ).ready(function() {
         case '/search':
         case '/wines':
         case '/wines/top-rated':
+        case '/hot-sellers':
             type = 'wines';
 
             let els = document.getElementsByClassName('vine-boxes')[0].childNodes;
@@ -39,11 +40,47 @@ $( document ).ready(function() {
             break;
     }
 
+    console.log();
+
+    if($('.vine-boxes').children().length < page_offset) {
+        $('#loadMoreLinkA').hide();
+        $('#loadMoreLink').hide();
+    }
+
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
+        +'page_offset=' + page_offset + '&page_limit=' + page_limit);
+
+    $('#loadMoreLinkA').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
         +'page_offset=' + page_offset + '&page_limit=' + page_limit);
 
     $('#loadMoreArrivalsLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
         +'page_offset=' + page_offset + '&page_limit=' + page_limit);
+
+    $(document).on("click", "#loadMoreLinkA", function (e) {
+        console.log('init');
+        e.preventDefault();
+        let $th = $(this);
+
+        if ($th.hasClass('processing')) return;
+
+        $th.addClass('processing');
+
+        console.log('requesting');
+
+        $.get($(this).attr('href'), function (data) {
+            if(data==='') $('#loadMoreLinkA').hide();
+            console.log('priting');
+            console.log(data);
+            $('.vine-boxes').append(data);
+
+            page_offset += page_limit;
+
+            $('#loadMoreLinkA').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
+                +'page_offset=' + page_offset + '&page_limit=' + page_limit);
+
+            $th.removeClass('processing');
+        });
+    });
 
     $('#loadMoreLink').click(function (e) {
         e.preventDefault();
@@ -54,6 +91,7 @@ $( document ).ready(function() {
         $th.addClass('processing');
 
         $.get($(this).attr('href'), function (data) {
+            console.log(data);
             if (Object.keys(data[type]).length > 0) {
                 loadedMoreCount = loadedMoreCount + page_offset*2;
 

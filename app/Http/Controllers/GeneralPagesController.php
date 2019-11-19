@@ -13,8 +13,8 @@ class GeneralPagesController extends Controller
 {
     public function new_arrivals(Request $request)
     {
-        $varietals = Varietal::all();
-        $regions = WineRegion::all();
+        $varietals = Varietal::orderBy('name')->get();
+        $regions = WineRegion::orderBy('name')->get();
 
         $filter = $request->all();
 
@@ -96,8 +96,8 @@ class GeneralPagesController extends Controller
 
     public function hot_sellers(Request $request)
     {
-        $varietals = Varietal::all();
-        $regions = WineRegion::all();
+        $varietals = Varietal::orderBy('name')->get();
+        $regions = WineRegion::orderBy('name')->get();
 
         $filter = $request->all();
 
@@ -148,6 +148,7 @@ class GeneralPagesController extends Controller
             $wines = $wines->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
                 ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
                 ->groupBy('wines.id')
+                ->having('orders_count', '>', 0)
                 ->orderBy('orders_count','desc')
                 ->skip($page_offset)
                 ->take($page_limit)
@@ -173,6 +174,7 @@ class GeneralPagesController extends Controller
             ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
             ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
             ->groupBy('wines.id')
+            ->having('orders_count', '>', 0)
             ->orderBy('orders_count','desc')
             ->get();
 
