@@ -18,10 +18,10 @@
                     </div>
                     <div class="product-info">
                         <h5>{{ favorite.name ? favorite.name: 'Name of wine'}}</h5>
-                     
+
 
                         <div class="star-rating">
-                            <h4 class="m-0 p-0">${{favorite.price}}</h4>
+                            <h4 class="m-0 p-0">${{favorite.price.toFixed(2)}}</h4>
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="favorite.rating"></star-rating>
                         </div>
                         <span class="order-q">{{ orders[favorite.id].orderNo }} orders</span>

@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="col-6 py-3">
                                     <h5 class="name">{{$latestWine->name}}</h5>
-                                    <h5 class="price"><span class="mr-2">$</span>{{$latestWine->price}}</h5>
+                                    <h5 class="price"><span class="mr-2">$</span>{{number_format($latestWine->price, 2, '.', ',')}}</h5>
                                 </div>
                             </div>
                         </a>
@@ -184,7 +184,7 @@
                         <h5>{{$wine->name?$wine->name:'Name of wine'}}</h5>
 
                         <div class="star-rating price">
-                            <h4 class="m-0 p-0">${{$wine->price}}</h4>
+                            <h4 class="m-0 p-0">${{number_format($wine->price, 2, '.', ',')}}</h4>
                             <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                         </div>
 

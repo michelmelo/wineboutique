@@ -27,7 +27,7 @@
                             <span> from </span>
                             <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
                         </td>
-                        <td>${{ order.price }}</td>
+                        <td>${{ order.price.toFixed(2) }}</td>
                     </tr>
                 </tbody>
             </table>

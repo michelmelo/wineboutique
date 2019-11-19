@@ -25,7 +25,7 @@
                             <input type="text" v-model="wine.name" v-if='currentlyEditing === wine.id'/>
                             <h5 v-else v-on:click="setEditing(wine.id)">{{wine.name&&wine.name.length?wine.name:'Name Of The Wine'}}</h5>
                             <input type="number" v-model="wine.price" v-if='currentlyEditing === wine.id' min="0"/>
-                            <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price || 0) | currency }}</h4>
+                            <h4 v-else v-on:click="setEditing(wine.id)">{{ (wine.price.toFixed(0) || 0.00) | currency }}</h4>
                             <select v-model="wine.varietal_id" v-if='currentlyEditing === wine.id' v-bind:disabled="varietals.length===0">
                                 <option disabled hidden>Select varietal</option>
                                 <option v-for="varietal in varietals" v-bind:value="varietal.id">

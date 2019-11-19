@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="container">
-      
+
         <div class="row vine-boxes">
             @foreach ($results as $result)
                 <div class="col-xs-3 vine-box-style-3 style-3-2">
@@ -31,7 +31,7 @@
                         <div class="product-info">
                             <h5>{{$result->name}}</h5>
                             <div class="star-rating price">
-                                <h4 class="m-0 p-0">${{$result->price}}</h4>
+                                <h4 class="m-0 p-0">${{number_format($result->price, 2, '.', ',')}}</h4>
                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$result->rating}}"></star-rating>
                             </div>
                             @if($result->wine_orders()->sum("quantity") > 0)

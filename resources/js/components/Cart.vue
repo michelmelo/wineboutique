@@ -14,7 +14,7 @@
                                 <div class="row">
                                     <div class="product-name">
                                         <h5 class="name">{{wine.name}}</h5>
-                                        <h5 class="price"><strong>{{ (wine.price || 0) | currency }}</strong></h5>
+                                        <h5 class="price"><strong>{{ (wine.price.toFixed(2) || 0.00) | currency }}</strong></h5>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-end w-100">
                                         <div class="product-shipping">

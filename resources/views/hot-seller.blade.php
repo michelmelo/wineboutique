@@ -18,7 +18,7 @@
             <h5>{{$wine->name}}</h5>
 
             <div class="star-rating">
-                <h4 class="m-0 p-0">${{$wine->price}}</h4>
+                <h4 class="m-0 p-0">${{number_format($wine->price, 2, '.', ',')}}</h4>
                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
             </div>
             @if($wine->orders_count && $wine->orders_count > 0)

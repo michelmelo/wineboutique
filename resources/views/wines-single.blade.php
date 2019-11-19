@@ -58,12 +58,12 @@
 
         <div class="col-lg-6 col-sm-12 single-wine-info">
             <h1>{{$wine->name}}</h1>
-            <p class="price">${{$wine->price}}</p>
+            <p class="price">${{number_format($wine->price, 2, '.', ',')}}</p>
 
             <div class="row">
                 <div class="col-4 center-text">
                     <p>SHIPPING</p>
-                    <span class="color-r">$ {{$wine->winery->winery_shippings->min('price')}}</span>
+                    <span class="color-r">$ {{number_format($wine->winery->winery_shippings->min('price'), 2, '.', ',')}}</span>
                 </div>
 
                 <div class="col-4 center-text">

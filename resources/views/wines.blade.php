@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="container">
-    
+
 
     <div class="row">
         <div class="col-lg-2 col-sm-12 sidebar">
@@ -111,7 +111,7 @@
                             <h5>{{$wine['name']?$wine['name']:'Name of wine'}}</h5>
 
                             <div class="star-rating price">
-                                <h4 class="m-0 p-0">${{$wine->price}}</h4>
+                                <h4 class="m-0 p-0">${{number_format($wine->price, 2, '.', ',')}}</h4>
                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                             </div>
                             @if($wine->wine_orders()->sum("quantity") > 0)

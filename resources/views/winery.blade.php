@@ -38,7 +38,7 @@
                                     <a href="{{route('wine.show', ['wine' => $wine->slug])}}">
                                         <div class="image-wrap">
                                             <figure class="image-container">
-                                                <img src="{{$wine->photo}}"> 
+                                                <img src="{{$wine->photo}}">
                                                 <div class="overlay"></div>
                                                 @if(Auth::user())
                                                     <favorite
@@ -52,7 +52,7 @@
                                         <div class="product-info">
                                             <h5>{{$wine->name}}</h5>
                                             <div class="star-rating price">
-                                                <h4 class="m-0 p-0">${{$wine->price}}</h4>
+                                                <h4 class="m-0 p-0">${{number_format($wine->price, 2, '.', ',')}}</h4>
                                                 <star-rating :star-size="15" active-color="#991D3F" :show-rating="false" :read-only="true" :rating="{{$wine->rating()}}"></star-rating>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                     @endforeach
 
                 </div>
-                
+
                 <div id="description" class="tab-pane fade wineries-box">
                     <div class="row winery-categories">
                         @foreach($winery->wines as $wine)

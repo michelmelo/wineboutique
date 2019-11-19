@@ -28,7 +28,7 @@
                                         <div class="image-container">
                                             <img src="{{$topWine->photo}}">
                                             <span class="pricing price">
-                                                ${{ sprintf('%0.2f', $topWine->price) }}
+                                                ${{ sprintf('%0.2f', number_format($topWine->price, 2, '.', ',')) }}
                                             </span>
                                         </div>
                                     </a>
