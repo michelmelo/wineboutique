@@ -1,6 +1,6 @@
 <template>
 <div>
-    <form class="form-inline" v-on:submit="onSubmit" method="post" action="/register">
+    <form class="form-inline register-vue" v-on:submit="onSubmit" method="post" action="/register">
         <input type="hidden" name="_token" v-model="csrf">
         <input type="hidden" name="type" value="CUSTOMER">
         <input type="text" v-model.trim="firstName" :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name">
@@ -41,8 +41,13 @@
             <strong>You must be 21 or older.</strong>
         </span>
         <div id="over-21" v-if="acceptAge">
-            <label class="form-check-label birthday" for="birthday">Enter your date of birth</label>
-            <input type="date" name="birthday" v-model="birthday"  :max="initialDate()"/>
+           
+           <datepicker :disabled-dates="disabledDate" :open-date="openDate" 
+                format="M / dd / yyyy" placeholder="Enter your date of birth"
+              v-model="birthday"
+                @input="birthdayFn(birthday)"></datepicker>
+             
+                <input type="hidden" name="birthday" v-model="birthday"/>
         </div>
         <input type="submit" name="submit" class="button red-button full-width" value="SIGN UP">
     </form>
@@ -131,6 +136,7 @@
            </div>
         </div>
     </transition>
+
 </div>
 </template>
 
@@ -138,6 +144,7 @@
     import { required, minLength, email, numeric } from 'vuelidate/lib/validators';
     import { isTrue } from "../../customValidators";
     import moment from 'moment';
+    import datepicker from 'vuejs-datepicker';
 
     const formFields = [
         'firstName',
@@ -150,8 +157,15 @@
     ];
 
     export default {
+        components: {
+          datepicker
+         },
         data: () => ({
-
+           disabledDate:{
+                  to: null,
+                  from: new Date(Date.now() - 662695992000)
+               },
+            openDate: new Date(Date.now() - 662695992000), 
             firstName: '',
             lastName: '',
             email: '',
@@ -212,6 +226,9 @@
                 date.setFullYear(date.getFullYear() - 21);
 
                 return moment(date).format('Y-MM-DD');
+            },
+            birthdayFn(date){
+               this.birthday =  moment(date).format('Y-MM-DD');
             }
         },
         validations: {
