@@ -185,7 +185,7 @@
                         <p>Tags <span>Optional</span></p>
                     </div>
                     <div class="col-lg-8 col-sm-12">
-                        <input data-role="tagsinput" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc." required>
+                        <input data-role="tagsinput" type="text" name="tags" placeholder="Tag1, tag2, tag3, etc.">
                         @if($errors->has('tags'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('tags') }}</strong>
