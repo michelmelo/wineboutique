@@ -165,7 +165,7 @@ class MyWineryController extends Controller
         ]);
     }
 
-    public function order_update($order_id, $wine_id, $tracking_id)
+    public function order_update($order_id, $wine_id, $tracking_id, $delivery)
     {
         $user = Auth::user();
         $wine = $user->winery->wines()->where("id", $wine_id)->first();
@@ -176,7 +176,7 @@ class MyWineryController extends Controller
 
         $order = Order::where("order_id", $order_id)->first();
 
-        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id])){
+        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id, "delivery" => $delivery])){
             if(count($order->order_wines()->where("status", 1)->get()) == 0){
                 $order->update(["status" => 2]);
 

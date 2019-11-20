@@ -161,11 +161,15 @@ $(".send-wine").click(function (e) {
 $("#confirm-ship-wine").click(function (e) {
     e.preventDefault();
 
-    if($("#tracking_id").val()){
-        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val();
+    if(!$("#tracking_id").val()){
+        $("#tracking_id").css("border", "1px solid red");
+    }
+    else if(!$("#delivery").val()){
+        $("#tracking_id").css("border", "1px solid green");
+        $("#delivery").css("border", "1px solid red");
     }
     else{
-        $("#tracking_id").css("border", "1px solid red");
+        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val() + "/" + $("#delivery").val();
     }
 });
 
