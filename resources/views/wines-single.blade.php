@@ -62,8 +62,8 @@
 
             <div class="row">
                 <div class="col-4 center-text">
-                    <p>SHIPPING</p>
-                    <span class="color-r">$ {{number_format($wine->winery->winery_shippings->min('price'), 2, '.', ',')}}</span>
+                    <p>SHIPPING</p> <?php $price = number_format($wine->winery->winery_shippings->min('price'), 2, '.', ',') ?>
+                    <span class="color-r">{{ $price === '0.00' ? 'FREE' : '$' . $price }}</span>
                 </div>
 
                 <div class="col-4 center-text">
