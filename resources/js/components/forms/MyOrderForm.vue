@@ -27,7 +27,7 @@
                             <span> from </span>
                             <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
                         </td>
-                        <td>${{ order.price === 'undefined' ? 0 : order.price.toFixed(2) }}</td>
+                        <td>${{ price(order) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -80,7 +80,14 @@
             },
             showDetails(orderId) {
                 this.order_to_show = orderId;
-            }
-        }
+            },
+            price(order) {
+                let retVal = 0;
+                order.order_wines.forEach(function(order_wine) {
+                    retVal += order_wine.price + order_wine.shipping_price;
+                });
+                return retVal.toFixed(2);
+            },
+        },
     }
 </script>
