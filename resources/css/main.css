@@ -633,6 +633,9 @@ header {
     top: 0px;
     z-index: 9999;
 }
+.search-results-mob{
+    display: none;
+} 
 
 @-webkit-keyframes slide-down {
     0% {
@@ -2334,6 +2337,10 @@ footer p {
 .info-box table.exception tr td {
     padding: 13px 5px 10px 10px;
     width: 15%;
+
+}
+.info-box table.exception tr td a{   
+    word-break: break-word;
 }
 
 .info-box table tr td:first-child {
