@@ -417,7 +417,7 @@ select {
     position: relative;
 }
 
-.search-results {
+.search-results{
     position: absolute;
     top: 80px;
     z-index: 9999;
@@ -427,8 +427,20 @@ select {
     border-radius: 10px;
     display: none;
 }
-
-.search-results a {
+.search-results-mob{ 
+    position: absolute;
+    top: 54px;
+    z-index: 9999;
+    background: rgb(255, 255, 255);
+    width: 91%;
+    border: 1px solid rgb(206, 212, 218);
+    border-radius: 10px;
+    max-width: 400px;
+    left: 50%;
+    transform: translateX(-52%);
+  }  
+.search-results a,
+.search-results-mob a {
     margin: 0;
     padding: 5px 15px;
     border-bottom: 1px solid #ced4da;
@@ -3099,10 +3111,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: 50%;
     }
 
-    .vdp-datepicker__calendar {
-        right:0;
+    .register-vue .vdp-datepicker__calendar {
+        left :0;
     }
-
+   .vdp-datepicker__calendar 
     .winery-header {
         height: 165px;
     }
