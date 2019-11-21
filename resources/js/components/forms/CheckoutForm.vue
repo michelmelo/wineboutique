@@ -147,9 +147,7 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <h5 class="card-title">
-                                Cart summary
-                            </h5>
+                         
                             <Cart :showComplete="false"/>
                         </div>
                     </article>

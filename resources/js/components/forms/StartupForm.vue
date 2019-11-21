@@ -134,7 +134,11 @@
                                 {{ region.name }}
                             </option>
                         </select>
+                          <span class="help-block error-block" v-if="isInvalid('shipping')">
+                                    <strong>You must select shipping origin .</strong>
+                                </span>
                     </div>
+                   
 
                     <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">
                     <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">
@@ -231,6 +235,7 @@
         mounted: function () {
             card = elements.create('card');
             card.mount("#card-element");
+            console.log(this.shippings.length)
         },
         methods: {
             refineValues(value){
@@ -321,7 +326,12 @@
                 if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
                 if(this.ssn.length < 4) this.errors['ssn'] = 'You must enter at least 4 digits.';
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
-
+                this.shippings.forEach((item)=>{
+                    if(item.ship_from == 0){
+                        this.errors['shipping'] = 'You must select shipping origin .'
+                    }
+                });
+               
                 if(Object.keys(this.errors).length == 0){
                     stripe.createToken(card).then(function(result) {
                         console.log(result);
