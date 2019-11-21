@@ -23,6 +23,9 @@ h1, h2, h3, h4, h5, h6 {
 h4{
     font-size: 20px;
 }
+h5{
+    word-break: break-word;
+}
 .text-red{
    color: #da8599;
 }
@@ -1155,7 +1158,7 @@ footer p {
 
 .vine-box-style-3 .product-info{
     padding: 10px;
-    min-height: 120px;
+    min-height: 150px;
 }
 
 .vine-box-style-3 h5 {
@@ -1163,6 +1166,7 @@ footer p {
     color: #646464;
     margin-top: 10px;
     padding: 0 10px;
+    word-break: break-word;
 }
 
 .vine-box-style-3 h4 {
@@ -2212,6 +2216,9 @@ footer p {
     font-weight: 400;
     padding: 15px 0px;
 }
+.cart-table th:first-child {    
+    padding: 0px;
+}
 
 .cart-table th b {
     font-weight: 600;
@@ -2559,7 +2566,8 @@ footer p {
     float: left;
 }
 
-.form-inputs p {
+.form-inputs p,
+.flex-center p.w-100{
     font-size: 18px;
     font-weight: 600;
     color: #9b1f3d;
@@ -2587,11 +2595,11 @@ footer p {
 
 .new-wine-photos img {
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
 }
 
 .other_images_preview img{
-    margin: 10px 5px 10px 0px;
+    margin: 10px 7px 10px 0px;
 }
 
 .form-inputs>div {
@@ -3703,6 +3711,25 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   }
 
 }
+@media only screen and (max-width : 990px) {
+    .flex-center{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+     }
+    .flex-center .w-100{
+        text-align: center;
+     }
+    .other_images_preview{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .other_images_preview img {
+    margin: 10px 3px 10px 3px;
+    }
+ }   
 @media only screen and (max-width : 450px) {
     
     .top-header .container-fluid{

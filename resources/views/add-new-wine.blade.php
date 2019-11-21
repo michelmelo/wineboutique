@@ -12,28 +12,31 @@
             <h2 >PHOTOS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
               <span class="popup-info d-none">Please select the photos of your wine bottle that you are adding. The Main Picture is the photo that will be showcased throughout our platform.</span>
 
-            <div class="col-lg-4 col-sm-12 mb-3">
+            <div class="col-lg-4 col-sm-12 mb-3 flex-center ">
                 <p class="w-100">Front bottle image *</p>
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
-                <label>
+                <label >
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" required>
                     <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview" data-default="{{asset('img/primary-photo.jpg')}}">
                 </label>
-
-                <input type="submit" id="crop-picture" value="Crop" style="display:none; width: 200px;" class="red-button button ">
-                <input type="submit" id="cancel-crop-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                  <div class="w-100">
+                    <input type="submit" id="crop-picture" value="Crop" style="display:none; width: 200px;" class="red-button button mb-2">
+                    <input type="submit" id="cancel-crop-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                 </div>  
                 <input type="hidden" name="cropx" id="cropx" value="226">
                 <input type="hidden" name="cropy" id="cropy" value="250">
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-8 col-sm-12 pr-lg-0 flex-center">
                 <p class="w-100">Other pictures</p>
-                <label>
+                <label class="flex-center">
                     <input type="file" id="other_image" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
-                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button">
-                    <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                     <div class="w-100">   
+                        <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button my-2">
+                        <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                    </div>
                     <div class="other_images_preview"></div>
                 </label>
             </div>

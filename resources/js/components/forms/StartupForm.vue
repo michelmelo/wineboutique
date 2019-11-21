@@ -95,11 +95,12 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="col-lg-12 wineries-box">
                         <div>
-                            <div class="wineries-brand"  :class="{ 'invalid': isInvalid('cover') }">
+                            <div class="wineries-brand"  :class="{ 'invalid': isInvalid('cover') }"
+                            v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
                                 <div class="cover-info">
-                                    <p>Chose cover image</p>
+                                    <p v-if="!getCoverPhoto()">Chose cover image</p>
                                 </div>
-                                <label class="winery-header uploader" v-model="cover" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
+                                <label class="winery-header uploader" v-model="cover" >
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
                             </div>
@@ -342,7 +343,9 @@
                 return this.profile?`/images/winery/profile/${this.profile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.cover ? `/images/winery/cover/${this.cover}`: '';
+
+
+                return this.cover ? `/images/winery/cover/${this.cover}`: this.defaultCoverPhoto;
             }
         }
     }

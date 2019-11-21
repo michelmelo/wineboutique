@@ -56,8 +56,8 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="col-lg-12 wineries-box">
                         <div>
-                            <div class="wineries-brand">
-                                <label class="winery-header uploader" v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
+                            <div class="wineries-brand " v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
+                                <label class="winery-header uploader" >
                                     <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
                                 </label>
                             </div>
@@ -277,8 +277,8 @@
                 return this.profile?`/images/winery/profile/${this.profile}`:this.defaultProfilePhoto;
             },
             getCoverPhoto() {
-                return this.cover?`/images/winery/cover/${this.cover}`:this.defaultCoverPhoto;
+                return this.cover?`/images/winery/cover/${this.cover}`: this.defaultCoverPhoto;
             }
         }
     }
-</script>
+</script> 
