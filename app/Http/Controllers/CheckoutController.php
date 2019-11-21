@@ -123,7 +123,7 @@ class CheckoutController extends Controller
             return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
                 ($item->shipping_additional * ($item->pivot->quantity - 1)), 2, '.', '');
         }, 0);
-        
+
         try{
             \Stripe\Stripe::setApiKey(env('STRIPE_PRIVATE_KEY'));
 
@@ -160,8 +160,8 @@ class CheckoutController extends Controller
                     $new_order_wine->quantity = $item->pivot->quantity;
                     $new_order_wine->wine_name = $item->name;
                     $new_order_wine->price = $item->price;
-                    $new_order_wine->shipping_price = $item->shipping_price;
-                    $new_order_wine->additional_shipping_price = $item->shipping_additional;
+                    $new_order_wine->shipping_price = $item->shipping_price ? $item->shipping_price : 0;
+                    $new_order_wine->additional_shipping_price = $item->shipping_additional ? $item->shipping_additional : 0;
 
                     $price += $item->pivot->quantity * $new_order_wine->wine()->first()->price;
                     $quantity += $item->pivot->quantity;
@@ -180,7 +180,7 @@ class CheckoutController extends Controller
                             {
                                 $message
                                     ->from("no-reply@wineboutique.com")
-                                    ->to($item->winery->user->email)->subject('New Order submited');
+                                    ->to($item->winery->user->email)->subject('New Order submitted');
                             });
                     }
                 }
