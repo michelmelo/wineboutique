@@ -123,7 +123,7 @@ class CheckoutController extends Controller
             return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
                 ($item->shipping_additional * ($item->pivot->quantity - 1)), 2, '.', '');
         }, 0);
-        dd($sum);
+        
         try{
             \Stripe\Stripe::setApiKey(env('STRIPE_PRIVATE_KEY'));
 
