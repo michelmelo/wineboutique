@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-xs-12">
             <h1 style="text-align: center;">{{ ucfirst(\Illuminate\Support\Facades\Auth::user()->winery->name) }} Orders</h1>
@@ -9,7 +9,7 @@
         <div class="col-md-12 mt-5 pt-2">
             <div class="card">
                 <div class="card-body my-winery-table">
-                    <table class="table table-striped ">
+                    <table class="table table-striped mb-0">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
@@ -52,7 +52,7 @@
         <div class="col-md-12 mt-5 pt-2">
             <div class="card">
                 <div class="card-body my-winery-table">
-                    <table class="table table-striped ">
+                    <table class="table table-striped mb-0">
                         <tbody>
                             <tr>
                                 <td>Number of orders</td>
