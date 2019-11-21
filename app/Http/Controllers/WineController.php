@@ -143,6 +143,10 @@ class WineController extends Controller
     {
         $wine = Wine::withTrashed()->where("slug", $wine)->first();
 
+        if(!$wine) {
+            abort(404);
+        }
+
         return view('wines-single', [
             'wine' => $wine,
             'wine_images' => WineImage::where('wine_id', $wine->id)->get(),

@@ -6,7 +6,7 @@
 <div class="container">
     <form method="POST" action="{{ route('store-new-wine') }}" class="row padding-row add-new-wine" enctype="multipart/form-data">
         @csrf
-        <h1 class="headline-2">ADD A NEW WINE</h1>
+        <h1 class="headline-2" id="top">ADD A NEW WINE</h1>
 
         <div class="shadow-box row new-wine-photos">
             <h2 >PHOTOS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
@@ -224,7 +224,7 @@
         </div>
         <div id="inputs" style="display: none;"></div>
         <div class="col-lg-4 col-lg-push-8 col-sm-12" style="padding: 0;">
-            <p id="crop-error" style="float: right; color: red; display: none;">Please crop the image</p>
+            <a href="#top"><p id="crop-error" style="float: right; color: red; display: none;">Please crop the image</p></a>
             <button type="submit" id="submit" class="red-button button float-right">SAVE AND CONTINUE</button>
         </div>
     </form>

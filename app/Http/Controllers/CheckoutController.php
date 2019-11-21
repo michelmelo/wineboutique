@@ -138,6 +138,7 @@ class CheckoutController extends Controller
             ]);
         }
         catch (\Exception $e){
+            dd($e);
             return redirect()->back();
         }
 

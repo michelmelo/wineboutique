@@ -27,6 +27,7 @@
 {{--                                <th scope="col">Winery</th>--}}
                                 <th scope="col">Vintage</th>
                                 <th scope="col">Total Capacity</th>
+                                <th scope="col">Quantity</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
 {{--                                    <td>{{ $wine->who_made_it }}</td>--}}
                                     <td>{{ $wine->when_was_it_made }}</td>
                                     <td>{{ $wine->capacity }} {{ $wine->capacityUnit->name }}</td>
+                                    <td>{{ $wine->quantity }}</td>
                                     <td>
                                         <a href="{{route('add-new-wine.edit', [$wine->slug])}}" class="btn btn-default"><i class="fas fa-pencil-alt"></i></a>
                                         <form method="POST" action="/add-new-wine/{{$wine->id}}" id="delete-wine-{{ $wine->id }}">

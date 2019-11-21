@@ -7,18 +7,24 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
-    $("#picture").change(function() {
-        readURL(this, $('#imagePreview'));
+    $("#picture").change(function(e) {
+        let target = e.target || e.srcElement;
+        if(target.value.length>0) {
+            readURL(this, $('#imagePreview'));
 
-        $(".add-new-wine button#submit").prop("disabled", "disabled");
-        $("#crop-error").show();
+            $(".add-new-wine button#submit").prop("disabled", "disabled");
+            $("#crop-error").show();
+        }
     });
 
-    $("#other_image").change(function(event){
-        readURL(this, $('#otherImagePreview'));
+    $("#other_image").change(function(e){
+        let target = e.target || e.srcElement;
+        if(target.value.length>0) {
+            readURL(this, $('#otherImagePreview'));
 
-        $(".add-new-wine button#submit").prop("disabled", "disabled");
-        $("#crop-error").show();
+            $(".add-new-wine button#submit").prop("disabled", "disabled");
+            $("#crop-error").show();
+        }
     });
 
     $("#crop-picture").click(function (e) {
