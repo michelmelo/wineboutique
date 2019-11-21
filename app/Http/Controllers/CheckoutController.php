@@ -155,6 +155,7 @@ class CheckoutController extends Controller
                 foreach ($cart as $item){
                     $new_order_wine = new OrderWine();
                     $new_order_wine->order_id = $new_order->id;
+                    $new_order_wine->winery_id = $item->winery->id;
                     $new_order_wine->wine_id = $item->pivot->wine_id;
                     $new_order_wine->quantity = $item->pivot->quantity;
                     $new_order_wine->wine_name = $item->name;
