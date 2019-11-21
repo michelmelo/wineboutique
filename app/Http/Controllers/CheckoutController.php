@@ -119,9 +119,9 @@ class CheckoutController extends Controller
             }
         }
 
-        $sum = (double)$cart->reduce(function($carry, $item) {
+        $sum = $cart->reduce(function($carry, $item) {
             return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
-                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2);
+                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2, '.', ',');
         }, 0);
         dd($sum);
         try{
