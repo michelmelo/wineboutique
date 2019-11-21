@@ -96,14 +96,17 @@
                 <div class="form-inputs">
                     <input type="text" name="tracking_id" id="tracking_id" placeholder="Tracking ID" required>
                 </div>
+                <div class="form-inputs">
+                    <input type="number" name="delivery" id="delivery" placeholder="Estimated delivery time" required>
+                </div>
+                <br>
             </div>
-            <br>
-            <br>
-            <br>
-            <a id="confirm-ship-wine" class="button red-button">Submit</a>
-            <span href="#" id="close-popup" class="button red-button">
-                <i class="fas fa-times"></i> CLOSE
-            </span>
+            <div class="col-xs-12">
+                <a id="confirm-ship-wine" class="button red-button">Submit</a>
+                <span href="#" id="close-popup" class="button red-button">
+                    <i class="fas fa-times"></i> CLOSE
+                </span>
+            </div>
         </div>
     </div>
 </div>

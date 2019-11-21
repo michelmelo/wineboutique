@@ -161,11 +161,15 @@ $(".send-wine").click(function (e) {
 $("#confirm-ship-wine").click(function (e) {
     e.preventDefault();
 
-    if($("#tracking_id").val()){
-        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val();
+    if(!$("#tracking_id").val()){
+        $("#tracking_id").css("border", "1px solid red");
+    }
+    else if(!$("#delivery").val()){
+        $("#tracking_id").css("border", "1px solid green");
+        $("#delivery").css("border", "1px solid red");
     }
     else{
-        $("#tracking_id").css("border", "1px solid red");
+        window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val() + "/" + $("#delivery").val();
     }
 });
 
@@ -189,8 +193,8 @@ $("#delete-wine-confirm").click(function (e) {
 
     $("#delete-wine-" + $(this).data("id")).submit();
 });
-
-$("#main-search").on('keyup input touchend', function () {
+/*
+$("#main-search").on('keyup input touchend change', function () {
     let that = $(this);
 
     if (timer) {
@@ -220,6 +224,45 @@ $("#main-search").on('keyup input touchend', function () {
         }
     }, 400);
 });
+*/
+
+function liveSearch(input, output){
+
+        input.on('keyup input touchend change', function () {
+             let that = $(this);
+
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(function () {
+                if(that.val().length == 0){
+                    output.hide();
+                }
+                else{
+                    $.get(that.closest("form").attr("action") + "?s=" + that.val(), function(response){
+                        output.empty();
+
+                        response.wines.forEach(function(element){
+                            output.append('<a class="text-red" href="/wine/' + element.slug + '">' + element.name + '</a>').show();
+                        });
+
+                        if(response.wines.length == 0){
+                            output.append('<p>No results found</p>');
+                        }
+                        else{
+                            output.append('<a class="text-red" href="#" id="trigger-main-search">See all results</a>');
+                        }
+
+                    }, "json");
+                }
+            }, 400);
+    });
+}
+
+liveSearch($("#main-search-mob"),$(".search-results-mob"));
+liveSearch($("#main-search"),$(".search-results"));
+
 
 $(document).on("click", "#trigger-main-search", function(e){
     e.preventDefault();
