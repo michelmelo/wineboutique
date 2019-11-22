@@ -127,6 +127,8 @@ class StartupController extends Controller
 
         }
 
+        $user->update(['completed' => 1]);
+
         return redirect()->route('my-winery')->with('message', 'Application sent.');
     }
 
