@@ -110,8 +110,8 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <form id="main-search-form-mob" class="form-inline" method="get" action="{{route('search')}}">
-                <input id="main-search-mob" class="form-control mr-sm-2 search-shadow input-width" type="search" name="s" placeholder="Search for wines..." aria-label="Search" required>
+            <form id="main-search-form" class="form-inline" method="get" action="{{route('search')}}">
+                <input id="main-search-mob" class="form-control mr-sm-2 search-shadow input-width" type="search" name="s" placeholder="Search for wines..." aria-label="Search" autocomplete="off" required>
                 <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
             </form>
              <div class="search-results-mob"></div>
