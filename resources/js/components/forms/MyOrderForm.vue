@@ -8,9 +8,9 @@
                 <table class="table table-striped exception" v-if="orders.length">
                     <thead>
                         <tr>
-                            <td >Order Id</td>
+                            <td>Order Id</td>
                             <td>Address</td>
-                            <td>Shipping/Status</td>
+                            <td>Shipping / Status</td>
                             <td>Wines ordered</td>
                             <td>Total price</td>
                         </tr>
@@ -18,10 +18,10 @@
                     <tbody>
                         <tr v-for="order in orders" v-bind:key="order.id">
                             <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
-                            <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
-                            <td>FedEx/{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
+                            <td>{{order.address.address_1}},<br> {{order.address.address_2}},<br> {{order.address.city}},<br> {{order.address.postal_code}}</td>
+                            <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                             <td>
-                                <div v-for="wine_order in order.order_wines">
+                                <div v-for="wine_order in order.order_wines" class="mb-2">
                                     <span>{{ wine_order.quantity }}x </span>
                                     <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
                                     <span> from </span>
