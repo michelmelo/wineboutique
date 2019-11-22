@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                        <multiselect v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                       <multiselect v-if="!chacked" v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
                                      label="text"
                                      track-by="value"
                                      :hideSelected="true"
@@ -156,24 +156,36 @@
                                      :close-on-select="false"
                                      :clear-on-select="false"
                                      :preserve-search="true"
+
                                      @input="refineValues"
                         ></multiselect>
+                        <select v-else disabled  placeholder="disabled">
+                            <option value="disabled" selected>Free shipping</option>
+                        </select>
 
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
+
+                        <span class="help-block error-block" v-if="isInvalid('shipping_cost')">
+                                    <strong>You must fill in shipping costs.</strong>
+                                </span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price">
+                        <input :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price" >
                         <div class="usd">USD</div>
+
+                        <span class="help-block error-block" v-if="isInvalid('shipping_price')">
+                                    <strong>You must enter shipping price.</strong>
+                                </span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
+                        <input :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
                         <div class="usd" >USD</div>
                     </div>
 
                     <div class="col-lg-9 col-lg-push-3 col-sm-12">
-                        <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
+                        <input v-model="chacked" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
                     </div>
 
@@ -185,7 +197,7 @@
 
             <input type="hidden" name="stripeToken" v-model="stripe">
             <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD STATES</button>
-            <button type="submit" v-on:click.prevent="onSubmit" class="red-button button float-right">FINISH</button>
+            <button id="submitForm" type="submit" v-on:click.prevent="onSubmit" class="red-button button float-right">FINISH</button>
         </form>
     </div>
 </template>
@@ -203,6 +215,7 @@
         components: { Multiselect },
         props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "selectedRegions", "fetchedRegions"],
         data: () => ({
+            chacked: false,
             csrf: window.Laravel.csrfToken,
             fetchedRegions_: [],
             ship_to_values: [],
@@ -236,6 +249,7 @@
             card = elements.create('card');
             card.mount("#card-element");
             console.log(this.shippings.length)
+        
         },
         methods: {
             refineValues(value){
@@ -319,6 +333,7 @@
 
                 var that = this;
 
+
                 this.errors = {};
 
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
@@ -329,6 +344,12 @@
                 this.shippings.forEach((item)=>{
                     if(item.ship_from == 0){
                         this.errors['shipping'] = 'You must select shipping origin .'
+                    }
+                     if(item.ship_to.length == 0){
+                        this.errors['shipping_cost'] = 'You must fill in shipping costs.'
+                    }
+                    if(!item.price){
+                        this.errors['shipping_price'] = 'You must enter shipping price.'
                     }
                 });
 
@@ -344,6 +365,19 @@
                             that.$el.querySelector("#startup-form").submit();
                         }
                     });
+                }else{
+
+                   this.$nextTick(() => {
+                        let error = document.querySelectorAll('.error-block');
+                 
+                 
+                
+                       if(error.length > 0){
+                         error[0].scrollIntoView({behavior: "smooth", block: "end"});
+                       }
+                    
+                   });
+               
                 }
             },
             isInvalid(name) {
@@ -357,6 +391,9 @@
 
                 return this.cover ? `/images/winery/cover/${this.cover}`: this.defaultCoverPhoto;
             }
-        }
+        },
+    
+       
+   
     }
 </script>
