@@ -7,6 +7,9 @@ body {
 .pointer{
     cursor: pointer;
 }
+.overflov-x{
+   overflow-x: auto;
+}
 
 a {
   text-decoration:none!important;
@@ -28,6 +31,7 @@ h5{
 }
 .text-red{
    color: #da8599;
+   word-break: break-word;
 }
 .text-red:hover{
    color: #da8599;
@@ -168,7 +172,9 @@ input, textarea, select{
 .single-wine-info .single-wine-buttons .red-button:hover {
     color: #fff;
 }
-
+.single-wine-info h1{
+    word-break: break-word;
+}
 .my-winery-head .button {
     font-size: 14px;
     padding: 6px 15px;
@@ -3857,6 +3863,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .winery-header {
         height: 100px;
     }
+    .forms .form-inline label {
+    font-size: 9px;
+}
 
 }
 
