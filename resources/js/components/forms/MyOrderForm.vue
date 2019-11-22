@@ -7,10 +7,9 @@
             <table class="table table-striped exception" v-if="orders.length">
                 <thead>
                     <tr>
-                        <td >Order Id</td>
+                        <td>Order Id</td>
                         <td>Address</td>
-                        <td>Shipping</td>
-                        <td>Status</td>
+                        <td>Shipping/Status</td>
                         <td>Wines ordered</td>
                         <td>Total price</td>
                     </tr>
@@ -19,13 +18,14 @@
                     <tr v-for="order in orders" v-bind:key="order.id">
                         <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
                         <td>{{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}</td>
-                        <td>FedEx</td>
-                        <td>{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
-                        <td v-for="wine_order in order.order_wines">
-                            <span>{{ wine_order.quantity }}x </span>
-                            <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
-                            <span> from </span>
-                            <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
+                        <td>FedEx/{{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
+                        <td>
+                            <div v-for="wine_order in order.order_wines">
+                                <span>{{ wine_order.quantity }}x </span>
+                                <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
+                                <span> from </span>
+                                <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
+                            </div>
                         </td>
                         <td>${{ price(order) }}</td>
                     </tr>
