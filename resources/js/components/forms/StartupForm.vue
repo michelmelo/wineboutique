@@ -1,4 +1,4 @@
-<template> 
+<template>
     <div class="col-md-12 col-sm-12">
         <form method="post" action="/startup" id="startup-form">
             <input type="hidden" name="_token" v-model="csrf">
@@ -53,7 +53,7 @@
 
             <div class="shadow-box row">
                 <h2>WINERY OWNER LAST 4 SSN NUMBERS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
-                <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span> 
+                <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
@@ -66,7 +66,7 @@
 
             <div class="shadow-box row">
                 <h2>WINERY OWNER CREDIT CARD <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
-                <span class="popup-info d-none">This is the credit card that will receive payments and purchases from customers. Please ensure that you provide the correct credit card number as Wine Boutique will not be responsible for incorrect details.</span> 
+                <span class="popup-info d-none">This is the credit card that will receive payments and purchases from customers. Please ensure that you provide the correct credit card number as Wine Boutique will not be responsible for incorrect details.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <label for="card-element">
@@ -138,10 +138,10 @@
                                     <strong>You must select shipping origin .</strong>
                                 </span>
                     </div>
-                   
 
-                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">
-                    <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">
+
+<!--                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">-->
+<!--                    <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">-->
 
                     <div class="col-lg-3 col-sm-12">
                         <p>Fixed shipping costs *</p>
@@ -250,8 +250,8 @@
             addMoreShippings(){
                 this.shippings.push({
                     ship_from: 0,
-                    days_from: "",
-                    days_to: "",
+                    // days_from: "",
+                    // days_to: "",
                     ship_to: [],
                     price: ""
                 });
@@ -331,7 +331,7 @@
                         this.errors['shipping'] = 'You must select shipping origin .'
                     }
                 });
-               
+
                 if(Object.keys(this.errors).length == 0){
                     stripe.createToken(card).then(function(result) {
                         console.log(result);

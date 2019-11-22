@@ -44,7 +44,6 @@ class StartupController extends Controller
                     $do_save = false;
                 }
             }
-
             if($do_save){
                 if(isset($shippings['shipping_free'])){
                     $shippings['price'] = 0;
@@ -53,13 +52,13 @@ class StartupController extends Controller
                 }
 
                 foreach ($shippings['ship_to'] as $to){
-                    $winery->winery_shippings()->create([
+                    $ship = $winery->winery_shippings()->create([
                         "ship_from" => $shippings['ship_from'],
                         "ship_to" => $to,
                         "price" => $shippings['price'],
                         "additional" => $shippings['additional'],
-                        "days_from" => $shippings['days_from'],
-                        "days_to" => $shippings['days_to']
+//                        "days_from" => $shippings['days_from'],
+//                        "days_to" => $shippings['days_to']
                     ]);
                 }
             }
