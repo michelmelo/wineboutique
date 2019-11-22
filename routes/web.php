@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['startup']], function() {
+    Route::get('/', 'HomeController@index')->name('home');
+
     Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
 
     Route::get('/redirect/{service}', 'Auth\LoginController@redirectProvider');
