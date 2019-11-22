@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-12 col-sm-12">
         <h1>{{ wineryName }} - edit info</h1>
-        <form v-on:submit="onSubmit" method="post" action="my-winery-store">
+        <form v-on:submit="onSubmit" id="updateForm" method="post" action="my-winery-store">
             <input type="hidden" name="_token" v-model="csrf">
             <input type="hidden" name="wineryId" :value="wineryId">
 
@@ -31,7 +31,7 @@
                                         {{ region.name }}
                                     </option>
                                 </select>
-                                <span class="help-block error-block" v-if="isInvalid('regions')">
+                                  <span class="help-block error-block" v-if="isInvalid('regions')">
                                     <strong>Winery state is required.</strong>
                                 </span>
                             </td>
@@ -45,7 +45,10 @@
                 <h2>WINERY DESCRIPTION</h2>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12">
-                    <textarea style="width: 100%; min-height: 150px;" name="description" >{{ wineryDesc }}</textarea>
+                    <textarea v-model="description" style="width: 100%; min-height: 150px;" name="description" >{{ wineryDesc }}</textarea>
+                    <span class="help-block error-block" v-if="isInvalid('description')">
+                        <strong>Winery description is required.</strong>
+                    </span>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
             </div>
@@ -67,6 +70,9 @@
                                 </label>
                             </div>
                             <p class="winery-title">{{wineryName}}</p>
+                            <span class="help-block error-block" v-if="isInvalid('cover')">
+                                <strong>Winery cover and logo are required.</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -87,6 +93,9 @@
                                 {{ region.name }}
                             </option>
                         </select>
+                          <span class="help-block error-block" v-if="isInvalid('shipping')">
+                                    <strong>You must select shipping origin .</strong>
+                                </span>
                     </div>
 
 <!--                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">-->
@@ -105,7 +114,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-sm-12" v-else>
-                        <multiselect v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                        <multiselect v-if="!chacked" v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
                                      label="text"
                                      track-by="value"
                                      :hideSelected="true"
@@ -115,22 +124,33 @@
                                      :preserve-search="true"
                                      @input="refineValues"
                         ></multiselect>
+                          <select v-else disabled  placeholder="disabled">
+                            <option value="disabled" selected>Free shipping</option>
+                        </select>
 
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
+
+                        <span class="help-block error-block" v-if="isInvalid('shipping_cost')">
+                                    <strong>You must fill in shipping costs.</strong>
+                                </span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
+                        <input  :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
                         <div class="usd">USD</div>
+
+                        <span class="help-block error-block" v-if="isInvalid('shipping_price')">
+                                    <strong>You must enter shipping price.</strong>
+                                </span>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
+                        <input :disabled="chacked"  type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
                         <div class="usd" >USD</div>
                     </div>
 
                     <div class="col-lg-9 col-lg-push-3 col-sm-12">
-                        <input type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
+                        <input v-model="chacked" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
 
                         <a :href="'/my-winery-shipping/delete/' + item.id" v-if="!item.is_template" style="float: right">
@@ -160,6 +180,7 @@
         components: { Multiselect },
         props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions'],
         data: () => ({
+            chacked: false,
             csrf: window.Laravel.csrfToken,
             profile: null,
             fetchedRegions_: [],
@@ -263,12 +284,46 @@
                 i.price = 0;
                 i.additional = 0;
             },
-            onSubmit() {
+            onSubmit(e) {
+                e.preventDefault();
+
+                var that = this;
+
+
                 this.errors = {};
-                if(this.description.length < 10) {
-                    this.errors['description'] = 'You must enter at least 10 characters.';
-                    return false;
+
+                if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
+                if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
+                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';                
+                this.existingShippings_.forEach((item)=>{
+                    if(item.ship_from == 0){
+                        this.errors['shipping'] = 'You must select shipping origin .'
+                    }
+                     if(item.ship_to.length == 0){
+                        this.errors['shipping_cost'] = 'You must fill in shipping costs.'
+                    }
+                    if(!item.price){
+                        this.errors['shipping_price'] = 'You must enter shipping price.'
+                    }
+                });
+
+                if(Object.keys(this.errors).length > 0){
+
+                   this.$nextTick(() => {
+                        let error = document.querySelectorAll('.error-block');
+                 
+                 
+                
+                       if(error.length > 0){
+                         error[0].scrollIntoView({behavior: "smooth", block: "end"});
+                       }
+                    
+                   });
+               
+                }else{
+                    that.$el.querySelector("#updateForm").submit();
                 }
+            
             },
             isInvalid(name) {
                 return this.errors[name];
