@@ -124,6 +124,8 @@ class CheckoutController extends Controller
                 ($item->shipping_additional * ($item->pivot->quantity - 1)), 2, '.', '');
         }, 0);
 
+        dd($sum);
+
         try{
             \Stripe\Stripe::setApiKey(env('STRIPE_PRIVATE_KEY'));
 
