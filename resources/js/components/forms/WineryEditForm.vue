@@ -89,8 +89,8 @@
                         </select>
                     </div>
 
-                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">
-                    <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">
+<!--                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">-->
+<!--                    <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">-->
 
                     <div class="col-lg-3 col-sm-12">
                         <p>Fixed shipping costs *</p>
@@ -199,8 +199,8 @@
             addMoreShippings(){
                 this.existingShippings_.push({
                     ship_from: 0,
-                    days_from: "",
-                    days_to: "",
+                    // days_from: "",
+                    // days_to: "",
                     ship_to: [],
                     price: "",
                     is_free_shipping: false,
@@ -281,4 +281,4 @@
             }
         }
     }
-</script> 
+</script>

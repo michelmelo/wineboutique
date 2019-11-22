@@ -37,7 +37,7 @@ class MyPaymentsController extends Controller
             $user_payment->stripe_customer_id = $stripe->id;
             $user_payment->stripe_card_id = !is_null($stripe->default_source) ? $stripe->default_source : "";
             $user_payment->alias = $request->alias;
-            $user_payment->is_default = true;
+            $user_payment->is_default = 1;
 
             $user_payment->save();
 

@@ -44,7 +44,6 @@ class StartupController extends Controller
                     $do_save = false;
                 }
             }
-
             if($do_save){
                 if(isset($shippings['shipping_free'])){
                     $shippings['price'] = 0;
@@ -53,13 +52,13 @@ class StartupController extends Controller
                 }
 
                 foreach ($shippings['ship_to'] as $to){
-                    $winery->winery_shippings()->create([
+                    $ship = $winery->winery_shippings()->create([
                         "ship_from" => $shippings['ship_from'],
                         "ship_to" => $to,
                         "price" => $shippings['price'],
                         "additional" => $shippings['additional'],
-                        "days_from" => $shippings['days_from'],
-                        "days_to" => $shippings['days_to']
+//                        "days_from" => $shippings['days_from'],
+//                        "days_to" => $shippings['days_to']
                     ]);
                 }
             }
@@ -120,7 +119,7 @@ class StartupController extends Controller
             $user_payment->stripe_customer_id = $stripe->id;
             $user_payment->stripe_card_id = !is_null($stripe->default_source) ? $stripe->default_source : "";
             $user_payment->alias = $request->alias;
-            $user_payment->is_default = true;
+            $user_payment->is_default = 1;
 
             $user_payment->save();
 
