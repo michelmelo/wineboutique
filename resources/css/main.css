@@ -292,13 +292,14 @@ input, textarea, select{
     border: 1px solid green !important;
 }
 
-.forms a, .orders-popup a {
+.forms a, .orders-popup a, .order-details {
     color: #da8599;
     font-weight: 500;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
-.forms a:hover, .orders-popup a:hover {
+.forms a:hover, .orders-popup a:hover, .order-details:hover {
     color: #9C193A;
     transition: all 0.3s;
 }
