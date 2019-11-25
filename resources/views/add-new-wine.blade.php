@@ -22,7 +22,7 @@
                   <div class="w-100">
                     <input type="submit" id="crop-picture" value="Crop" style="display:none; width: 200px;" class="red-button button mb-2">
                     <input type="submit" id="cancel-crop-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
-                 </div>  
+                 </div>
                 <input type="hidden" name="cropx" id="cropx" value="226">
                 <input type="hidden" name="cropy" id="cropy" value="250">
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
@@ -33,7 +33,7 @@
                 <label class="flex-center">
                     <input type="file" id="other_image" style="display: none; cursor: pointer;" >
                     <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
-                     <div class="w-100">   
+                     <div class="w-100">
                         <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button my-2">
                         <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
                     </div>
