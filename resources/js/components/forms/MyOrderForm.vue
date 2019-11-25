@@ -12,7 +12,7 @@
                             <td>Address</td>
                             <td>Shipping / Status</td>
                             <td>Wines ordered</td>
-                            <td>Total price</td>
+                            <!--<td>Total price</td>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -21,14 +21,37 @@
                             <td>{{order.address.address_1}},<br> {{order.address.address_2}},<br> {{order.address.city}},<br> {{order.address.postal_code}}</td>
                             <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                             <td>
-                                <div v-for="wine_order in order.order_wines" class="mb-2">
-                                    <span>{{ wine_order.quantity }}x </span>
-                                    <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
-                                    <span> from </span>
-                                    <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
-                                </div>
+                                <span class="order-details" @click="activePopup = !activePopup">Details...</span>
+                                <transition name="fade">
+                                    <div class="orders-popup is-visible" role="alert" v-if="activePopup">
+                                       <div class="popup-container">
+                                        <span class="popup-close img-replace" @click="activePopup = !activePopup">Close</span>
+                                            <div class="popup-head">
+                                              <h2 class="text-center"><strong>Your Orders</strong></h2>
+                                            </div>
+                                            <div class="popup-body mb-3">
+                                                <div class="mb-2 order-row mx-auto text-center">
+                                                    <div class="pr-3 d-inline"  v-for="wine_order in order.order_wines">
+                                                        <span>{{ wine_order.quantity }}x </span> 
+                                                        <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
+                                                        <span> from </span> 
+                                                        <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
+                                                    </div>
+                                                    <strong>${{ price(order) }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="text-center py-4">
+                                                <span href="#0" class="button red-button" @click="activePopup = !activePopup">
+                                                    <i class="fas fa-times"></i> CLOSE
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </transition>
                             </td>
+                            <!--
                             <td>${{ price(order) }}</td>
+                        -->
                         </tr>
                     </tbody>
                 </table>
@@ -65,7 +88,8 @@
         data: () => ({
             selectedOrders: null,
             orders: [],
-            order_to_show: null
+            order_to_show: null,
+            activePopup: false
         }),
         created: function() {
             const orders = JSON.parse(this.userOrders);
