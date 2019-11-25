@@ -292,13 +292,13 @@ input, textarea, select{
     border: 1px solid green !important;
 }
 
-.forms a {
+.forms a, .orders-popup a {
     color: #da8599;
     font-weight: 500;
     transition: all 0.3s;
 }
 
-.forms a:hover {
+.forms a:hover, .orders-popup a:hover {
     color: #9C193A;
     transition: all 0.3s;
 }
@@ -2820,11 +2820,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     z-index: 10000;
 }
 
-.terms-popup, .newsletter-popup, .default-popup {
+.terms-popup, .newsletter-popup, .default-popup, .orders-popup {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2500;
+    z-index: 9999;
     position: fixed;
     left: 0;
     top: 0;
@@ -2923,6 +2923,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 .newsletter-popup .popup-body{
     padding: 0 20px;  
+}
+
+.orders-popup .popup-body .order-row{
+    padding: 13px 5px;
+}
+
+.orders-popup .popup-body .order-row:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
 }
 
 .popup-container h2 {
