@@ -1446,7 +1446,7 @@ footer p {
 
 
 .quantity {
-    padding: 10px 20px;
+    padding: 10px ;
     text-align: center;
 }
 
@@ -3922,11 +3922,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     margin: auto;
     width: 20px;
     height: 20px;
-    border: 1px solid red;
+    
     border-radius: 100%;
     text-align: center;
     vertical-align: middle;
     font-size: 16px;
     line-height: 20px;
-    color: red;
+    color: #9b1f3d;
+    z-index: 999;
 }
