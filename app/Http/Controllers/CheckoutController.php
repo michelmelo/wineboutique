@@ -79,8 +79,8 @@ class CheckoutController extends Controller
         }
 
         $this->amount = $wines->reduce(function($carry, $item) {
-            return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
-                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2);
+            return $carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
+                ($item->shipping_additional * ($item->pivot->quantity - 1));
         }, 0);
 
         return view('checkout', [
@@ -120,8 +120,8 @@ class CheckoutController extends Controller
         }
 
         $sum = $cart->reduce(function($carry, $item) {
-            return number_format($carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
-                ($item->shipping_additional * ($item->pivot->quantity - 1)), 2, '.', '');
+            return $carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +
+                ($item->shipping_additional * ($item->pivot->quantity - 1));
         }, 0);
 
         try{
