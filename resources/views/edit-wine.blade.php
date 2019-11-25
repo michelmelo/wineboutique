@@ -32,7 +32,7 @@
                         <div class="image-delete-holder">
                             <img src="{{ $img['path'] }}" id="imagePreview">
                             <a href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
-                                X
+                               <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>
                     @endforeach

@@ -292,13 +292,14 @@ input, textarea, select{
     border: 1px solid green !important;
 }
 
-.forms a, .orders-popup a {
+.forms a, .orders-popup a, .order-details {
     color: #da8599;
     font-weight: 500;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
-.forms a:hover, .orders-popup a:hover {
+.forms a:hover, .orders-popup a:hover, .order-details:hover {
     color: #9C193A;
     transition: all 0.3s;
 }
@@ -1445,7 +1446,7 @@ footer p {
 
 
 .quantity {
-    padding: 10px 20px;
+    padding: 10px ;
     text-align: center;
 }
 
@@ -3921,11 +3922,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     margin: auto;
     width: 20px;
     height: 20px;
-    border: 1px solid red;
+    
     border-radius: 100%;
     text-align: center;
     vertical-align: middle;
     font-size: 16px;
     line-height: 20px;
-    color: red;
+    color: #9b1f3d;
+    z-index: 999;
 }
