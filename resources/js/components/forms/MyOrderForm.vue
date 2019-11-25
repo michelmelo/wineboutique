@@ -22,8 +22,8 @@
                             <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
                             <td>
                                 <span class="order-details" @click="activePopup = !activePopup">Details...</span>
-                                <transition name="fade">
-                                    <div class="orders-popup is-visible" role="alert" v-if="activePopup">
+                                <transition name="fade" v-for="wine_order in order.order_wines">
+                                    <div class="orders-popup is-visible" role="alert" v-if="activePopup" >
                                        <div class="popup-container">
                                         <span class="popup-close img-replace" @click="activePopup = !activePopup">Close</span>
                                             <div class="popup-head">
@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="popup-body mb-3">
                                                 <div class="mb-2 order-row mx-auto text-center">
-                                                    <div class="pr-3 d-inline"  v-for="wine_order in order.order_wines">
+                                                    <div class="pr-3 d-inline" >
                                                         <span>{{ wine_order.quantity }}x </span> 
                                                         <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
                                                         <span> from </span> 
