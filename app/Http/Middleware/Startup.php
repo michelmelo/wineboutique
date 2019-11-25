@@ -16,7 +16,7 @@ class Startup
     public function handle($request, Closure $next)
     {
         $user = app('Illuminate\Contracts\Auth\Guard')->user();
-        if($user && $user->type == 'SELLER' && $user->completed == 0 && $_SERVER['REQUEST_URI'] !== '/startup') {
+        if($user && $user->type == 'SELLER' && $user->completed == 0 && !in_array($_SERVER['REQUEST_URI'], ['/startup', '/winery/profile', '/winery/cover'])) {
             return redirect('/startup');
         }
 
