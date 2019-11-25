@@ -115,9 +115,9 @@ class CheckoutController extends Controller
 
                         break;
                     }
-                    if($wine->quantity > Wine::where('id', $wine->id)->first()->quantity) {
-                        return redirect()->back()->with('message', 'Not enough ' . $wine->name  . ' in the storage.');
-                    }
+                }
+                if($wine->quantity > Wine::where('id', $wine->id)->first()->quantity) {
+                    return redirect()->back()->with('message', 'Not enough ' . $wine->name  . ' in the storage.');
                 }
             }
         }
