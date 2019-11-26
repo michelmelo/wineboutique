@@ -146,12 +146,11 @@ class AddNewWineController extends Controller
 
             $data['photo'] = '/images/wine/' . $photo;
         }
-        dd($data);
 
         $wine->update($data);
         $wine->varietal()->associate($request->varietal);
         $wine->winery()->associate(Auth::user()->winery);
-        $wine->wineRegion()->associate($request->wine_region);
+        $wine->wineRegion()->associate($request->wine_region_id);
         $wine->save();
 
         $images = [];
