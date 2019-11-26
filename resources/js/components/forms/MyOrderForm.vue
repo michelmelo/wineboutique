@@ -26,7 +26,7 @@
                                        <div class="popup-container">
                                         <span class="popup-close img-replace" @click="activePopup = false">Close</span>
                                             <div class="popup-head">
-                                              <h2 class="text-center"><strong>Your Orders</strong></h2>
+                                              <h2 class="text-center text-uppercase"><strong>Order: {{order.order_id}}</strong></h2>
                                             </div>
                                             <div class="popup-body mb-5">
                                                 <div class="mb-2 order-row d-flex justify-content-between " v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
@@ -39,7 +39,7 @@
                                                     <strong>${{ singlePrice(wine_order) }}</strong>
                                                 </div>
                                                 <div class="border-top p-3">
-                                                   <strong class="float-right"> ${{price(order)}}</strong>
+                                                   <span>TOTAL PRICE:</span><strong class="float-right"> ${{price(order)}}</strong>
                                                 </div>
                                             </div>
                                             <div class="text-center py-5">
