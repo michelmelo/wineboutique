@@ -22,15 +22,14 @@
                             <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Cancelled"}}</td>
                             <td>
                                 <span class="order-details" @click="activePopup = index">Details...</span>
-                                <transition name="fade" v-for="wine_order in order.order_wines" v-bind:key="order.id">
-                                    <div class="orders-popup is-visible" role="alert" v-if=" activePopup === index" >
+                               <div class="orders-popup is-visible" role="alert" v-if=" activePopup === index" >
                                        <div class="popup-container">
                                         <span class="popup-close img-replace" @click="activePopup = false">Close</span>
                                             <div class="popup-head">
                                               <h2 class="text-center"><strong>Your Orders</strong></h2>
                                             </div>
                                             <div class="popup-body mb-3">
-                                                <div class="mb-2 order-row mx-auto text-center">
+                                                <div class="mb-2 order-row mx-auto text-center" v-for="wine_order in order.order_wines" v-bind:key="order.id">
                                                     <div class="pr-3 d-inline" >
                                                         <span>{{ wine_order.quantity }}x </span> 
                                                         <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
@@ -46,8 +45,8 @@
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
-                                </transition>
+                                   
+                                </div>
                             </td>
                             <!--
                             <td>${{ price(order) }}</td>
