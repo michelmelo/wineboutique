@@ -24,7 +24,7 @@
                             <td>
                                 <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name==='California'">
                                         {{ region.name }}
                                     </option>
                                 </select>
@@ -249,7 +249,7 @@
             card = elements.create('card');
             card.mount("#card-element");
             console.log(this.shippings.length)
-        
+
         },
         methods: {
             refineValues(value){
@@ -297,7 +297,7 @@
                     });
             },
             handlePhotoChange(e) {
-               
+
                 let vm = this;
 
                 if(e.target.files && e.target.files.length) {
@@ -372,15 +372,15 @@
 
                    this.$nextTick(() => {
                         let error = document.querySelectorAll('.error-block');
-                 
-                 
-                
+
+
+
                        if(error.length > 0){
                          error[0].scrollIntoView({behavior: "smooth", block: "end"});
                        }
-                    
+
                    });
-               
+
                 }
             },
             isInvalid(name) {
@@ -395,8 +395,8 @@
                 return this.cover ? `/images/winery/cover/${this.cover}`: this.defaultCoverPhoto;
             }
         },
-    
-       
-   
+
+
+
     }
 </script>

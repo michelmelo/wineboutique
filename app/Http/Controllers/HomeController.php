@@ -71,12 +71,16 @@ class HomeController extends Controller
             });
         }
 
-        if($topRatedWines->count() >= 10){
-            $topRatedWines = $topRatedWines->paginate(10);
-        }
-        else{
-            $topRatedWines = $topRatedWines->paginate(5);
-        }
+        $pag = $topRatedWines->count() >= 8 ? 8 : 4;
+        $topRatedWines = $topRatedWines->paginate($pag);
+        $pag = count($topWineries) >= 10 ? 10 : 5;
+        $topWineries = array_slice($topWineries, 0, $pag, true);
+//        if($topRatedWines->count() >= 10){
+//            $topRatedWines = $topRatedWines->paginate(10);
+//        }
+//        else{
+//            $topRatedWines = $topRatedWines->paginate(5);
+//        }
 
         return view('home', [
             'varietals' => $varietals,

@@ -27,7 +27,7 @@
                             <td>
                                 <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name==='California'">
                                         {{ region.name }}
                                     </option>
                                 </select>
@@ -89,7 +89,7 @@
                     <div class="col-lg-9 col-sm-12">
                         <select id="location" :name="'shipping[' + index + '][ship_from]'" class="location" v-model="item.ship_from">
                             <option value="0" disabled selected>Select location</option>
-                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name == 'California'">
+                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" >
                                 {{ region.name }}
                             </option>
                         </select>
@@ -104,11 +104,12 @@
                     <div class="col-lg-3 col-sm-12">
                         <p>Fixed shipping costs *</p>
                     </div>
-
+           
                     <div class="col-lg-3 col-sm-12" v-if="!item.is_template">
                         <select :name="'shipping[' + index + '][ship_to]'" class="destination" v-model="item.ship_to">
-                            <option value="0" disabled selected>Add a destination</option>
-                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                            <option value="0" disabled selected>Add a destination</option> 
+                            <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id"
+                                    v-if="duplicateCheck['from'].includes(item.ship_from) && !duplicateCheck['to'].includes(region.id) || region.id == item.ship_to ">
                                 {{ region.name }}
                             </option>
                         </select>
@@ -203,11 +204,31 @@
             this.regions = JSON.parse(this.selectedRegions);
             this.name = this.wineryName;
 
+
             if(this.existingShippings_.length == 0){
                 this.addMoreShippings();
             }
         },
-        methods: {
+        computed: {
+         duplicateCheck(){
+           
+            let id = {
+                to: [],
+                from: []
+            };
+
+            this.existingShippings_.forEach((item)=>{ 
+
+                  id['to'].push(item.ship_to);
+                  id['from'].push(item.ship_from);                      
+               
+            });
+
+            return id;
+           },
+         
+         },
+        methods: {     
             refineValues(value){
                 var that = this;
 
@@ -294,7 +315,7 @@
 
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
-                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';                
+                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
                 this.existingShippings_.forEach((item)=>{
                     if(item.ship_from == 0){
                         this.errors['shipping'] = 'You must select shipping origin .'
@@ -311,19 +332,19 @@
 
                    this.$nextTick(() => {
                         let error = document.querySelectorAll('.error-block');
-                 
-                 
-                
+
+
+
                        if(error.length > 0){
                          error[0].scrollIntoView({behavior: "smooth", block: "end"});
                        }
-                    
+
                    });
-               
+
                 }else{
                     that.$el.querySelector("#updateForm").submit();
                 }
-            
+
             },
             isInvalid(name) {
                 return this.errors[name];
