@@ -117,7 +117,7 @@ class CheckoutController extends Controller
                     }
                 }
                 if($wine->pivot->quantity > Wine::where('id', $wine->id)->first()->quantity) {
-                    return redirect()->back()->with('message', 'Not enough ' . $wine->pivot->name  . ' in the storage.');
+                    return redirect()->back()->with('message', 'Not enough ' . $wine->name  . ' in the storage.');
                 }
             }
         }
