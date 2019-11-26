@@ -173,7 +173,7 @@ class CheckoutController extends Controller
                     if($new_order_wine->save()){
                         Auth::user()->cart()->detach($new_order_wine->wine_id);
                         $temp_wine = Wine::where("id", $item->pivot->wine_id)->first();
-                        $temp_wine->update(["quantity" => $temp_wine->quantity - 1]);
+                        $temp_wine->update(["quantity" => $temp_wine->quantity - $item->pivot->quantity]);
 
                         Mail::send('email.order-created', [
                             'order' => $new_order->order_id,
