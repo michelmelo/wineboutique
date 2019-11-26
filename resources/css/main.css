@@ -2896,10 +2896,15 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     transition-duration: 0.3s;
 }
 
+.orders-popup .popup-container {
+    max-width: 700px;
+}
+.orders-popup .popup-container h2{
+    margin: 0;
+}
 .popup-head {
     margin: 100px 0 50px;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.7);
     background-color: rgba(255, 255, 255, 0.7);
     -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.04);
@@ -2918,6 +2923,14 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     margin: 20px 0 50px;
 }
 
+.orders-popup .popup-head {
+    margin: 50px 0 50px;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 .popup-body{
     padding: 0 4em;   
 }
@@ -2927,7 +2940,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 
 .orders-popup .popup-body .order-row{
-    padding: 13px 5px;
+    padding: 13px 10px;
 }
 
 .orders-popup .popup-body .order-row:nth-of-type(odd) {
