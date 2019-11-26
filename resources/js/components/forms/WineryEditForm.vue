@@ -93,7 +93,7 @@
                                 {{ region.name }}
                             </option>
                         </select>
-                          <span class="help-block error-block" v-if="isInvalid('shipping')">
+                          <span class="help-block error-block" v-if="isInvalid('shipping') && item.ship_from == 0">
                                     <strong>You must select shipping origin .</strong>
                                 </span>
                     </div>
@@ -117,7 +117,7 @@
                     <div class="col-lg-3 col-sm-12" v-else>
                         <multiselect v-if="!chacked" v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
-                                     track-by="value"
+                                     track-by="value"                                   
                                      :hideSelected="true"
                                      :multiple="true"
                                      :close-on-select="false"
@@ -131,7 +131,7 @@
 
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_cost')">
+                        <span class="help-block error-block" v-if="isInvalid('shipping_cost') && item.ship_to.length == 0">
                                     <strong>You must fill in shipping costs.</strong>
                                 </span>
                     </div>
@@ -140,7 +140,7 @@
                         <input  :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
                         <div class="usd">USD</div>
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_price')">
+                        <span class="help-block error-block" v-if="isInvalid('shipping_price') && item.price == 0">
                                     <strong>You must enter shipping price.</strong>
                                 </span>
                     </div>
@@ -203,7 +203,7 @@
             this.existingShippings_ = JSON.parse(this.existingShippings);
             this.regions = JSON.parse(this.selectedRegions);
             this.name = this.wineryName;
-            this.duplicateOptions;
+            this.duplicateCheck;
 
             if(this.existingShippings_.length == 0){
                 this.addMoreShippings();
@@ -241,14 +241,34 @@
                 this.existingShippings_.forEach((item, index)=>{ 
                  
                  
-                    if(id[item.ship_from]){                   
+                    if(id[item.ship_from]){  
+                      
+                      if(item.ship_to.length){
+                         item.ship_to.forEach((value)=>{
+                             id[item.ship_from].push(value.value);
+                         })
+                      }else{                    
+                                      
 
                         id[item.ship_from].push(item.ship_to);
+                      }   
                        
 
                     }else{
 
                         id[item.ship_from] = [];
+
+                        if(item.ship_to.length){
+                         item.ship_to.forEach((value)=>{
+                             id[item.ship_from].push(value.value);
+                         })
+                      }else{                    
+                                      
+
+                        id[item.ship_from].push(item.ship_to);
+                      }   
+
+
                         id[item.ship_from].push(item.ship_to);
                        
                     }
