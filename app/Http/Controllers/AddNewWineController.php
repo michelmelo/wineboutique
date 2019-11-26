@@ -146,6 +146,7 @@ class AddNewWineController extends Controller
 
             $data['photo'] = '/images/wine/' . $photo;
         }
+        dd($data);
 
         $wine->update($data);
         $wine->varietal()->associate($request->varietal);
