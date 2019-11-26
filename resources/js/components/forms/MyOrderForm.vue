@@ -28,8 +28,8 @@
                                             <div class="popup-head">
                                               <h2 class="text-center"><strong>Your Orders</strong></h2>
                                             </div>
-                                            <div class="popup-body mb-3">
-                                                <div class="mb-2 order-row mx-auto text-center" v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
+                                            <div class="popup-body mb-5">
+                                                <div class="mb-2 order-row d-flex justify-content-between " v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
                                                     <div class="pr-3 d-inline" >
                                                         <span>{{ wine_order.quantity }}x </span> 
                                                         <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
@@ -38,8 +38,11 @@
                                                     </div>
                                                     <strong>${{ singlePrice(wine_order) }}</strong>
                                                 </div>
+                                                <div class="border-top p-3">
+                                                   <strong class="float-right"> ${{price(order)}}</strong>
+                                                </div>
                                             </div>
-                                            <div class="text-center py-4">
+                                            <div class="text-center py-5">
                                                 <span href="#0" class="button red-button" @click="activePopup = false">
                                                     <i class="fas fa-times"></i> CLOSE
                                                 </span>
