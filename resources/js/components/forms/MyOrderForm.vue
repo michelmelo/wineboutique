@@ -118,7 +118,8 @@
             },
             singlePrice(order_wine){
                 console.log(order_wine);
-                return order_wine.quantity * order_wine.price + order_wine.shipping_price + ((order_wine.quantity - 1) *order_wine.additional_shipping_price);
+                let totalPrice = order_wine.quantity * order_wine.price + order_wine.shipping_price + ((order_wine.quantity - 1) *order_wine.additional_shipping_price);
+                return totalPrice.toFixed(2);
             }
         },
     }
