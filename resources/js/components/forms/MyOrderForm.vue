@@ -16,16 +16,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="order in orders" v-bind:key="order.id">
+                        <tr v-for="(order, index) in orders" v-bind:key="order.id">
                             <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
                             <td>{{order.address.address_1}},<br> {{order.address.address_2}},<br> {{order.address.city}},<br> {{order.address.postal_code}}</td>
-                            <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Canceled"}}</td>
+                            <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Cancelled"}}</td>
                             <td>
-                                <span class="order-details" @click="activePopup = !activePopup">Details...</span>
-                                <transition name="fade" v-for="wine_order in order.order_wines">
-                                    <div class="orders-popup is-visible" role="alert" v-if="activePopup" >
+                                <span class="order-details" @click="activePopup = index">Details...</span>
+                                <transition name="fade" v-for="wine_order in order.order_wines" v-bind:key="order.id">
+                                    <div class="orders-popup is-visible" role="alert" v-if=" activePopup === index" >
                                        <div class="popup-container">
-                                        <span class="popup-close img-replace" @click="activePopup = !activePopup">Close</span>
+                                        <span class="popup-close img-replace" @click="activePopup = false">Close</span>
                                             <div class="popup-head">
                                               <h2 class="text-center"><strong>Your Orders</strong></h2>
                                             </div>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </div>
                                             <div class="text-center py-4">
-                                                <span href="#0" class="button red-button" @click="activePopup = !activePopup">
+                                                <span href="#0" class="button red-button" @click="activePopup = false">
                                                     <i class="fas fa-times"></i> CLOSE
                                                 </span>
                                             </div>
@@ -110,7 +110,7 @@
             price(order) {
                 let retVal = 0;
                 order.order_wines.forEach(function(order_wine) {
-                    retVal += order_wine.price + order_wine.shipping_price;
+                    retVal += order_wine.quantity * order_wine.price + order_wine.shipping_price + ((order_wine.quantity - 1) *order_wine.additional_shipping_price);
                 });
                 return retVal.toFixed(2);
             },
