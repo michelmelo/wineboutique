@@ -120,17 +120,17 @@ class GeneralPagesController extends Controller
                 $useOr = false;
 
                 if(in_array(1, $prices)) {
-                    $q->whereBetween('price', [5, 50]);
+                    $q->whereBetween('wines.price', [5, 50]);
                     $useOr = true;
                 }
 
                 if(in_array(2, $prices)) {
-                    $useOr?$q->orWhereBetween('price', [51, 100]):$q->whereBetween('price', [51, 100]);
+                    $useOr?$q->orWhereBetween('wines.price', [51, 100]):$q->whereBetween('wines.price', [51, 100]);
                     $useOr = true;
                 }
 
                 if(in_array(3, $prices)) {
-                    $useOr?$q->orWhere('price', '>', 100):$q->where('price', '>', 100);
+                    $useOr?$q->orWhere('wines.price', '>', 100):$q->where('wines.price', '>', 100);
                 }
             });
         }
