@@ -8,6 +8,11 @@ let type = '';
 let timer = 0;
 
 $( document ).ready(function() {
+    setTimeout(function() {
+        $('#not-enough-wine').alert('close')}
+        ,2000);
+
+
     switch (window.location.pathname) {
         case '/search':
         case '/wines':
