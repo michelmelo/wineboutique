@@ -2,7 +2,7 @@
 
 @section('content')
     @if(Session::has('message'))
-        <p class="alert alert-danger fade show" id="not-enough-wine" role="alert">{{ Session::get('message') }}</p>
+        <p class="alert alert-danger" id="not-enough-wine" role="alert">{{ Session::get('message') }}</p>
     @endif
     <div class="container payment-toggle">
         <checkout-form
