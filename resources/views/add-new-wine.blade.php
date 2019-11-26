@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="wine_region" id="wine_region">
+                        <select name="wine_region_id" id="wine_region">
                             <option value="" disabled selected>Wine Region</option>
                             @foreach($wine_regions as $wine_region)
                                 <option value="{{$wine_region->id}}">{{ $wine_region->name }}</option>

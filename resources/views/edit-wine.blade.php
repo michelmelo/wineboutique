@@ -8,7 +8,7 @@
         <h1 class="headline-2">EDIT WINE</h1>
 
         <div class="shadow-box row new-wine-photos">
-            <h2>PHOTOS</h2>           
+            <h2>PHOTOS</h2>
             <div class="col-lg-4 col-sm-12 mb-3">
                <p class="w-100">Front bottle image *</p>
                 <label>
@@ -118,7 +118,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="wine_region" id="wine_region">
+                        <select name="wine_region_id" id="wine_region">
                             @foreach($wine_regions as $wine_region)
                                 <option value="{{$wine_region->id}}" {{$wine_region->id==$wine->wine_region_id ? "selected" : ""}}>{{ $wine_region->name }}</option>
                             @endforeach
