@@ -27,7 +27,7 @@
                             <td>
                                 <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name==='California'">
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
                                         {{ region.name }}
                                     </option>
                                 </select>
@@ -109,20 +109,20 @@
                         <select :name="'shipping[' + index + '][ship_to]'" class="destination" v-model="item.ship_to">
                             <option value="0" disabled selected>Add a destination</option> 
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id"
-                                    v-if="duplicateCheck['from'].includes(item.ship_from) && !duplicateCheck['to'].includes(region.id) || region.id == item.ship_to ">
+                                    v-if="item.ship_to == region.id || !duplicateCheck[item.ship_from].includes(region.id) " >
                                 {{ region.name }}
                             </option>
                         </select>
                     </div>
                     <div class="col-lg-3 col-sm-12" v-else>
-                        <multiselect v-if="!chacked" v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                        <multiselect v-if="!chacked" v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
                                      track-by="value"
                                      :hideSelected="true"
                                      :multiple="true"
                                      :close-on-select="false"
                                      :clear-on-select="false"
-                                     :preserve-search="true"
+                                     :preserve-search="true"                                    
                                      @input="refineValues"
                         ></multiselect>
                           <select v-else disabled  placeholder="disabled">
@@ -203,26 +203,57 @@
             this.existingShippings_ = JSON.parse(this.existingShippings);
             this.regions = JSON.parse(this.selectedRegions);
             this.name = this.wineryName;
-
+            this.duplicateOptions;
 
             if(this.existingShippings_.length == 0){
                 this.addMoreShippings();
             }
         },
         computed: {
+         duplicateOptions(){
+
+           let shipOr = this.duplicateCheck[this.existingShippings_[this.existingShippings_.length - 1].ship_from];
+            
+         
+           
+          function myFilter(value) {
+
+               if(!shipOr.includes(value.id)){
+                 return value;
+               }
+             }
+
+           
+
+           let options = this.fetchedRegions_.filter(myFilter);
+           let newOptions = options.map(person => ({ value: person.id, text: person.name }));
+          
+          
+            return newOptions;
+            
+
+          },   
          duplicateCheck(){
            
-            let id = {
-                to: [],
-                from: []
-            };
+            let id = { };
+            
 
-            this.existingShippings_.forEach((item)=>{ 
+                this.existingShippings_.forEach((item, index)=>{ 
+                 
+                 
+                    if(id[item.ship_from]){                   
 
-                  id['to'].push(item.ship_to);
-                  id['from'].push(item.ship_from);                      
-               
-            });
+                        id[item.ship_from].push(item.ship_to);
+                       
+
+                    }else{
+
+                        id[item.ship_from] = [];
+                        id[item.ship_from].push(item.ship_to);
+                       
+                    }
+                  
+                });
 
             return id;
            },
@@ -315,7 +346,7 @@
 
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
-                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
+                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';                
                 this.existingShippings_.forEach((item)=>{
                     if(item.ship_from == 0){
                         this.errors['shipping'] = 'You must select shipping origin .'
@@ -332,19 +363,19 @@
 
                    this.$nextTick(() => {
                         let error = document.querySelectorAll('.error-block');
-
-
-
+                 
+                 
+                
                        if(error.length > 0){
                          error[0].scrollIntoView({behavior: "smooth", block: "end"});
                        }
-
+                    
                    });
-
+               
                 }else{
                     that.$el.querySelector("#updateForm").submit();
                 }
-
+            
             },
             isInvalid(name) {
                 return this.errors[name];
