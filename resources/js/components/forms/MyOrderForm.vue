@@ -29,14 +29,14 @@
                                               <h2 class="text-center"><strong>Your Orders</strong></h2>
                                             </div>
                                             <div class="popup-body mb-3">
-                                                <div class="mb-2 order-row mx-auto text-center" v-for="wine_order in order.order_wines" v-bind:key="order.id">
+                                                <div class="mb-2 order-row mx-auto text-center" v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
                                                     <div class="pr-3 d-inline" >
                                                         <span>{{ wine_order.quantity }}x </span> 
                                                         <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
                                                         <span> from </span> 
                                                         <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
                                                     </div>
-                                                    <strong>${{ price(order) }}</strong>
+                                                    <strong>${{ singlePrice(wine_order) }}</strong>
                                                 </div>
                                             </div>
                                             <div class="text-center py-4">
@@ -113,6 +113,10 @@
                 });
                 return retVal.toFixed(2);
             },
+            singlePrice(order_wine){
+                console.log(order_wine);
+                return order_wine.quantity * order_wine.price + order_wine.shipping_price + ((order_wine.quantity - 1) *order_wine.additional_shipping_price);
+            }
         },
     }
 </script>
