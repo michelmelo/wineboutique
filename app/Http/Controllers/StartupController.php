@@ -40,7 +40,7 @@ class StartupController extends Controller
             $do_save = true;
 
             foreach ($shippings as $shipping){
-                if(is_null($shipping) && $shipping != 'additional'){
+                if(is_null($shipping) && $shipping == 'additional'){
                     $do_save = false;
                 }
             }

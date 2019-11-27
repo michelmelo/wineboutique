@@ -56,7 +56,7 @@
                 <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
-                    <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
+                    <input type="number" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
                     <span class="help-block error-block" v-if="isInvalid('ssn')">
                         <strong>Winery ssn number is required.</strong>
                     </span>
@@ -404,39 +404,39 @@
         computed: {
          duplicateOptions(){
 
-           let shipOr = this.duplicateCheck[this.shippings[this.shippings.length - 1].ship_from];           
-         
-           
+           let shipOr = this.duplicateCheck[this.shippings[this.shippings.length - 1].ship_from];
+
+
           function myFilter(value) {
 
                if(!shipOr.includes(value.id)){
                  return value;
                }
              }
-           
+
 
            let options = this.fetchedRegions_.filter(myFilter);
            let newOptions = options.map(person => ({ value: person.id, text: person.name }));
-                    
+
             return newOptions;
-            
-          },   
+
+          },
          duplicateCheck(){
-           
+
             let id = { };
-            
-                this.shippings.forEach((item, index)=>{ 
-                                  
-                    if(id[item.ship_from]){  
-                      
+
+                this.shippings.forEach((item, index)=>{
+
+                    if(id[item.ship_from]){
+
                       if(item.ship_to.length){
                          item.ship_to.forEach((value)=>{
                              id[item.ship_from].push(value.value);
                          })
-                      }else{               
+                      }else{
                         id[item.ship_from].push(item.ship_to);
-                      }   
-                       
+                      }
+
 
                     }else{
 
@@ -446,20 +446,20 @@
                          item.ship_to.forEach((value)=>{
                              id[item.ship_from].push(value.value);
                          })
-                      }else{                    
-                                      
-                        id[item.ship_from].push(item.ship_to);
-                      }   
+                      }else{
 
                         id[item.ship_from].push(item.ship_to);
-                       
+                      }
+
+                        id[item.ship_from].push(item.ship_to);
+
                     }
-                  
+
                 });
 
             return id;
            },
-         
+
          },
 
     }
