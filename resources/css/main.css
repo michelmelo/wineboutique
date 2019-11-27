@@ -465,6 +465,7 @@ select {
     display: none;
 }
 
+
 /*=========================================================================================================================================================================================
                                                                            NAVIGATION
 ==========================================================================================================================================================================================*/
@@ -1758,7 +1759,20 @@ footer p {
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-
+.shipping-regions ul{
+    display: grid;
+    position: relative;  
+    grid-auto-columns: rep;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 10px;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+.shipping-regions ul li{
+    list-style: none;   
+    grid-column: span 3;
+}
 
 /*=============================================================================================
                                      HOME SLIDER
@@ -3003,9 +3017,21 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     height: 2px;
     background-color: #8f9cb5;
 }
+#app #ship-wine-confirm .popup-head {
 
-
-
+    margin: 10px 0px 10px;
+}
+#app #ship-wine-confirm .popup-container {    
+    min-height: 430px;
+}
+#app #ship-wine-confirm .popup-container label{
+    font-size: 18px;
+    line-height: 20px;   
+}
+.match-regions{
+    color: #9C183A;
+    font-weight: bold;
+}
 /*=========================================================================================================================================================================================
                                                                                  MEDIA QUERY
 ==========================================================================================================================================================================================*/
@@ -3168,6 +3194,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   .logo img{
     width: 100%;
   }
+
 }
 
 @media only screen and (min-width : 768px) and (max-width : 998px) {    
@@ -3183,7 +3210,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
 
 }
-
+@media only screen and (max-width : 920px) {
+  .shipping-regions ul li{     
+    grid-column: span 4;
+  }  
+}
 @media only screen and (max-width : 768px) {
     .sbmt-new-payment-mtd {
         width: 100%;
@@ -3739,6 +3770,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         flex: 0 0 33.333333%;
         max-width: 0 0 33.333333%;
     }
+    .shipping-regions ul li {
+    grid-column: span 6;
+   }
 }
 @media only screen and (min-width : 1600px) {
   .home-slider, .home-slider .carousel-inner{
@@ -3807,6 +3841,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .winery-header {
         height: 120px;
     }
+    #app #ship-wine-confirm .popup-container .popup-body {
+    padding: 0px;
+}
 }
 
 @media only screen and (max-width : 400px) {

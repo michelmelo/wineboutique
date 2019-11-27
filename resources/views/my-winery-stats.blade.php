@@ -94,10 +94,12 @@
         <div class="popup-body text-center">
             <div class="col-xs-8 col-xs-push-2">
                 <div class="form-inputs">
-                    <input type="text" name="tracking_id" id="tracking_id" placeholder="Tracking ID" required>
+                    <label for="tracking_id">Tracking ID</label>
+                    <input type="text" name="tracking_id" id="tracking_id"  required>
                 </div>
-                <div class="form-inputs">
-                    <input type="number" name="delivery" id="delivery" placeholder="Estimated delivery time" required>
+                <div class="form-inputs mt-3">
+                    <label for="tracking_id" >Estimated delivery time</label>
+                    <input type="number" name="delivery" id="delivery" min="1" required>
                 </div>
                 <br>
             </div>
