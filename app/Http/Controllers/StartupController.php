@@ -40,7 +40,7 @@ class StartupController extends Controller
             $do_save = true;
 
             foreach ($shippings as $shipping){
-                if(is_null($shipping)){
+                if(is_null($shipping) && $shipping != 'additional'){
                     $do_save = false;
                 }
             }
@@ -49,6 +49,10 @@ class StartupController extends Controller
                     $shippings['price'] = 0;
                     $shippings['additional'] = 0;
                     unset($shippings['shipping_free']);
+                }
+
+                if(!isset($shippings['additional'])||$shippings['additional']==null) {
+                    $shippings['additional'] = 0;
                 }
 
                 foreach ($shippings['ship_to'] as $to){
