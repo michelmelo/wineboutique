@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row padding-row">
         <div class="col-lg-6 col-sm-12 preview" id="slider">
@@ -106,8 +107,22 @@
             </ul>
 
             <div class="tab-content">
-                <div id="description" class="tab-pane fade in active show">
-                    <p>{{$wine->description}}</p>
+                <div id="description" class="tab-pane fade in active show">  
+                 <p>{{$wine->description}}</p>                   
+                 <div class="shipping-regions">
+                    <ul>
+                    @foreach($shipping_regions as $region)
+                    
+                      <li class="@if(in_array($region, $user_regions)) 
+                                   match-regions 
+                                   @endif">
+                          {{$region}} 
+                      </li>  
+                    
+                    @endforeach
+                    </ul>
+                  </div>
+                  
                 </div>
 
                 <div id="info" class="tab-pane fade in">
