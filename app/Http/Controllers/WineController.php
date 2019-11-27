@@ -193,7 +193,7 @@ class WineController extends Controller
         }
 
         if(array_key_exists('region', $filter)) {
-            $wines = $wines->whereIn('region_id', $filter['region']);
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
         }
 
         if(array_key_exists('price', $filter)) {
