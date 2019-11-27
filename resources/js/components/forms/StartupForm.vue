@@ -45,7 +45,7 @@
                 <div class="col-lg-8 col-sm-12">
                     <textarea style="width: 100%; min-height: 150px;" name="description" v-model.trim="description" minlength="10" :class="{ 'invalid': isInvalid('description') }"></textarea>
                     <span class="help-block error-block" v-if="isInvalid('description')">
-                        <strong>Winery description is required.</strong>
+                        <strong>{{errors['description']}}</strong>
                     </span>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
@@ -134,7 +134,7 @@
                                 {{ region.name }}
                             </option>
                         </select>
-                          <span class="help-block error-block" v-if="isInvalid('shipping')">
+                          <span class="help-block error-block" v-if="isInvalid('shipping') && item.ship_from == 0">
                                     <strong>You must select shipping origin .</strong>
                                 </span>
                     </div>
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                       <multiselect v-if="!chacked" v-model="item.ship_to" :options="fetchedRegions_.map(person => ({ value: person.id, text: person.name }))"
+                       <multiselect v-if="!chacked" v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
                                      track-by="value"
                                      :hideSelected="true"
@@ -165,7 +165,7 @@
 
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_cost')">
+                        <span class="help-block error-block" v-if="isInvalid('shipping_cost') && item.ship_to.length == 0">
                                     <strong>You must fill in shipping costs.</strong>
                                 </span>
                     </div>
@@ -174,7 +174,7 @@
                         <input :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price" >
                         <div class="usd">USD</div>
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_price')">
+                        <span class="help-block error-block" v-if="isInvalid('shipping_price') && item.price == 0">
                                     <strong>You must enter shipping price.</strong>
                                 </span>
                     </div>
@@ -341,7 +341,13 @@
 
                 if(this.name.length<3) this.errors['name'] = 'You must enter winery name.';
                 if(this.regions.length===0) this.errors['regions'] = 'You must select at least 1 region.';
-                if(this.description.length < 10) this.errors['description'] = 'You must enter at least 10 characters.';
+                if(this.description.length < 10){
+                    this.errors['description'] = 'You must enter at least 10 characters.';
+                }
+
+                if(this.description == '') {
+                    this.errors['description'] = 'You must enter a description.';
+                }
                 if(this.ssn.length < 4) this.errors['ssn'] = 'You must enter at least 4 digits.';
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
                 this.shippings.forEach((item)=>{
@@ -395,8 +401,66 @@
                 return this.cover ? `/images/winery/cover/${this.cover}`: this.defaultCoverPhoto;
             }
         },
+        computed: {
+         duplicateOptions(){
 
+           let shipOr = this.duplicateCheck[this.shippings[this.shippings.length - 1].ship_from];           
+         
+           
+          function myFilter(value) {
 
+               if(!shipOr.includes(value.id)){
+                 return value;
+               }
+             }
+           
+
+           let options = this.fetchedRegions_.filter(myFilter);
+           let newOptions = options.map(person => ({ value: person.id, text: person.name }));
+                    
+            return newOptions;
+            
+          },   
+         duplicateCheck(){
+           
+            let id = { };
+            
+                this.shippings.forEach((item, index)=>{ 
+                                  
+                    if(id[item.ship_from]){  
+                      
+                      if(item.ship_to.length){
+                         item.ship_to.forEach((value)=>{
+                             id[item.ship_from].push(value.value);
+                         })
+                      }else{               
+                        id[item.ship_from].push(item.ship_to);
+                      }   
+                       
+
+                    }else{
+
+                        id[item.ship_from] = [];
+
+                        if(item.ship_to.length){
+                         item.ship_to.forEach((value)=>{
+                             id[item.ship_from].push(value.value);
+                         })
+                      }else{                    
+                                      
+                        id[item.ship_from].push(item.ship_to);
+                      }   
+
+                        id[item.ship_from].push(item.ship_to);
+                       
+                    }
+                  
+                });
+
+            return id;
+           },
+         
+         },
 
     }
 </script>
