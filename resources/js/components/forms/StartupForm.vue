@@ -56,7 +56,7 @@
                 <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
-                    <input type="text" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
+                    <input type="number" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
                     <span class="help-block error-block" v-if="isInvalid('ssn')">
                         <strong>Winery ssn number is required.</strong>
                     </span>
