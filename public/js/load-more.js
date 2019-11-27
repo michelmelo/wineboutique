@@ -50,6 +50,7 @@ $( document ).ready(function() {
     if($('.vine-boxes').children().length < page_offset) {
         $('#loadMoreLinkA').hide();
         $('#loadMoreLink').hide();
+        $('#loadMoreArrivalsLink').hide();
     }
 
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
