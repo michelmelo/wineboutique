@@ -64,7 +64,7 @@
                     <a href="{{ route("winery", ["winery" => $result->slug]) }}">
                         <div class="wineries-brand">
                             <img class="winery-header" src="{{ $result->cover ? asset('/images/winery/cover/'.$result->cover) : asset('img/winery-1.jpg')}}" height="165px">
-                            <img class="winery-logo" src="{{ $result->profile ? asset('/images/winery/cover/'.$result->profile) : asset('img/winery-1.jpg')}}">
+                            <img class="winery-logo" src="{{ $result->profile ? asset('/images/winery/profile/'.$result->profile) : asset('img/winery-1.jpg')}}">
                         </div>
                         <p>{{$result->name}}</p>
                     </a>

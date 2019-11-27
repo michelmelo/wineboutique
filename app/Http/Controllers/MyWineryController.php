@@ -86,7 +86,7 @@ class MyWineryController extends Controller
                             "ship_from" => $shippings['ship_from'],
                             "ship_to" => $to,
                             "price" => $shippings['price'],
-                            "additional" => $shippings['additional'],
+                            "additional" => isset($shippings['additional']) && $shippings['additional'] !== null ? $shippings['additional'] : 0,
 //                            "days_from" => $shippings['days_from'],
 //                            "days_to" => $shippings['days_to']
                         ]);
