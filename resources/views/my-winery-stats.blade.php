@@ -74,10 +74,10 @@
                                 <td>Total Revenue</td>
                                 <td>${{ $stats["order_money_sum"] }}</td>
                             </tr>
-                            <tr>
-                                <td>X Active Wines</td>
-                                <td>-</td>
-                            </tr>
+{{--                            <tr>--}}
+{{--                                <td>X Active Wines</td>--}}
+{{--                                <td>-</td>--}}
+{{--                            </tr>--}}
                         </tbody>
                     </table>
                 </div>
