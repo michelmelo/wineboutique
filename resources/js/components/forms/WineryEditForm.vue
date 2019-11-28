@@ -27,7 +27,7 @@
                             <td>
                                 <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
                                     <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id">
+                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name==='California'">
                                         {{ region.name }}
                                     </option>
                                 </select>
