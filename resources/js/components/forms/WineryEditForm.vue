@@ -115,7 +115,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 col-sm-12" v-else>
-                        <multiselect v-if="!chacked" v-model="item.ship_to" :options="duplicateOptions"
+                        <multiselect  v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
                                      track-by="value"                                   
                                      :hideSelected="true"
@@ -125,9 +125,7 @@
                                      :preserve-search="true"                                    
                                      @input="refineValues"
                         ></multiselect>
-                          <select v-else disabled  placeholder="disabled">
-                            <option value="disabled" selected>Free shipping</option>
-                        </select>
+                         
 
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
 
@@ -137,24 +135,25 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input  :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
+                        <input  type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
                         <div class="usd">USD</div>
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_price') && item.price == 0">
-                                    <strong>You must enter shipping price.</strong>
-                                </span>
+                       
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input :disabled="chacked"  type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
+                        <input   type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
                         <div class="usd" >USD</div>
                     </div>
 
                     <div class="col-lg-9 col-lg-push-3 col-sm-12">
-                        <input v-model="chacked" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
+                        <input @click="item.price == 0" :checked="item.price == 0" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
 
                         <a :href="'/my-winery-shipping/delete/' + item.id" v-if="!item.is_template" style="float: right">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <a @click="removeState(index , $event)" href="#" v-else style="float: right">
                             <i class="fa fa-trash"></i>
                         </a>
                     </div>
@@ -180,8 +179,7 @@
     export default {
         components: { Multiselect },
         props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions'],
-        data: () => ({
-            chacked: false,
+        data: () => ({            
             csrf: window.Laravel.csrfToken,
             profile: null,
             fetchedRegions_: [],
@@ -356,6 +354,12 @@
                 i.price = 0;
                 i.additional = 0;
             },
+            removeState(index, e){
+                 e.preventDefault();
+              
+                this.existingShippings_.splice(index, 1);
+
+            },
             onSubmit(e) {
                 e.preventDefault();
 
@@ -374,9 +378,7 @@
                      if(item.ship_to.length == 0){
                         this.errors['shipping_cost'] = 'You must fill in shipping costs.'
                     }
-                    if(!item.price){
-                        this.errors['shipping_price'] = 'You must enter shipping price.'
-                    }
+                    
                 });
 
                 if(Object.keys(this.errors).length > 0){

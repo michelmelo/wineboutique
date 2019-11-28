@@ -58,7 +58,7 @@
                 <div class="col-lg-8 col-sm-12 enter-name">
                     <input type="number" name="ssn" maxlength="4" v-model="ssn"  :class="{ 'invalid': isInvalid('ssn') }">
                     <span class="help-block error-block" v-if="isInvalid('ssn')">
-                        <strong>Winery ssn number is required.</strong>
+                        <strong>{{errors['ssn']}}</strong>
                     </span>
                 </div>
                 <div class="col-lg-2 col-sm-12"></div>
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12">
-                       <multiselect v-if="!chacked" v-model="item.ship_to" :options="duplicateOptions"
+                       <multiselect  v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
                                      track-by="value"
                                      :hideSelected="true"
@@ -159,10 +159,7 @@
 
                                      @input="refineValues"
                         ></multiselect>
-                        <select v-else disabled  placeholder="disabled">
-                            <option value="disabled" selected>Free shipping</option>
-                        </select>
-
+                      
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
 
                         <span class="help-block error-block" v-if="isInvalid('shipping_cost') && item.ship_to.length == 0">
@@ -171,22 +168,23 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price" >
+                        <input  type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price" >
                         <div class="usd">USD</div>
 
-                        <span class="help-block error-block" v-if="isInvalid('shipping_price') && item.price == 0">
-                                    <strong>You must enter shipping price.</strong>
-                                </span>
+                      
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
-                        <input :disabled="chacked" type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
+                        <input  type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional">
                         <div class="usd" >USD</div>
                     </div>
 
                     <div class="col-lg-9 col-lg-push-3 col-sm-12">
-                        <input v-model="chacked" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
+                        <input @click="item.price == 0" :checked="item.price == 0" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
+                          <a @click="removeState(index , $event)" href="#" v-if='index != 0' style="float: right">
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </div>
 
                     <div class="col-lg-12 col-sm-12">
@@ -214,8 +212,7 @@
     export default {
         components: { Multiselect },
         props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "selectedRegions", "fetchedRegions"],
-        data: () => ({
-            chacked: false,
+        data: () => ({            
             csrf: window.Laravel.csrfToken,
             fetchedRegions_: [],
             ship_to_values: [],
@@ -331,6 +328,12 @@
                 i.price = 0;
                 i.additional = 0;
             },
+            removeState(index, e){
+                 e.preventDefault();
+              
+                this.shippings.splice(index, 1);
+
+            },
             onSubmit(e) {
                 e.preventDefault();
 
@@ -348,18 +351,23 @@
                 if(this.description == '') {
                     this.errors['description'] = 'You must enter a description.';
                 }
-                if(this.ssn.length < 4) this.errors['ssn'] = 'You must enter at least 4 digits.';
+                if(this.ssn < 4 && this.ssn >= 0) {
+                    this.errors['ssn'] = 'You must enter at least 4 digits.';
+                }else if(this.ssn < 0) {
+                    this.errors['ssn'] = "Ssn number can't be negative";
+                }
+              
+
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
+
                 this.shippings.forEach((item)=>{
-                    if(item.ship_from == 0){
+                if(item.ship_from == 0){
                         this.errors['shipping'] = 'You must select shipping origin .'
                     }
                      if(item.ship_to.length == 0){
                         this.errors['shipping_cost'] = 'You must fill in shipping costs.'
                     }
-                    if(!item.price){
-                        this.errors['shipping_price'] = 'You must enter shipping price.'
-                    }
+                  
                 });
 
                 if(Object.keys(this.errors).length == 0){
