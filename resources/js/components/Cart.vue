@@ -19,7 +19,7 @@
                                     <div class="d-flex justify-content-between align-items-end w-100">
                                         <div class="product-shipping">
                                             <div class="shipping">
-                                                <span v-if="wine.shipping_price">Shipping:<br> {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                                <span v-if="wine.shipping">Shipping:<br> {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
                                                 <span v-else>
                                                     Winery is not shipping to your state, please remove wine or
                                                     <a href="/my-address" class="text-red font-weight-bold">change shipping state</a>
@@ -110,7 +110,7 @@
                 var status = true;
 
                 this.wines.forEach(function(item, index){
-                    if(!item.shipping_price){
+                    if(!item.shipping){
                         status = false;
                         return false;
                     }
