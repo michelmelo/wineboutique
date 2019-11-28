@@ -147,11 +147,11 @@ class WineController extends Controller
         $shipping_regions = Region::whereIn('id', $regionID)->pluck('name');
         $user_regions = array();
 
-        if(Auth::user()->type == "CUSTOMER"){
+            if(Auth::user() && Auth::user()->type == "CUSTOMER"){
 
-           $user_regionsId = Auth::user()->addresses->pluck('region_id');
-           $user_regions = Region::whereIn('id', $user_regionsId)->pluck('name')->toArray();
-        }      
+               $user_regionsId = Auth::user()->addresses->pluck('region_id');
+               $user_regions = Region::whereIn('id', $user_regionsId)->pluck('name')->toArray();
+            }      
        
 
      
