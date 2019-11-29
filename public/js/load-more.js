@@ -170,9 +170,10 @@ $("#confirm-ship-wine").click(function (e) {
     if(!$("#tracking_id").val()){
         $("#tracking_id").css("border", "1px solid red");
     }
-    else if(!$("#delivery").val()){
+    else if(!$("#delivery").val() || $("#delivery").val() < 0){
         $("#tracking_id").css("border", "1px solid green");
         $("#delivery").css("border", "1px solid red");
+        $("<span class='help-block error-block text-left' style='font-size: 12px;'>Estimated delivery time cen't be negativ number .</span>").insertAfter("#delivery");
     }
     else{
         window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val() + "/" + $("#delivery").val();

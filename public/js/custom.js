@@ -90,26 +90,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		});
 
     /*********SCROLL TO TOP***********/ 
-    /*********WINERY STATS FORM VALIDATION***********/ 
-      let delivery = document.getElementById('delivery');
-      let confirmShip = document.getElementById('confirm-ship-wine');
-
-      confirmShip.addEventListener('click', (e)=>{
-
-      	if(!delivery.value || delivery.value < 0){
-          e.preventDefault();
-          delivery.setAttribute('style', 'border: 1px solid red;');
-          
-         } else{
-         delivery.setAttribute('style', 'border-color: initial;');
-         }
-      })
-
-
-
-
-
-     /*********WINERY STATS FORM VALIDATION***********/ 
+ 
 });
 
 
