@@ -350,3 +350,20 @@ function hideLoadMore(force=false) {
         $("#loadMore").fadeOut('slow');
     }
 }
+
+/*********Search input HTML5 validation***********/ 
+
+    let search = document.getElementById( "main-search-mob" );
+    let warrinig = document.getElementById( "warrning" );
+
+    search.addEventListener( "invalid", function( event ) {
+        event.preventDefault();
+        warrning.classList.add('d-block');  
+    }, true );
+
+    search.addEventListener( "submit", function( event ) {
+        if ( !this.checkValidity() ) {
+            event.preventDefault();
+            warrning.classList.add('d-block');
+        }
+    });
