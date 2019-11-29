@@ -36,7 +36,7 @@
                                     <td><span class="order-details details-popup">Details...</span>
                                         <!----------POPUP----------------->
                 
-                                 <div class="orders-popup is-visible" style="opacity: : none;"  >
+                                 <div class="orders-popup is-visible op-none op-one" >
                                        <div class="popup-container">
                                         <span class="popup-close img-replace details-close">Close</span>
                                             <div class="popup-head">

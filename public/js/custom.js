@@ -117,7 +117,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
        detailsOpen.forEach((item)=>{
         	
         	item.addEventListener('click', ()=>{
-                item.nextElementSibling.style.display = 'block';
+        		console.log(item.nextElementSibling.classList)
+                item.nextElementSibling.classList.remove('op-none');
+                console.log(item.nextElementSibling.classList)
         	})
         })
 
@@ -126,7 +128,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         	item.addEventListener('click', ()=>{
                detailsPopup.forEach((item)=>{
         	
-        	        item.style.display = 'none';
+        	        item.classList.add('op-none');
         	
                })
         	})
