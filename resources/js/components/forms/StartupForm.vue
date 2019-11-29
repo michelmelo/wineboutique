@@ -159,8 +159,8 @@
 
                                      @input="refineValues"
                         ></multiselect>
-                      
-                        <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
+
+                        <input v-for="s in item.ship_to" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="s.value">
 
                         <span class="help-block error-block" v-if="isInvalid('shipping_cost') && item.ship_to.length == 0">
                                     <strong>You must fill in shipping costs.</strong>
@@ -171,7 +171,7 @@
                         <input  type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item" v-model="item.price" >
                         <div class="usd">USD</div>
 
-                      
+
                     </div>
 
                     <div class="col-lg-3 col-sm-12 show_hide">
@@ -212,7 +212,7 @@
     export default {
         components: { Multiselect },
         props: ['wineryName', 'wineryId', "wineryDesc", "wineryProfile", "wineryCover", "selectedRegions", "fetchedRegions"],
-        data: () => ({            
+        data: () => ({
             csrf: window.Laravel.csrfToken,
             fetchedRegions_: [],
             ship_to_values: [],
@@ -330,7 +330,7 @@
             },
             removeState(index, e){
                  e.preventDefault();
-              
+
                 this.shippings.splice(index, 1);
 
             },
@@ -356,7 +356,7 @@
                 }else if(this.ssn < 0) {
                     this.errors['ssn'] = "Ssn number can't be negative";
                 }
-              
+
 
                 if(!this.cover) this.errors['cover'] = 'You must upload cover.';
 
@@ -367,7 +367,7 @@
                      if(item.ship_to.length == 0){
                         this.errors['shipping_cost'] = 'You must fill in shipping costs.'
                     }
-                  
+
                 });
 
                 if(Object.keys(this.errors).length == 0){
