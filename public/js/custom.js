@@ -105,11 +105,40 @@ document.addEventListener('DOMContentLoaded', ()=>{
          }
       })
 
-
-
-
-
      /*********WINERY STATS FORM VALIDATION***********/ 
+     /*********Shipping Status Popup***********/ 
+     
+     let detailsOpen = document.querySelectorAll('.details-popup');
+     let detailsClose = document.querySelectorAll('.details-close');
+     let detailsPopup = document.querySelectorAll('.orders-popup');
+
+     if(detailsPopup.length > 0){
+        
+       detailsOpen.forEach((item)=>{
+        	
+        	item.addEventListener('click', ()=>{
+        		console.log(item.nextElementSibling.classList)
+                item.nextElementSibling.classList.remove('op-none');
+                console.log(item.nextElementSibling.classList)
+        	})
+        })
+
+        detailsClose.forEach((item)=>{
+        	
+        	item.addEventListener('click', ()=>{
+               detailsPopup.forEach((item)=>{
+        	
+        	        item.classList.add('op-none');
+        	
+               })
+        	})
+        })
+
+     }
+
+
+
+      /*********Shipping Status Popup***********/ 
 });
 
 

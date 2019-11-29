@@ -30,7 +30,7 @@
                                             </div>
                                             <div class="popup-body mb-5">
                                                 <div class="mb-2 order-row d-flex justify-content-between " v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
-                                                    <div class="pr-3 d-inline" >
+                                                    <div class="pr-3 d-inline " >
                                                         <span>{{ wine_order.quantity }}x </span> 
                                                         <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
                                                         <span> from </span> 
