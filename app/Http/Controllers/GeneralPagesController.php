@@ -82,7 +82,6 @@ class GeneralPagesController extends Controller
                 ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
                 ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
                 ->groupBy('wines.id')
-                ->having('orders_count', '>', 0)
                 ->orderBy('wines.created_at', 'desc')
                 ->get(),
             'wine_count' => Wine::count(),
