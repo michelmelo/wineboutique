@@ -106,6 +106,18 @@ class MyWineryController extends Controller
         ]);
     }
 
+    private function countOrders($orders) {
+        $retVal = 0;
+        $temp = [];
+        foreach($orders as $order) {
+            if(!in_array($order->order_id, $temp)) {
+                $temp[] = $order->order_id;
+                $retVal++;
+            }
+        }
+        return $retVal;
+    }
+
     public function stats()
     {
         $tmp_orders = DB::table('orders')
@@ -124,7 +136,7 @@ class MyWineryController extends Controller
         $orders = array();
 
         $status = [
-            "order_count" => count($tmp_orders),
+            "order_count" => $this->countOrders($tmp_orders),
             "bottle_count" => 0,
             "best_selling_wine" => "",
             "best_selling_state" => "",
