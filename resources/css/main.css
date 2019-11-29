@@ -3350,11 +3350,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-box-style-3 .order-q {
         font-size: 14px;
         right: 20px;
-        bottom: 5px;
+        bottom: 10px;
     }
     .vine-box-style-3 .star-rating {
       padding-bottom: 6px;
-      bottom: 8px;
+      bottom: 14px;
     }
     .vine-box-style-3 h4 {
         margin-bottom: 10px;

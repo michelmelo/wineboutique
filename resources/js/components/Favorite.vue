@@ -11,7 +11,7 @@
             <div class="favorite-popup-container"  v-if="do_show">
                 <i class="fas fa-times" @click.prevent="do_show = false"></i>
                 <div class="">
-                    <h2 class="thank-you text-center">Are you sure you wish to unfavourite wine?</h2>
+                    <h2 class="thank-you text-center">Are you sure you wish to unfavorite wine?</h2>
                 </div>
                 <div class="">
                     <span href="#" class="button red-button" @click.prevent="unFavorite(post)" > Yes</span>

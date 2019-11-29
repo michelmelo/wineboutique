@@ -2,7 +2,8 @@
     <div class="info-box shadow-box">
         <div>
             <h2>PERSONAL INFORMATION</h2>
-            <div class="edit-button" v-on:click="toggleEditing"><i class="far fa-edit"></i>{{editing?'Save':'Edit'}}</div>
+            <div class="edit-button" v-on:click="toggleEditing">
+                <i class="far fa-edit" v-bind:class="[editing ? 'fas fa-save' : 'far fa-edit']"> </i> {{editing?'Save':'Edit'}}</div>
             <table>
                 <tr>
                     <td>First Name:</td>
