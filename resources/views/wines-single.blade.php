@@ -110,6 +110,7 @@
                 <div id="description" class="tab-pane fade in active show">  
                  <p>{{$wine->description}}</p>                   
                  <div class="shipping-regions">
+                    <h2 class="my-5" style="color: #9C193A;">This wine is currently being shipped to these states:</h2>
                     <ul>
                     @foreach($shipping_regions as $region)
                     

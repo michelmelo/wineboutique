@@ -53,7 +53,8 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                                                                     <tr>
                                                                         <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                                                            <a href="{{ $actionUrl }}" class="button button-blue" target="_blank" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #FFF; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #991338; border-top: 10px solid #991338; border-right: 18px solid #991338; border-bottom: 10px solid #991338; border-left: 18px solid #991338;">Complete Registration</a>
+                                                                            <a href="{{ $actionUrl }}" class="button button-blue" target="_blank" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #FFF; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #991338; border-top: 10px solid #991338; border-right: 18px solid #991338; border-bottom: 10px solid #991338; border-left: 18px solid #991338;">{{ $actionText }}</a>
+                                                                            
                                                                         </td>
                                                                     </tr>
                                                                 </table>
