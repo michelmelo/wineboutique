@@ -10,7 +10,7 @@
         <div class="shadow-box row new-wine-photos">
             <h2>PHOTOS</h2>
             <div class="col-lg-4 col-sm-12 mb-3">
-               <p class="w-100">Front bottle image *</p>
+               <p class="w-100">Front bottle image *</p> 
                 <label>
                     <input name="photo" style="display: none; cursor: pointer;" type="file" id="picture">
                     <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview">
@@ -31,7 +31,8 @@
                     @foreach($preloadedImages as $img)
                         <div class="image-delete-holder">
                             <img src="{{ $img['path'] }}" id="imagePreview">
-                            <a href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
+                            <a class="removeImage" href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
+                                <input type="hidden" value="{{$img['id']}}">
                                <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>

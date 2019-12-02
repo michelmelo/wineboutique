@@ -351,10 +351,12 @@
                 if(this.description == '') {
                     this.errors['description'] = 'You must enter a description.';
                 }
-                if(this.ssn < 4 && this.ssn >= 0) {
+                if(this.ssn.length < 4 && this.ssn > 0) {
                     this.errors['ssn'] = 'You must enter at least 4 digits.';
                 }else if(this.ssn < 0) {
                     this.errors['ssn'] = "Ssn number can't be negative";
+                }else if(this.ssn.length > 4) {
+                    this.errors['ssn'] = "Ssn number can't be more then 4 digits";
                 }
 
 
