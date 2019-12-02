@@ -132,7 +132,6 @@
 									                        </tr>
 									                        <tr>
 									                          <td style="padding: 0 15px 0 0;">1574707710</td>
-									                          <td style="padding: 0 15px;">FedEx <br> Processing</td>
 									                          <td style="padding: 0 0 0 15px;">
 									                            <div> <span>1x </span> <a href="/wine/vino2-crno" style="color: #da8599;font-weight: 500;">vino2 crno</a> <span> from </span> <a href="/winery/winariew" style="color: #da8599;font-weight: 500;">WinarieW</a> </div>
 									                          </td>
