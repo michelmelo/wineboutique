@@ -202,7 +202,7 @@ class MyWineryController extends Controller
                     {
                         $message
                             ->from("no-reply@wineboutique.com")
-                            ->to($user->email)->subject('Order completed');
+                            ->to($user->email)->subject('Your order is on its way!');
                     });
             }
         }

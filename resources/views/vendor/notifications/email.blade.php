@@ -29,7 +29,7 @@
                     <tr>
                         <td class="header" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 25px 0; text-align: center; background-color: #fff;">
                             <a href="http://localhost" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #fff; font-size: 19px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 white;">
-                                <img src="http://stage.wineboutique.execdigi.com/img/logo.png" alt="wineBoutique-logo" />
+                                <img src="https://stage.wineboutique.com/img/logo.png" alt="wineBoutique-logo" />
                             </a>
                         </td>
                     </tr>
