@@ -114,6 +114,8 @@ class CheckoutController extends Controller
                         $wine->shipping_additional = $shipping->additional;
 
                         break;
+                    } else {
+                        return back();
                     }
                 }
                 if($wine->pivot->quantity > Wine::where('id', $wine->id)->first()->quantity) {
