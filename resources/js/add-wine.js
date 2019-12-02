@@ -7,6 +7,10 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+   
+ 
+
+
     $("#picture").change(function(e) {
         let target = e.target || e.srcElement;
         if(target.value.length>0) {
@@ -17,9 +21,6 @@ $(document).ready(function() {
         }
     });
 
-    $("remove-icon").click(function(){
-        $(this).parent().remmove();
-    });
 
     $("#other_image").change(function(e){
         let target = e.target || e.srcElement;
@@ -106,7 +107,9 @@ $(document).ready(function() {
             contentType: false,
             success : function(response) {
                 $(`<input type="hidden" name="images[]" value="${response.id}" />`).appendTo("#inputs");
-                $(".other_images_preview").append('<div class="image-delete-holder"><img src="' + crop_image_preview + '"><a class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
+                $(".other_images_preview").append('<div class="image-delete-holder"><img src="' + crop_image_preview + '"><a href="/my-wine/image/' + response.id +'/delete" class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
+                   
+           
             }
         });
     });

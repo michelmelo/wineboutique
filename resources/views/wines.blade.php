@@ -150,7 +150,7 @@
             $.removeCookie('activeAccordionGroup');
         });
         var last = $.cookie('activeAccordionGroup');
-        if (last != null) {
+        if (last != null && $(window).width() > 970) {
             //remove default collapse settings
             $("#accordion .panel-collapse").removeClass('show');
             //show the account_last visible group
