@@ -388,7 +388,7 @@ select {
 .other-login{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     width: 100%;
     margin-top: 20px;
@@ -396,6 +396,18 @@ select {
 
 .other-login div{
     margin-bottom: 10px;
+    border: 2px solid #9C183A;
+    padding: 5px;
+    text-align: center;
+   
+}
+.google-login, .facebook-login {
+   flex: 0 0 50%;
+    max-width: 48%;
+}
+.regular{
+    flex: 0 0 100%;
+    max-width: 100%;
 }
 
 .StripeElement {
@@ -3061,6 +3073,8 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .container {
         max-width: 1190px;
     }
+   
+
 }
 
 @media only screen and (max-width : 1200px) {
@@ -3077,6 +3091,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   }
   .winery-header {
     height: 120px;
+  }
+  .google-login, .facebook-login {
+    flex: 0 0 100%;
+    max-width: 100%;
+ 
   }
 
 }
@@ -3993,4 +4012,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     line-height: 20px;
     color: #9b1f3d;
     z-index: 999;
+}
+.image-delete-holder .remove-icon{
+  color: #9b1f3d!important;
+  top: 3px;
+  right: -2px;
+  cursor: pointer;
+  z-index: 9999;
 }

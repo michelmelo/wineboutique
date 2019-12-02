@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		});
 
     /*********SCROLL TO TOP***********/ 
+  
     /*********WINERY STATS FORM VALIDATION***********/ 
       let delivery = document.getElementById('delivery');
       let confirmShip = document.getElementById('confirm-ship-wine');
