@@ -14,7 +14,7 @@
                             <tr class="text-center">
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Shipping</th>                               
+                                <th scope="col">Shipping</th>
                                 <th scope="col">Ordered Date</th>
                                 <th scope="col">Shipping Status</th>
                                 <th scope="col">Wines</th>
@@ -25,17 +25,17 @@
                                 <tr class="text-center">
                                     <td>{{$key}}</td>
                                     <td>{{$value["address"]}}</td>
-                                    <td>FedEx</td>                                      
+                                    <td>FedEx</td>
                                     <td>{{$value["order_date"]}}</td>
                                     <td>@if($value["status"] == 1)
-                                     <a class="send-wine" href="/my_winery/order-update/{{$key}}/{{$wine['id']}}">Send</a>
+                                     <a class="send-wine" href="/my_winery/order-update/{{$key}}">Send</a>
                                       @else
-                                       Wine send
+                                       Wine(s) sent
                                        @endif
                                        </td>
                                     <td><span class="order-details details-popup">Details...</span>
                                         <!----------POPUP----------------->
-                
+
                                  <div class="orders-popup is-visible op-none op-one" >
                                        <div class="popup-container">
                                         <span class="popup-close img-replace details-close">Close</span>
@@ -43,16 +43,16 @@
                                               <h2 class="text-center text-uppercase"><strong>Order: {{$key}}</strong></h2>
                                             </div>
                                             <div class="popup-body mb-5">
-                                             @foreach($value["wines"] as $wine) 
-                                             
+                                             @foreach($value["wines"] as $wine)
+
                                                 <div class="mb-2 order-row d-flex justify-content-between " >
-                                                   <div class="pr-3 d-inline text-left" >                                               
-                                                            <span>{{$wine["quantity"]}} x </span> 
-                                                            <a>{{ $wine["name"] }} </a> 
+                                                   <div class="pr-3 d-inline text-left" >
+                                                            <span>{{$wine["quantity"]}} x </span>
+                                                            <a>{{ $wine["name"] }} </a>
                                                       </div>
-                                                                                                   
+
                                                 </div>
-                                            
+
                                             @endforeach
                                             </div>
                                             <div class="text-center py-5">
@@ -61,13 +61,13 @@
                                                 </span>
                                             </div>
                                         </div>
-                                   
+
                                 </div>
                                   <!----------POPUP----------------->
-                                    </td>                              
+                                    </td>
                                 </tr>
 
-                
+
 
 
 
