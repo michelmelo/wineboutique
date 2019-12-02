@@ -19,7 +19,7 @@
                         <tr v-for="(order, index) in orders" v-bind:key="order.id">
                             <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
                             <td>{{order.address.address_1}},<br> {{order.address.address_2}},<br> {{order.address.city}},<br> {{order.address.postal_code}}</td>
-                            <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 2 ? "Shipped" : "Cancelled"}}</td>
+                            <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 0 ? "Shipped" : "Cancelled"}}</td>
                             <td>
                                 <span class="order-details" @click="activePopup = index">Details...</span>
                                <div class="orders-popup is-visible" role="alert" v-if=" activePopup === index" >
@@ -31,9 +31,9 @@
                                             <div class="popup-body mb-5">
                                                 <div class="mb-2 order-row d-flex justify-content-between " v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
                                                     <div class="pr-3 d-inline " >
-                                                        <span>{{ wine_order.quantity }}x </span> 
-                                                        <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a> 
-                                                        <span> from </span> 
+                                                        <span>{{ wine_order.quantity }}x </span>
+                                                        <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
+                                                        <span> from </span>
                                                         <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
                                                     </div>
                                                     <strong>${{ singlePrice(wine_order) }}</strong>
@@ -48,7 +48,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                   
+
                                 </div>
                             </td>
                             <!--

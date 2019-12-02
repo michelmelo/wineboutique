@@ -7,6 +7,10 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+   
+   
+
+
     $("#picture").change(function(e) {
         let target = e.target || e.srcElement;
         if(target.value.length>0) {
@@ -17,9 +21,6 @@ $(document).ready(function() {
         }
     });
 
-    $("remove-icon").click(function(){
-        $(this).parent().remmove();
-    });
 
     $("#other_image").change(function(e){
         let target = e.target || e.srcElement;
@@ -77,6 +78,39 @@ $(document).ready(function() {
         $(this).hide();
     });
 
+   function deleteUploadedImg(id, item){       ///delete uploaded img
+        $.ajax({
+            url : `/wine-image/${id}`,
+            type : 'DELETE',          
+            processData: false,
+            contentType: false,
+            success : function(response) {
+
+               item.detach();
+
+                }
+        });
+    };
+    function deleteImg(id, item){       ///delete wine img
+        $.ajax({
+            url : `/my-wine/image/${id}/delete`,
+            type : 'GET',          
+            processData: false,
+            contentType: false,
+            success : function(response) {
+
+               item.detach();
+
+                }
+        });
+    };
+
+    $(".removeImage").click(function(e){
+                e.preventDefault();
+             
+               deleteImg($(this).children().first().val() ,  $(this).parent());
+            });
+
     $("#crop-other-picture").click(function(e){
         e.preventDefault();
 
@@ -106,7 +140,15 @@ $(document).ready(function() {
             contentType: false,
             success : function(response) {
                 $(`<input type="hidden" name="images[]" value="${response.id}" />`).appendTo("#inputs");
-                $(".other_images_preview").append('<div class="image-delete-holder"><img src="' + crop_image_preview + '"><a class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
+                $(".other_images_preview").append('<div class="image-delete-holder"><img src="' + crop_image_preview + '"><a  class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
+              
+
+                $(".remove-icon").click(function(e){
+                    e.preventDefault();
+                    console.log('click');
+               
+                     deleteUploadedImg(response.id,  $(this).parent());
+            });
             }
         });
     });
