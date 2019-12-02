@@ -129,7 +129,10 @@
                 axios.get('/cart/get')
                     .then(response => {
                        this.wines = response.data.wines;
-                       this.canPay(this.hasShippingAddress(this.wines))
+                       if(this.canPay) {
+                           this.canPay(this.hasShippingAddress(this.wines))
+                       }
+
                        this.fetchedFirst = true;
                     })
                     .catch(error => console.log(error));
