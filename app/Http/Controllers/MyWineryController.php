@@ -162,7 +162,7 @@ class MyWineryController extends Controller
                             "id" => $order->wine_id
                         ]
                     ],
-                    "status" => $order->order_status,
+                    "status" => $order->wine_status,
                     "order_date" => $order->order_date,
                 ];
             }
