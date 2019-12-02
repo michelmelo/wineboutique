@@ -70,7 +70,7 @@
                     </tr>
                 </table>
                 <div class="row cart-buttons">
-                    <a href="/checkout" class="button red-button full-width" v-if="showComplete && hasShippingAddress()">CHECKOUT</a>
+                    <a href="/checkout" class="button red-button full-width" v-if="showComplete && hasShippingAddress(wines)">CHECKOUT</a>
                     <a href="/wines" class="button pink-button full-width">CONTINUE SHOPPING</a>
                 </div>
             </div>
@@ -84,7 +84,8 @@
 <script>
     export default {
         props: [
-            'showComplete'
+            'showComplete',
+            'canPay'
         ],
         data: function() {
             return {
@@ -106,22 +107,29 @@
             this.getCart();
         },
         methods: {
-            hasShippingAddress() {
-                var status = true;
+            hasShippingAddress(wines) {
+                // use this
+                return wines.filter(({shipping}) => !shipping).length === 0
 
-                this.wines.forEach(function(item, index){
-                    if(!item.shipping){
-                        status = false;
-                        return false;
-                    }
-                });
+                // not this
+                // var status = true;
+                //
+                // this.wines.forEach(function(item, index){
+                //     if(!item.shipping){
+                //         status = false;
+                //         return false;
+                //     }
+                // });
+                //
+                // return status;
 
-                return status;
+
             },
             getCart() {
                 axios.get('/cart/get')
                     .then(response => {
                        this.wines = response.data.wines;
+                       this.canPay(this.hasShippingAddress(this.wines))
                        this.fetchedFirst = true;
                     })
                     .catch(error => console.log(error));

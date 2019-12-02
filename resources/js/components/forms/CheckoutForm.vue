@@ -147,17 +147,17 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                         
-                            <Cart :showComplete="false"/>
+
+                            <Cart :showComplete="false" :canPay="checkIfCanPay"/>
                         </div>
                     </article>
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment">
+                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment && canMakePayment">
                                 Place order
                             </button>
-                            <a href="/my-payments" class="text-red font-weight-bold" v-else>Add payment method please</a>
+                            <a href="/my-payments" class="text-red font-weight-bold" v-if="!hasPayment">Add payment methodS please</a>
                         </div>
                     </article>
                 </div>
@@ -187,6 +187,7 @@
         ],
         data() {
             return {
+                canMakePayment: false,
                 selecting: false,
                 creating: false,
                 addresses: [],
@@ -208,6 +209,9 @@
             this.asyncData();
         },
         methods: {
+            checkIfCanPay: function(v) {
+                this.canMakePayment = v
+            },
             addToCart() {
                 axios.post('/cart', {
                     wines: [{
