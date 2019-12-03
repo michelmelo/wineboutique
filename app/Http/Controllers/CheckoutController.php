@@ -186,7 +186,7 @@ class CheckoutController extends Controller
                             {
                                 $message
                                     ->from("no-reply@wineboutique.com")
-                                    ->to($item->winery->user->email)->subject('New Order submitted');
+                                    ->to($item->winery->user->email)->subject('New Order - [ORDER NUMBER]');
                             });
                     }
                 }
@@ -205,7 +205,7 @@ class CheckoutController extends Controller
         {
             $message
                 ->from("no-reply@wineboutique.com")
-                ->to($user->email)->subject('Order confirmation');
+                ->to($user->email)->subject('Thank you for your order!');
         });
 
         return redirect("/checkout/done/" . $new_order->id);
