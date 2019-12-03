@@ -19,4 +19,26 @@ class OrderWine extends Model
     {
         return $this->belongsTo(Wine::class);
     }
+
+    public static function TotalPrice($orderWines) {
+        $retVal = 0;
+        foreach ($orderWines as $orderWine) {
+            $retVal += $orderWine->price * $orderWine->quantity +
+                $orderWine->shipping_price +
+                ($orderWine->quantity-1) * $orderWine->additioinal_shipping_price;
+        }
+        return $retVal;
+    }
+
+    public static function TotalPrice2($orderWines) {
+        $retVal = 0;
+        foreach ($orderWines as $orderWines1) {
+            foreach ($orderWines1 as $orderWine) {
+                $retVal += $orderWine->price * $orderWine->quantity +
+                    $orderWine->shipping_price +
+                    ($orderWine->quantity - 1) * $orderWine->additioinal_shipping_price;
+            }
+        }
+        return $retVal;
+    }
 }

@@ -1,6 +1,7 @@
 <template>
     <div class="section">
         <form action="/checkout/complete" method="post">
+            <input type="hidden" name="date" :value="dateC">
             <slot>
 
             </slot>
@@ -202,11 +203,13 @@
                     region_id: '',
                     default: true
                 },
-                showErrors: false
+                showErrors: false,
+                dateC: null,
             }
         },
         mounted() {
             this.asyncData();
+            this.dateC = (new Date()).toLocaleDateString();
         },
         methods: {
             checkIfCanPay: function(v) {
@@ -293,6 +296,7 @@
                 if (addresses.length === 0) {
                     alert("You must enter address to place order.");
                 }
+                this.dateC = (new Date()).toLocaleDateString();
             },
         },
         computed: {

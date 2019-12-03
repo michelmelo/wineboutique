@@ -7,6 +7,7 @@ use App\Order;
 use App\OrderWine;
 use App\User;
 use App\Wine;
+use App\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -99,7 +100,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function complete()
+    public function complete(Request $request)
     {
         $user = Auth::user();
         $cart = $user->cart;
@@ -108,16 +109,16 @@ class CheckoutController extends Controller
 
         if($user_default_region){
             foreach ($cart as $wine){
+                $returner = true;
                 foreach ($wine->winery->winery_shippings as $shipping){
                     if($user_default_region->region_id == $shipping->ship_to){
                         $wine->shipping_price = $shipping->price;
                         $wine->shipping_additional = $shipping->additional;
-
+                        $returner = false;
                         break;
-                    } else {
-                        return back();
                     }
                 }
+                if($returner) return back();
                 if($wine->pivot->quantity > Wine::where('id', $wine->id)->first()->quantity) {
                     return redirect()->back()->with('message', 'Not enough ' . $wine->name  . ' in the storage.');
                 }
@@ -150,6 +151,8 @@ class CheckoutController extends Controller
         $price = 0;
         $quantity = 0;
 
+        $wine_orders = [];
+
         if($charge && $charge->status == "succeeded"){
             $new_order = new Order();
             $new_order->order_id = (int)$this->orderId;
@@ -169,6 +172,7 @@ class CheckoutController extends Controller
                     $new_order_wine->shipping_price = $item->shipping_price ? $item->shipping_price : 0;
                     $new_order_wine->additional_shipping_price = $item->shipping_additional ? $item->shipping_additional : 0;
 
+
                     $price += $item->pivot->quantity * $new_order_wine->wine()->first()->price;
                     $quantity += $item->pivot->quantity;
 
@@ -177,30 +181,49 @@ class CheckoutController extends Controller
                         $temp_wine = Wine::where("id", $item->pivot->wine_id)->first();
                         $temp_wine->update(["quantity" => $temp_wine->quantity - $item->pivot->quantity]);
 
-                        Mail::send('email.order-created', [
-                            'order' => $new_order->order_id,
-                            'wine' => $item->name,
-                            'quantity' => $item->pivot->quantity,
-                        ],
-                            function ($message) use ($item)
-                            {
-                                $message
-                                    ->from("no-reply@wineboutique.com")
-                                    ->to($item->winery->user->email)->subject('New Order - [ORDER NUMBER]');
-                            });
+//                        Mail::send('email.order-created', [
+//                            'order' => $new_order->order_id,
+//                            'wine' => $item->name,
+//                            'quantity' => $item->pivot->quantity,
+//                        ],
+//                            function ($message) use ($item, $new_order)
+//                            {
+//                                $message
+//                                    ->from("no-reply@wineboutique.com")
+//                                    ->to($item->winery->user->email)->subject('New Order - ' . $new_order->id);
+//                            });
                     }
+                    $new_order_wine->slug = $item->slug;
+                    $wine_orders[$new_order_wine->winery_id][] = $new_order_wine;
                 }
             }
         }
 
-        $address = Auth::user()->addresses()->where("default", 1)->first();
+        foreach($wine_orders as $winery_id => $orders_per_winery) {
+            $mailData = [
+                'winery' => Winery::where('id', $winery_id)->first(),
+                'orders' => $orders_per_winery,
+                'id' => $new_order->order_id,
+            ];
+            Mail::send('email.order-created', $mailData,
+                function ($message) use ($item, $new_order)
+                {
+                    $message
+                        ->from("no-reply@wineboutique.com")
+                        ->to($item->winery->user->email)->subject('New Order - ' . $new_order->order_id);
+                });
+        }
 
-        $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
+//        $address = Auth::user()->addresses()->where("default", 1)->first();
 
-        Mail::send('email.order-confirmation', [
-            'order' => $new_order->order_id,
-            'from_to' => $from_to
-        ],
+//        $from_to = $new_order->order_wines[0]->wine->winery->winery_shippings->where("ship_to", $address->region_id)->first();
+        $mailData = [
+            'order' => $wine_orders,
+            'user' => $user,
+            'date_' => $request->date,
+            'order_id' => $new_order->order_id,
+        ];
+        Mail::send('email.order-confirmation', $mailData,
         function ($message) use ($user)
         {
             $message

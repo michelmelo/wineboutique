@@ -203,6 +203,9 @@ class MyWineryController extends Controller
             $order->update(['status' => 0]);
             Mail::send('email.order-completed', [
                     'order' => $order->order_id,
+                    'user' => $user,
+                    'tracking' => $tracking_id,
+                    'delivery' => $delivery,
                 ],
                     function ($message) use ($user)
                     {
