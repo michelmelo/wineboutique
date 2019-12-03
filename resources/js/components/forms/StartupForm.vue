@@ -52,7 +52,7 @@
             </div>
 
             <div class="shadow-box row">
-                <h2>WINERY OWNER LAST 4 SSN NUMBERS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
+                <h2 id="foursssns">WINERY OWNER LAST 4 SSN NUMBERS <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
                 <span class="popup-info d-none">This information is required for billing. Please ensure to provide the last 4 SSN numbers from the winery owner and billing account holder.</span>
                 <div class="col-lg-2 col-sm-12"></div>
                 <div class="col-lg-8 col-sm-12 enter-name">
@@ -261,10 +261,9 @@
             addMoreShippings(){
                 this.shippings.push({
                     ship_from: 0,
-                    // days_from: "",
-                    // days_to: "",
-                    ship_to: [],
-                    price: ""
+                    price: 0,
+                    additional: 0,
+                    ship_to: []
                 });
             },
             setEditing(wineId) {
@@ -352,7 +351,7 @@
                     this.errors['description'] = 'You must enter a description.';
                 }
                 if(this.ssn.length < 4 && this.ssn > 0) {
-                    this.errors['ssn'] = 'You must enter at least 4 digits.';
+                    this.errors['ssn'] = 'You must enter 4 digits.';
                 }else if(this.ssn < 0) {
                     this.errors['ssn'] = "Ssn number can't be negative";
                 }else if(this.ssn.length > 4) {
@@ -378,6 +377,7 @@
                         if (result.error) {
                             var errorElement = document.getElementById('card-errors');
                             errorElement.textContent = result.error.message;
+                            document.getElementById("foursssns").scrollIntoView();
                         } else {
                             that.stripe = result.token.id;
 

@@ -58,10 +58,6 @@
                         <td>Shipping:</td>
                         <td>{{ (getShippingTotal() || 0) | currency }}</td>
                     </tr>
-                    <tr>
-                        <td>Sales Tax:</td>
-                        <td>$0.00</td>
-                    </tr>
                 </table>
                 <table class="cart-table-total">
                     <tr>
