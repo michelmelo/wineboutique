@@ -15,8 +15,8 @@
                         <td>{{address.name}}</td>
                         <td><i v-bind:class="'fas fa-'+(address.default?'check':'times')"></i></td>
                         <td>
-                            <button v-on:click="selectAddress(address.id)" class="btn btn-default d-inline-block"><i class="far fa-edit"></i> Edit</button>
-                            <button v-on:click="deleteAddress(address.id)" v-if="!address.default" class="btn btn-default d-inline-block"><i class="fas fa-trash-alt"></i> Delete</button>
+                            <button v-on:click="selectAddress(address.id)" class="btn d-inline-block"><i class="far fa-edit"></i> Edit</button>
+                            <button v-on:click="deleteAddress(address.id)" v-if="!address.default" class="btn d-inline-block"><i class="fas fa-trash-alt"></i> Delete</button>
                         </td>
                     </tr>
                 </tbody>

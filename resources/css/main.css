@@ -497,6 +497,11 @@ header .navbar{
     color: rgb(155, 31, 61);
 }
 
+.navbar-collapse{
+    position: relative;
+    z-index: 99999;
+}
+
 .navbar-collapse .nav-link{
    text-transform: uppercase;
 }
@@ -536,14 +541,14 @@ header {
     z-index: 9999;
 }
 
-.form-control {
+header .form-control {
     border-radius: 10px 0 0 10px;
     -webkit-box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
             box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
     margin-right: 0px!important;
 }
 
-.form-control:focus{
+header .form-control:focus{
     border-color: #9C193A;
     outline: 0;
     -webkit-box-shadow: 0 0 0 1px rgba(156, 25, 58, 0.25);
@@ -2076,10 +2081,6 @@ footer p {
     display: none;
 }
 
-#imagePreview{
-    cursor: pointer;
-}
-
 .my-wine a:hover h2 {
     color: #9A1D3E;
 }
@@ -2102,8 +2103,6 @@ footer p {
 }
 .my-winery-table .btn-default, .my-winery-table form{
     display: inline-block;
-    max-height: 38px;
-    max-width: 38px;
     margin-top: 2px
 }
 
@@ -2390,6 +2389,13 @@ footer p {
     top: 20px;
 }
 
+.info-box .btn {
+    color:#9b1f3d;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
 .save-button{
     right: 30px;
 }
@@ -2635,11 +2641,17 @@ footer p {
 
 .new-wine-photos img {
     width: 100%;
-    max-width: 140px;
+    max-width: 131px;
 }
 
-.other_images_preview img{
-    margin: 10px 7px 10px 0px;
+.new-wine-photos .front-image{
+    width: 100%;
+    max-width: 180px;    
+}
+
+.new-wine-photos .imagePreview, .new-wine-photos .other-pictures-img{
+    height: 100%;
+    max-height: 130px;
 }
 
 .form-inputs>div {
@@ -3200,6 +3212,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .my-winery-table{
         overflow-x: auto;
+        font-size: 14px;
     }
     .popup-info {   
       left: 58%;   
@@ -3219,6 +3232,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .winery-header {
         height: 165px;
     }
+    .new-wine-photos .front-picture {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
 
 }
 
@@ -3227,6 +3246,12 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     width: 100%;
   }
 
+}
+
+@media only screen and (min-width : 768px) and (max-width: 1200px){  
+    .vine-box-style-1 {
+        min-height: 360px;
+    }
 }
 
 @media only screen and (min-width : 768px) and (max-width : 998px) {    
@@ -3374,6 +3399,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .vine-boxes{
       padding: 0!important;
       margin: 0 auto!important;
+    }
+
+    .star-rating {
+        bottom: 5px;
     }
 
     .vine-box-style-3 .image-container i{
@@ -3803,8 +3832,17 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         max-width: 0 0 33.333333%;
     }
     .shipping-regions ul li {
-    grid-column: span 6;
-   }
+        grid-column: span 6;
+    }
+    .other-pictures, .new-wine-photos .front-picture {
+        text-align: center;
+    }
+    .other-pictures label{
+        justify-content: center;
+    }
+    .other-pictures-img{
+        margin-bottom: 20px;
+    }
 }
 @media only screen and (min-width : 1600px) {
   .home-slider, .home-slider .carousel-inner{
@@ -3817,6 +3855,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        flex-grow: 1;
      }
     .flex-center .w-100{
         text-align: center;
@@ -3824,11 +3863,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     .other_images_preview{
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         width: 100%;
     }
-    .other_images_preview img {
-    margin: 10px 3px 10px 3px;
+    .image-delete-holder {
+        margin: 10px 3px 10px 3px;
     }
  }   
 @media only screen and (max-width : 450px) {
@@ -3901,6 +3939,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .my-winery-head .button {
         padding: 5px 10px;
+    }
+    .new-wine-photos{
+        padding: 20px 0;
     }
 }
 
@@ -3992,8 +4033,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 /* OTHER */
 
 .image-delete-holder {
-    display: inline-block;
     position: relative;
+    flex: 0 0 91px;
+    margin: 0 7px 10px 0px;
 }
 
 .image-delete-holder a {
@@ -4014,11 +4056,11 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     z-index: 999;
 }
 .image-delete-holder .remove-icon{
-  color: #9b1f3d!important;
-  top: 3px;
-  right: -2px;
-  cursor: pointer;
-  z-index: 9999;
+    color: #9b1f3d!important;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+    z-index: 9999;
 }
 
 .card-errors{
