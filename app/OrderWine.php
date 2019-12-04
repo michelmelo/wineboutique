@@ -19,7 +19,7 @@ class OrderWine extends Model
     {
         return $this->belongsTo(Wine::class);
     }
-
+  
     public static function TotalPrice($orderWines) {
         $retVal = 0;
         foreach ($orderWines as $orderWine) {
@@ -40,5 +40,8 @@ class OrderWine extends Model
             }
         }
         return $retVal;
+    public function winery()
+    {
+        return $this->belongsTo(Winery::class);
     }
 }

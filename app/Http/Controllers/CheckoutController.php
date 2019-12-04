@@ -124,6 +124,9 @@ class CheckoutController extends Controller
                 }
             }
         }
+        if(count($cart)==0) {
+            return back();
+        }
 
         $sum = $cart->reduce(function($carry, $item) {
             return $carry + ($item->price * $item->pivot->quantity) + $item->shipping_price +

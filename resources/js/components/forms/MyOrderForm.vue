@@ -32,9 +32,10 @@
                                                 <div class="mb-2 order-row d-flex justify-content-between " v-for="wine_order in order.order_wines" v-bind:key="wine_order.id">
                                                     <div class="pr-3 d-inline " >
                                                         <span>{{ wine_order.quantity }}x </span>
-                                                        <a :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
+                                                        <a v-if="wine_order.wine" :href="'/wine/' + wine_order.wine.slug">{{ wine_order.wine.name}}</a>
+                                                        <b v-else>{{ wine_order.wine_name}}</b>
                                                         <span> from </span>
-                                                        <a :href="'/winery/' + wine_order.wine.winery.slug">{{ wine_order.wine.winery.name }}</a>
+                                                        <a :href="'/winery/' + wine_order.winery.slug">{{ wine_order.winery.name }}</a>
                                                     </div>
                                                     <strong>${{ singlePrice(wine_order) }}</strong>
                                                 </div>
@@ -95,7 +96,7 @@
         }),
         created: function() {
             const orders = JSON.parse(this.userOrders);
-            console.log(orders);
+            // console.log(orders);
             this.orders = orders;
         },
         methods: {
@@ -117,7 +118,7 @@
                 return retVal.toFixed(2);
             },
             singlePrice(order_wine){
-                console.log(order_wine);
+                // console.log(order_wine);
                 let totalPrice = order_wine.quantity * order_wine.price + order_wine.shipping_price + ((order_wine.quantity - 1) *order_wine.additional_shipping_price);
                 return totalPrice.toFixed(2);
             }

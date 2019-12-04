@@ -290,10 +290,9 @@
             addMoreShippings(){
                 this.existingShippings_.push({
                     ship_from: 0,
-                    // days_from: "",
-                    // days_to: "",
                     ship_to: [],
-                    price: "",
+                    price: 0,
+                    additional: 0,
                     is_free_shipping: false,
                     is_template: true
                 });

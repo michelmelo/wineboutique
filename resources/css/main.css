@@ -4020,3 +4020,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   cursor: pointer;
   z-index: 9999;
 }
+
+.card-errors{
+    color: red;
+}
