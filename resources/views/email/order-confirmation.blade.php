@@ -112,12 +112,11 @@
 									              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
 									                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
 									                  <tr>
-									                    <td align="left" style="font-size:0px;padding:10px 0;word-break:break-word;">
+									                    <td align="left" style="font-size:0px;padding:10px 0 0;word-break:break-word;">
 									                      <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;">
 									                        <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
 									                          <th style="padding:10px ;">Shipping / Status</th>
 									                          <th style="padding:10px ;">Wines ordered</th>
-{{--									                          <th style="padding:10px ;">Wine price/first shipping/each additional</th>--}}
 									                        </tr>
                                                               @foreach($order as $winery_id => $orders)
                                                               @foreach($orders as $wine_order)
@@ -136,14 +135,15 @@
 									                        </tr>
                                                               @endforeach
                                                               @endforeach
+                                                            <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px;background-color:#F2F2F2;">
+                                                              <td style="padding:10px ;">Total price</td>
+                                                              <td align="right" style="padding:10px ;"><strong>${{ \App\OrderWine::TotalPrice2($order) }}</strong></td>
+                                                          </tr>
 									                      </table>
 									                    </td>
 									                  </tr>
 									                </table>
-                                              <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px;background-color:#F2F2F2;">
-                                                  <td style="padding:10px ;">Total Price</td>
-                                                  <td align="right" style="padding:10px ;"><strong>${{ \App\OrderWine::TotalPrice2($order) }}</strong></td>
-                                              </tr>
+
 									              </div>
 									              <!--[if mso | IE]>
 									            </td>
