@@ -124,6 +124,7 @@ $(document).ready(function() {
         $('#otherImagePreview').cropper('destroy').attr('src', '/img/every-angle.jpg');
         $("#crop-error").hide();
         $("#cancel-crop-other-picture").hide();
+        $('#cropButtons').hide();
 
         var formData = new FormData();
         formData.append('image', $("#other_image")[0].files[0]);
@@ -140,7 +141,7 @@ $(document).ready(function() {
             contentType: false,
             success : function(response) {
                 $(`<input type="hidden" name="images[]" value="${response.id}" />`).appendTo("#inputs");
-                $(".other_images_preview").append('<div class="image-delete-holder"><img src="' + crop_image_preview + '"><a  class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
+                $(".other_images_preview").append('<div class="image-delete-holder"><img class="imagePreview" src="' + crop_image_preview + '"><a  class="remove-icon"><i class="fas fa-trash-alt"></i></a></div>');
               
 
                 $(".remove-icon").click(function(e){
@@ -177,6 +178,7 @@ function readURL(input, selector) {
             if(selector.is("#otherImagePreview")){
                 $("#crop-other-picture").show();
                 $("#cancel-crop-other-picture").show();
+                $('#cropButtons').show();
             }
             else{
                 $("#crop-picture").show();
