@@ -117,7 +117,7 @@
 									                        </tr>
                                                               @foreach($orders as $order_wine)
 									                        <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
-									                          <td style="padding: 5px 10px">
+									                          <td colspan="2" style="padding: 5px 10px">
 									                            <div>
 									                              <div style="display: inline;"> <span>{{ $order_wine->quantity }}x </span> <a href="{{ url('/') . '/wine/' . $order_wine->slug }}" style="color: #da8599;font-weight: 500;">{{ $order_wine->wine_name }}</a></div>
 									                              <div style="display: inline; float:right;">
