@@ -17,7 +17,20 @@
                     </thead>
                     <tbody>
                         <tr v-for="(order, index) in orders" v-bind:key="order.id">
-                            <td v-on:click="showDetails(order.id)" class="pointer">{{order.order_id}}</td>
+                            <td v-on:click="showDetails(order.id)" class="pointer position-relative">
+                                {{order.order_id}}
+                                <div v-if="order.id == order_to_show" class="order-info-box">                                   
+                                    <b class="mr-2">Order ID:</b> {{ order.order_id }}
+                                    <br>
+                                    <b class="mr-2">Delivery Address:</b> {{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}
+                                    <br>
+                                    <b class="mr-2">Delivery Company:</b> FedEx
+                                    <br>
+                                    <span v-for="ow in order.order_wines" v-bind:key="ow.id">
+                                        <b class="mr-2">Order Wine:</b>{{ow.wine.name}} - {{ow.status == 1 ? "Proccesing" : "Tracking number: " + ow.tracking}} <br>
+                                    </span>
+                                </div>
+                            </td>
                             <td>{{order.address.address_1}},<br> {{order.address.address_2}},<br> {{order.address.city}},<br> {{order.address.postal_code}}</td>
                             <td>FedEx <br> {{order.status == 1 ? "Processing" : order.status == 0 ? "Shipped" : "Cancelled"}}</td>
                             <td>
@@ -61,17 +74,6 @@
 
                 <p v-else>You have no orders yet.</p>
             </div>
-            <div v-if="order.id == order_to_show" v-for="order in orders" v-bind:key="order.id">
-                <b class="mr-2">Order ID:</b> {{ order.order_id }}
-                <br>
-                <b class="mr-2">Delivery Address:</b> {{order.address.address_1}}, {{order.address.address_2}}, {{order.address.city}}, {{order.address.postal_code}}
-                <br>
-                <b class="mr-2">Delivery Company:</b> FedEx
-                <br>
-                <span v-for="ow in order.order_wines" v-bind:key="ow.id">
-                    <b class="mr-2">Order Wine:</b>{{ow.wine.name}} - {{ow.status == 1 ? "Proccesing" : "Tracking number: " + ow.tracking}} <br>
-                </span>
-            </div>
         </div>
     </div>
 </template>
@@ -108,7 +110,11 @@
                 this.selectedOrders = {...selectedOrders};
             },
             showDetails(orderId) {
+              if(!this.order_to_show ||  this.order_to_show !== orderId ){
                 this.order_to_show = orderId;
+               }else{
+                this.order_to_show = null;
+               } 
             },
             price(order) {
                 let retVal = 0;
