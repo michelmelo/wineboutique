@@ -21,6 +21,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div v-if="addresses.length == 0">
+                <br>
+                <h3 class="text-center">No saved addresses</h3>
+            </div>
         </div>
         <div v-else>
             <h2>
