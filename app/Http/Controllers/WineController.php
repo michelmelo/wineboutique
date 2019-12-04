@@ -141,9 +141,12 @@ class WineController extends Controller
 
     public function show($wine)
     {
-        $wine = Wine::withTrashed()->where("slug", $wine)->first();
+        $wine = Wine::where("slug", $wine)->first();
+        if(!$wine) {
+            abort(404);
+        }
 
-        $regionID = $wine->winery->winery_shippings->pluck('ship_to');     
+        $regionID = $wine->winery->winery_shippings->pluck('ship_to');
         $shipping_regions = Region::whereIn('id', $regionID)->pluck('name');
         $user_regions = array();
 
@@ -151,14 +154,7 @@ class WineController extends Controller
 
                $user_regionsId = Auth::user()->addresses->pluck('region_id');
                $user_regions = Region::whereIn('id', $user_regionsId)->pluck('name')->toArray();
-            }      
-       
-
-     
-
-        if(!$wine) {
-            abort(404);
-        }
+            }
 
         return view('wines-single', [
             'wine' => $wine,

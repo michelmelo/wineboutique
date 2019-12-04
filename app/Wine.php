@@ -64,7 +64,8 @@ class Wine extends Model
         return [
             'slug' => [
                 'source' => 'name',
-                'onUpdate' => true
+                'onUpdate' => true,
+                'includeTrashed' => true,
             ]
         ];
     }
