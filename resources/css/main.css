@@ -2430,6 +2430,15 @@ footer p {
     padding: 2px;
 }
 
+.order-info-box{
+    position: absolute;
+    width: 320px;
+    background: #fff;
+    z-index: 2;
+    padding: 20px;
+    border: 1px solid;
+}
+
 
 
 /*=========================================================================================================================================================================================
@@ -3942,6 +3951,10 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
     }
     .new-wine-photos{
         padding: 20px 0;
+    }
+    .order-info-box {
+        width: 251px;
+        padding: 10px;
     }
 }
 
