@@ -3,11 +3,11 @@
 @section('content')
     <div class="container-fluid">
           <div class="row padding-row">
-            <h1 class="headline-2">Wines for "{{$searchstr}}"</h1>
+            <h1 class="headline-2">Wine results for "{{$searchstr}}":</h1>
         </div>
     </div>
     <div class="container">
-
+        @if(count($results)>0)
         <div class="row vine-boxes">
             @foreach ($results as $result)
                 <div class="col-xs-3 vine-box-style-3 style-3-2">
@@ -42,6 +42,11 @@
                 </div>
             @endforeach
         </div>
+        @else
+            <div class="center-text">
+                No wines found for your search.
+            </div>
+        @endif
         @if(count($results)>0)
             <div class="col-12 mt-4 mb-5 text-center">
                 @include('layouts.partials.load_more')
@@ -53,10 +58,11 @@
 
     <div class="container-fluid">
           <div class="row padding-row">
-            <h2 class="headline-2 m-0">Wineries Results for "{{$searchstr}}"</h2>
+            <h2 class="headline-2 m-0">Winery results for "{{$searchstr}}":</h2>
         </div>
     </div>
  <div class="container">
+     @if(count($winery_results)>0)
      <div class="row padding-row vine-boxes">
          @foreach ($winery_results as $result)
             <div class="col-lg-6 wineries-box px-0 ">
@@ -72,6 +78,11 @@
             </div>
          @endforeach
     </div>
+     @else
+         <div class="center-text">
+             No wineries found for your search.
+         </div>
+     @endif
     <!-------------------------------WINERIES----------------------->
 
     </div>
