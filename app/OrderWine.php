@@ -19,4 +19,9 @@ class OrderWine extends Model
     {
         return $this->belongsTo(Wine::class);
     }
+
+    public function winery()
+    {
+        return $this->belongsTo(Winery::class);
+    }
 }
