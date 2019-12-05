@@ -32,6 +32,10 @@
                         <span>{{email}}</span>
                     </td>
                 </tr>
+                <tr v-if="activated">
+                    <td>Activated:</td>
+                    <td>YES</td>
+                </tr>
             </table>
         </div>
     </div>
@@ -60,7 +64,8 @@
             disabledDates: {
                 from: new Date(new Date().setFullYear(new Date().getFullYear() - 21))
             },
-            focusedDate: null
+            focusedDate: null,
+            activated: false,
         }),
         created: function() {
             const user = JSON.parse(this.user);
@@ -71,6 +76,7 @@
             let d = new Date();
             d.setFullYear(d.getFullYear()-22);
             this.focusedDate = d;
+            this.activated = (user.email_verified_at !== "undefined") && (user.email_verified_at !== null);
         },
         methods: {
             toggleEditing() {

@@ -10,9 +10,9 @@
     <div class="container">
         <div class="footer-social">
             <h4>CONNECT WITH US</h4>
-            <a href="https://www.facebook.com/wineboutiqueus/"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/wineboutiqueus/"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com/WineBoutique_?lang=en"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/wineboutiqueus/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/wineboutiqueus/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/WineBoutique_?lang=en" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
 
@@ -33,5 +33,5 @@
             </ul>
         </div>
     </div>
-    <div class="copyright text-center">© 2018 - Wine Boutique | All Rights Reserved | <a href="https://executive-digital.com/" class="color-r" target="_blank">Web Development</a> by Executive Digital</div>
+    <div class="copyright text-center">© {{ date("Y") }} - Wine Boutique | All Rights Reserved | <a href="https://executive-digital.com/" class="color-r" target="_blank">Web Development</a> by Executive Digital</div>
 </footer>
