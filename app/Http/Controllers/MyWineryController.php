@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use App\WineryShipping;
 use Illuminate\Http\Request;
 use App\Varietal;
@@ -199,19 +200,21 @@ class MyWineryController extends Controller
                 }
             }
         }
-        if($update_order_status) {
+
+        $to = User::where('id', $order->user_id)->first();
+        if($to && $update_order_status) {
             $order->update(['status' => 0]);
             Mail::send('email.order-completed', [
                     'order' => $order->order_id,
-                    'user' => $user,
+                    'user' => $to,
                     'tracking' => $tracking_id,
                     'delivery' => $delivery,
                 ],
-                    function ($message) use ($user)
+                    function ($message) use ($to)
                     {
                         $message
-                            ->from("no-reply@wineboutique.com")
-                            ->to($user->email)->subject('Your order is on its way!');
+                            ->from("wineboutiquemerchant@gmail.com")
+                            ->to($to->email)->subject('Your order is on its way!');
                     });
         }
 
