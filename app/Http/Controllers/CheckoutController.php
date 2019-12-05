@@ -202,17 +202,19 @@ class CheckoutController extends Controller
         }
 
         foreach($wine_orders as $winery_id => $orders_per_winery) {
-            $mailData = [
-                'winery' => Winery::where('id', $winery_id)->first(),
-                'orders' => $orders_per_winery,
-                'id' => $new_order->order_id,
-            ];
-            Mail::send('email.order-created', $mailData,
-                function ($message) use ($item, $new_order)
-                {
-                    $message
-                        ->to($item->winery->user->email)->subject('New Order - ' . $new_order->order_id);
-                });
+            $winery = Winery::where('id', $winery_id)->first();
+            if($winery) {
+                $mailData = [
+                    'winery' => $winery,
+                    'orders' => $orders_per_winery,
+                    'id' => $new_order->order_id,
+                ];
+                Mail::send('email.order-created', $mailData,
+                    function ($message) use ($winery, $new_order) {
+                        $message
+                            ->to($winery->user->email)->subject('New Order - ' . $new_order->order_id);
+                    });
+            }
         }
 
 //        $address = Auth::user()->addresses()->where("default", 1)->first();

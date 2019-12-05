@@ -86,7 +86,15 @@
 	                                    	Great News!
 	                                    </p>
                                         <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #000000; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                        	Your Order <strong>{{ $order }}</strong> has been dispatched. Please expect to receive your items within <strong>{{ $delivery }}</strong> days.
+                                            Your Wine{{ count($order_wines)>1 ? 's' : '' }}:</p>
+                                        <ul>
+                                            @foreach($order_wines as $order_wine)
+                                                <li>{{ $order_wine->quantity }}x {{ $order_wine->wine_name }}</li>
+                                            @endforeach
+                                        </ul>
+                                        <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #000000; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
+                                            From Order <strong>{{ $order }}</strong> by <a href="{{ url('/winery/') . '/' . $winery->slug }}">{{ $winery->name }}</a>
+                                            ha{{ count($order_wines)>1 ? 've' : 's' }} been dispatched. Please expect to receive your items within <strong>{{ $delivery }}</strong> day{{ $delivery>1 ? 's' : '' }}.
                                         </p>
                                         <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #000000; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
                                         	Your tracking number is <strong>{{ $tracking }}</strong>, so please keep this email in your inbox for reference.

@@ -124,7 +124,7 @@
 									                          <td style="padding: 0 15px;">FedEx <br> Processing</td>
 									                          <td style="padding: 5px 10px">
 									                            <div><?php $winery = \App\Winery::where('id', $wine_order->winery_id)->first(); ?>
-									                              <div style="display: inline;"> <span>1x </span> <a href="{{ url('/') . '/wine/' .  $wine_order->slug }}" style="color: #da8599;font-weight: 500;">{{ $wine_order->wine_name }}</a> <span> from </span> <a href="{{ url('/') . '/winery/' . $winery->slug }}" style="color: #da8599;font-weight: 500;">{{ $winery->name }}</a> </div>
+									                              <div style="display: inline;"> <span>{{ $wine_order->quantity }}x </span> <a href="{{ url('/') . '/wine/' .  $wine_order->slug }}" style="color: #da8599;font-weight: 500;">{{ $wine_order->wine_name }}</a> <span> from </span> <a href="{{ url('/') . '/winery/' . $winery->slug }}" style="color: #da8599;font-weight: 500;">{{ $winery->name }}</a> </div>
 									                              <div style="display: inline; float:right;">
 {{--                                                                      <strong>${{$wine_order->price}}</strong>--}}
 {{--                                                                      <strong>${{$wine_order->shipping_price}}</strong>--}}
@@ -137,7 +137,7 @@
                                                               @endforeach
                                                             <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px;background-color:#F2F2F2;">
                                                               <td style="padding:10px ;">Total price</td>
-                                                              <td align="right" style="padding:10px ;"><strong>${{ \App\OrderWine::TotalPrice2($order) }}</strong></td>
+                                                              <td align="right" style="padding:10px ;"><strong>${{ number_format(\App\OrderWine::TotalPrice2($order), 2) }}</strong></td>
                                                           </tr>
 									                      </table>
 									                    </td>

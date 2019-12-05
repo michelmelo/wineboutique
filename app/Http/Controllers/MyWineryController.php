@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderWine;
 use App\User;
 use App\WineryShipping;
 use Illuminate\Http\Request;
@@ -131,6 +132,7 @@ class MyWineryController extends Controller
                 'wines.id as wine_id', 'wineries.name as winery_name', 'wines.price as wine_price', 'addresses.address_1', 'addresses.address_2',
                 'addresses.postal_code', 'addresses.city', 'regions.name as region_name')
             ->where("wines.winery_id", Auth::user()->winery->id)
+            ->orderBy('orders.created_at','desc')
             ->get();
 
         $orders = array();
@@ -204,18 +206,21 @@ class MyWineryController extends Controller
         $to = User::where('id', $order->user_id)->first();
         if($to && $update_order_status) {
             $order->update(['status' => 0]);
-            Mail::send('email.order-completed', [
-                    'order' => $order->order_id,
-                    'user' => $to,
-                    'tracking' => $tracking_id,
-                    'delivery' => $delivery,
-                ],
-                    function ($message) use ($to)
-                    {
-                        $message
-                            ->to($to->email)->subject('Your order is on its way!');
-                    });
         }
+        $mailData = [
+            'order' => $order->order_id,
+            'user' => $to,
+            'tracking' => $tracking_id,
+            'delivery' => $delivery,
+            'winery' => $user->winery,
+            'order_wines' => OrderWine::where(['order_id' => $order->id, 'winery_id' => $user->winery->id])->get(),
+        ];
+        Mail::send('email.order-completed', $mailData,
+            function ($message) use ($to)
+            {
+                $message
+                    ->to($to->email)->subject('Your order is on its way!');
+            });
 
 
 //        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id, "delivery" => $delivery])){

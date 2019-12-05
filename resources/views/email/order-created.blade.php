@@ -131,7 +131,7 @@
                                                               @endforeach
 									                        <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px;background-color:#F2F2F2;">
 									                          <td style="padding:10px ;">Total Price</td>
-									                          <td align="right" style="padding:10px ;"><strong>${{ \App\OrderWine::TotalPrice($orders) }}</strong></td>
+									                          <td align="right" style="padding:10px ;"><strong>${{ number_format(\App\OrderWine::TotalPrice($orders),2) }}</strong></td>
 									                        </tr>
 									                      </table>
 									                    </td>

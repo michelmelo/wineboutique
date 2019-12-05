@@ -126,11 +126,11 @@
         <div class="popup-body text-center">
             <div class="col-xs-8 col-xs-push-2">
                 <div class="form-inputs">
-                    <label for="tracking_id">Tracking ID</label>
+                    <label for="tracking_id">Please enter the Tracking ID:</label>
                     <input type="text" name="tracking_id" id="tracking_id"  required>
                 </div>
                 <div class="form-inputs mt-3">
-                    <label for="tracking_id" >Estimated delivery time</label>
+                    <label for="tracking_id" >Estimated delivery time (days):</label>
                     <input type="number" name="delivery" id="delivery" min="1" required>
                 </div>
                 <br>
