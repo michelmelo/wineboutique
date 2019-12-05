@@ -192,7 +192,6 @@ class CheckoutController extends Controller
 //                            function ($message) use ($item, $new_order)
 //                            {
 //                                $message
-//                                    ->from("no-reply@wineboutique.com")
 //                                    ->to($item->winery->user->email)->subject('New Order - ' . $new_order->id);
 //                            });
                     }
@@ -212,7 +211,6 @@ class CheckoutController extends Controller
                 function ($message) use ($item, $new_order)
                 {
                     $message
-                        ->from("wineboutiquemerchant@gmail.com")
                         ->to($item->winery->user->email)->subject('New Order - ' . $new_order->order_id);
                 });
         }
@@ -230,7 +228,6 @@ class CheckoutController extends Controller
         function ($message) use ($user)
         {
             $message
-                ->from("wineboutiquemerchant@gmail.com")
                 ->to($user->email)->subject('Thank you for your order!');
         });
 

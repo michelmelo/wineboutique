@@ -228,7 +228,6 @@ class MyWineryController extends Controller
 //                    function ($message) use ($user)
 //                    {
 //                        $message
-//                            ->from("no-reply@wineboutique.com")
 //                            ->to($user->email)->subject('Order completed');
 //                    });
 //            }
