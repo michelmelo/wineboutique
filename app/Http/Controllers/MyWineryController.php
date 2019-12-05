@@ -213,7 +213,7 @@ class MyWineryController extends Controller
                     function ($message) use ($to)
                     {
                         $message
-                            ->from("wineboutiquemerchant@gmail.com")
+                            ->from(['address' => "wineboutiquemerchant@gmail.com", 'name' => 'Wine Boutique'])
                             ->to($to->email)->subject('Your order is on its way!');
                     });
         }
