@@ -1,6 +1,7 @@
 <template>
     <div class="section">
         <form action="/checkout/complete" method="post">
+            <input type="hidden" name="date" :value="dateC">
             <slot>
 
             </slot>
@@ -8,8 +9,8 @@
                 <h1 class="headline-2">CHECKOUT</h1>
                 <div class="col-md-12">
                     <article class="card mb-2">
-                        <div class="card-body p-2">
-                            <h5 class="card-title">Ship to</h5>
+                        <div class="card-body p-3">
+                            <p class="card-title"><b>Ship to</b></p>
                             <template v-if="selecting">
                                 <table class="table table-striped table-hover">
                                     <tbody>
@@ -25,7 +26,7 @@
                                             </p>
                                         </td>
                                         <td>
-                                            <a href="#" class="button red-button button-small" @click.prevent="switchAddress(address)">Ship
+                                            <a href="#" class="button red-button button-small d-inline-block" @click.prevent="switchAddress(address)">Ship
                                                 here</a>
                                         </td>
                                     </tr>
@@ -114,29 +115,35 @@
                             </template>
                             <template v-else>
                                 <template v-if="selectedAddress">
-                                    <p>
-                                        {{selectedAddress.name}}<br>
-                                        {{selectedAddress.address_1}}<br>
-                                        <!-- {{selectedAddress.address_2}}<br> -->
-                                        {{selectedAddress.city}}<br>
-                                        {{selectedAddress.postal_code}}<br>
-                                        {{selectedAddress.region.name}}
-                                    </p>
+                                    <table class="table table-striped table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    {{selectedAddress.name}},&nbsp;
+                                                    {{selectedAddress.address_1}},&nbsp;
+                                                    <!-- {{selectedAddress.address_2}}<br> -->
+                                                    {{selectedAddress.city}},&nbsp;
+                                                    {{selectedAddress.postal_code}},&nbsp;
+                                                    {{selectedAddress.region.name}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </template>
 
-                                <button type="button" class="button red-button button-small" @click.prevent="selecting = true"
+                                <span class="button red-button button-small mx-2 d-inline-block" @click.prevent="selecting = true"
                                         v-if="addresses.length>1">Change shipping address
-                                </button>
-                                <a href="/my-address" class="button red-button button-small">Add an address</a>
+                                </span>
+                                <a href="/my-address" class="button red-button button-small d-inline-block">Add an address</a>
                             </template>
                         </div>
                     </article>
 
                     <article class="card mb-2">
-                        <div class="card-body p-2">
-                            <h5 class="card-title">
-                                Shipping
-                            </h5>
+                        <div class="card-body p-3">
+                            <p class="card-title">
+                                <b>Shipping</b>
+                            </p>
                             <select class="form-control">
                                 <option>
                                     FedEx
@@ -147,19 +154,17 @@
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <h5 class="card-title">
-                                Cart summary
-                            </h5>
-                            <Cart :showComplete="false"/>
+
+                            <Cart :showComplete="false" :canPay="checkIfCanPay"/>
                         </div>
                     </article>
 
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment">
+                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment && canMakePayment">
                                 Place order
                             </button>
-                            <a href="/my-payments" class="text-red font-weight-bold" v-else>Add payment method please</a>
+                            <a href="/my-payments" class="text-red font-weight-bold" v-if="!hasPayment">Add payment method please</a>
                         </div>
                     </article>
                 </div>
@@ -189,6 +194,7 @@
         ],
         data() {
             return {
+                canMakePayment: false,
                 selecting: false,
                 creating: false,
                 addresses: [],
@@ -203,13 +209,18 @@
                     region_id: '',
                     default: true
                 },
-                showErrors: false
+                showErrors: false,
+                dateC: null,
             }
         },
         mounted() {
             this.asyncData();
+            this.dateC = (new Date()).toLocaleDateString();
         },
         methods: {
+            checkIfCanPay: function(v) {
+                this.canMakePayment = v
+            },
             addToCart() {
                 axios.post('/cart', {
                     wines: [{
@@ -291,6 +302,7 @@
                 if (addresses.length === 0) {
                     alert("You must enter address to place order.");
                 }
+                this.dateC = (new Date()).toLocaleDateString();
             },
         },
         computed: {

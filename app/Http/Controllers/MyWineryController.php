@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderWine;
+use App\User;
 use App\WineryShipping;
 use Illuminate\Http\Request;
 use App\Varietal;
@@ -63,32 +64,35 @@ class MyWineryController extends Controller
             $do_save = true;
             $do_edit = !is_null($shippings["id"]);
 
-            foreach ($shippings as $key => $shipping){
-                if((is_null($shipping) && $key != "id") || (is_null($shipping) && $do_edit)){
+            foreach ($shippings as $key => $shipping) {
+                if ((is_null($shipping) && $key != "id" && $key != 'additional') || (is_null($shipping) && $do_edit)) {
                     $do_save = false;
                 }
             }
 
-            if($do_save){
-                if(isset($shippings['shipping_free'])){
+            if ($do_save) {
+                if (isset($shippings['shipping_free'])) {
                     $shippings['price'] = 0;
                     $shippings['additional'] = 0;
 
                     unset($shippings['shipping_free']);
                 }
 
-                if($do_edit){
-                    WineryShipping::where('id', $shippings["id"])->update($shippings);
+                if(!isset($shippings['additional'])||$shippings['additional']==null) {
+                    $shippings['additional'] = 0;
                 }
-                else{
-                    foreach ($shippings['ship_to'] as $to){
+
+                if ($do_edit) {
+                    WineryShipping::where('id', $shippings["id"])->update($shippings);
+                } else {
+                    foreach ($shippings['ship_to'] as $to) {
                         $winery->winery_shippings()->create([
                             "ship_from" => $shippings['ship_from'],
                             "ship_to" => $to,
                             "price" => $shippings['price'],
                             "additional" => $shippings['additional'],
-                            "days_from" => $shippings['days_from'],
-                            "days_to" => $shippings['days_to']
+//                            "days_from" => $shippings['days_from'],
+//                            "days_to" => $shippings['days_to']
                         ]);
                     }
                 }
@@ -101,6 +105,18 @@ class MyWineryController extends Controller
             'capacity_units' => CapacityUnit::all(),
             'wines' => $request->user()->winery->wines
         ]);
+    }
+
+    private function countOrders($orders) {
+        $retVal = 0;
+        $temp = [];
+        foreach($orders as $order) {
+            if(!in_array($order->order_id, $temp)) {
+                $temp[] = $order->order_id;
+                $retVal++;
+            }
+        }
+        return $retVal;
     }
 
     public function stats()
@@ -116,12 +132,13 @@ class MyWineryController extends Controller
                 'wines.id as wine_id', 'wineries.name as winery_name', 'wines.price as wine_price', 'addresses.address_1', 'addresses.address_2',
                 'addresses.postal_code', 'addresses.city', 'regions.name as region_name')
             ->where("wines.winery_id", Auth::user()->winery->id)
+            ->orderBy('orders.created_at','desc')
             ->get();
 
         $orders = array();
 
         $status = [
-            "order_count" => count($tmp_orders),
+            "order_count" => $this->countOrders($tmp_orders),
             "bottle_count" => 0,
             "best_selling_wine" => "",
             "best_selling_state" => "",
@@ -148,7 +165,7 @@ class MyWineryController extends Controller
                             "id" => $order->wine_id
                         ]
                     ],
-                    "status" => $order->order_status,
+                    "status" => $order->wine_status,
                     "order_date" => $order->order_date,
                 ];
             }
@@ -165,32 +182,61 @@ class MyWineryController extends Controller
         ]);
     }
 
-    public function order_update($order_id, $wine_id, $tracking_id, $delivery)
+    public function order_update($order_id, $tracking_id, $delivery)
     {
         $user = Auth::user();
-        $wine = $user->winery->wines()->where("id", $wine_id)->first();
-
-        if(!$wine){
-            return redirect("my-winery-stats")->with("error", "Permission denied");
-        }
 
         $order = Order::where("order_id", $order_id)->first();
 
-        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id, "delivery" => $delivery])){
-            if(count($order->order_wines()->where("status", 1)->get()) == 0){
-                $order->update(["status" => 2]);
+        if(!$order) {
+            return abort(404);
+        }
 
-                Mail::send('email.order-completed', [
-                    'order' => $order->order_id,
-                ],
-                    function ($message) use ($user)
-                    {
-                        $message
-                            ->from("no-reply@wineboutique.com")
-                            ->to($user->email)->subject('Order completed');
-                    });
+        $update_order_status = true;
+        foreach($order->order_wines()->get() as $order_wine) {
+            if($order_wine->winery_id===$user->winery->id) {
+                $order_wine->update(["status" => 0, "tracking" => $tracking_id, "delivery" => $delivery]);
+            } else {
+                if ($order_wine->status === 1) {
+                    $update_order_status = false;
+                }
             }
         }
+
+        $to = User::where('id', $order->user_id)->first();
+        if($to && $update_order_status) {
+            $order->update(['status' => 0]);
+        }
+        $mailData = [
+            'order' => $order->order_id,
+            'user' => $to,
+            'tracking' => $tracking_id,
+            'delivery' => $delivery,
+            'winery' => $user->winery,
+            'order_wines' => OrderWine::where(['order_id' => $order->id, 'winery_id' => $user->winery->id])->get(),
+        ];
+        Mail::send('email.order-completed', $mailData,
+            function ($message) use ($to)
+            {
+                $message
+                    ->to($to->email)->subject('Your order is on its way!');
+            });
+
+
+//        if($order->order_wines()->where("wine_id", $wine_id)->update(["status" => 2, "tracking" => $tracking_id, "delivery" => $delivery])){
+//            if(count($order->order_wines()->where("status", 1)->get()) == 0){
+//                $order->update(["status" => 2]);
+//
+//                Mail::send('email.order-completed', [
+//                    'order' => $order->order_id,
+//                ],
+//                    function ($message) use ($user)
+//                    {
+//                        $message
+//                            ->to($user->email)->subject('Order completed');
+//                    });
+//            }
+//        }
 
         return redirect("my-winery-stats")->with("success", "Wine sent");
     }

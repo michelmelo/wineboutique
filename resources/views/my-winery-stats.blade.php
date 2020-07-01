@@ -16,6 +16,7 @@
                                 <th scope="col">Address</th>
                                 <th scope="col">Shipping</th>
                                 <th scope="col">Ordered Date</th>
+                                <th scope="col">Shipping Status</th>
                                 <th scope="col">Wines</th>
                             </tr>
                         </thead>
@@ -26,20 +27,51 @@
                                     <td>{{$value["address"]}}</td>
                                     <td>FedEx</td>
                                     <td>{{$value["order_date"]}}</td>
-                                    <td>
-                                        @foreach($value["wines"] as $wine)
-                                            @if($wine["status"] == 1)
-                                                <div>
-                                                    {{ $wine["name"] }} ({{$wine["quantity"]}}) - <a class="send-wine" href="/my_winery/order-update/{{$key}}/{{$wine["id"]}}">Send</a>
+                                    <td>@if($value["status"] == 1)
+                                     <a class="send-wine" href="/my_winery/order-update/{{$key}}">Send</a>
+                                      @else
+                                       Wine(s) sent
+                                       @endif
+                                       </td>
+                                    <td><span class="order-details details-popup">Details...</span>
+                                        <!----------POPUP----------------->
+
+                                 <div class="orders-popup is-visible op-none op-one" >
+                                       <div class="popup-container">
+                                        <span class="popup-close img-replace details-close">Close</span>
+                                            <div class="popup-head">
+                                              <h2 class="text-center text-uppercase"><strong>Order: {{$key}}</strong></h2>
+                                            </div>
+                                            <div class="popup-body mb-5">
+                                             @foreach($value["wines"] as $wine)
+
+                                                <div class="mb-2 order-row d-flex justify-content-between " >
+                                                   <div class="pr-3 d-inline text-left" >
+                                                            <span>{{$wine["quantity"]}} x </span>
+                                                            <a>{{ $wine["name"] }} </a>
+                                                      </div>
+
                                                 </div>
-                                            @else
-                                                <div>
-                                                    {{ $wine["name"] }} ({{$wine["quantity"]}}) - Wine sent
-                                                </div>
-                                            @endif
-                                        @endforeach
+
+                                            @endforeach
+                                            </div>
+                                            <div class="text-center py-5">
+                                                <span href="#0" class="button red-button  details-close" >
+                                                    <i class="fas fa-times"></i> CLOSE
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                </div>
+                                  <!----------POPUP----------------->
                                     </td>
                                 </tr>
+
+
+
+
+
+
                             @endforeach
                         </tbody>
                     </table>
@@ -74,10 +106,10 @@
                                 <td>Total Revenue</td>
                                 <td>${{ $stats["order_money_sum"] }}</td>
                             </tr>
-                            <tr>
-                                <td>X Active Wines</td>
-                                <td>-</td>
-                            </tr>
+{{--                            <tr>--}}
+{{--                                <td>X Active Wines</td>--}}
+{{--                                <td>-</td>--}}
+{{--                            </tr>--}}
                         </tbody>
                     </table>
                 </div>
@@ -94,10 +126,12 @@
         <div class="popup-body text-center">
             <div class="col-xs-8 col-xs-push-2">
                 <div class="form-inputs">
-                    <input type="text" name="tracking_id" id="tracking_id" placeholder="Tracking ID" required>
+                    <label for="tracking_id">Please enter the Tracking ID:</label>
+                    <input type="text" name="tracking_id" id="tracking_id"  required>
                 </div>
-                <div class="form-inputs">
-                    <input type="number" name="delivery" id="delivery" placeholder="Estimated delivery time" required>
+                <div class="form-inputs mt-3">
+                    <label for="tracking_id" >Estimated delivery time (days):</label>
+                    <input type="number" name="delivery" id="delivery" min="1" required>
                 </div>
                 <br>
             </div>

@@ -17,29 +17,34 @@
                 <p class="error-message" id="main-img-err" style="display: none;">You must specify a main image.</p>
                 <label >
                     <input type="file" name="photo" id="picture" style="display: none; cursor: pointer;" required>
-                    <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview" data-default="{{asset('img/primary-photo.jpg')}}">
+                    <img src="{{asset('img/primary-photo.jpg')}}" id="imagePreview" class="front-image" data-default="{{asset('img/primary-photo.jpg')}}">
                 </label>
                   <div class="w-100">
                     <input type="submit" id="crop-picture" value="Crop" style="display:none; width: 200px;" class="red-button button mb-2">
                     <input type="submit" id="cancel-crop-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
-                 </div>  
+                 </div>
                 <input type="hidden" name="cropx" id="cropx" value="226">
                 <input type="hidden" name="cropy" id="cropy" value="250">
                 <input type="hidden" name="cropwidth" id="cropwidth" value="0">
                 <input type="hidden" name="cropheight" id="cropheight" value="0">
             </div>
-            <div class="col-lg-8 col-sm-12 pr-lg-0 flex-center">
+            <div class="col-lg-8 col-sm-12 pr-lg-0 flex-center other-pictures">
                 <p class="w-100">Other pictures</p>
-                <label class="flex-center">
-                    <input type="file" id="other_image" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
-                     <div class="w-100">   
-                        <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button my-2">
-                        <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
-                    </div>
-                    <div class="other_images_preview"></div>
-                </label>
+                <div class="d-flex flex-wrap">
+                    <label class="flex-center mb-5">
+                        <input type="file" id="other_image" style="display: none; cursor: pointer;" >
+                        <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" class="other-pictures-img " data-default="{{asset('img/every-angle.jpg')}}">
+                         <div class="w-100">
+                            <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button my-2">
+                            <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
+                        </div>
+                    </label>
+                    <div class="other_images_preview d-flex"></div>
+                </div>
             </div>
+            <span class="help-block">
+                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+            </span>
         </div>
 
         <div class="shadow-box row details">
@@ -112,7 +117,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="wine_region" id="wine_region">
+                        <select name="wine_region_id" id="wine_region">
                             <option value="" disabled selected>Wine Region</option>
                             @foreach($wine_regions as $wine_region)
                                 <option value="{{$wine_region->id}}">{{ $wine_region->name }}</option>

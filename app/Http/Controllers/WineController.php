@@ -141,14 +141,25 @@ class WineController extends Controller
 
     public function show($wine)
     {
-        $wine = Wine::withTrashed()->where("slug", $wine)->first();
-
+        $wine = Wine::where("slug", $wine)->first();
         if(!$wine) {
             abort(404);
         }
 
+        $regionID = $wine->winery->winery_shippings->pluck('ship_to');
+        $shipping_regions = Region::whereIn('id', $regionID)->pluck('name');
+        $user_regions = array();
+
+            if(Auth::user() && Auth::user()->type == "CUSTOMER"){
+
+               $user_regionsId = Auth::user()->addresses->pluck('region_id');
+               $user_regions = Region::whereIn('id', $user_regionsId)->pluck('name')->toArray();
+            }
+
         return view('wines-single', [
             'wine' => $wine,
+            'shipping_regions' => $shipping_regions,
+             'user_regions' => $user_regions,
             'wine_images' => WineImage::where('wine_id', $wine->id)->get(),
             'orders_count' =>  DB::table('orders')
                 ->selectRaw('COUNT(id) as cnt')
@@ -193,7 +204,7 @@ class WineController extends Controller
         }
 
         if(array_key_exists('region', $filter)) {
-            $wines = $wines->whereIn('region_id', $filter['region']);
+            $wines = $wines->whereIn('wine_region_id', $filter['region']);
         }
 
         if(array_key_exists('price', $filter)) {

@@ -42,11 +42,12 @@ class CartController extends Controller
 
         if($user_default_region){
             foreach ($wines as $wine){
+                $wine->shipping = false;
                 foreach ($wine->winery->winery_shippings as $shipping){
                     if($user_default_region->region_id == $shipping->ship_to){
                         $wine->shipping_price = $shipping->price;
                         $wine->shipping_additional = $shipping->additional;
-
+                        $wine->shipping = true;
                         break;
                     }
                 }

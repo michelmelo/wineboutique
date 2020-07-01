@@ -92,6 +92,12 @@
             @foreach($wines as $wine)
                 @include('hot-seller')
             @endforeach
+            @if(count($wines)===0)
+                <div class="no-wines">
+                    <h2 class="color-r"> <strong>Unfortunately</strong> </h2>
+                    <p>There are no wines matching the filters you have selected.</p>
+                </div>
+            @endif
         </div>
 
         @if(count($wines) > 0 && $wine_count > count($wines))

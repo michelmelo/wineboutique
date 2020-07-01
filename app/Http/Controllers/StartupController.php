@@ -40,11 +40,10 @@ class StartupController extends Controller
             $do_save = true;
 
             foreach ($shippings as $shipping){
-                if(is_null($shipping)){
+                if(is_null($shipping) && $shipping == 'additional'){
                     $do_save = false;
                 }
             }
-
             if($do_save){
                 if(isset($shippings['shipping_free'])){
                     $shippings['price'] = 0;
@@ -52,14 +51,18 @@ class StartupController extends Controller
                     unset($shippings['shipping_free']);
                 }
 
+                if(!isset($shippings['additional'])||$shippings['additional']==null) {
+                    $shippings['additional'] = 0;
+                }
+
                 foreach ($shippings['ship_to'] as $to){
-                    $winery->winery_shippings()->create([
+                    $ship = $winery->winery_shippings()->create([
                         "ship_from" => $shippings['ship_from'],
                         "ship_to" => $to,
                         "price" => $shippings['price'],
                         "additional" => $shippings['additional'],
-                        "days_from" => $shippings['days_from'],
-                        "days_to" => $shippings['days_to']
+//                        "days_from" => $shippings['days_from'],
+//                        "days_to" => $shippings['days_to']
                     ]);
                 }
             }
@@ -120,13 +123,15 @@ class StartupController extends Controller
             $user_payment->stripe_customer_id = $stripe->id;
             $user_payment->stripe_card_id = !is_null($stripe->default_source) ? $stripe->default_source : "";
             $user_payment->alias = $request->alias;
-            $user_payment->is_default = true;
+            $user_payment->is_default = 1;
 
             $user_payment->save();
 
             UserPayment::where("id", "!=", $user_payment->id)->where("user_id", $user->id)->update(["is_default" => 0]);
 
         }
+
+        $user->update(['completed' => 1]);
 
         return redirect()->route('my-winery')->with('message', 'Application sent.');
     }

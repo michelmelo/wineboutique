@@ -110,15 +110,19 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <form id="main-search-form-mob" class="form-inline" method="get" action="{{route('search')}}">
-                <input id="main-search-mob" class="form-control mr-sm-2 search-shadow input-width" type="search" name="s" placeholder="Search for wines..." aria-label="Search" required>
+            <form id="main-search-form" class="form-inline" method="get" action="{{route('search')}}">
+                <input id="main-search-mob" class="form-control mr-sm-2 search-shadow input-width" type="search" name="s" placeholder="Search for wines..." aria-label="Search" autocomplete="off" required>
                 <button class="btn my-2 my-sm-0 search" type="submit"><i class="fas fa-search"></i></button>
             </form>
              <div class="search-results-mob"></div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+            <div id="warrning" class="error-block d-none mx-auto">
+                <div>
+                    <p>Please fill out this field.</p>
+                </div>
+            </div>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">

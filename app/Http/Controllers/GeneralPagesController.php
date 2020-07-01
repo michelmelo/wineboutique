@@ -20,7 +20,7 @@ class GeneralPagesController extends Controller
 
         $wines = Wine::query();
 
-        $wines = $wines->where("quantity", ">", 0);
+        $wines = $wines->where("wines.quantity", ">", 0);
 
         if(array_key_exists('varietal', $filter)) {
             $wines = $wines->whereIn('varietal_id', $filter['varietal']);
@@ -35,17 +35,17 @@ class GeneralPagesController extends Controller
             $wines = $wines->where(function($q) use ($prices) {
                 $useOr = false;
                 if(in_array(1, $prices)) {
-                    $q->whereBetween('price', [5, 50]);
+                    $q->whereBetween('wines.price', [5, 50]);
                     $useOr = true;
                 }
 
                 if(in_array(2, $prices)) {
-                    $useOr?$q->orWhereBetween('price', [51, 100]):$q->whereBetween('price', [51, 100]);
+                    $useOr?$q->orWhereBetween('wines.price', [51, 100]):$q->whereBetween('wines.price', [51, 100]);
                     $useOr = true;
                 }
 
                 if(in_array(3, $prices)) {
-                    $useOr?$q->orWhere('price', '>', 100):$q->where('price', '>', 100);
+                    $useOr?$q->orWhere('wines.price', '>', 100):$q->where('wines.price', '>', 100);
                 }
             });
         }
@@ -79,8 +79,8 @@ class GeneralPagesController extends Controller
 
         return view('new-arrivals', [
             'wines' => $wines->limit(12)
-                ->leftJoin('orders', 'wines.id', '=', 'orders.id')
-                ->select(DB::raw('wines.*, count(orders.id) as orders_count'))
+                ->leftJoin('order_wines', 'order_wines.wine_id', '=', 'wines.id')
+                ->select(DB::raw('wines.*, sum(order_wines.quantity) as orders_count'))
                 ->groupBy('wines.id')
                 ->orderBy('wines.created_at', 'desc')
                 ->get(),
@@ -120,17 +120,17 @@ class GeneralPagesController extends Controller
                 $useOr = false;
 
                 if(in_array(1, $prices)) {
-                    $q->whereBetween('price', [5, 50]);
+                    $q->whereBetween('wines.price', [5, 50]);
                     $useOr = true;
                 }
 
                 if(in_array(2, $prices)) {
-                    $useOr?$q->orWhereBetween('price', [51, 100]):$q->whereBetween('price', [51, 100]);
+                    $useOr?$q->orWhereBetween('wines.price', [51, 100]):$q->whereBetween('wines.price', [51, 100]);
                     $useOr = true;
                 }
 
                 if(in_array(3, $prices)) {
-                    $useOr?$q->orWhere('price', '>', 100):$q->where('price', '>', 100);
+                    $useOr?$q->orWhere('wines.price', '>', 100):$q->where('wines.price', '>', 100);
                 }
             });
         }

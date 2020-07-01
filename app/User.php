@@ -29,7 +29,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'phone',
         'type',
-        'birthday'
+        'birthday',
+        'completed',
     ];
 
     protected $dates = [

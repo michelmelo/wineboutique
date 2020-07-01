@@ -45,7 +45,7 @@ class MailVarifyNotification extends Notification
         }
 
         return (new MailMessage)
-            ->subject('Verify Email Address')
+            ->subject('Complete Registration')
             ->line("Thank you for signing up with us!")
             ->line("You're almost done! Complete your registration and verify your account by clicking on following button:")
             ->action(

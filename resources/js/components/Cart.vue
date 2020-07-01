@@ -19,7 +19,7 @@
                                     <div class="d-flex justify-content-between align-items-end w-100">
                                         <div class="product-shipping">
                                             <div class="shipping">
-                                                <span v-if="wine.shipping_price">Shipping:<br> {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
+                                                <span v-if="wine.shipping">Shipping:<br> {{wine.shipping_price + (wine.shipping_additional * (wine.pivot.quantity - 1)) | currency}}</span>
                                                 <span v-else>
                                                     Winery is not shipping to your state, please remove wine or
                                                     <a href="/my-address" class="text-red font-weight-bold">change shipping state</a>
@@ -58,10 +58,6 @@
                         <td>Shipping:</td>
                         <td>{{ (getShippingTotal() || 0) | currency }}</td>
                     </tr>
-                    <tr>
-                        <td>Sales Tax:</td>
-                        <td>$0.00</td>
-                    </tr>
                 </table>
                 <table class="cart-table-total">
                     <tr>
@@ -70,7 +66,7 @@
                     </tr>
                 </table>
                 <div class="row cart-buttons">
-                    <a href="/checkout" class="button red-button full-width" v-if="showComplete && hasShippingAddress()">CHECKOUT</a>
+                    <a href="/checkout" class="button red-button full-width" v-if="showComplete && hasShippingAddress(wines)">CHECKOUT</a>
                     <a href="/wines" class="button pink-button full-width">CONTINUE SHOPPING</a>
                 </div>
             </div>
@@ -84,7 +80,8 @@
 <script>
     export default {
         props: [
-            'showComplete'
+            'showComplete',
+            'canPay'
         ],
         data: function() {
             return {
@@ -106,22 +103,32 @@
             this.getCart();
         },
         methods: {
-            hasShippingAddress() {
-                var status = true;
+            hasShippingAddress(wines) {
+                // use this
+                return wines.filter(({shipping}) => !shipping).length === 0
 
-                this.wines.forEach(function(item, index){
-                    if(!item.shipping_price){
-                        status = false;
-                        return false;
-                    }
-                });
+                // not this
+                // var status = true;
+                //
+                // this.wines.forEach(function(item, index){
+                //     if(!item.shipping){
+                //         status = false;
+                //         return false;
+                //     }
+                // });
+                //
+                // return status;
 
-                return status;
+
             },
             getCart() {
                 axios.get('/cart/get')
                     .then(response => {
                        this.wines = response.data.wines;
+                       if(this.canPay) {
+                           this.canPay(this.hasShippingAddress(this.wines))
+                       }
+
                        this.fetchedFirst = true;
                     })
                     .catch(error => console.log(error));

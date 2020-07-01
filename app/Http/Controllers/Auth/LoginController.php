@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -86,9 +87,10 @@ class LoginController extends Controller
         return redirect()->to('/');
     }
 
-    public function FacebookCallback() {
+    public function FacebookCallback()
+    {
         try {
-            $user = Socialite::with ('facebook')->user();
+            $user = Socialite::with('facebook')->user();
         } catch (\Exception $e) {
             return redirect('/login');
         }
@@ -96,17 +98,17 @@ class LoginController extends Controller
         $fullName = explode(' ', $user->name);
         $existingUser = User::where('email', $user->email)->first();
 
-        if($existingUser){
+        if ($existingUser) {
             auth()->login($existingUser, true);
         } else {
-            $newUser                  = new User;
-            $newUser->firstName       = $fullName[0];
-            $newUser->lastName        = count($fullName) > 1 ? $fullName[1] : ' ';
-            $newUser->facebook_id     = $user->id;
-            $newUser->avatar          = $user->avatar;
+            $newUser = new User;
+            $newUser->firstName = $fullName[0];
+            $newUser->lastName = count($fullName) > 1 ? $fullName[1] : ' ';
+            $newUser->facebook_id = $user->id;
+            $newUser->avatar = $user->avatar;
             $newUser->avatar_original = $user->avatar_original;
-            $newUser->email           = $user->email;
-            $newUser->type            = "CUSTOMER";
+            $newUser->email = $user->email;
+            $newUser->type = "CUSTOMER";
 
             $newUser->save();
 
@@ -114,5 +116,12 @@ class LoginController extends Controller
         }
 
         return redirect()->to('/');
+    }
+
+    protected function redirectTo() {
+        if(Auth::user()->type === User::$types['seller']) {
+            return '/my-winery';
+        }
+        return '/';
     }
 }

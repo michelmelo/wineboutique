@@ -35,14 +35,15 @@
                 </div>
                 <input type="submit" name="submit" class="button red-button full-width" value="SIGN IN">
                 <div class="other-login">
-                    <div class="google-login">
-                        <a href="{{url('/redirect/google')}}">Login in with Google</a>
-                    </div>
-                    <div class="google-login">
+                    <div class="google-login regular">
                         <a href="{{route('register')}}">Create Account</a>
                     </div>
-                    <div class="facebook-login">
-                        <a href="{{url('/redirect/facebook')}}">Login in with Facebook</a>
+                    <div class="google-login  ">
+                        <a href="{{url('/redirect/google')}}"><i class="fab fa-google mr-2"></i> Continue with Google </a>
+                    </div>
+                    
+                    <div class="facebook-login ">
+                        <a href="{{url('/redirect/facebook')}}"><i class="fab fa-facebook-f mr-2"></i> Continue with Facebook</a>
                     </div>
                 </div>
             </form>

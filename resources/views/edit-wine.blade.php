@@ -8,39 +8,50 @@
         <h1 class="headline-2">EDIT WINE</h1>
 
         <div class="shadow-box row new-wine-photos">
-            <h2>PHOTOS</h2>           
-            <div class="col-lg-4 col-sm-12 mb-3">
-               <p class="w-100">Front bottle image *</p>
+            <h2>PHOTOS</h2>
+            <div class="col-lg-4 col-sm-12 mb-3 front-picture">
+               <p class="w-100">Front bottle image *</p> 
                 <label>
                     <input name="photo" style="display: none; cursor: pointer;" type="file" id="picture">
-                    <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview">
+                    <img src="{{ $wine->photo === null ? asset('img/primary-photo.jpg') : $wine->photo }}" id="imagePreview" class="front-image">
                 </label>
-
-                <input type="submit" id="crop-picture" value="Crop" style="display:none;">
-                <input type="hidden" name="cropx" id="cropx" value="226">
-                <input type="hidden" name="cropy" id="cropy" value="250">
-                <input type="hidden" name="cropwidth" id="cropwidth" value="0">
-                <input type="hidden" name="cropheight" id="cropheight" value="0">
+                <div>
+                    <input type="submit" id="crop-picture" value="Crop" class="red-button button" style="width: 200px;display:none;">
+                    <input type="hidden" name="cropx" id="cropx" value="226">
+                    <input type="hidden" name="cropy" id="cropy" value="250">
+                    <input type="hidden" name="cropwidth" id="cropwidth" value="0">
+                    <input type="hidden" name="cropheight" id="cropheight" value="0">
+                </div>
             </div>
 
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-8 col-sm-12 other-pictures">
                 <p class="w-100">Other pictures</p>
-                <label>
-                    <input type="file" id="other_image" style="display: none; cursor: pointer;" >
-                    <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}">
-                    @foreach($preloadedImages as $img)
-                        <div class="image-delete-holder">
-                            <img src="{{ $img['path'] }}" id="imagePreview">
-                            <a href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
-                                X
-                            </a>
+                <div class="d-flex flex-wrap">
+                    <label class="flex-center">
+                        <input type="file" id="other_image" style="display: none; cursor: pointer;" >
+                        <img src="{{asset('img/every-angle.jpg')}}" id="otherImagePreview" data-default="{{asset('img/every-angle.jpg')}}" class="other-pictures-img ">
+                        <div id="cropButtons" class="mb-4 w-100" style="display:none;">
+                            <input type="submit" id="crop-other-picture" value="Crop" style="display:none;" class="red-button button my-2" style="width: 200px;">
+                            <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none;" class="red-button button my-2" style="width: 200px;">
                         </div>
-                    @endforeach
-                    <input type="submit" id="crop-other-picture" value="Crop" style="display:none; width: 200px;" class="red-button button">
-                    <input type="submit" id="cancel-crop-other-picture" value="Cancel crop" style="display:none; width: 200px;" class="red-button button ">
-                    <div class="other_images_preview"></div>
-                </label>
+                    </label>
+                    <div class="d-flex flex-grow-1 flex-wrap pl-md-3">
+                        @foreach($preloadedImages as $img)
+                            <div class="image-delete-holder">
+                                <img src="{{ $img['path'] }}" id="imagePreview" class="imagePreview">
+                                <a class="removeImage" href="{{ route('wine-image-destroy', ['id' => $img['id']]) }}">
+                                    <input type="hidden" value="{{$img['id']}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="other_images_preview order-3 w-100 d-flex flex-grow-1"></div>
+                </div>
             </div>
+            <span class="help-block">
+                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+            </span>
         </div>
 
         <div class="shadow-box row details">
@@ -118,7 +129,7 @@
                     </div>
 
                     <div class="col-lg-8 col-sm-12">
-                        <select name="wine_region" id="wine_region">
+                        <select name="wine_region_id" id="wine_region">
                             @foreach($wine_regions as $wine_region)
                                 <option value="{{$wine_region->id}}" {{$wine_region->id==$wine->wine_region_id ? "selected" : ""}}>{{ $wine_region->name }}</option>
                             @endforeach

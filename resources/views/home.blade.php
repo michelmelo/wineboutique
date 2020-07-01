@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <a href="/wines" class="button red-button margin-0-auto margin-t">SEE MORE</a>
+        <a href="/new-arrivals" class="button red-button margin-0-auto margin-t">SEE MORE</a>
     </div>
 
     <div class="row padding-row row-eq-height">

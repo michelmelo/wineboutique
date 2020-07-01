@@ -8,6 +8,11 @@ let type = '';
 let timer = 0;
 
 $( document ).ready(function() {
+    setTimeout(function() {
+        $('#not-enough-wine').alert('close')}
+        ,2000);
+
+
     switch (window.location.pathname) {
         case '/search':
         case '/wines':
@@ -45,6 +50,7 @@ $( document ).ready(function() {
     if($('.vine-boxes').children().length < page_offset) {
         $('#loadMoreLinkA').hide();
         $('#loadMoreLink').hide();
+        $('#loadMoreArrivalsLink').hide();
     }
 
     $('#loadMoreLink').attr('href', window.location.pathname + (window.location.search==='' ? '?' : (window.location.search+'&') )
@@ -164,9 +170,10 @@ $("#confirm-ship-wine").click(function (e) {
     if(!$("#tracking_id").val()){
         $("#tracking_id").css("border", "1px solid red");
     }
-    else if(!$("#delivery").val()){
+    else if(!$("#delivery").val() || $("#delivery").val() < 0){
         $("#tracking_id").css("border", "1px solid green");
         $("#delivery").css("border", "1px solid red");
+        $("<span class='help-block error-block text-left' style='font-size: 12px;'>Estimated delivery time cen't be negativ number .</span>").insertAfter("#delivery");
     }
     else{
         window.location.href = $(this).attr("href") + "/" + $("#tracking_id").val() + "/" + $("#delivery").val();
@@ -344,3 +351,20 @@ function hideLoadMore(force=false) {
         $("#loadMore").fadeOut('slow');
     }
 }
+
+/*********Search input HTML5 validation***********/ 
+
+    let search = document.getElementById( "main-search-mob" );
+    let warrinig = document.getElementById( "warrning" );
+
+    search.addEventListener( "invalid", function( event ) {
+        event.preventDefault();
+        warrning.classList.add('d-block');  
+    }, true );
+
+    search.addEventListener( "submit", function( event ) {
+        if ( !this.checkValidity() ) {
+            event.preventDefault();
+            warrning.classList.add('d-block');
+        }
+    });
