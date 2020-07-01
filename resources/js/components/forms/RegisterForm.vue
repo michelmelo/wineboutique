@@ -42,12 +42,21 @@
         </span>
         <div id="over-21" v-if="acceptAge">
            
-           <datepicker :disabled-dates="disabledDate" :open-date="openDate" 
-                format="M / dd / yyyy" placeholder="Enter your date of birth"
-              v-model="birthday"
-                @input="birthdayFn(birthday)"></datepicker>
+           <!--<datepicker :disabled-dates="disabledDate" :open-date="openDate" -->
+                <!--format="M / dd / yyyy" placeholder="Enter your date of birth"-->
+              <!--v-model="birthday"-->
+                <!--@input="birthdayFn(birthday)"></datepicker>-->
+                <!--<input type="text" id="datepicker" v-model="birthday" name="birthday">-->
              
-                <input type="hidden" name="birthday" v-model="birthday"/>
+                <input type="hidden" name="birthday" v-model="birthday.selectedDate" id="birthday"/>
+                <span>Select your birthday:</span>
+                <FunctionalCalendar v-model="birthday"
+                                    :is-date-picker="true"
+                                    :change-month-function="true"
+                                    :change-year-function="true"
+                                    :date-format="'yyyy-mm-dd'"
+                                    :new-current-date="openDate"
+                ></FunctionalCalendar>
         </div>
         <input type="submit" name="submit" class="button red-button full-width" value="SIGN UP">
     </form>
@@ -146,6 +155,8 @@
     import moment from 'moment';
     import datepicker from 'vuejs-datepicker';
 
+    import {FunctionalCalendar} from 'vue-functional-calendar';
+
     const formFields = [
         'firstName',
         'lastName',
@@ -158,7 +169,8 @@
 
     export default {
         components: {
-          datepicker
+          datepicker,
+            FunctionalCalendar,
          },
         data: () => ({
            disabledDate:{
@@ -176,7 +188,8 @@
             csrf: window.Laravel.csrfToken,
             showErrors: false,
             validEmail: null,
-            activePopup: false
+            activePopup: false,
+            calendarData: {},
         }),
         watch: {
             'email': 'checkEmail'

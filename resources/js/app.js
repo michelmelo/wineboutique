@@ -12,6 +12,9 @@ window.Vue2Filters = require('vue2-filters');
 Vue.use(Vuelidate);
 Vue.use(Vue2Filters);
 
+
+Vue.config.devtools = true;
+
 Vue.directive('click-outside', {
     bind: function (el, binding, vnode) {
         this.event = function (event) {
