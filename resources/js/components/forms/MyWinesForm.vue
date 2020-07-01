@@ -42,9 +42,11 @@
                             <h4 v-else v-on:click="setEditing(wine.id)">{{getRegion(wine.region_id).name}}</h4>
                         </div>
                     </div>
-
                 </div>
             </div>
+            <span class="help-block">
+                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+            </span>
         </div>
     </div>
 </template>

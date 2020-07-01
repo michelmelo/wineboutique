@@ -49,6 +49,9 @@
                     <div class="other_images_preview order-3 w-100 d-flex flex-grow-1"></div>
                 </div>
             </div>
+            <span class="help-block">
+                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+            </span>
         </div>
 
         <div class="shadow-box row details">
