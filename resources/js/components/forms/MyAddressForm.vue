@@ -30,9 +30,6 @@
             <h2>
                 <span>MY ADDRESS</span>
             </h2>
-            <div class="edit-button save-button" v-on:click="saveAddress">
-                <i class="fas fa-save"></i>
-            </div>
             <div class="edit-button" v-on:click="cancelEditing">
                 <i class="fas fa-times"></i>
             </div>
@@ -86,6 +83,13 @@
                         <input type="checkbox" name="default" id="default" class="css-checkbox shipping-check" v-model="selectedAddress.default"
                                :disabled="disableSelected"/>
                         <label for="default" class="css-label lite-red-check">Default</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="full-width" colspan="2">            
+                        <button class="button red-button margin-0-auto d-block margin-t" v-on:click="saveAddress">
+                            Save
+                        </button>
                     </td>
                 </tr>
             </table>

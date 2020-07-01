@@ -2331,7 +2331,7 @@ footer p {
     background: #fff;
     -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    padding: 10px;
+    padding: 10px 10px 20px;
     margin-bottom: 20px;
     width: 100%;
     position: relative;
@@ -2361,7 +2361,7 @@ footer p {
 
 }
 
-.info-box table tr td {
+.info-box table tr td:not(.full-width) {
     padding: 13px 5px 10px 20px;
     width: 50%;
 }
@@ -2405,7 +2405,7 @@ footer p {
     padding: 6px 15px;
 }
 
-.info-box .address-table tr td {
+.info-box .address-table tbody tr td {
     padding: 10px 5px;
     width: auto;
 }
@@ -3994,7 +3994,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         font-size: 10px;
     }
 
-    .info-box table tr td {
+    .info-box table tr td:not(.full-width) {
      /*   max-width: 130px;*/
      /*   width: 100%;*/
         padding: 10px 5px 10px 5px;
