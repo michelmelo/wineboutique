@@ -73,6 +73,9 @@
                             <span class="help-block error-block" v-if="isInvalid('cover')">
                                 <strong>Winery cover and logo are required.</strong>
                             </span>
+                            <span class="help-block">
+                                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+                            </span>
                         </div>
                     </div>
                 </div>

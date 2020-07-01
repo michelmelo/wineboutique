@@ -42,6 +42,9 @@
                     <div class="other_images_preview d-flex"></div>
                 </div>
             </div>
+            <span class="help-block">
+                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
+            </span>
         </div>
 
         <div class="shadow-box row details">
