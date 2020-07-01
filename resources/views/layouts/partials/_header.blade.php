@@ -28,7 +28,7 @@
                                     <a href="{{route('login')}}" class="d-inline-block mx-4"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN IN</span></a>
                                 </div>
                                 <div class="d-flex sign-up align-items-center py-4">
-                                    <a href="{{route('register')}}" class="d-inline-block mx-3 mx-lg-4"><div><img src="{{asset('img/user.svg')}}"></div><span>SIGN UP</span></a>
+                                    <a href="{{route('register')}}" class="d-inline-block mx-3 mx-lg-4"><div><img src="{{asset('img/signup.svg')}}"></div><span>SIGN UP</span></a>
                                 </div>
                             </div>
                         @else
