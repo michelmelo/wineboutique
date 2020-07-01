@@ -149,7 +149,7 @@
                     </li> -->
                     @if(!Auth::guest() && Auth::user()->type==='SELLER')
                     <li class="nav-item col">
-                        <a class="nav-link" href="{{route('my-winery')}}">My Winery </a>
+                        <a class="nav-link important-text" href="{{route('my-winery')}}">My Winery </a>
                     </li>
                     @endif
                     <!-- @if(Auth::guest())
