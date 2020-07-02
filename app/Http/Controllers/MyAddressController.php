@@ -42,7 +42,7 @@ class MyAddressController extends Controller
 
         $request->user()->addresses()->save($address);
 
-//        $this->check_default($address);
+        $address->region = Region::find($address->region_id);
 
         return $address;
     }

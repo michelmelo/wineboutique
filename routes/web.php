@@ -111,6 +111,11 @@ Route::group(['middleware' => ['startup']], function() {
 
         Route::get('/my-address', 'MyAddressController@show')->name('my-address.show');
         Route::post('/my-address', 'MyAddressController@store')->name('my-address.store');
+//
+//
+//        Route::get('/my-address-create', 'MyAddressController@store');
+//
+//
         Route::post('/my-address/{address}', 'MyAddressController@update')->name('my-address.update');
         Route::delete('/my-address/{address}', 'MyAddressController@destroy')->name('my-address.delete');
 

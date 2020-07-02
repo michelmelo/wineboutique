@@ -134,7 +134,8 @@
                                 <span class="button red-button button-small mx-2 d-inline-block" @click.prevent="selecting = true"
                                         v-if="addresses.length>1">Change shipping address
                                 </span>
-                                <a href="/my-address" class="button red-button button-small d-inline-block">Add an address</a>
+                                <!--<a href="/my-address" class="button red-button button-small d-inline-block">Add an address</a>-->
+                                <new-address-form v-if="addresses.length<=1 && !selectedAddress" :regions="regions" @newAddress="newAddressFn"></new-address-form>
                             </template>
                         </div>
                     </article>
@@ -303,6 +304,10 @@
                     alert("You must enter address to place order.");
                 }
                 this.dateC = (new Date()).toLocaleDateString();
+            },
+            newAddressFn(selectedAddress) {
+                this.addresses.push(selectedAddress)
+                this.selectedAddress = selectedAddress;
             },
         },
         computed: {
