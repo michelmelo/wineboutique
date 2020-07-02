@@ -1,0 +1,25 @@
+.float-element--center-right{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -90px;
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+}
+
+.float-element__wrap{
+	height: 500px;
+    padding: 20px;
+}
+/*
+.rotate-90d{
+    transform: rotate(-90deg);
+}
+*/
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

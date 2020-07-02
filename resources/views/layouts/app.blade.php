@@ -40,6 +40,7 @@
     @include('layouts.partials._header')
 	<div class="main" id="app">
         @yield('content')
+        <report-bug-form />
         @include('layouts.partials._footer')
 	</div>
 
