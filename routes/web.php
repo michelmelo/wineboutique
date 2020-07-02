@@ -120,21 +120,8 @@ Route::group(['middleware' => ['startup']], function() {
             'add-new-wine' => 'wine'
         ]);
 
-        Route::get('/shipping', function(){
-            $winery = Auth::user()->winery;
-            $retVal = array();
-            foreach ($winery->regions as $item) {
-                array_push($retVal,$item->id);
-            }
-            return view('shipping', [
-                'winery' => $winery,
-                'shippings' => $winery->winery_shippings()->get(),
-                'regions' => App\Region::orderBy('name')->get(),
-                'winery_regions' => $retVal,
-            ]);
-            //return view('shipping');
-        })->name('shipping.show');
-        Route::post('/shipping-save', 'ShippingController@save')->name('shipping.save');
+        Route::get('/shipping', 'ShippingController@index')->name('shipping.index');
+        Route::post('/shipping', 'ShippingController@save')->name('shipping.store');
 
 
         Route::post('/store-new-wine', 'AddNewWineController@store')->name('store-new-wine');

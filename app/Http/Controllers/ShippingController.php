@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Region;
+use App\WineryShipping;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShippingController extends Controller
 {
+    public function index(Request $request) {
+        $winery = Auth::user()->winery;
+        $retVal = array();
+        foreach ($winery->regions as $item) {
+            array_push($retVal,$item->id);
+        }
+        return view('shipping', [
+            'winery' => $winery,
+            'shippings' => $winery->winery_shippings()->get(),
+            'regions' => Region::orderBy('name')->get(),
+            'winery_regions' => $retVal,
+        ]);
+    }
+
     public function save(Request $request){
+        $winery = Auth::user()->winery;
     	foreach($request->shipping as $shippings) {
             $do_save = true;
             $do_edit = !is_null($shippings["id"]);
@@ -30,7 +48,7 @@ class ShippingController extends Controller
                 }
 
                 if ($do_edit) {
-                    App\WineryShipping::where('id', $shippings["id"])->update($shippings);
+                    WineryShipping::where('id', $shippings["id"])->update($shippings);
                 } else {
                     foreach ($shippings['ship_to'] as $to) {
                         $winery->winery_shippings()->create([
@@ -45,6 +63,6 @@ class ShippingController extends Controller
                 }
             }
         }
-        return redirect("/shipping");
+        return redirect()->route('shipping.index');
     }
 }

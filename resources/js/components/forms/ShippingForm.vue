@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-12 col-sm-12">
         <h1>{{ wineryName }} - shipping</h1>
-        <form v-on:submit="onSubmit" id="updateForm" method="post" action="shipping-save">
+        <form v-on:submit="onSubmit" id="updateForm" method="post" :action="methodAction">
             <input type="hidden" name="_token" v-model="csrf">
             <input type="hidden" name="wineryId" :value="wineryId">
 
@@ -102,7 +102,7 @@
 
     export default {
         components: { Multiselect },
-        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions'],
+        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions', 'methodAction'],
         data: () => ({            
             csrf: window.Laravel.csrfToken,
             profile: null,

@@ -7,7 +7,7 @@
             {!! (request()->route()->getName()==='my-order.show') ? '<li class="active">' : '<li>' !!}<a href="my-orders"><i class="far fa-list-alt"></i> My Orders</a></li>
         @endif
         @if(\Illuminate\Support\Facades\Auth::user()->type == 'SELLER')
-        	{!! (request()->route()->getName()==='shipping.show') ? '<li class="active">' : '<li>' !!}
+        	{!! (request()->route()->getName()==='shipping.index') ? '<li class="active">' : '<li>' !!}
             	<a href="shipping"><i class="far fa-list-alt"></i> Shipping</a>
             </li>
         @endif
