@@ -59,7 +59,7 @@ class MyWineryController extends Controller
         $winery->save();
 
         $winery->regions()->attach($request->regions);
-
+/*
         foreach($request->shipping as $shippings) {
             $do_save = true;
             $do_edit = !is_null($shippings["id"]);
@@ -97,7 +97,7 @@ class MyWineryController extends Controller
                     }
                 }
             }
-        }
+        }*/
 
         return view('my-winery',[
             'varietals' => Varietal::all(),

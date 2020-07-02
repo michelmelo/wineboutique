@@ -120,6 +120,10 @@ Route::group(['middleware' => ['startup']], function() {
             'add-new-wine' => 'wine'
         ]);
 
+        Route::get('/shipping', 'ShippingController@index')->name('shipping.index');
+        Route::post('/shipping', 'ShippingController@save')->name('shipping.store');
+
+
         Route::post('/store-new-wine', 'AddNewWineController@store')->name('store-new-wine');
         Route::post('/hideMsg', 'AddNewWineController@hideMsg');
         Route::put('/store-edited-wine/{wine}', 'AddNewWineController@update');

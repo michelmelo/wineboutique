@@ -6,6 +6,11 @@
             {!! (request()->route()->getName()==='my-address.show') ? '<li class="active">' : '<li>' !!}<a href="my-address"><i class="fas fa-map-marker-alt"></i> My Address</a></li>
             {!! (request()->route()->getName()==='my-order.show') ? '<li class="active">' : '<li>' !!}<a href="my-orders"><i class="far fa-list-alt"></i> My Orders</a></li>
         @endif
+        @if(\Illuminate\Support\Facades\Auth::user()->type == 'SELLER')
+        	{!! (request()->route()->getName()==='shipping.index') ? '<li class="active">' : '<li>' !!}
+            	<a href="shipping"><i class="fas fa-dolly"></i> Shipping</a>
+            </li>
+        @endif
         {!! (request()->route()->getName()==='my-favorites.show') ? '<li class="active">' : '<li>' !!}<a href="my-favorites"><i class="far fa-heart"></i> My Favorites</a></li>
     </ul>
 </div>

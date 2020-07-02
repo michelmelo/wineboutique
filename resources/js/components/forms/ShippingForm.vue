@@ -1,90 +1,11 @@
 <template>
-    <div class="col-md-12 col-sm-12">
-        <h1>{{ wineryName }} - edit info</h1>
-        <form v-on:submit="onSubmit" id="updateForm" method="post" action="my-winery-store">
+    <div class="info-box shadow-box">
+        <h2>{{ wineryName }} - shipping</h2>
+        <form v-on:submit="onSubmit" id="updateForm" method="post" :action="methodAction">
             <input type="hidden" name="_token" v-model="csrf">
             <input type="hidden" name="wineryId" :value="wineryId">
 
-            <div class="shadow-box row">
-                <h2>NAME YOUR WINERY <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
-                <span class="popup-info d-none">This is your brand name that will be visible to all users on Wine Boutique.</span>
-                <div class="col-lg-3 col-sm-12"></div>
-                <div class="col-lg-6 col-sm-12 enter-name">
-                    <input type="text" placeholder="Enter your winery name" v-model.trim="name" name="wineryName" :class="{ 'invalid': isInvalid('name') }" min="4">
-                    <div class="name-check"><i class="fas fa-check"></i></div>
-                </div>
-                <div class="col-lg-3 col-sm-12"></div>
-            </div>
-
-            <div class="shadow-box row">
-                <h2>WINERY PREFERENCES <i class="fas fa-info-circle popup-info-trigers" ></i></h2>
-                <span class="popup-info d-none">Please select your winery state where your winery is located.</span>
-                <div class="col-lg-2 col-sm-12"></div>
-                <div class="col-lg-8 col-sm-12 winery-preferences">
-                    <table>
-                        <tr>
-                            <td>Winery state *</td>
-                            <td>
-                                <select class="half-select" v-model="regions" v-bind:disabled="fetchedRegions_.length===0" name="regions[]" :class="{ 'invalid': isInvalid('regions') }" multiple>
-                                    <option disabled hidden value="">Select</option>
-                                    <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id" v-if="region.name==='California'">
-                                        {{ region.name }}
-                                    </option>
-                                </select>
-                                  <span class="help-block error-block" v-if="isInvalid('regions')">
-                                    <strong>Winery state is required.</strong>
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-lg-2 col-sm-12"></div>
-            </div>
-
-            <div class="shadow-box row">
-                <h2>WINERY DESCRIPTION</h2>
-                <div class="col-lg-2 col-sm-12"></div>
-                <div class="col-lg-8 col-sm-12">
-                    <textarea v-model="description" style="width: 100%; min-height: 150px;" name="description" >{{ wineryDesc }}</textarea>
-                    <span class="help-block error-block" v-if="isInvalid('description')">
-                        <strong>Winery description is required.</strong>
-                    </span>
-                </div>
-                <div class="col-lg-2 col-sm-12"></div>
-            </div>
-
-            <div class="shadow-box row">
-                <h2>WINERY APPEARANCE</h2>
-                <div class="col-lg-2 col-sm-12"></div>
-                <div class="col-lg-8 col-sm-12">
-                    <div class="col-lg-12 wineries-box">
-                        <div>
-                            <div class="wineries-brand " v-bind:style="'background-image: url(' + getCoverPhoto() + ')'">
-                                <label class="winery-header uploader" >
-                                    <input type="file" @change="handlePhotoChange" accept="image/*" data-type="cover" />
-                                </label>
-                            </div>
-                            <div class="wineries-brand">
-                                <label class="winery-logo uploader" v-bind:style="'background-image: url(' + getProfilePhoto() + ')'">
-                                    <input type="file" @change="handlePhotoChange" accept="image/*" data-type="profile" />
-                                </label>
-                            </div>
-                            <p class="winery-title">{{wineryName}}</p>
-                            <span class="help-block error-block" v-if="isInvalid('cover')">
-                                <strong>Winery cover and logo are required.</strong>
-                            </span>
-                            <span class="help-block">
-                                <strong>10 MB limit. Allowed types: (*.jpg), (*.png), (*.gif), (*.bmp), (*.tiff)</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-12"></div>
-            </div>
-<!--
-            <div class="shadow-box row">
-                <h2>SHIPPING</h2>
-
+            <div class="row">
                 <div class="row form-inputs shipping-item-wrapper" v-for="(item, index) in existingShippings_" v-bind:key="item.id">
                     <div class="col-lg-3 col-sm-12">
                         <p>Shipping origin *</p>
@@ -103,12 +24,12 @@
 
 <!--                    <input type="hidden" :name="'shipping[' + index + '][days_from]'" v-model="item.days_from">-->
 <!--                    <input type="hidden" :name="'shipping[' + index + '][days_to]'" v-model="item.days_to">-->
-<!-- 
-                    <div class="col-lg-3 col-sm-12">
+
+                    <div class="col-12">
                         <p>Fixed shipping costs *</p>
                     </div>
            
-                    <div class="col-lg-3 col-sm-12" v-if="!item.is_template">
+                    <div class="col-lg-4 col-sm-12" v-if="!item.is_template">
                         <select :name="'shipping[' + index + '][ship_to]'" class="destination" v-model="item.ship_to">
                             <option value="0" disabled selected>Add a destination</option> 
                             <option v-for="region in fetchedRegions_" v-bind:value="region.id" v-bind:key="region.id"
@@ -117,7 +38,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-lg-3 col-sm-12" v-else>
+                    <div class="col-lg-4 col-sm-12" v-else>
                         <multiselect  v-model="item.ship_to" :options="duplicateOptions"
                                      label="text"
                                      track-by="value"                                   
@@ -129,7 +50,6 @@
                                      @input="refineValues"
                         ></multiselect>
                          
-
                         <input v-for="item in ship_to_values" type="hidden" :name="'shipping[' + index + '][ship_to][]'" :value="item">
 
                         <span class="help-block error-block" v-if="isInvalid('shipping_cost') && item.ship_to.length == 0">
@@ -137,23 +57,23 @@
                                 </span>
                     </div>
 
-                    <div class="col-lg-3 col-sm-12 show_hide">
+                    <div class="col-lg-4 col-sm-12 show_hide">
                         <input  type="number" min="0"  :name="'shipping[' + index + '][price]'" class="usd-input price" placeholder="One item"  v-model="item.price" >
                         <div class="usd">USD</div>
 
                        
                     </div>
 
-                    <div class="col-lg-3 col-sm-12 show_hide">
+                    <div class="col-lg-4 col-sm-12 show_hide">
                         <input   type="number" min="0"  :name="'shipping[' + index + '][additional]'" class="usd-input additional" placeholder="Each additional" v-model="item.additional" >
                         <div class="usd" >USD</div>
                     </div>
 
-                    <div class="col-lg-9 col-lg-push-3 col-sm-12">
+                    <div class="col-12">
                         <input @click="item.price == 0" :checked="item.price == 0" type="checkbox" :name="'shipping[' + index + '][shipping_free]'" :id="'shipping_free' + index" class="css-checkbox shipping-check" v-on:click="toggle_free_shipping(item)"/>
                         <label :for="'shipping_free' + index" class="css-label lite-red-check">Free shipping</label>
 
-                        <a :href="'/my-winery-shipping/delete/' + item.id" v-if="!item.is_template" style="float: right">
+                        <a :href="'/my-winery-shipping/delete/' + item.id" v-if="!item.is_template" style="float: right" class="text-red">
                             <i class="fa fa-trash"></i>
                         </a>
                         <a @click="removeState(index , $event)" href="#" v-else style="float: right">
@@ -167,10 +87,13 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD STATES</button>
 
-            <button type="button" class="red-button button float-left" v-on:click="addMoreShippings" >ADD STATES</button>
-            -->
-            <button type="submit" class="red-button button float-right">UPDATE</button>
+                    <button type="submit" class="red-button button float-right">UPDATE</button>
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -182,7 +105,7 @@
 
     export default {
         components: { Multiselect },
-        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions'],
+        props: ['wineryName', 'wineryId', 'wineryDesc', 'wineryProfile', 'wineryCover', 'fetchedRegions', 'existingShippings', 'selectedRegions', 'methodAction'],
         data: () => ({            
             csrf: window.Laravel.csrfToken,
             profile: null,
