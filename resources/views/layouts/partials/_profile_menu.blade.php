@@ -8,7 +8,7 @@
         @endif
         @if(\Illuminate\Support\Facades\Auth::user()->type == 'SELLER')
         	{!! (request()->route()->getName()==='shipping.index') ? '<li class="active">' : '<li>' !!}
-            	<a href="shipping"><i class="far fa-list-alt"></i> Shipping</a>
+            	<a href="shipping"><i class="fas fa-dolly"></i> Shipping</a>
             </li>
         @endif
         {!! (request()->route()->getName()==='my-favorites.show') ? '<li class="active">' : '<li>' !!}<a href="my-favorites"><i class="far fa-heart"></i> My Favorites</a></li>
