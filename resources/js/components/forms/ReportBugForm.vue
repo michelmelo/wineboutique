@@ -5,8 +5,8 @@
 			<div v-if="toggle">
 				<div class="float-element__wrap">
 					<label for="report">Describe your issue:</label>
-					<textarea name="report" id="report" class="input__textarea input__textarea--report" cols="25" rows="10"></textarea>
-					<button type="submit" class="button red-button button-smaller">SEND</button>
+					<textarea name="report" id="report" class="input__textarea input__textarea--report" cols="25" rows="10" v-model="reportText" :disabled="disabledForm"></textarea>
+					<button type="button" class="button red-button button-smaller" @click="sendReport" :disabled="disabledForm">SEND</button>
 				</div>
 		    </div>
 	    </transition>
@@ -15,9 +15,23 @@
 <script>
     export default {
         data: () => ({
-            toggle: false
+            toggle: false,
+			reportText: '',
+			disabledForm: false,
         }),
         methods: {
+            sendReport() {
+                let dis = this
+				if(dis.reportText!=='') {
+                    dis.disabledForm = true
+                    axios.post('/bug-report', {text: dis.reportText,}).then(response => {
+                        // console.log(response)
+                        dis.toggle = !dis.toggle
+                        dis.reportText = ''
+                        dis.disabledForm = false
+                    })
+                }
+			}
         },
     }
 </script>

@@ -134,5 +134,8 @@ Route::group(['middleware' => ['startup']], function() {
         Route::get('/my-winery-shipping/delete/{id}', 'MyWineryController@shipping_delete')->name('shipping-delete');
         Route::get('/my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
         Route::post('/my-winery-store', 'MyWineryController@store')->name('my-winery-store');
+
+        Route::post('/bug-report', 'ReportController@store');
+        Route::get('/bug-report', 'ReportController@store');
     });
 });
