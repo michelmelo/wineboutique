@@ -160,12 +160,17 @@
                         </div>
                     </article>
 
+
+                    <div v-if="showcardmade">
+                        <span v-html="showcardmadetext"></span>
+                    </div>
+
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment && canMakePayment">
+                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="haspayment && canMakePayment">
                                 Place order
                             </button>
-                            <div v-if="!hasPayment" id="formReplacement">
+                            <div v-if="!haspayment" id="formReplacement">
                                 <div class="form-row">
                                     <label for="card-element">
                                         Credit or debit card
@@ -179,7 +184,7 @@
                                 </div>
                                 <br>
                                 <div class="form-row">
-                                    <input type="text" name="alias" class="StripeElement" placeholder="Card alias" required>
+                                    <input type="text" id="card-alias" name="alias" class="StripeElement" placeholder="Card alias" required>
                                 </div>
                                 <br>
                                 <div class="form-row">
@@ -237,11 +242,14 @@
                 },
                 showErrors: false,
                 dateC: null,
+                haspayment: false,
+                showcardmade: false,
             }
         },
         mounted() {
             this.asyncData();
             this.dateC = (new Date()).toLocaleDateString();
+            this.haspayment = this.hasPayment
             this.mountCC();
         },
         methods: {
@@ -334,8 +342,10 @@
             newAddressFn(selectedAddress) {
                 this.addresses.push(selectedAddress)
                 this.selectedAddress = selectedAddress;
+                window.location.reload()
             },
             mountCC() {
+                let dis = this;
                 var stripe = Stripe('pk_test_bWZc4BcEaCNAKbJbhv6u91ZJ00zZEQ2RIQ');
                 var elements = stripe.elements();
 
@@ -378,7 +388,6 @@
                 var wasSubmitted = false;
 
                 btn.addEventListener('click', function(event) {
-                    event.preventDefault();
 
                     if(!wasSubmitted) {
                         wasSubmitted = true;
@@ -399,16 +408,17 @@
                 //
                 // Submit the form with the token ID.
                 function stripeTokenHandler(token) {
-                    // Ins  ert the token ID into the form so it gets submitted to the server
-                    var form = document.getElementById('payment-form');
-                    var hiddenInput = document.createElement('input');
-                    hiddenInput.setAttribute('type', 'hidden');
-                    hiddenInput.setAttribute('name', 'stripeToken');
-                    hiddenInput.setAttribute('value', token.id);
-                    form.appendChild(hiddenInput);
-
-                    // Submit the form
-                    form.submit();
+                    let data = {
+                        'stripeToken' : token.id,
+                        'alias' : document.getElementById('card-alias').value
+                    };
+                    axios.post('/my-payments', data).then(response => {
+                        console.log(response.data)
+                        if(response.data !== null) {
+                            dis.haspayment = true;
+                            dis.showcardmade = true;
+                            dis.showcardmadetext = 'Card <i>' + response.data.alias + '</i> successfully saved!';                        }
+                    })
                 }
             },
         },
