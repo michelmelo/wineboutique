@@ -1,3 +1,9 @@
+button, .btn, .button{
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
 .button {
     font-size: 20px;
     padding: 10px 30px;
@@ -6,10 +12,15 @@
     border: 0;
     cursor: pointer;
 
-    &--rotate{
-        transform: rotate(90deg);
+    &--vertical{
+        height: 350px;
+        -ms-writing-mode: tb-lr;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        font-feature-settings: "vkrn", "vpal";
+        padding: 20px 10px;
         position: absolute;
-        left: -124px;
+        left: -50px;
     }
 
     @media only screen and (max-width : 768px) {
@@ -37,6 +48,11 @@
     font-size: 12px!important;
     padding: 5px 10px;
     border-bottom: 1px solid #fff;
+}
+
+.button-smaller{
+    font-size: 14px;
+    padding: 6px 15px;
 }
 
 .white-button {

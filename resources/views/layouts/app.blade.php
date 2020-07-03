@@ -40,8 +40,8 @@
     @include('layouts.partials._header')
 	<div class="main" id="app">
         @yield('content')
-        <report-bug-form />
         @include('layouts.partials._footer')
+        <report-bug-form />
 	</div>
 
     <div class="default-popup is-visible popup-holder" role="alert" style="display:none;">
