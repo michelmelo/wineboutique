@@ -39,6 +39,7 @@ Vue.component('password-update-form', require('./components/forms/PasswordUpdate
 Vue.component('my-wines-form', require('./components/forms/MyWinesForm.vue'));
 Vue.component('checkout-form', require('./components/forms/CheckoutForm.vue'));
 Vue.component('my-address-form', require('./components/forms/MyAddressForm.vue'));
+Vue.component('new-address-form', require('./components/forms/NewAddressForm.vue'));
 Vue.component('my-order-form', require('./components/forms/MyOrderForm.vue'));
 Vue.component('shipping-form', require('./components/forms/ShippingForm.vue'));
 Vue.component('favorite', require('./components/Favorite.vue'));

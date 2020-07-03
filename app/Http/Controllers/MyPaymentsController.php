@@ -43,7 +43,16 @@ class MyPaymentsController extends Controller
 
             UserPayment::where("id", "!=", $user_payment->id)->where('user_id', Auth::user()->id)->update(["is_default" => 0]);
 
+            if($request->ajax()) {
+                return $user_payment;
+            }
+
             return redirect("my-payments")->with('message', 'Success.');
+        }
+
+
+        if($request->ajax()) {
+            return null;
         }
 
         return redirect("my-payments")->with('message', 'Failed.');
