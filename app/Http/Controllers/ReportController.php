@@ -15,7 +15,7 @@ class ReportController extends Controller
         'vm@executive-digital.com',
         'aj@executive-digital.com',
         'ts@executive-digital.com',
-        'james@eepaz.com',
+        'James@WineBoutique.com',
     ];
 
     public function store(ReportRequest $request)
