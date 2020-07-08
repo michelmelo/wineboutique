@@ -134,7 +134,8 @@
                                 <span class="button red-button button-small mx-2 d-inline-block" @click.prevent="selecting = true"
                                         v-if="addresses.length>1">Change shipping address
                                 </span>
-                                <a href="/my-address" class="button red-button button-small d-inline-block">Add an address</a>
+                                <!--<a href="/my-address" class="button red-button button-small d-inline-block">Add an address</a>-->
+                                <new-address-form v-if="addresses.length<=1 && !selectedAddress" :regions="regions" @newAddress="newAddressFn"></new-address-form>
                             </template>
                         </div>
                     </article>
@@ -159,12 +160,38 @@
                         </div>
                     </article>
 
+
+                    <div v-if="showcardmade">
+                        <span v-html="showcardmadetext"></span>
+                    </div>
+
                     <article class="card mb-2">
                         <div class="card-body p-2">
-                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="hasPayment && canMakePayment">
+                            <button class="button red-button full-width d-block w-100 payment-submit" type="submit" v-if="haspayment && canMakePayment">
                                 Place order
                             </button>
-                            <a href="/my-payments" class="text-red font-weight-bold" v-if="!hasPayment">Add payment method please</a>
+                            <div v-if="!haspayment" id="formReplacement">
+                                <div class="form-row">
+                                    <label for="card-element">
+                                        Credit or debit card
+                                    </label>
+                                    <div id="card-element">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+                                <br>
+                                <div class="form-row">
+                                    <input type="text" id="card-alias" name="alias" class="StripeElement" placeholder="Card alias" required>
+                                </div>
+                                <br>
+                                <div class="form-row">
+                                    <button type="button" id="sbmt-new-payment-mtd" class="sbmt-new-payment-mtd button red-button">Submit New Payment Method</button>
+                                </div>
+                            </div>
+                            <!--<a href="/my-payments" class="text-red font-weight-bold" v-if="!hasPayment">Add payment method please</a>-->
                         </div>
                     </article>
                 </div>
@@ -209,13 +236,21 @@
                     region_id: '',
                     default: true
                 },
+                ccInfo: {
+                    alias: '',
+
+                },
                 showErrors: false,
                 dateC: null,
+                haspayment: false,
+                showcardmade: false,
             }
         },
         mounted() {
             this.asyncData();
             this.dateC = (new Date()).toLocaleDateString();
+            this.haspayment = this.hasPayment
+            this.mountCC();
         },
         methods: {
             checkIfCanPay: function(v) {
@@ -303,6 +338,88 @@
                     alert("You must enter address to place order.");
                 }
                 this.dateC = (new Date()).toLocaleDateString();
+            },
+            newAddressFn(selectedAddress) {
+                this.addresses.push(selectedAddress)
+                this.selectedAddress = selectedAddress;
+                window.location.reload()
+            },
+            mountCC() {
+                let dis = this;
+                var stripe = Stripe('pk_test_bWZc4BcEaCNAKbJbhv6u91ZJ00zZEQ2RIQ');
+                var elements = stripe.elements();
+
+                // Custom styling can be passed to options when creating an Element.
+                // (Note that this demo uses a wider set of styles than the guide below.)
+                var style = {
+                    base: {
+                        color: '#32325d',
+                        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                        fontSmoothing: 'antialiased',
+                        fontSize: '16px',
+                        '::placeholder': {
+                            color: '#aab7c4'
+                        }
+                    },
+                    invalid: {
+                        color: '#fa755a',
+                        iconColor: '#fa755a'
+                    }
+                };
+
+                // Create an instance of the card Element.
+                var card = elements.create('card', {style: style});
+
+                // Add an instance of the card Element into the `card-element` <div>.
+                card.mount('#card-element');
+
+                // Handle real-time validation errors from the card Element.
+                card.addEventListener('change', function(event) {
+                    var displayError = document.getElementById('card-errors');
+                    if (event.error) {
+                        displayError.textContent = event.error.message;
+                    } else {
+                        displayError.textContent = '';
+                    }
+                });
+
+                // Handle form submission.
+                var btn = document.getElementById('sbmt-new-payment-mtd');
+                var wasSubmitted = false;
+
+                btn.addEventListener('click', function(event) {
+
+                    if(!wasSubmitted) {
+                        wasSubmitted = true;
+                        btn.disabled = true;
+
+                        stripe.createToken(card).then(function(result) {
+                            if (result.error) {
+                                // Inform the user if there was an error.
+                                var errorElement = document.getElementById('card-errors');
+                                errorElement.textContent = result.error.message;
+                            } else {
+                                // Send the token to your server.
+                                stripeTokenHandler(result.token);
+                            }
+                        });
+                    }
+                });
+                //
+                // Submit the form with the token ID.
+                function stripeTokenHandler(token) {
+                    let data = {
+                        'stripeToken' : token.id,
+                        'alias' : document.getElementById('card-alias').value
+                    };
+                    axios.post('/my-payments', data).then(response => {
+                        console.log(response.data)
+                        if(response.data !== null) {
+                            dis.haspayment = true;
+                            dis.showcardmade = true;
+                            dis.showcardmadetext = 'Card <i>' + response.data.alias + '</i> successfully saved!';                        }
+                    })
+                }
             },
         },
         computed: {

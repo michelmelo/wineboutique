@@ -41,6 +41,9 @@
 	<div class="main" id="app">
         @yield('content')
         @include('layouts.partials._footer')
+        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->type === \App\User::$types['seller'])
+            <report-bug-form />
+        @endif
 	</div>
 
     <div class="default-popup is-visible popup-holder" role="alert" style="display:none;">

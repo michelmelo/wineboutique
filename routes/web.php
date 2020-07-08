@@ -111,6 +111,11 @@ Route::group(['middleware' => ['startup']], function() {
 
         Route::get('/my-address', 'MyAddressController@show')->name('my-address.show');
         Route::post('/my-address', 'MyAddressController@store')->name('my-address.store');
+//
+//
+//        Route::get('/my-address-create', 'MyAddressController@store');
+//
+//
         Route::post('/my-address/{address}', 'MyAddressController@update')->name('my-address.update');
         Route::delete('/my-address/{address}', 'MyAddressController@destroy')->name('my-address.delete');
 
@@ -119,6 +124,10 @@ Route::group(['middleware' => ['startup']], function() {
         Route::resource('/add-new-wine', 'AddNewWineController')->except(['show'])->parameters([
             'add-new-wine' => 'wine'
         ]);
+
+        Route::get('/shipping', 'ShippingController@index')->name('shipping.index');
+        Route::post('/shipping', 'ShippingController@save')->name('shipping.store');
+
 
         Route::post('/store-new-wine', 'AddNewWineController@store')->name('store-new-wine');
         Route::post('/hideMsg', 'AddNewWineController@hideMsg');
@@ -130,5 +139,8 @@ Route::group(['middleware' => ['startup']], function() {
         Route::get('/my-winery-shipping/delete/{id}', 'MyWineryController@shipping_delete')->name('shipping-delete');
         Route::get('/my-winery-edit', 'MyWineryController@edit')->name('my-winery-edit');
         Route::post('/my-winery-store', 'MyWineryController@store')->name('my-winery-store');
+
+        Route::post('/bug-report', 'ReportController@store');
+        Route::get('/bug-report', 'ReportController@store');
     });
 });

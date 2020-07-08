@@ -1,0 +1,55 @@
+.float-element{
+    display: flex;
+    align-items: center;
+    width: 0;
+ 	transition: all .5s;
+    background: #fff;
+    border: 2px solid #9c193a;
+    z-index: 999999;
+
+	.button{
+		@media only screen and (min-width: 580px) and (max-width: 768px){
+		    left: -46px;
+		}
+		@media only screen and (max-width: 580px){
+		    font-size: 14px;
+		    padding: 8px 14px;
+		}
+	}
+}
+.float-element--center-right{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -4px;
+}
+
+.float-element--active{
+	width: 350px;
+	transition: all .5s;
+
+	.button{
+		@extend .red-button;
+	}
+
+	@media only screen and (max-width: 580px){
+	    width: calc(100% - 45px);
+	}
+}
+
+.float-element__wrap{
+	height: 500px;
+    padding: 20px 30px;
+
+	@media only screen and (max-width: 580px){
+        padding: 20px 15px;
+	}
+}
+
+.jsFadeSlide-enter-active, .jsFadeSlide-leave-active {
+  transition: all .5s;
+}
+.jsFadeSlide-enter, .jsFadeSlide-leave-to {
+	opacity: 0;
+	transform: translate(100%, 0);
+}

@@ -12,6 +12,9 @@ window.Vue2Filters = require('vue2-filters');
 Vue.use(Vuelidate);
 Vue.use(Vue2Filters);
 
+
+Vue.config.devtools = true;
+
 Vue.directive('click-outside', {
     bind: function (el, binding, vnode) {
         this.event = function (event) {
@@ -36,7 +39,9 @@ Vue.component('password-update-form', require('./components/forms/PasswordUpdate
 Vue.component('my-wines-form', require('./components/forms/MyWinesForm.vue'));
 Vue.component('checkout-form', require('./components/forms/CheckoutForm.vue'));
 Vue.component('my-address-form', require('./components/forms/MyAddressForm.vue'));
+Vue.component('new-address-form', require('./components/forms/NewAddressForm.vue'));
 Vue.component('my-order-form', require('./components/forms/MyOrderForm.vue'));
+Vue.component('shipping-form', require('./components/forms/ShippingForm.vue'));
 Vue.component('favorite', require('./components/Favorite.vue'));
 Vue.component('rating', require('./components/Rating.vue'));
 Vue.component('star-rating', StarRating.default);
@@ -46,6 +51,7 @@ Vue.component('buy-now', require('./components/BuyNow.vue'));
 Vue.component('winery-edit-form', require('./components/forms/WineryEditForm.vue'));
 Vue.component('newsletter-form', require('./components/forms/NewsletterForm'));
 Vue.component('my-favorites', require('./components/forms/MyFavorites.vue'));
+Vue.component('report-bug-form', require('./components/forms/ReportBugForm.vue'));
 
 const app = new Vue({
     el: '#app'

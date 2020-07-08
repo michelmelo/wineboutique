@@ -116,56 +116,8 @@ input, textarea, select{
             transform: translate(0, -50%);
 }
 
-.button {
-    font-size: 20px;
-    padding: 10px 30px;
-    text-align: center;
-    font-weight: 600;
-    border: 0;
-    cursor: pointer;
-}
-
-.button:hover {
-    opacity: .8;
-}
-
-.button:focus, .button:active {
-    outline: none;
-}
-
-.button:not([href]):not([tabindex]) {
-    color: #fff;
-}
-
-.button-small{
-    font-size: 12px!important;
-    padding: 5px 10px;
-    border-bottom: 1px solid #fff;
-}
-
-.white-button {
-    background: #fff;
-    color: #9C193A;
-}
-
-.red-button, .red-button:focus {
-    background: #9C193A;
-    color: #fff;
-    transition: all 0.4s ease-in-out;
-
-}
-
 .ml-10 {
     margin-left: 10px;
-}
-
-.pink-button, .pink-button:focus {
-    background: #D6879A;
-    color: #fff;
-}
-
-.white-button:hover {
-    color: #9C193A;
 }
 
 .red-button:hover, .pink-button:hover,
@@ -497,9 +449,15 @@ header .navbar{
     color: rgb(155, 31, 61);
 }
 
+.navbar-light .navbar-nav .nav-link.important-text, .important-text {
+    color: rgb(155, 31, 61);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
 .navbar-collapse{
     position: relative;
-    z-index: 999;
+    z-index: 9;
 }
 
 .navbar-collapse .nav-link{
@@ -2379,25 +2337,11 @@ footer p {
      color:#9b1f3d;
 }
 
-.edit-button {
-    color:#9b1f3d;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 400;
-    position: absolute;
-    right: 10px;
-    top: 20px;
-}
-
 .info-box .btn {
     color:#9b1f3d;
     font-size: 14px;
     cursor: pointer;
     font-weight: 400;
-}
-
-.save-button{
-    right: 30px;
 }
 
 .shadow-box .button {
@@ -3390,10 +3334,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         top: calc(50% + 20px);
     }
 
-    .button {
-        font-size: 16px;
-    }
-
     .add-new-wine .button{
         margin: 0 auto;
         display: block;
@@ -3644,10 +3584,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
     .info-box table {
        font-size: 14px;
-    }
-
-    .edit-button {
-        top: 18px;
     }
 
     .vine-box-style-1 {
@@ -4019,10 +3955,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
         width: calc(100% - 4px);
         margin: 2px;
     }
-    .button {
-        font-size: 16px;
-        padding: 8px 20px;
-    }
+
     .info-box table tr td input {
         max-width: 120px;
     }
