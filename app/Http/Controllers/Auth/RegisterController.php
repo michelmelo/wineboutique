@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use App\Winery;
+use App\Http\Requests\PreRegRequest;
+use App\SellerPreregistration;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -40,12 +42,40 @@ class RegisterController extends Controller
      */
     public function showRegistrationSellForm()
     {
-        return view('auth.register-sell', [
+//        return view('auth.register-sell', [
+        return view('auth.seller-preregister', [
             'seo' => [
                 'title' => 'Sell on WB | Wine Boutique',
                 'noindex' => true
             ]
         ]);
+    }
+
+    private $reportingTo = ['au@executive-digital.com'];
+
+    public function preregisterSellers(PreRegRequest $request)
+    {
+        $data = $request->except(['_token', 'acceptTerms', 'submit']);
+        $directoryName = public_path() . '/preregister_licences';
+        if (!file_exists($directoryName)) {
+            mkdir($directoryName, 0775);
+        }
+        $filename = time() . '.' . $data['licences']->getClientOriginalExtension();
+        $data['licences']->move($directoryName, $filename);
+        $data['licences'] = 'preregister_licences/' . $filename;
+        $data['shipping'] = isset($data['shipping']) ? 1 : 0;
+
+        $sellerRegistration = SellerPreregistration::create($data);
+
+        Mail::send('email.preregister', ['sellerRegistration' => $sellerRegistration],
+            function ($message) use ($sellerRegistration) {
+                $message->to($this->reportingTo)->subject('Winery registration request from: ' . $sellerRegistration->companyName);
+            });
+
+        $msg = 'Dear ' . ucwords($sellerRegistration->firstName . ' ' . $sellerRegistration->lastName) .
+            ', we have received your request and will get back to you in the next 24 hours. Thank you for your application!';
+        $request->session()->flash('successMsg', $msg);
+        return redirect('/');
     }
 
     /**

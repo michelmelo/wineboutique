@@ -52,6 +52,7 @@ Vue.component('winery-edit-form', require('./components/forms/WineryEditForm.vue
 Vue.component('newsletter-form', require('./components/forms/NewsletterForm'));
 Vue.component('my-favorites', require('./components/forms/MyFavorites.vue'));
 Vue.component('report-bug-form', require('./components/forms/ReportBugForm.vue'));
+Vue.component('seller-preregister', require('./components/forms/SellerPreregisterForm.vue'));
 
 const app = new Vue({
     el: '#app'

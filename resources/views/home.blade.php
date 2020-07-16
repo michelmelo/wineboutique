@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+@if(request()->session()->has('successMsg'))
+    <div class="alert alert-success"> {{ request()->session()->get('successMsg') }}</div>
+    <script> setTimeout(function () { $('.alert-success').hide()}, 10000) </script>
+@endif
 <div class="container-fluid p-0 home">
     <div class="home-slider row">
         <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
