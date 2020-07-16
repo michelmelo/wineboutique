@@ -18,6 +18,7 @@ Route::group(['middleware' => ['startup']], function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('register/sell', 'Auth\RegisterController@showRegistrationSellForm')->name('register.sell');
+    Route::post('preregister', 'Auth\RegisterController@preregisterSellers')->name('preregister.seller');
 
     Route::get('/redirect/{service}', 'Auth\LoginController@redirectProvider');
     Route::get('/callback', 'Auth\LoginController@handleGoogleProviderCallback');

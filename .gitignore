@@ -4,6 +4,7 @@
 /public/images/wine
 /public/images/winery/cover
 /public/images/winery/profile
+/public/preregister_licences
 /public/css/app.css
 /public/js/app.js
 public/css/app.css
@@ -14,6 +15,7 @@ public/fonts/
 /public/fonts/
 /public/mix-manifest.json
 public/mix-manifest.json
+public/robots.txt
 /storage/*.key
 /vendor
 /.idea
