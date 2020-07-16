@@ -12,7 +12,7 @@
         <!--shipping: false,-->
         <!--acceptTerms: false,-->
         <!--*/-->
-        <form action="/preregister" class="form-inline" method="post" v-on:submit="onSubmit" enctype="multipart/form-data">
+        <form action="/preregister" class="form-inline" method="post" v-on:submit="onSubmit" enctype="multipart/form-data" id="captcha-form">
                 <input name="_token" type="hidden" v-model="csrf">
                 <input :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name" type="text"
                        v-model.trim="firstName">
@@ -77,7 +77,12 @@
                 <span class="help-block error-block" v-if="isInvalid('acceptTerms')">
                     <strong>You must accept Terms and Conditions.</strong>
                 </span>
-                <input class="button red-button full-width" name="submit" type="submit" value="SIGN UP">
+                <!--<input class="button red-button full-width" name="submit" type="submit" value="SIGN UP">-->
+
+                <button class="button red-button full-width" type="submit"
+                    data-sitekey="6LdXLbIZAAAAALeKEq0GDN8Oea1B-dWf3Tg21BH1"
+                    data-callback='onSubmit'
+                    data-action='submit'>SIGN UP</button>
         </form>
         <transition name="fade">
             <div class="terms-popup is-visible" role="alert" v-if="activePopup">
