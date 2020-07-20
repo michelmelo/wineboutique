@@ -12,7 +12,7 @@
         <!--shipping: false,-->
         <!--acceptTerms: false,-->
         <!--*/-->
-        <form action="/preregister" class="form-inline" method="post" v-on:submit="onSubmit" enctype="multipart/form-data">
+        <form action="/preregister" class="form-inline" method="post" v-on:submit="onSubmit" enctype="multipart/form-data" id="captcha-form">
                 <input name="_token" type="hidden" v-model="csrf">
                 <input :class="{ 'invalid': isInvalid('firstName') }" name="firstName" placeholder="First Name" type="text"
                        v-model.trim="firstName">
@@ -60,12 +60,13 @@
                 <span class="help-block error-block" v-if="isInvalid('licences')">
                     <strong>You must upload your licences.</strong>
                 </span>
-
-                <input :class="{ 'invalid': isInvalid('shipping') }" name="shipping" placeholder="Shipping" type="checkbox"
-                       v-model="shipping" id="defaultCheck2">
-                <label class="form-check-label" for="defaultCheck2">
-                    Shipping
-                </label>
+                <div class="form-check">
+                    <input :class="{ 'invalid': isInvalid('shipping') }" name="shipping" placeholder="Shipping" type="checkbox"
+                           v-model="shipping" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck2">
+                        Shipping
+                    </label>
+                </div>
                 <div class="form-check">
                     <input class="form-check-input" id="defaultCheck1" name="acceptTerms" type="checkbox"
                            v-model="acceptTerms">
@@ -77,7 +78,12 @@
                 <span class="help-block error-block" v-if="isInvalid('acceptTerms')">
                     <strong>You must accept Terms and Conditions.</strong>
                 </span>
-                <input class="button red-button full-width" name="submit" type="submit" value="SIGN UP">
+                <!--<input class="button red-button full-width" name="submit" type="submit" value="SIGN UP">-->
+
+                <button class="button red-button full-width margin-t" type="submit"
+                    data-sitekey="6LdXLbIZAAAAALeKEq0GDN8Oea1B-dWf3Tg21BH1"
+                    data-callback='onSubmit'
+                    data-action='submit'>SIGN UP</button>
         </form>
         <transition name="fade">
             <div class="terms-popup is-visible" role="alert" v-if="activePopup">

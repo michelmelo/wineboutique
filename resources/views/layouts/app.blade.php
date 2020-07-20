@@ -24,6 +24,9 @@
     <!-- Scripts -->
 
 {{--    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>--}}
+    @if(strpos(url()->current(), '/register/sell') !== false)
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdXLbIZAAAAALeKEq0GDN8Oea1B-dWf3Tg21BH1">
+    @endif
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 
