@@ -60,12 +60,13 @@
                 <span class="help-block error-block" v-if="isInvalid('licences')">
                     <strong>You must upload your licences.</strong>
                 </span>
-
-                <input :class="{ 'invalid': isInvalid('shipping') }" name="shipping" placeholder="Shipping" type="checkbox"
-                       v-model="shipping" id="defaultCheck2">
-                <label class="form-check-label" for="defaultCheck2">
-                    Shipping
-                </label>
+                <div class="form-check">
+                    <input :class="{ 'invalid': isInvalid('shipping') }" name="shipping" placeholder="Shipping" type="checkbox"
+                           v-model="shipping" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck2">
+                        Shipping
+                    </label>
+                </div>
                 <div class="form-check">
                     <input class="form-check-input" id="defaultCheck1" name="acceptTerms" type="checkbox"
                            v-model="acceptTerms">
@@ -79,7 +80,7 @@
                 </span>
                 <!--<input class="button red-button full-width" name="submit" type="submit" value="SIGN UP">-->
 
-                <button class="button red-button full-width" type="submit"
+                <button class="button red-button full-width margin-t" type="submit"
                     data-sitekey="6LdXLbIZAAAAALeKEq0GDN8Oea1B-dWf3Tg21BH1"
                     data-callback='onSubmit'
                     data-action='submit'>SIGN UP</button>
